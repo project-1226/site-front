@@ -1,15 +1,25 @@
-import logo from './logo.svg';
-import './App.css';
-import HeaderPage from './components/HeaderPage';
-import {Container} from 'react-bootstrap'
-import RouterPage from './components/RouterPage';
+import HeaderPage from "./components/HeaderPage";
+import RouterPage from "./components/RouterPage";
+import FooterPage from "./components/FooterPage";
 
 function App() {
   return (
-    <Container>
-        <HeaderPage/>
-        <RouterPage/>
-    </Container>   
+    <div className="App">
+      <header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Edit <code>src/App.js</code> and save to reload.
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+    </div>
   );
 }
 
