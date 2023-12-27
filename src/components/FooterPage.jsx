@@ -30,7 +30,7 @@ const FooterPage = () => {
                         typesetting industry. Contrary to popular belief, Lorem
                         Ipsum is not simply random text.
                     </div>
-                    <span style={{fontSize:'2.5rem'}}>
+                    <span style={{ fontSize: "2.5rem" }}>
                         <FaSquareFacebook />
                         <FaSquareTwitter />
                         <FaSquareGithub />
