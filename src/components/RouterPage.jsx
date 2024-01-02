@@ -7,6 +7,7 @@ import Imagereader from "./ai/Imagereader";
 import MotionReader from "./ai/MotionReader";
 import Chatbot from "./chatbot/Chatbot";
 import AiList from "./ai/AiList";
+import Cart from "./cart/Cart";
 
 const RouterPage = () => {
   return (
@@ -16,9 +17,11 @@ const RouterPage = () => {
       {/* user */}
       <Route path="/login" element={<SigninPage />} />
       <Route path="/AIimg" element={<Imagereader />} />
-            <Route path="/AImotion" element={<MotionReader />} />
-            <Route path="/Chatbot" element={<Chatbot />} />
-            <Route path="/Ailist" element={<AiList />} />
+
+     <Route path="/AImotion" element={<MotionReader />} />
+     <Route path="/Chatbot" element={<Chatbot />} />
+     <Route path="/Ailist" element={<AiList />} />
+     <Route path="/Cart" element={<Cart />} />
     </Routes>
   );
 };
