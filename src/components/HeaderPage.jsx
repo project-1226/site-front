@@ -1,52 +1,39 @@
-import React from "react";
+import { Menu } from "@mui/icons-material";
 import {
+    AppBar,
+    Box,
     Button,
-    Container,
-    Form,
-    Nav,
-    NavDropdown,
-    Navbar,
-} from "react-bootstrap";
+    IconButton,
+    Toolbar,
+    Typography,
+} from "@mui/material";
+import React from "react";
 
 const HeaderPage = () => {
     return (
-        <Navbar expand="lg" className="py-3" bg="light" data-bs-theme="light">
-            <Container fluid>
-                <Navbar.Brand href="/">LOGO</Navbar.Brand>
-                <Navbar.Toggle aria-controls="navbarScroll" />
-                <Navbar.Collapse id="navbarScroll">
-                    <Nav
-                        className="me-auto my-2 my-lg-0"
-                        style={{ maxHeight: "100px" }}
-                        navbarScroll
+        <Box sx={{ flexGrow: 1 }}>
+            <AppBar position="static">
+                <Toolbar>
+                    <IconButton
+                        size="large"
+                        edge="start"
+                        color="inherit"
+                        aria-label="menu"
+                        sx={{ mr: 2 }}
                     >
-                        <Nav.Link href="#action1">Home</Nav.Link>
-                        <Nav.Link href="#action2">Link</Nav.Link>
-                        <NavDropdown title="Link" id="navbarScrollingDropdown">
-                            <NavDropdown.Item href="#action3">
-                                Action
-                            </NavDropdown.Item>
-                            <NavDropdown.Item href="#action4">
-                                Another action
-                            </NavDropdown.Item>
-                            <NavDropdown.Divider />
-                            <NavDropdown.Item href="#action5">
-                                Something else here
-                            </NavDropdown.Item>
-                        </NavDropdown>
-                    </Nav>
-                    <Form className="d-flex">
-                        <Form.Control
-                            type="search"
-                            placeholder="Search"
-                            className="me-2"
-                            aria-label="Search"
-                        />
-                        <Button variant="outline-success">Search</Button>
-                    </Form>
-                </Navbar.Collapse>
-            </Container>
-        </Navbar>
+                        <Menu />
+                    </IconButton>
+                    <Typography
+                        variant="h6"
+                        component="div"
+                        sx={{ flexGrow: 1 }}
+                    >
+                        Home
+                    </Typography>
+                    <Button color="inherit">Login</Button>
+                </Toolbar>
+            </AppBar>
+        </Box>
     );
 };
 
