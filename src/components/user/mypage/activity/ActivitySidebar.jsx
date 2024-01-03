@@ -12,8 +12,8 @@ const ActivitySidebar = () => {
     return (
         <>
             <ListItemButton
-                selected={selectedIndex === 4}
-                onClick={() => handleListItemClick(4)}
+                selected={selectedIndex === 5}
+                onClick={() => handleListItemClick(5)}
             >
                 <ListItemIcon>
                     <Inbox />
@@ -21,8 +21,8 @@ const ActivitySidebar = () => {
                 <ListItemText primary="활동 내역" />
             </ListItemButton>
             <ListItemButton
-                selected={selectedIndex === 5}
-                onClick={() => handleListItemClick(5)}
+                selected={selectedIndex === 6}
+                onClick={() => handleListItemClick(6)}
             >
                 <ListItemIcon>
                     <Inbox />

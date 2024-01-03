@@ -1,6 +1,7 @@
 import { Inbox } from "@mui/icons-material";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const InfoSidebar = () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -14,6 +15,8 @@ const InfoSidebar = () => {
             <ListItemButton
                 selected={selectedIndex === 9}
                 onClick={() => handleListItemClick(9)}
+                component={Link}
+                to="upd"
             >
                 <ListItemIcon>
                     <Inbox />
@@ -21,8 +24,10 @@ const InfoSidebar = () => {
                 <ListItemText primary="개인정보확인/수정" />
             </ListItemButton>
             <ListItemButton
-                selected={selectedIndex === 10}
-                onClick={() => handleListItemClick(10)}
+                selected={selectedIndex === 11}
+                onClick={() => handleListItemClick(11)}
+                component={Link}
+                to="addr"
             >
                 <ListItemIcon>
                     <Inbox />

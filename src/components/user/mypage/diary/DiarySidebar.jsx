@@ -1,6 +1,7 @@
 import { Inbox } from "@mui/icons-material";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const DiarySidebar = () => {
     const [selectedIndex, setSelectedIndex] = useState(1);
@@ -12,8 +13,10 @@ const DiarySidebar = () => {
     return (
         <>
             <ListItemButton
-                selected={selectedIndex === 0}
-                onClick={() => handleListItemClick(0)}
+                selected={selectedIndex === 1}
+                onClick={() => handleListItemClick(1)}
+                component={Link}
+                to="repo"
             >
                 <ListItemIcon>
                     <Inbox />
@@ -21,8 +24,10 @@ const DiarySidebar = () => {
                 <ListItemText primary="상세 리포트" />
             </ListItemButton>
             <ListItemButton
-                selected={selectedIndex === 1}
-                onClick={() => handleListItemClick(1)}
+                selected={selectedIndex === 2}
+                onClick={() => handleListItemClick(2)}
+                component={Link}
+                to="rcmp"
             >
                 <ListItemIcon>
                     <Inbox />
@@ -30,8 +35,10 @@ const DiarySidebar = () => {
                 <ListItemText primary="맞춤형 추천 플랜" />
             </ListItemButton>
             <ListItemButton
-                selected={selectedIndex === 2}
-                onClick={() => handleListItemClick(2)}
+                selected={selectedIndex === 3}
+                onClick={() => handleListItemClick(3)}
+                component={Link}
+                to="cstp"
             >
                 <ListItemIcon>
                     <Inbox />
@@ -39,8 +46,10 @@ const DiarySidebar = () => {
                 <ListItemText primary="커스텀 운동 플랜" />
             </ListItemButton>
             <ListItemButton
-                selected={selectedIndex === 3}
-                onClick={() => handleListItemClick(3)}
+                selected={selectedIndex === 4}
+                onClick={() => handleListItemClick(4)}
+                component={Link}
+                to="mysv"
             >
                 <ListItemIcon>
                     <Inbox />
