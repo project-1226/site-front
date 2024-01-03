@@ -16,21 +16,22 @@ const GoogleLogin = () => {
         const user = data.user;
         const email = user.email;
         const photoURL = user.photoURL;
-
+          console.log(data);
         // console.log(email + "\n" + photoURL);
-        const res = await axios.post("/user/login", { email, password: "0" });
-        console.log(res.data);
-        if (res.data === 0) {
-          await axios.post("/user/insert", {
-            email,
-            photo: photoURL,
-          });
-        }
-        sessionStorage.setItem("email", email);
-        window.location.href = "/";
-      })
-      .catch((err) => {
-        console.log(err);
+      //   const res = await axios.post("/user/login", { email, password: "0" });
+      //   console.log(res.data);
+      //   if (res.data === 0) {
+      //     await axios.post("/user/insert", {
+      //       email,
+      //       photo: photoURL,
+      //     });
+      //   }
+      //   sessionStorage.setItem("email", email);
+      //   window.location.href = "/";
+      // })
+      // .catch((err) => {
+      //   console.log(err);
+
       });
   }
 

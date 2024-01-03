@@ -40,68 +40,53 @@ const HeaderPage = () => {
     }, []);
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar>
-                    <IconButton
-                        size="large"
-                        edge="start"
-                        color="inherit"
-                        aria-label="menu"
-                        component={Link}
-                        to="/"
-                        sx={{ mr: 2 }}
-                    >
-                        <SetMeal />
-                    </IconButton>
-                    <Stack
-                        direction="row"
-                        spacing={4}
-                        sx={{ flexGrow: 1 }}
-                        justifyContent="center"
-                    >
-                        <Typography
-                            color="inherit"
-                            component={Link}
-                            to="/"
-                            sx={{ textDecoration: "none" }}
-                        >
-                            내 식단
-                        </Typography>
-                        <Typography
-                            color="inherit"
-                            component={Link}
-                            to="/"
-                            sx={{ textDecoration: "none" }}
-                        >
-                            건강식단
-                        </Typography>
-                        <Typography
-                            color="inherit"
-                            component={Link}
-                            to="/"
-                            sx={{ textDecoration: "none" }}
-                        >
-                            질환맞춤식단
-                        </Typography>
-                        <Typography
-                            color="inherit"
-                            component={Link}
-                            to="/"
-                            sx={{ textDecoration: "none" }}
-                        >
-                            헬스케어
-                        </Typography>
-                        <Typography
-                            color="inherit"
-                            component={Link}
-                            to="/"
-                            sx={{ textDecoration: "none" }}
-                        >
-                            커뮤니티
-                        </Typography>
-                    </Stack>
-                    {/* 로그인 case별 분기 */}
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static">
+        <Toolbar>
+          <IconButton
+            size="large"
+            edge="start"
+            color="inherit"
+            aria-label="menu"
+            component={Link}
+            to="/"
+            sx={{ mr: 2 }}
+          >
+            <SetMeal />
+          </IconButton>
+          <Stack direction="row" spacing={4} sx={{ flexGrow: 1 }} justifyContent="center">
+            <Typography
+              color="inherit"
+              component={Link}
+              to="/mydiet"
+              sx={{ textDecoration: "none" }}> 내 식단 </Typography>
+            
+            <Typography
+              color="inherit"
+              component={Link} 
+              to="/healthydiet"
+              sx={{ textDecoration: "none" }}> 건강식단 </Typography>
+
+            <Typography
+              color="inherit"
+              component={Link}
+              to="/diseasediet"
+              sx={{ textDecoration: "none" }}> 질환맞춤식단 </Typography>
+            
+            <Typography
+              color="inherit"
+              component={Link} 
+              to="/healthcare"
+              sx={{ textDecoration: "none" }}> 헬스케어 </Typography>
+            
+            <Typography
+              color="inherit"
+              component={Link} 
+              to="/"
+              sx={{ textDecoration: "none" }}> 커뮤니티 </Typography>
+          </Stack>
+
+          {/* 로그인 case별 분기 */}
                     <Stack
                         direction="row"
                         spacing={2}
@@ -177,10 +162,10 @@ const HeaderPage = () => {
                             )
                         }
                     </Stack>
-                </Toolbar>
-            </AppBar>
-        </Box>
-    );
+        </Toolbar>
+      </AppBar>
+    </Box>
+  );
 };
 
 export default HeaderPage;
