@@ -18,7 +18,7 @@ const Sidebar = () => {
                         component="div"
                         id="list1-diary"
                         sx={{
-                            fontSize: "1.3rem",
+                            fontSize: "1.1rem",
                             bgcolor: "transparent",
                         }}
                     >
@@ -37,7 +37,7 @@ const Sidebar = () => {
                         component="div"
                         id="list1-diary"
                         sx={{
-                            fontSize: "1.3rem",
+                            fontSize: "1.1rem",
                             bgcolor: "transparent",
                         }}
                     >
@@ -56,7 +56,7 @@ const Sidebar = () => {
                         component="div"
                         id="list1-diary"
                         sx={{
-                            fontSize: "1.3rem",
+                            fontSize: "1.1rem",
                             bgcolor: "transparent",
                         }}
                     >
@@ -75,7 +75,7 @@ const Sidebar = () => {
                         component="div"
                         id="list1-diary"
                         sx={{
-                            fontSize: "1.3rem",
+                            fontSize: "1.1rem",
                             bgcolor: "transparent",
                         }}
                     >
