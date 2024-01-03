@@ -1,35 +1,43 @@
+import { Box, Container, Link, Typography } from "@mui/material";
 import React from "react";
-import { Col, Row } from "react-bootstrap";
 
-import {
-  FaSquareFacebook,
-  FaSquareTwitter,
-  FaSquareGithub,
-} from "react-icons/fa6";
+function Copyright() {
+    return (
+        <Typography variant="body2" color="text.secondary">
+            {"Copyright © "}
+            <Link color="inherit" href="https://mui.com/">
+                Your Website
+            </Link>{" "}
+            {new Date().getFullYear()}
+            {"."}
+        </Typography>
+    );
+}
 
 const FooterPage = () => {
-  return (
-    <>
-      <Row>
-        <Col className="py-5" md={7} style={{ backgroundColor: "lightcoral" }}>
-          Brand Name
-        </Col>
-        <Col className="py-5" md={5} style={{ backgroundColor: "lightpink" }}>
-          <h5>About the company</h5>
-          <div className="my-3">
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Contrary to popular belief, Lorem Ipsum is not simply
-            random text.
-          </div>
-          <span style={{ fontSize: "2.5rem" }}>
-            <FaSquareFacebook />
-            <FaSquareTwitter />
-            <FaSquareGithub />
-          </span>
-        </Col>
-      </Row>
-    </>
-  );
+    return (
+        <>
+            <Box
+                component="footer"
+                sx={{
+                    py: 3,
+                    px: 2,
+                    mt: "auto",
+                    backgroundColor: (theme) =>
+                        theme.palette.mode === "light"
+                            ? theme.palette.grey[200]
+                            : theme.palette.grey[800],
+                }}
+            >
+                <Container maxWidth="sm">
+                    <Typography variant="body1">
+                        My sticky footer can be found here.
+                    </Typography>
+                    <Copyright />
+                </Container>
+            </Box>
+        </>
+    );
 };
 
 export default FooterPage;
