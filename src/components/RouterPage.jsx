@@ -8,6 +8,8 @@ import MotionReader from "./ai/MotionReader";
 import Chatbot from "./chatbot/Chatbot";
 import AiList from "./ai/AiList";
 import Cart from "./cart/Cart";
+import OrderPage from "./cart/OrderPage";
+
 
 const RouterPage = () => {
   return (
@@ -22,6 +24,8 @@ const RouterPage = () => {
      <Route path="/Chatbot" element={<Chatbot />} />
      <Route path="/Ailist" element={<AiList />} />
      <Route path="/Cart" element={<Cart />} />
+     <Route path="/Order" element={<OrderPage />} />
+
     </Routes>
   );
 };
