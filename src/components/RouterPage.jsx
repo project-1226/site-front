@@ -10,12 +10,27 @@ import Healthy from "./healthyDiet/Healthy";
 import Disease from "./diseaseDiet/Disease";
 import Healthcare from "./healthcare/Healthcare";
 
+import Imagereader from "./ai/Imagereader";
+import MotionReader from "./ai/MotionReader";
+import Chatbot from "./chatbot/Chatbot";
+import AiList from "./ai/AiList";
+import Cart from "./cart/Cart";
+import OrderPage from "./cart/OrderPage";
+
+
 const RouterPage = () => {
     return (
         <Routes>
             <Route path="/" element={<HomePage />} />
 
-            {/* 사용자 */}
+      <Route path="/AIimg" element={<Imagereader />} />
+     <Route path="/AImotion" element={<MotionReader />} />
+     <Route path="/Chatbot" element={<Chatbot />} />
+     <Route path="/Ailist" element={<AiList />} />
+     <Route path="/Cart" element={<Cart />} />
+     <Route path="/Order" element={<OrderPage />} />
+
+            {/* user */}
             <Route path="/login" element={<SigninPage />} />
             <Route path="/join" element={<SignupPage />} />
 

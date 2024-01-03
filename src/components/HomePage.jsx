@@ -1,11 +1,25 @@
 import React from "react";
+import { Col, Container, Row } from "react-bootstrap";
 
 const HomePage = () => {
     return (
-        <div
+        <Container
             className="py-5 w-100"
             style={{ backgroundColor: "skyblue" }}
-        ></div>
+             
+        >
+            <Row>
+                <Col>
+                <div className="my-3">
+                
+                </div>
+            
+                </Col>
+
+            </Row>
+
+
+        </Container>
     );
 };
 
