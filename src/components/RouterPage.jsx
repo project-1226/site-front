@@ -2,6 +2,9 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./HomePage";
 import SigninPage from "./user/SigninPage";
+import SideMenu from "./community/SideMenu";
+import NoticePage from "./community/NoticePage";
+import ReviewPage from "./community/ReviewPage";
 import MyPage from "./user/MyPage";
 import MyPageMain from "./user/mypage/MyPageMain";
 import SignupPage from "./user/SignupPage";
@@ -33,6 +36,11 @@ const RouterPage = () => {
             {/* user */}
             <Route path="/login" element={<SigninPage />} />
             <Route path="/join" element={<SignupPage />} />
+              
+                    {/* community */}
+      <Route path="/community" element={<SideMenu/>} />
+      <Route path="/community/notice" element={<NoticePage/>} />
+      <Route path="/community/review" element={<ReviewPage/>} />
 
             {/* 마이페이지 */}
             <Route path="/mypage" element={<MyPage />}>
