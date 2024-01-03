@@ -12,6 +12,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const HeaderPage = () => {
+
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
