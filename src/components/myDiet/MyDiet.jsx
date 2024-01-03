@@ -1,12 +1,24 @@
 import * as React from 'react';
+import { useState } from 'react';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { Button } from '@mui/material';
 import Carousel from 'react-bootstrap/Carousel';
+import DietModal from './DietModal';
 
 // MyDiet 컴포넌트 정의
 const MyDiet = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleImageClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className='diet_wrap'>
       <div className="main_box">
@@ -28,7 +40,7 @@ const MyDiet = () => {
           </div>
 
           <div className='date_plan_img'>
-            <div className='date_plan_imgbox'> 음식이미지 </div>
+            <div className='date_plan_imgbox' onClick={handleImageClick}> 음식이미지 </div>
           </div>
 
           <div className='date_plan_info'>
@@ -80,6 +92,7 @@ const MyDiet = () => {
           </div>
         </section>{/* diet_review */}
       </div>{/* diet_contents */}
+      <DietModal show={isModalOpen} onHide={handleCloseModal} />
     </div>
   );
 }
