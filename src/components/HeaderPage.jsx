@@ -28,53 +28,38 @@ const HeaderPage = () => {
           >
             <SetMeal />
           </IconButton>
-          <Stack
-            direction="row"
-            spacing={4}
-            sx={{ flexGrow: 1 }}
-            justifyContent="center"
-          >
+          <Stack direction="row" spacing={4} sx={{ flexGrow: 1 }} justifyContent="center">
             <Typography
               color="inherit"
               component={Link}
-              to="/"
-              sx={{ textDecoration: "none" }}
-            >
-              내 식단
-            </Typography>
+              to="/mydiet"
+              sx={{ textDecoration: "none" }}> 내 식단 </Typography>
+            
+            <Typography
+              color="inherit"
+              component={Link} 
+              to="/healthydiet"
+              sx={{ textDecoration: "none" }}> 건강식단 </Typography>
+
             <Typography
               color="inherit"
               component={Link}
-              to="/"
-              sx={{ textDecoration: "none" }}
-            >
-              건강식단
-            </Typography>
+              to="/diseasediet"
+              sx={{ textDecoration: "none" }}> 질환맞춤식단 </Typography>
+            
             <Typography
               color="inherit"
-              component={Link}
-              to="/"
-              sx={{ textDecoration: "none" }}
-            >
-              질환맞춤식단
-            </Typography>
+              component={Link} 
+              to="/healthcare"
+              sx={{ textDecoration: "none" }}> 헬스케어 </Typography>
+            
             <Typography
               color="inherit"
-              component={Link}
+              component={Link} 
               to="/"
-              sx={{ textDecoration: "none" }}
-            >
-              헬스케어
-            </Typography>
-            <Typography
-              color="inherit"
-              component={Link}
-              to="/"
-              sx={{ textDecoration: "none" }}
-            >
-              커뮤니티
-            </Typography>
+              sx={{ textDecoration: "none" }}> 커뮤니티 </Typography>
           </Stack>
+
           <Button color="inherit" component={Link} to="/login">
             Login
           </Button>
