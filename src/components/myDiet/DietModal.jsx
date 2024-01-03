@@ -1,45 +1,24 @@
-import { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import CloseButton from 'react-bootstrap/CloseButton';
 
-const DietModal = () => {
-  const [smShow, setSmShow] = useState(false);
-  const [lgShow, setLgShow] = useState(false);
+function DietModal({ show, onHide }) {
+  const handleClose = () => onHide();
 
   return (
     <>
-      <Button onClick={() => setSmShow(true)} className="me-2">
-        Small modal
-      </Button>
-      <Button onClick={() => setLgShow(true)}>Large modal</Button>
-      <Modal
-        size="sm"
-        show={smShow}
-        onHide={() => setSmShow(false)}
-        aria-labelledby="example-modal-sizes-title-sm"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-sm">
-            Small Modal
-          </Modal.Title>
+      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size="lg" >
+        <Modal.Header closeButton variant='white'>
+          <Modal.Title> 상세보기 </Modal.Title>
         </Modal.Header>
-        <Modal.Body>...</Modal.Body>
-      </Modal>
-      <Modal
-        size="lg"
-        show={lgShow}
-        onHide={() => setLgShow(false)}
-        aria-labelledby="example-modal-sizes-title-lg"
-      >
-        <Modal.Header closeButton>
-          <Modal.Title id="example-modal-sizes-title-lg">
-            Large Modal
-          </Modal.Title>
-        </Modal.Header>
-        <Modal.Body>...</Modal.Body>
+
+
+        <Modal.Body>
+          I will not close if you click outside me. Do not even try to press
+          escape key.
+        </Modal.Body>
       </Modal>
     </>
-  )
+  );
 }
 
-export default DietModal
+export default DietModal;
