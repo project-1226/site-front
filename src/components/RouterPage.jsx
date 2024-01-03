@@ -13,6 +13,9 @@ import CustomPlan from "./user/mypage/diary/CustomPlan";
 import Report from "./user/mypage/diary/Report";
 import MyActivity from "./user/mypage/activity/MyActivity";
 import Scrap from "./user/mypage/activity/Scrap";
+import MyPurchase from "./user/mypage/shop/MyPurchase";
+import CancelReturn from "./user/mypage/shop/CancelReturn";
+import MyWishItem from "./user/mypage/shop/MyWishItem";
 
 const RouterPage = () => {
     return (
@@ -34,7 +37,9 @@ const RouterPage = () => {
                 <Route path="mact" element={<MyActivity />} />
                 <Route path="scrp" element={<Scrap />} />
 
-                <Route path="scrp" element={<Scrap />} />
+                <Route path="mprch" element={<MyPurchase />} />
+                <Route path="cncl" element={<CancelReturn />} />
+                <Route path="wsit" element={<MyWishItem />} />
 
                 <Route path="upd" element={<UpdateUser />} />
                 <Route path="addr" element={<ManageAddress />} />

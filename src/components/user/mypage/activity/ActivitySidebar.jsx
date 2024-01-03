@@ -1,6 +1,7 @@
 import { Inbox } from "@mui/icons-material";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ActivitySidebar = () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -14,6 +15,8 @@ const ActivitySidebar = () => {
             <ListItemButton
                 selected={selectedIndex === 5}
                 onClick={() => handleListItemClick(5)}
+                component={Link}
+                to="mact"
             >
                 <ListItemIcon>
                     <Inbox />
@@ -23,6 +26,8 @@ const ActivitySidebar = () => {
             <ListItemButton
                 selected={selectedIndex === 6}
                 onClick={() => handleListItemClick(6)}
+                component={Link}
+                to="scrp"
             >
                 <ListItemIcon>
                     <Inbox />

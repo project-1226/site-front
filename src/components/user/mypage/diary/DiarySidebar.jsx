@@ -16,7 +16,7 @@ const DiarySidebar = () => {
                 selected={selectedIndex === 1}
                 onClick={() => handleListItemClick(1)}
                 component={Link}
-                to="repo"
+                to=""
             >
                 <ListItemIcon>
                     <Inbox />

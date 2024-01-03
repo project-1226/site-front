@@ -1,6 +1,7 @@
 import { Inbox } from "@mui/icons-material";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 
 const ShopSidebar = () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -14,6 +15,8 @@ const ShopSidebar = () => {
             <ListItemButton
                 selected={selectedIndex === 7}
                 onClick={() => handleListItemClick(7)}
+                component={Link}
+                to="mprch"
             >
                 <ListItemIcon>
                     <Inbox />
@@ -23,6 +26,8 @@ const ShopSidebar = () => {
             <ListItemButton
                 selected={selectedIndex === 8}
                 onClick={() => handleListItemClick(8)}
+                component={Link}
+                to="cncl"
             >
                 <ListItemIcon>
                     <Inbox />
@@ -32,6 +37,8 @@ const ShopSidebar = () => {
             <ListItemButton
                 selected={selectedIndex === 9}
                 onClick={() => handleListItemClick(9)}
+                component={Link}
+                to="wsit"
             >
                 <ListItemIcon>
                     <Inbox />
