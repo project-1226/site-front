@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Button } from '@mui/material';
 import Carousel from 'react-bootstrap/Carousel'; 
 
 const Disease = () => {
+  //예시데이터
+  const data = {
+    "신장실환": { image: "신장실환 신장실환", ingredients: '신장실환 신장실환, 신장실환,....신장실환' },
+    "위암식단": { image: "위암식단 사진이미지이이이이", ingredients: '잡곡 100g, 양배추40g,....etc' }
+  }
+  const tagData = ["신장실환","간질환","폐암식단","위암식단","심장실환","유방암식단","대장암식단","간암식단","당뇨실환","고혈압식단","고지혈증식단"];
+
+  const [selectTag,setSelectTag] = useState("위암식단");
+
+
+  const handleClickMore = ()=>{
+    window.location.href = `/diseasedetail/${selectTag}`;
+  }
+
   return (
     <div className='disease_wrap'>
       <div className='disease_main_box'>
@@ -18,30 +32,43 @@ const Disease = () => {
         </div>
       </div>{/* main_box */}
       <div className='disease_contents'>
+
+
+         {/* 첫 번째 행의 버튼 */}
         <div className='disease_tag_box'>
-          <Button variant="contained" size="small" > 신장실환 </Button>
-          <Button variant="contained" size="small"> 신장실환 </Button>
-          <Button variant="contained" size="small" > 신장실환 </Button>
-          <Button variant="contained" size="small" > 신장실환 </Button>
-          <Button variant="contained" size="small"> 신장실환 </Button>
-          <Button variant="contained" size="small"> 신장실환 </Button>               
+          {tagData.slice(0, 6).map((tag, index) => (
+            <Button
+              key={index}
+              variant="contained"
+              size="small"
+              onClick={() => setSelectTag(tag)}
+            >
+              {tag}
+            </Button>
+          ))}
         </div>
-        <div className='disease_tag_box'>         
-          <Button variant="contained" size="small"> 신장실환 </Button>
-          <Button variant="contained" size="small"> 신장실환 </Button>
-          <Button variant="contained" size="small"> 신장실환 </Button>
-          <Button variant="contained" size="small"> 신장실환 </Button>
-          <Button variant="contained" size="small"> 신장실환 </Button>               
+        {/* 두 번째 행의 버튼 */}
+        <div className='disease_tag_box'>
+          {tagData.slice(6, 11).map((tag, index) => (
+            <Button
+              key={index}
+              variant="contained"
+              size="small"
+              onClick={() => setSelectTag(tag)}
+            >
+              {tag}
+            </Button>
+          ))}              
         </div>
 
         <div className='disease_detail_wrap'>
           <div className='disease_detail_plan'>
-            <div className='disease_detail_img'>이미지</div>
+            <div className='disease_detail_img'>{data[selectTag].image}</div>
             <div className='disease_detail_contents'>
               <div className='disease_detail_text'>
-                <p>dklsfahjklsjflksdjflksajfsFdklsfahjklsjflksddklsfahjklsjflksdjflksajfsFdklsfahjklsjflksddklsfahjklsjflksdjflksajfsFdklsfahjklsjflksddklsfahjklsjflksdjflksajfsFdklsfahjklsjflksd </p>       
+                <p>{data[selectTag]?.ingredients}</p>       
               </div>
-              <Button variant="contained" size="small"> 자세히보기 </Button>               
+              <Button variant="contained" size="small" onClick={handleClickMore}> 자세히보기 </Button>               
             </div>
           </div>
         </div>
