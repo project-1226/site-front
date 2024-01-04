@@ -5,6 +5,7 @@ import "./css/index.css";
 import "./css/mydiet.css";
 import "./css/dietmodal.css";
 import "./css/healthy.css";
+import "./css/healthymodal.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import App from "./App";
