@@ -1,0 +1,13 @@
+.diet_wrap {width: 100%;}
+.healthy_main_wrap {width: 100%; height: 538px; margin-bottom: 100px;}
+.healthy_main {width: 100%; height: 417px; margin: 0 auto; display: flex; align-items: center; justify-content: center;
+    background: #ddd;}
+.main_text_box {width: 30%; text-align: center; }
+.main_subtitle {font-size: 14px; letter-spacing: -1px; margin-bottom: 5px;}
+.main_title {font-size: 40px; font-weight: bold; margin-bottom: 70px; letter-spacing: -3px;}
+.main_article {font-size: 20px; font-weight: bold; letter-spacing: -1px;}
+
+.recomm_menu {display: flex; flex-wrap: wrap; justify-content: center; z-index: 1; position: relative; bottom: 70px}
+.recomm_menuimg {width: 18%; height: 180px; border-radius: 25px; background: #c0c0c0; margin-right: 2%; position: relative;}
+.recomm_menuimg:last-child {margin-right: 0;}
+
