@@ -24,3 +24,4 @@ yarn-error.log*
 
 # 민감 정보 제외
 FirebaseConfig.js
+ApiKeyConfig.js
