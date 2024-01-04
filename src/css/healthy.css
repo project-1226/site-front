@@ -1,15 +1,15 @@
 .diet_wrap {width: 100%;}
-.healthy_main_wrap {width: 100%; height: 752px; margin-bottom: 100px;}
-.healthy_main {width: 100%; height: 470px; margin: 0 auto; display: flex; align-items: center; justify-content: center;
+.healthy_main_wrap {width: 100%; height: 800px; margin-bottom: 100px;}
+.healthy_main {width: 100%; height: 570px; margin: 0 auto; display: flex; align-items: center; justify-content: center;
     background: url('../images/healthy_main.jpg') no-repeat 50% 45%; background-size: cover; position: relative;}
-.healthy_main::before {width: 100%; height: 470px; content: ''; position: absolute; top: 0; left: 0; background: rgba(0, 0, 0, 0.5) }
+.healthy_main::before {width: 100%; height: 570px; content: ''; position: absolute; top: 0; left: 0; background: rgba(0, 0, 0, 0.5) }
 
 .main_text_box {width: 30%; text-align: center; z-index: 1;}
-.main_subtitle {font-size: 18px; letter-spacing: -1px; margin-bottom: 5px; color: #fff;}
-.main_title {font-size: 50px; font-weight: bold; color: #fff; margin-bottom: 70px; letter-spacing: -2px; font-family: 'Noto Serif KR';}
+.main_subtitle {font-size: 18px; letter-spacing: -1px; margin-bottom: 3px; color: #fff;}
+.main_title {font-size: 60px; font-weight: 600; color: #fff; margin-bottom: 70px; letter-spacing: -2px; font-family: 'Noto Serif KR';}
 .main_article {font-size: 20px; font-weight: bold; letter-spacing: -1px; color: #fff;}
 
-.recomm_menu {display: flex; flex-wrap: wrap; justify-content: center; z-index: 1; position: relative; bottom: 100px}
+.recomm_menu {display: flex; flex-wrap: wrap; justify-content: center; z-index: 1; position: relative; bottom: 150px}
 .recomm_menuimg {width: 18%; height: 380px; margin-right: 2%; position: relative; cursor: pointer;}
 .recomm_menuimg:last-child {margin-right: 0;}
 
