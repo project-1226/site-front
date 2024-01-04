@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./HomePage";
 import SigninPage from "./user/SigninPage";
-import SideMenu from "./community/SideMenu";
+import CommunityPageMain from "./community/CommunityPageMain";
 import NoticePage from "./community/NoticePage";
 import ReviewPage from "./community/ReviewPage";
 import MyPage from "./user/MyPage";
@@ -19,6 +19,8 @@ import Chatbot from "./chatbot/Chatbot";
 import AiList from "./ai/AiList";
 import Cart from "./cart/Cart";
 import OrderPage from "./cart/OrderPage";
+import CommentPage from "./community/CommentPage";
+import AdminPage from "./admin/AdminPage";
 
 
 const RouterPage = () => {
@@ -26,21 +28,25 @@ const RouterPage = () => {
         <Routes>
             <Route path="/" element={<HomePage />} />
 
-      <Route path="/AIimg" element={<Imagereader />} />
-     <Route path="/AImotion" element={<MotionReader />} />
-     <Route path="/Chatbot" element={<Chatbot />} />
-     <Route path="/Ailist" element={<AiList />} />
-     <Route path="/Cart" element={<Cart />} />
-     <Route path="/Order" element={<OrderPage />} />
+            <Route path="/AIimg" element={<Imagereader />} />
+            <Route path="/AImotion" element={<MotionReader />} />
+            <Route path="/Chatbot" element={<Chatbot />} />
+            <Route path="/Ailist" element={<AiList />} />
+            <Route path="/Cart" element={<Cart />} />
+            <Route path="/Order" element={<OrderPage />} />
 
             {/* user */}
             <Route path="/login" element={<SigninPage />} />
             <Route path="/join" element={<SignupPage />} />
               
-                    {/* community */}
-      <Route path="/community" element={<SideMenu/>} />
-      <Route path="/community/notice" element={<NoticePage/>} />
-      <Route path="/community/review" element={<ReviewPage/>} />
+            {/* community */}
+            <Route path="/community" element={<CommunityPageMain />} />
+                <Route path="/community/notice" element={<NoticePage />} />
+                <Route path="/community/review" element={<ReviewPage />} />
+                <Route path="/community/comment" element={<CommentPage />} />
+
+            {/* 관리자페이지 */}
+            <Route path="/admin" element={<AdminPage />} />
 
             {/* 마이페이지 */}
             <Route path="/mypage" element={<MyPage />}>
