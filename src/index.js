@@ -7,6 +7,7 @@ import "./css/dietmodal.css";
 import "./css/healthy.css";
 import "./css/healthymodal.css";
 import "./css/healthcare.css";
+import "./css/disease.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import App from "./App";
