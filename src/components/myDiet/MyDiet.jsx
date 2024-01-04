@@ -10,6 +10,7 @@ import DietModal from './DietModal';
 // MyDiet 컴포넌트 정의
 const MyDiet = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(1);
 
   const handleImageClick = () => {
     setIsModalOpen(true);
@@ -17,6 +18,10 @@ const MyDiet = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleDayButtonClick = (day) => {
+    setSelectedDay(day);
   };
 
   return (
@@ -30,17 +35,18 @@ const MyDiet = () => {
 
         <div className='date_plan'>
           <div className='date_plan_datebtn'>
-            <Button variant="contained" size="small"> 1일차 </Button>
-            <Button variant="contained" size="small"> 2일차 </Button>
-            <Button variant="contained" size="small"> 3일차 </Button>
-            <Button variant="contained" size="small"> 4일차 </Button>
-            <Button variant="contained" size="small"> 5일차 </Button>
-            <Button variant="contained" size="small"> 6일차 </Button>
-            <Button variant="contained" size="small"> 7일차 </Button>
+            {[1, 2, 3, 4, 5, 6, 7].map((day) => (
+              <Button key={day} variant="contained" 
+              size="small" onClick={() => handleDayButtonClick(day)} disabled={selectedDay === day}>
+                {`${day}일차`}
+              </Button>
+            ))}
           </div>
 
           <div className='date_plan_img'>
-            <div className='date_plan_imgbox' onClick={handleImageClick}> 음식이미지 </div>
+            <div className='date_plan_imgbox' onClick={handleImageClick}>
+              {`${selectedDay}일차 음식 이미지`}
+            </div>
           </div>
 
           <div className='date_plan_info'>
