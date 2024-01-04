@@ -3,8 +3,10 @@ import { Button } from '@mui/material';
 import Carousel from 'react-bootstrap/Carousel'; 
 import { useState } from 'react';
 import DiseaseModal from './DiseaseModal';
+import { useParams } from 'react-router-dom';
 
 const DiseaseDetail = () => {
+  const {tag} = useParams();
 
   //예시데이터
   const recipes = [
@@ -38,6 +40,7 @@ const DiseaseDetail = () => {
     <div className='disease_wrap'>
       {recipes.map((recipe, index) => (
         <div key={index} className='disease_sub_wrap'>
+          <h1>{tag}식단!!!</h1>
           <div className='disease_sub_plan'>
             {index % 2 === 0 ? <div className='disease_sub_img'></div> : null}
             <div className='disease_sub_contents'>

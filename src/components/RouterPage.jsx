@@ -82,7 +82,7 @@ const RouterPage = () => {
 
             {/* 질환맞춤식단 */}
             <Route path="/diseasediet" element={<Disease />} />
-            <Route path="/diseasedetail" element={<DiseaseDetail/>} />
+            <Route path="/diseasedetail/:tag" element={<DiseaseDetail/>} />
 
             {/* 헬스케어 */}
             <Route path="/healthcare" element={<Healthcare />} />
