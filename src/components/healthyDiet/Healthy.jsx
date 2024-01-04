@@ -20,7 +20,17 @@ const Healthy = () => {
       </div>{/* healthy_main_wrap */}
 
       <div className='healthy_contents'>
-        <section></section>
+        <section className='healthy_recipe'>
+          <div className="contents_title_box">
+            <p className="contents_title">레시피 모아모아</p>
+          </div>
+
+          <div className='healthy_video_wrap'>
+            <div className='healthy_video'>유튜브 레시피 영상</div>
+            <div className='healthy_video'>유튜브 레시피 영상</div>
+            <div className='healthy_video'>유튜브 레시피 영상</div>
+          </div>
+        </section>{/* diet_recipe */}
       </div>
     </div>
   )
