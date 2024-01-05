@@ -4,12 +4,16 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { Button } from '@mui/material';
-import Carousel from 'react-bootstrap/Carousel';
+import Carousel from 'react-bootstrap/Carousel';                          
 import DietModal from './DietModal';
+import YouTubeSearchVideo from '../YouTubeSearchVideo';
 
 // MyDiet 컴포넌트 정의
 const MyDiet = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedDay, setSelectedDay] = useState(1);
+  
+  const recipeTitle = ["연어샐러드", "포케샐러드", "닭가슴살 샐러드"];
 
   const handleImageClick = () => {
     setIsModalOpen(true);
@@ -17,6 +21,10 @@ const MyDiet = () => {
 
   const handleCloseModal = () => {
     setIsModalOpen(false);
+  };
+
+  const handleDayButtonClick = (day) => {
+    setSelectedDay(day);
   };
 
   return (
@@ -30,17 +38,18 @@ const MyDiet = () => {
 
         <div className='date_plan'>
           <div className='date_plan_datebtn'>
-            <Button variant="contained" size="small"> 1일차 </Button>
-            <Button variant="contained" size="small"> 2일차 </Button>
-            <Button variant="contained" size="small"> 3일차 </Button>
-            <Button variant="contained" size="small"> 4일차 </Button>
-            <Button variant="contained" size="small"> 5일차 </Button>
-            <Button variant="contained" size="small"> 6일차 </Button>
-            <Button variant="contained" size="small"> 7일차 </Button>
+            {[1, 2, 3, 4, 5, 6, 7].map((day) => (
+              <Button key={day} variant="contained" 
+              size="small" onClick={() => handleDayButtonClick(day)} disabled={selectedDay === day}>
+                {`${day}일차`}
+              </Button>
+            ))}
           </div>
 
           <div className='date_plan_img'>
-            <div className='date_plan_imgbox' onClick={handleImageClick}> 음식이미지 </div>
+            <div className='date_plan_imgbox' onClick={handleImageClick}>
+              {`${selectedDay}일차 음식 이미지`}
+            </div>
           </div>
 
           <div className='date_plan_info'>
@@ -58,9 +67,9 @@ const MyDiet = () => {
           </div>
 
           <div className='recipe_video_wrap'>
-            <div className='recipe_video'>유튜브 레시피 영상</div>
-            <div className='recipe_video'>유튜브 레시피 영상</div>
-            <div className='recipe_video'>유튜브 레시피 영상</div>
+            <div className='recipe_video'><YouTubeSearchVideo query={recipeTitle[0]} size={1}/></div>
+            <div className='recipe_video'><YouTubeSearchVideo query={recipeTitle[1]} size={1}/></div>
+            <div className='recipe_video'><YouTubeSearchVideo query={recipeTitle[2]} size={1}/></div>
           </div>
         </section>{/* diet_recipe */}
 

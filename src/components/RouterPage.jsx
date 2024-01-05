@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import HomePage from "./HomePage";
 
 import SideMenu from "./community/SideMenu";
+import CommunityPageMain from "./community/CommunityPageMain";
 import NoticePage from "./community/NoticePage";
 import ReviewPage from "./community/ReviewPage";
 
@@ -24,6 +25,7 @@ import MyWishItem from "./user/mypage/shop/MyWishItem";
 import MyDiet from "./myDiet/MyDiet";
 import Healthy from "./healthyDiet/Healthy";
 import Disease from "./diseaseDiet/Disease";
+import DiseaseDetail from "./diseaseDiet/DiseaseDetail";
 import Healthcare from "./healthcare/Healthcare";
 
 import Imagereader from "./ai/Imagereader";
@@ -33,6 +35,10 @@ import Chatbot from "./chatbot/Chatbot";
 
 import Cart from "./cart/Cart";
 import OrderPage from "./cart/OrderPage";
+import CommentPage from "./community/CommentPage";
+import AdminPage from "./admin/AdminPage";
+import WriteReview from "./community/WriteReview";
+import ProductRegisterPage from "./admin/ProductRegisterPage";
 
 const RouterPage = () => {
   return (
@@ -90,6 +96,7 @@ const RouterPage = () => {
       <Route path="/healthcare" element={<Healthcare />} />
     </Routes>
   );
+
 };
 
 export default RouterPage;

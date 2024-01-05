@@ -101,13 +101,9 @@ const HeaderPage = () => {
 
             <Typography
               color="inherit"
-              component={Link}
-              to="/"
-              sx={{ textDecoration: "none" }}
-            >
-              {" "}
-              커뮤니티{" "}
-            </Typography>
+              component={Link} 
+              to="/community/notice"
+              sx={{ textDecoration: "none" }}> 커뮤니티 </Typography>
           </Stack>
 
           {/* 로그인 case별 분기 */}
