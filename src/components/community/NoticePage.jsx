@@ -11,7 +11,7 @@ const NoticePage = () => {
                     <SideMenu />
                 </Col>
                 <Col className='my-5 justify-content-center'>
-                    <Table size="sm" width="80%" className='text-center mb-2'>
+                    <Table size="sm" width="80%" className='text-center mb-3'>
                         <thead>
                             <tr>
                                 <th>No.</th>
