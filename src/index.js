@@ -3,6 +3,8 @@ import ReactDOM from "react-dom/client";
 
 import "./css/index.css";
 import "./css/mydiet.css"
+import "./css/AK.css"
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import App from "./App";
