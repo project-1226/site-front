@@ -24,6 +24,7 @@ import MyWishItem from "./user/mypage/shop/MyWishItem";
 import MyDiet from "./myDiet/MyDiet"; 
 import Healthy from "./healthyDiet/Healthy";
 import Disease from "./diseaseDiet/Disease";
+import DiseaseDetail from "./diseaseDiet/DiseaseDetail";
 import Healthcare from "./healthcare/Healthcare";
 
 import Imagereader from "./ai/Imagereader";
@@ -81,6 +82,7 @@ const RouterPage = () => {
 
             {/* 질환맞춤식단 */}
             <Route path="/diseasediet" element={<Disease />} />
+            <Route path="/diseasedetail" element={<DiseaseDetail/>} />
 
             {/* 헬스케어 */}
             <Route path="/healthcare" element={<Healthcare />} />
