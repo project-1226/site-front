@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import SideMenu from './SideMenu'
 import { Table, Row, Col, Spinner } from 'react-bootstrap'
+import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 
 
 const ReviewPage = () => {
+    const navi = useNavigate();
     const [review, setReview] = useState([]);
     const [loading, setLoading] = useState(false);
     const [favoriteCnt, setFavoriteCnt] = useState(0);
 
     const getReviewList = () => { //review list 가져오기
         //setLoading(true)
-        const res = '';
+        const res = '/';
+        //setReview(res.data.list);
+        
 
     }
 
@@ -18,6 +23,14 @@ const ReviewPage = () => {
         getReviewList();
     }, []);
 
+
+    const onClickReview = () => {
+        if(sessionStorage.getItem("uid") == null){
+            navi('/login');
+        }else{
+            navi('/community/review/write');
+        }
+    }
 
     if(loading) return <div className='text-center my-5'><Spinner/></div>
 
@@ -35,6 +48,7 @@ const ReviewPage = () => {
                                 <th>Title</th>
                                 <th>Writer</th>
                                 <th>Date</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -58,6 +72,9 @@ const ReviewPage = () => {
                             </tr>
                         </tbody>
                     </Table>
+                    <div className='ms-5 text-end'>
+                        <Button variant='contained' onClick={onClickReview}>후기 작성</Button>
+                    </div>
                 </Col>
             </Row>
         </div>

@@ -35,6 +35,8 @@ import Cart from "./cart/Cart";
 import OrderPage from "./cart/OrderPage";
 import CommentPage from "./community/CommentPage";
 import AdminPage from "./admin/AdminPage";
+import WriteReview from "./community/WriteReview";
+import ProductRegisterPage from "./admin/ProductRegisterPage";
 
 const RouterPage = () => {
     return (
@@ -57,9 +59,11 @@ const RouterPage = () => {
                 <Route path="/community/notice" element={<NoticePage />} />
                 <Route path="/community/review" element={<ReviewPage />} />
                 <Route path="/community/comment" element={<CommentPage />} />
+                <Route path="/community/review/write" element={<WriteReview />} />
 
             {/* 관리자페이지 */}
             <Route path="/admin" element={<AdminPage />} />
+                <Route path="/admin/product/register" element={<ProductRegisterPage />} />
 
             {/* mypage */}
             <Route path="/mp" element={<MyPage />}>

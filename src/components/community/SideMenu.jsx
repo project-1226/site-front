@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, List, ListItemButton, ListItemText, Divider, Link } from '@mui/material'
 
 const SideMenu = () => {
-    const [selectedIndex, setSelectedIndex] = React.useState(0);
+    const [selectedIndex, setSelectedIndex] = useState(0);
 
     const handleListItemClick = (e, index) => {
         setSelectedIndex(index);
@@ -15,7 +15,7 @@ const SideMenu = () => {
                     selected={selectedIndex === 0}
                     onClick={(e) => handleListItemClick(e, 0)}
                 >
-                    <Link href='/community/notice' underline='none'>
+                    <Link href='/community/notice' color="inherit">
                         <ListItemText primary="공지" /></Link>
                 </ListItemButton>
 
@@ -23,7 +23,7 @@ const SideMenu = () => {
                     selected={selectedIndex === 1}
                     onClick={(e) => handleListItemClick(e, 1)}
                 >
-                    <Link href='/community/review' underline='none'>
+                    <Link href='/community/review' color="inherit">
                         <ListItemText primary="후기" /></Link>
                 </ListItemButton>
             </List>
