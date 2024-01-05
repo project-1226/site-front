@@ -38,19 +38,18 @@ const YouTubeSearchVideo = ({query ,size}) => {
 
 
   return (
-    <div>
+    <div className='recipe_video_wrap'>
       {/* videoIds.map을 사용하여 여러 개의 iframe 생성 */}
       {videoIds.map((videoId, index) => (
-        <div key={index}>
-          <iframe
+        
+          <iframe className='recipe_video'
             width="560"
             height="315"
             src={`https://www.youtube.com/embed/${videoId}`}
             title={`YouTube Video ${index + 1}`}
             frameBorder="0"
             allowFullScreen
-          ></iframe>
-        </div>
+          ></iframe> 
       ))}
     </div>
   );
