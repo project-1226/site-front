@@ -56,7 +56,7 @@ const HeaderPage = () => {
             <Typography
               color="inherit"
               component={Link} 
-              to="/"
+              to="/community/notice"
               sx={{ textDecoration: "none" }}> 커뮤니티 </Typography>
           </Stack>
 

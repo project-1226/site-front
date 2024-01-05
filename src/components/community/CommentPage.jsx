@@ -4,44 +4,82 @@ import { Button, List, ListItem, ListItemText, ListItemAvatar,
          Avatar, Typography, Divider } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import SideMenu from './SideMenu';
+import { useParams } from 'react-router-dom';
 
 
 const CommentPage = () => {
+    const {commentid} = useParams();
     const [body, setBody] = useState('');
     const [total, setTotal] = useState(0);
 
-    const getList = () => {
-        const res = '';
+    //댓글 목록 가져오기
+    const getCommentList = () => {
+        const res = '/';
+        
     }
 
     useEffect(() => {
-        getList();
+        getCommentList();
     }, []);
 
+    const onClickWrite = () => {
+        window.location.href='/login';
+    }
 
+    const onCommentSave = () => {
+        if(body == ""){
+            alert("댓글 내용을 입력하세요.");
+            
+        }else{
+            //댓글 등록 작업
+        }
+    }
+
+    const onClickFavorite = (commentid) => {
+        if(sessionStorage.getItem("uid")){
+            //좋아요 작업
+        }else{
+            //sessionStorage.getItem("uid") == "null"
+            //window.location.href="/login";
+        }
+    }
     return (
-        <>
-            <div className='my-3 text-center'>Review 상세페이지</div>
-            <Row className='justify-content-center'>
-                <Col xs={6} md={5} >
-                    <Card>
+        <div>
+            <Row>
+                <Col md={3}>
+                    <SideMenu />
+                </Col>
+                <Col className='justify-content-center'>
+                    <div className='my-3'>Review 상세페이지</div>
+                    <Card style={{width: '80%', height: 'auto'}}>
                         <CardBody>
-                            <CardTitle>title</CardTitle>
-                            <Card.Subtitle className='ms-2 mb-1 text-end'>userid</Card.Subtitle>
-                            <CardText>Review.........................</CardText>
+                            <div className='mb-3 ms-3'>
+                            <CardTitle className='text-center'>title</CardTitle>
+                            <Card.Subtitle className='text-end'>(userid) / (regdate)</Card.Subtitle><hr/>
+                            <CardText>review 읽어오기 <br/>
+                                .....review
+                            </CardText>
+                            </div>
                         </CardBody>
                     </Card>
-                    <div className='mt-5'>
-                        <label>댓글쓰기</label>
-                        <textarea className='form-control mt-2'
-                            rows={3} placeholder='댓글 내용을 입력하세요.' />
 
-                        <div className='text-end mt-2'>
-                            <Button className='btn_review_save' variant='contained' size='small'>등록</Button>
+                    {!sessionStorage.getItem("uid") ?
+                        <div className='mt-5'><Button onClick={onClickWrite} variant='contained'>댓글 작성</Button></div>
+                        :
+                        <div className='mt-5' style={{width: '80%'}}>
+                            <label>댓글쓰기</label>
+                            <textarea className='form-control mt-2'
+                                rows={3} placeholder='댓글 내용을 입력하세요.' />
+
+                            <div className='text-end mt-2'>
+                                <Button onClick={onCommentSave}
+                                    className='btn_comment_save' variant='contained' size='small'>등록</Button>
+                            </div>
                         </div>
-                    </div>
-                    <div className='comment_list mt-3'>
-                        <p>댓글 {}</p>
+                    }
+                    <div className='comment_list mt-5'>
+                        <p>댓글 {total}</p>
                         <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'Background.paper' }}>
                             <ListItem alignItems='flex-start'>
                                 <ListItemAvatar>
@@ -57,7 +95,8 @@ const CommentPage = () => {
                                                 color="text.primary"
                                             >
                                                 (userid) / (regdate) 
-                                                <span className='text-end ms-2'><FavoriteIcon fontSize='small'/>10</span>
+                                                <span className='text-end ms-2'>
+                                                    <FavoriteIcon onClick={()=> onClickFavorite()} fontSize='small'/>10</span>
                                             </Typography><br/>
                                             {" — I'll be in your neighborhood doing errands this…"}
                                         </React.Fragment>
@@ -111,7 +150,7 @@ const CommentPage = () => {
                     </div>
                 </Col >
             </Row >
-        </>
+        </div>
     )
 }
 
