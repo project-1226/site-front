@@ -6,11 +6,14 @@ import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
 import { Button } from '@mui/material';
 import Carousel from 'react-bootstrap/Carousel';                          
 import DietModal from './DietModal';
+import YouTubeSearchVideo from '../YouTubeSearchVideo';
 
 // MyDiet 컴포넌트 정의
 const MyDiet = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(1);
+  
+  const recipeTitle = ["연어샐러드", "포케샐러드", "닭가슴살 샐러드"];
 
   const handleImageClick = () => {
     setIsModalOpen(true);
@@ -64,9 +67,9 @@ const MyDiet = () => {
           </div>
 
           <div className='recipe_video_wrap'>
-            <div className='recipe_video'>유튜브 레시피 영상</div>
-            <div className='recipe_video'>유튜브 레시피 영상</div>
-            <div className='recipe_video'>유튜브 레시피 영상</div>
+            <div className='recipe_video'><YouTubeSearchVideo query={recipeTitle[0]} size={1}/></div>
+            <div className='recipe_video'><YouTubeSearchVideo query={recipeTitle[1]} size={1}/></div>
+            <div className='recipe_video'><YouTubeSearchVideo query={recipeTitle[2]} size={1}/></div>
           </div>
         </section>{/* diet_recipe */}
 
