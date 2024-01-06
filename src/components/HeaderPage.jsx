@@ -22,7 +22,6 @@ const HeaderPage = () => {
         userid: sessionStorage.getItem("userid"),
       },
     });
-    // console.log(res.data.avatar);
     setAvatar(res.data.avatar);
   };
 
@@ -35,7 +34,9 @@ const HeaderPage = () => {
   };
 
   useEffect(() => {
-    getAvatar();
+    if (sessionStorage.getItem("userid")) {
+      getAvatar();
+    }
   }, []);
 
   return (
@@ -65,8 +66,7 @@ const HeaderPage = () => {
               to="/mydiet"
               sx={{ textDecoration: "none" }}
             >
-              {" "}
-              내 식단{" "}
+              내 식단
             </Typography>
 
             <Typography
@@ -75,8 +75,7 @@ const HeaderPage = () => {
               to="/healthydiet"
               sx={{ textDecoration: "none" }}
             >
-              {" "}
-              건강식단{" "}
+              건강식단
             </Typography>
 
             <Typography
@@ -85,8 +84,7 @@ const HeaderPage = () => {
               to="/diseasediet"
               sx={{ textDecoration: "none" }}
             >
-              {" "}
-              질환맞춤식단{" "}
+              질환맞춤식단
             </Typography>
 
             <Typography
@@ -95,15 +93,17 @@ const HeaderPage = () => {
               to="/healthcare"
               sx={{ textDecoration: "none" }}
             >
-              {" "}
-              헬스케어{" "}
+              헬스케어
             </Typography>
 
             <Typography
               color="inherit"
-              component={Link} 
+              component={Link}
               to="/community/notice"
-              sx={{ textDecoration: "none" }}> 커뮤니티 </Typography>
+              sx={{ textDecoration: "none" }}
+            >
+              커뮤니티
+            </Typography>
           </Stack>
 
           {/* 로그인 case별 분기 */}
