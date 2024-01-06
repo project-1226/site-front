@@ -2,15 +2,27 @@ import { Box, Button } from "@mui/material";
 import React, { useState } from "react";
 import AddressList from "./AddressList";
 import InsertAddress from "./InsertAddress";
+import UpdateAddress from "./UpdateAddress";
 
 const ManageAddress = () => {
   const [clickAdd, setClickAdd] = useState(false);
+  const [clickUpdate, setClickUpdate] = useState(false);
+  const [selectedList, setSelectedList] = useState();
 
   return (
     <Box sx={{ width: "100%", bgcolor: "transparent", p: 5 }}>
-      {!clickAdd ? (
+      {clickUpdate ? (
+        <UpdateAddress
+          setClickUpdate={setClickUpdate}
+          addressInfo={selectedList}
+          setSelectedList={setSelectedList}
+        />
+      ) : !clickAdd ? (
         <>
-          <AddressList />
+          <AddressList
+            setClickUpdate={setClickUpdate}
+            setSelectedList={setSelectedList}
+          />
           <Button
             fullWidth
             variant="contained"

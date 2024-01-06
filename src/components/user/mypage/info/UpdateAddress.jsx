@@ -22,16 +22,8 @@ import React, { useState } from "react";
 import ModatPostCode from "./ModatPostCode";
 import axios from "axios";
 
-const InsertAddress = ({ setClickAdd }) => {
-  const [form, setForm] = useState({
-    userid: sessionStorage.getItem("userid"),
-    selected: 0,
-    recipient: "",
-    recipient_phone: "",
-    address1: "",
-    address2: "",
-    address3: "",
-  });
+const UpdateAddress = ({ setClickUpdate, addressInfo, setSelectedList }) => {
+  const [form, setForm] = useState(addressInfo);
   const {
     selected,
     recipient,
@@ -61,16 +53,16 @@ const InsertAddress = ({ setClickAdd }) => {
     if (!recipient || !recipient_phone || !address1 || !address3) {
       return;
     }
-    await axios.post("/address/insert", form);
-    alert("배송지가 등록되었습니다.");
+    await axios.post("/address/update", form);
+    alert("배송지가 수정되었습니다.");
     setSubmitted(false);
-    setClickAdd(false);
+    setClickUpdate(false);
   };
 
   return (
     <>
       <Typography variant="h6" gutterBottom sx={{ fontWeight: "bolder" }}>
-        배송지 추가
+        배송지 수정
       </Typography>
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
@@ -229,12 +221,12 @@ const InsertAddress = ({ setClickAdd }) => {
       />
       <Stack direction="row" sx={{ my: 2 }} spacing={2} justifyContent="center">
         <Button variant="contained" type="submit" onClick={onSubmit}>
-          등록
+          수정
         </Button>
         <Button
           variant="contained"
           color="secondary"
-          onClick={() => setClickAdd(false)}
+          onClick={() => setClickUpdate(false)}
         >
           취소
         </Button>
@@ -243,4 +235,4 @@ const InsertAddress = ({ setClickAdd }) => {
   );
 };
 
-export default InsertAddress;
+export default UpdateAddress;

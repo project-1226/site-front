@@ -49,6 +49,7 @@ const UpdatePage = ({ userInfo, setIsEqualPass }) => {
     alert(
       "비밀번호가 변경되었습니다\n변경된 비밀번호로 다시 로그인하시기 바랍니다."
     );
+    sessionStorage.clear();
     window.location.href = "/login";
   };
 
