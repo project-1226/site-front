@@ -1,12 +1,9 @@
-import { MoreVert } from "@mui/icons-material";
 import {
+  Box,
   Button,
-  ButtonGroup,
   Card,
   CardContent,
-  IconButton,
-  Menu,
-  MenuItem,
+  CircularProgress,
   Pagination,
   Skeleton,
   Stack,
@@ -28,12 +25,14 @@ const AddressList = ({ setClickUpdate, setSelectedList }) => {
   };
 
   const getList = async () => {
+    setLoading(true);
     const res = await axios("/address/list", {
       params: { userid: sessionStorage.getItem("userid"), page, size },
     });
     // console.log(res.data);
     setList(res.data.list);
     setTotal(res.data.total);
+    setLoading(false);
   };
 
   const onDelete = async (addressid) => {
@@ -55,6 +54,13 @@ const AddressList = ({ setClickUpdate, setSelectedList }) => {
   useEffect(() => {
     getList();
   }, [page]);
+
+  if (loading)
+    return (
+      <Box sx={{ my: 15, textAlign: "center" }}>
+        <CircularProgress />
+      </Box>
+    );
 
   return (
     <>

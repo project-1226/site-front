@@ -29,7 +29,7 @@ const UpdateUser = () => {
   }, [location]);
 
   return (
-    <Box sx={{ width: "100%", bgcolor: "transparent", p: 5 }}>
+    <Box sx={{ width: "100%", bgcolor: "transparent", py: 5, pr: 3 }}>
       {!isEqualPass ? (
         <CheckUser user={user} onPassCheck={onCheckPass} />
       ) : (
