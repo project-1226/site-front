@@ -34,6 +34,7 @@ import Chatbot from "./chatbot/Chatbot";
 import Cart from "./cart/Cart";
 import OrderPage from "./cart/OrderPage";
 import UpdateAddress from "./user/mypage/info/UpdateAddress";
+import InsertReview from "./user/mypage/shop/InsertReview";
 
 const RouterPage = () => {
   return (
@@ -73,6 +74,7 @@ const RouterPage = () => {
         <Route path="mprch" element={<MyPurchase />} />
         <Route path="cncl" element={<CancelReturn />} />
         <Route path="wsit" element={<MyWishItem />} />
+        <Route path="revw" element={<InsertReview />} />
         {/* 정보 */}
         <Route path="upd" element={<UpdateUser />} />
         <Route path="addr" element={<ManageAddress />} />

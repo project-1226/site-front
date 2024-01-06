@@ -10,7 +10,7 @@ const ManageAddress = () => {
   const [selectedList, setSelectedList] = useState();
 
   return (
-    <Box sx={{ width: "100%", bgcolor: "transparent", p: 5 }}>
+    <Box sx={{ width: "100%", bgcolor: "transparent", py: 5, pr: 3 }}>
       {clickUpdate ? (
         <UpdateAddress
           setClickUpdate={setClickUpdate}

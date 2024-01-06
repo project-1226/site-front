@@ -1,7 +1,6 @@
 import { SetMeal, AccountCircle } from "@mui/icons-material";
 import {
   AppBar,
-  Avatar,
   Box,
   Button,
   IconButton,
@@ -9,21 +8,20 @@ import {
   Toolbar,
   Typography,
 } from "@mui/material";
-import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
 const HeaderPage = () => {
-  const [avatar, setAvatar] = useState("");
+  // const [avatar, setAvatar] = useState("");
 
-  const getAvatar = async () => {
-    const res = await axios("/user/read", {
-      params: {
-        userid: sessionStorage.getItem("userid"),
-      },
-    });
-    setAvatar(res.data.avatar);
-  };
+  // const getAvatar = async () => {
+  //   const res = await axios("/user/read", {
+  //     params: {
+  //       userid: sessionStorage.getItem("userid"),
+  //     },
+  //   });
+  //   setAvatar(res.data.avatar);
+  // };
 
   const onLogout = (e) => {
     e.preventDefault();
@@ -33,11 +31,11 @@ const HeaderPage = () => {
     }
   };
 
-  useEffect(() => {
-    if (sessionStorage.getItem("userid")) {
-      getAvatar();
-    }
-  }, []);
+  // useEffect(() => {
+  //   if (sessionStorage.getItem("userid")) {
+  //     getAvatar();
+  //   }
+  // }, []);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -133,18 +131,6 @@ const HeaderPage = () => {
             sessionStorage.getItem("userid") &&
               sessionStorage.getItem("userid") !== "2fa0017c-053b-4983-8" && (
                 <>
-                  <Typography
-                    color="inherit"
-                    component={Link}
-                    to="/mp"
-                    sx={{ textDecoration: "none" }}
-                  >
-                    <Avatar
-                      alt="avatar"
-                      src={avatar}
-                      sx={{ width: 33, height: 33 }}
-                    />
-                  </Typography>
                   <Typography
                     color="inherit"
                     component={Link}
