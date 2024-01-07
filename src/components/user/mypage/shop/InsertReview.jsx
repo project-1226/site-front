@@ -14,7 +14,8 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
+import ImageUploader from "./ImageUploader";
 
 const labels = {
   1: "나쁨",
@@ -29,8 +30,25 @@ function getLabelText(value) {
 }
 
 const InsertReview = () => {
-  const [value, setValue] = useState(0);
+  const [loading, setLoading] = useState(false);
+  const [score, setScore] = useState(0);
   const [hover, setHover] = useState(-1);
+  const [content, setContent] = useState("");
+  const [imageURLs, setImageURLs] = useState("");
+
+  const downloadURLs = [];
+
+  // 자식 컴포넌트 함수 호출!!!
+  const uploaderRef = useRef(null);
+
+  const handleUpload = async () => {
+    setLoading(true);
+    if (uploaderRef.current) {
+      await uploaderRef.current.onUpload();
+    }
+    // console.log(downloadURLs); <- 배열로 받아온 url 정보를 ,를 사용해서 String으로 전환 필요!
+    setLoading(false);
+  };
 
   return (
     <Box sx={{ width: "100%", bgcolor: "transparent", py: 5, pr: 3 }}>
@@ -63,12 +81,12 @@ const InsertReview = () => {
                   <Stack direction="row" spacing={2} alignItems="center">
                     <Rating
                       name="hover-feedback"
-                      value={value}
+                      value={score}
                       precision={1}
                       size="large"
                       getLabelText={getLabelText}
                       onChange={(event, newValue) => {
-                        setValue(newValue);
+                        setScore(newValue);
                       }}
                       onChangeActive={(event, newHover) => {
                         setHover(newHover);
@@ -77,9 +95,9 @@ const InsertReview = () => {
                         <Star style={{ opacity: 0.55 }} fontSize="inherit" />
                       }
                     />
-                    {value !== null && (
+                    {score !== null && (
                       <Box sx={{ ml: 2 }}>
-                        {labels[hover !== -1 ? hover : value]}
+                        {labels[hover !== -1 ? hover : score]}
                       </Box>
                     )}
                   </Stack>
@@ -127,14 +145,18 @@ const InsertReview = () => {
                 </Typography>
               </TableCell>
               <TableCell>
-                <Button variant="outlined">사진 첨부하기</Button>
+                <ImageUploader ref={uploaderRef} downloadURLs={downloadURLs} />
               </TableCell>
             </TableRow>
             <TableRow
               sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
             >
               <TableCell colSpan={2} sx={{ textAlign: "center" }}>
-                <Button variant="contained" sx={{ mr: 2 }}>
+                <Button
+                  variant="contained"
+                  sx={{ mr: 2 }}
+                  onClick={handleUpload}
+                >
                   리뷰 등록
                 </Button>
                 <Button variant="outlined">등록 취소</Button>
