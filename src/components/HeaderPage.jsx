@@ -97,7 +97,7 @@ const HeaderPage = () => {
             <Typography
               color="inherit"
               component={Link}
-              to="/community/notice"
+              to="/community"
               sx={{ textDecoration: "none" }}
             >
               커뮤니티

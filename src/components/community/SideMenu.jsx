@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Box, List, ListItemButton, ListItemText, Divider, Link } from '@mui/material'
+import { Box, List, ListItemButton, ListItemText, Divider } from '@mui/material'
+import { Link } from 'react-router-dom';
 
 const SideMenu = () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -14,17 +15,19 @@ const SideMenu = () => {
                 <ListItemButton
                     selected={selectedIndex === 0}
                     onClick={(e) => handleListItemClick(e, 0)}
+                    component={Link}
+                    to=""
                 >
-                    <Link href='/community/notice' color="inherit">
-                        <ListItemText primary="공지" /></Link>
+                    <ListItemText primary="공지" />
                 </ListItemButton>
 
                 <ListItemButton
                     selected={selectedIndex === 1}
                     onClick={(e) => handleListItemClick(e, 1)}
+                    component={Link}
+                    to="review"
                 >
-                    <Link href='/community/review' color="inherit">
-                        <ListItemText primary="후기" /></Link>
+                    <ListItemText primary="후기" />
                 </ListItemButton>
             </List>
             <Divider />
