@@ -16,7 +16,7 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import ImageUploader from "./ImageUploader";
 import axios from "axios";
 
@@ -37,32 +37,41 @@ const InsertReview = () => {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(-1);
   const [content, setContent] = useState("");
-  const [URLs, setURLs] = useState("");
 
-  const form = {
+  let form = {
     userid: sessionStorage.getItem("userid"),
     productid: 1,
     score,
     content,
-    image_urls: URLs,
+    image_urls: "",
   };
 
   // 자식 컴포넌트 함수 호출!!!
   const uploaderRef = useRef(null);
-  const handleUpload = async () => {
-    setLoading(true);
-    if (uploaderRef.current) {
-      const uploadedURLs = await uploaderRef.current.onUpload();
-      setURLs(uploadedURLs.join(","));
-    }
-    setLoading(false);
-  };
-
   const onSubmit = async () => {
-    await handleUpload();
-    console.log(form);
-    await axios.post("/product_review/insert", form);
-    alert("리뷰가 등록되었습니다.");
+    setLoading(true);
+
+    try {
+      const uploadedURLs = await uploaderRef.current.onUpload();
+      // console.log(uploadedURLs);
+      if (uploadedURLs) {
+        // setURLs(uploadedURLs.join(","));
+        form = {
+          userid: sessionStorage.getItem("userid"),
+          productid: 1,
+          score,
+          content,
+          image_urls: uploadedURLs.join(","),
+        };
+        console.log(form);
+      }
+      await axios.post("/product_review/insert", form);
+      setLoading(false);
+      alert("리뷰가 등록되었습니다.");
+    } catch (error) {
+      setLoading(false);
+      alert("사진 업로드가 실패하였습니다.\n관리자에게 문의해주세요.");
+    }
   };
 
   return (
