@@ -27,15 +27,18 @@ const SigninPage = () => {
   } = useForm();
 
   const onSubmit = async (data) => {
-    // console.log(data.email);
     const res = await axios.post("/user/login", data);
-    if (res.data === 0) {
+    console.log(res.data);
+    const result = res.data.result;
+    // console.log(result + ", " + userid);
+    if (result === 0) {
       alert("해당 이메일이 존재하지 않습니다.");
-    } else if (res.data === 2) {
+    } else if (result === 2) {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
       alert("로그인 성공!");
-      sessionStorage.setItem("email", data.email);
+      const userid = res.data.user.userid;
+      sessionStorage.setItem("userid", userid);
       window.location.href = "/";
     }
   };
