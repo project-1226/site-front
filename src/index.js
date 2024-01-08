@@ -3,12 +3,17 @@ import ReactDOM from "react-dom/client";
 
 import "./css/index.css";
 import "./css/default.css";
+
+import "./css/mydiet.css"
+import "./css/AK.css"
+
 import "./css/mydiet.css";
 import "./css/dietmodal.css";
 import "./css/healthy.css";
 import "./css/healthymodal.css";
 import "./css/healthcare.css";
 import "./css/disease.css";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import App from "./App";
