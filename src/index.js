@@ -2,6 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom/client";
 
 import "./css/index.css";
+
+import "./css/mydiet.css"
+import "./css/AK.css"
+
 import "./css/mydiet.css";
 import "./css/dietmodal.css";
 import "./css/healthy.css";
