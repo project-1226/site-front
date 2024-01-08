@@ -18,6 +18,17 @@ const ActivitySidebar = ({ selectedIndex, handleListItemClick }) => {
         <ListItemText primary="활동 내역" />
       </ListItemButton>
       <ListItemButton
+        selected={selectedIndex === 12}
+        onClick={() => handleListItemClick(12)}
+        component={Link}
+        to="qact"
+      >
+        <ListItemIcon>
+          <Inbox />
+        </ListItemIcon>
+        <ListItemText primary="문의 내역" />
+      </ListItemButton>
+      <ListItemButton
         selected={selectedIndex === 6}
         onClick={() => handleListItemClick(6)}
         component={Link}
