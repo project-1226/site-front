@@ -7,36 +7,45 @@ import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined
 import HelpCenterOutlinedIcon from '@mui/icons-material/HelpCenterOutlined';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
+import CustomerModal from './CustomerModal';
 
 
 const AdminSidebar = () => {
     const [selectedIndex, setSelectedIndex] = useState();
+    const [isModalOpen, setModalOpen] = useState(false);
 
     const handleListItemClick = (e, index) => {
         setSelectedIndex(index);
+        if(index === 0){
+            setModalOpen(true);
+        }
     }
 
-  return (
-    <Box
-        sx={{ width: '100%', maxWidth: 360, bgcolor: "transparent", p: 3 }}
-    >
-        <List
-            component="nav"
-            aria-labelledby="admin-list"
-            subheader={
-                <ListSubheader
-                    component="div"
-                    id="admin-list"
-                    sx={{
-                        fontSize: "1.3rem",
-                        bgcolor: "transparent",
-                    }}
-                >
-                    Admin
-                </ListSubheader>
-            }
+    const handleCloseModal = () => {
+        setModalOpen(false);
+      };
+
+    return (
+        <Box
+            sx={{ width: '100%', maxWidth: 360, bgcolor: "transparent", p: 3 }}
         >
-            <ListItemButton
+            <List
+                component="nav"
+                aria-labelledby="admin-list"
+                subheader={
+                    <ListSubheader
+                        component="div"
+                        id="admin-list"
+                        sx={{
+                            fontSize: "1.3rem",
+                            bgcolor: "transparent",
+                        }}
+                    >
+                        Admin
+                    </ListSubheader>
+                }
+            >
+                <ListItemButton
                     selected={selectedIndex === 0}
                     onClick={(event) => handleListItemClick(event, 0)}
                 >
@@ -63,62 +72,62 @@ const AdminSidebar = () => {
                     </ListItemIcon>
                     <ListItemText primary="배송지관리" />
                 </ListItemButton>
-        </List>
-        <Divider />
-        <List
-            component="nav"
-            aria-labelledby="admin-list"
-            subheader={
-                <ListSubheader
-                    component="div"
-                    id="admin-list"
-                    sx={{
-                        fontSize: "1.3rem",
-                        bgcolor: "transparent",
-                    }}
-                >
-                    상품
-                </ListSubheader>
-            }
-        >
-            <ListItemButton
-                selected={selectedIndex === 3}
-                onClick={(event) => handleListItemClick(event, 3)}
+            </List>
+            <Divider />
+            <List
+                component="nav"
+                aria-labelledby="admin-list"
+                subheader={
+                    <ListSubheader
+                        component="div"
+                        id="admin-list"
+                        sx={{
+                            fontSize: "1.3rem",
+                            bgcolor: "transparent",
+                        }}
+                    >
+                        상품
+                    </ListSubheader>
+                }
             >
-                <ListItemIcon>
-                    <AddShoppingCartOutlinedIcon />
-                </ListItemIcon>
-                <Link href="/admin/product/register" color="inherit">
-                    <ListItemText primary="상품등록" /></Link>
-            </ListItemButton>
-            <ListItemButton
-                selected={selectedIndex === 4}
-                onClick={(event) => handleListItemClick(event, 4)}
-            >
-                <ListItemIcon>
-                    <HelpCenterOutlinedIcon />
-                </ListItemIcon>
-                <ListItemText primary="문의" />
-            </ListItemButton>
-        </List>
-        <Divider />
-        <List
-            component="nav"
-            aria-labelledby="admin-list"
-            subheader={
-                <ListSubheader
-                    component="div"
-                    id="admin-list"
-                    sx={{
-                        fontSize: "1.3rem",
-                        bgcolor: "transparent",
-                    }}
+                <ListItemButton
+                    selected={selectedIndex === 3}
+                    onClick={(event) => handleListItemClick(event, 3)}
                 >
-                    Community
-                </ListSubheader>
-            }
-        >
-            <ListItemButton
+                    <ListItemIcon>
+                        <AddShoppingCartOutlinedIcon />
+                    </ListItemIcon>
+                    <Link href="/admin/product/register" color="inherit">
+                        <ListItemText primary="상품등록" /></Link>
+                </ListItemButton>
+                <ListItemButton
+                    selected={selectedIndex === 4}
+                    onClick={(event) => handleListItemClick(event, 4)}
+                >
+                    <ListItemIcon>
+                        <HelpCenterOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="문의" />
+                </ListItemButton>
+            </List>
+            <Divider />
+            <List
+                component="nav"
+                aria-labelledby="admin-list"
+                subheader={
+                    <ListSubheader
+                        component="div"
+                        id="admin-list"
+                        sx={{
+                            fontSize: "1.3rem",
+                            bgcolor: "transparent",
+                        }}
+                    >
+                        Community
+                    </ListSubheader>
+                }
+            >
+                <ListItemButton
                     selected={selectedIndex === 5}
                     onClick={(event) => handleListItemClick(event, 5)}
                 >
@@ -136,10 +145,11 @@ const AdminSidebar = () => {
                     </ListItemIcon>
                     <ListItemText primary="후기/댓글" />
                 </ListItemButton>
-        </List>
-        <Divider />
-    </Box>
-  )
+            </List>
+            <Divider />
+            <CustomerModal show={isModalOpen} hide={handleCloseModal} />
+        </Box>
+    )
 }
 
 export default AdminSidebar
