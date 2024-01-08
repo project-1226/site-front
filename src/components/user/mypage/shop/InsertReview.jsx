@@ -1,7 +1,9 @@
 import { Star } from "@mui/icons-material";
 import {
+  Backdrop,
   Box,
   Button,
+  CircularProgress,
   Paper,
   Rating,
   Stack,
@@ -14,8 +16,9 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import ImageUploader from "./ImageUploader";
+import axios from "axios";
 
 const labels = {
   1: "나쁨",
@@ -34,24 +37,42 @@ const InsertReview = () => {
   const [score, setScore] = useState(0);
   const [hover, setHover] = useState(-1);
   const [content, setContent] = useState("");
-  const [imageURLs, setImageURLs] = useState("");
+  const [URLs, setURLs] = useState("");
 
-  const downloadURLs = [];
+  const form = {
+    userid: sessionStorage.getItem("userid"),
+    productid: 1,
+    score,
+    content,
+    image_urls: URLs,
+  };
 
   // 자식 컴포넌트 함수 호출!!!
   const uploaderRef = useRef(null);
-
   const handleUpload = async () => {
     setLoading(true);
     if (uploaderRef.current) {
-      await uploaderRef.current.onUpload();
+      const uploadedURLs = await uploaderRef.current.onUpload();
+      setURLs(uploadedURLs.join(","));
     }
-    // console.log(downloadURLs); <- 배열로 받아온 url 정보를 ,를 사용해서 String으로 전환 필요!
     setLoading(false);
+  };
+
+  const onSubmit = async () => {
+    await handleUpload();
+    console.log(form);
+    await axios.post("/product_review/insert", form);
+    alert("리뷰가 등록되었습니다.");
   };
 
   return (
     <Box sx={{ width: "100%", bgcolor: "transparent", py: 5, pr: 3 }}>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Typography variant="h6" gutterBottom sx={{ fontWeight: "bolder" }}>
         리뷰 작성
       </Typography>
@@ -68,7 +89,11 @@ const InsertReview = () => {
           </TableHead>
           <TableBody>
             <TableRow
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{
+                "&:last-child td, &:last-child th": {
+                  border: 0,
+                },
+              }}
             >
               <TableCell width={150}>
                 <img src="http://via.placeholder.com/500x500" alt="product" />
@@ -105,12 +130,20 @@ const InsertReview = () => {
               </TableCell>
             </TableRow>
             <TableRow
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{
+                "&:last-child td, &:last-child th": {
+                  border: 0,
+                },
+              }}
             >
               <TableCell width={150} sx={{ verticalAlign: "top" }}>
                 <Typography
                   variant="body1"
-                  sx={{ fontWeight: "bolder", mt: 0.5, ml: 0.5 }}
+                  sx={{
+                    fontWeight: "bolder",
+                    mt: 0.5,
+                    ml: 0.5,
+                  }}
                 >
                   상세 리뷰
                 </Typography>
@@ -122,6 +155,8 @@ const InsertReview = () => {
                   multiline
                   rows={4}
                   placeholder="다른 고객님에게 도움이 되도록 상품에 대한 솔직한 평가를 남겨주세요."
+                  value={content}
+                  onChange={(e) => setContent(e.target.value)}
                   sx={{ mt: 0.5, mb: 2 }}
                 />
                 <Typography variant="caption" color="grey">
@@ -134,29 +169,37 @@ const InsertReview = () => {
               </TableCell>
             </TableRow>
             <TableRow
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{
+                "&:last-child td, &:last-child th": {
+                  border: 0,
+                },
+              }}
             >
               <TableCell width={150} sx={{ verticalAlign: "top" }}>
                 <Typography
                   variant="body1"
-                  sx={{ fontWeight: "bolder", mt: 0.5, ml: 0.5 }}
+                  sx={{
+                    fontWeight: "bolder",
+                    mt: 0.5,
+                    ml: 0.5,
+                  }}
                 >
                   사진 첨부
                 </Typography>
               </TableCell>
               <TableCell>
-                <ImageUploader ref={uploaderRef} downloadURLs={downloadURLs} />
+                <ImageUploader ref={uploaderRef} />
               </TableCell>
             </TableRow>
             <TableRow
-              sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+              sx={{
+                "&:last-child td, &:last-child th": {
+                  border: 0,
+                },
+              }}
             >
               <TableCell colSpan={2} sx={{ textAlign: "center" }}>
-                <Button
-                  variant="contained"
-                  sx={{ mr: 2 }}
-                  onClick={handleUpload}
-                >
+                <Button variant="contained" sx={{ mr: 2 }} onClick={onSubmit}>
                   리뷰 등록
                 </Button>
                 <Button variant="outlined">등록 취소</Button>

@@ -17,7 +17,7 @@ import {
 import { RemoveCircle } from "@mui/icons-material";
 import { v4 as uuidv4 } from "uuid";
 
-const ImageUploader = forwardRef(({ downloadURLs }, ref) => {
+const ImageUploader = forwardRef((props, ref) => {
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
 
@@ -65,6 +65,7 @@ const ImageUploader = forwardRef(({ downloadURLs }, ref) => {
   };
 
   const onUpload = async () => {
+    const downloadURLs = [];
     for (const image of images) {
       const fileExtension = image.name
         .split(".")
@@ -75,13 +76,12 @@ const ImageUploader = forwardRef(({ downloadURLs }, ref) => {
       try {
         await uploadBytes(imageRef, image);
         const downloadURL = await getDownloadURL(imageRef);
-        // console.log(downloadURL);
         downloadURLs.push(downloadURL);
-        // console.log(downloadURLs);
       } catch (error) {
         console.error("Error uploading file:", error);
       }
     }
+    return downloadURLs;
   };
 
   useImperativeHandle(ref, () => ({
