@@ -37,42 +37,40 @@ const ProductRegisterPage = () => {
     }
 
     return (
-        <div className='my-5'>
-            <h5 className='text-center mb-5'>상품등록 페이지</h5>
-            <Row className='justify-content-center '>
-                <Col md={5} lg={6}>
-                    <Card className='text-center p-4'>
-                        <div>
-                            <img onClick={()=> ref_productFile.current.click()} 
-                                src={src || 'http://via.placeholder.com/150x150'} width= '30%' />
-                            <input onChange={onChangeFile} type='file' ref={ref_productFile} style={{display: 'none'}}/>
-                            <br/>
-                            <div className='mt-3'>
-                                <Button onClick={onSaveImage} variant='contained'>사진등록</Button>
-                            </div>
+        <div className='my-4'>
+            <Row className='justify-content-center ms-5'>
+                <h5 className='text-center mb-4'> [상품등록] </h5>
+                <Card className='text-center p-4' style={{width: '250%', height: 'auto'}}>
+                    <div>
+                        <img onClick={()=> ref_productFile.current.click()} 
+                            src={src || 'http://via.placeholder.com/150x150'} width= '50%' />
+                        <input onChange={onChangeFile} type='file' ref={ref_productFile} style={{display: 'none'}}/>
+                        <br/>
+                        <div className='mt-3'>
+                            <Button onClick={onSaveImage} variant='contained'>사진등록</Button>
                         </div>
-                            <form className='mt-5 justify-content-center' style={{width: '80%', margin: '0 auto'}}>
-                                <InputGroup className='mb-2'>
-                                    <InputGroup.Text>상품명</InputGroup.Text>
-                                    <Form.Control name="name"/>
-                                </InputGroup>
-                                <InputGroup className='mb-2'>
-                                    <InputGroup.Text>상품가격</InputGroup.Text>
-                                    <Form.Control name="price"/>
-                                </InputGroup>
-                                <InputGroup className='mb-2'>
-                                    <InputGroup.Text>정보</InputGroup.Text>
-                                    <Form.Control name="info"/>
-                                </InputGroup>
-                            </form>
-                            <div className='mt-3'>
-                                <Button onClick={onProductSave} variant="contained" size="sm">등록</Button>
-                            </div>
-                    </Card>
-                </Col>
+                    </div>
+                        <form className='mt-5 justify-content-center' style={{width: '80%', margin: '0 auto'}}>
+                            <InputGroup className='mb-2'>
+                                <InputGroup.Text>상품명</InputGroup.Text>
+                                <Form.Control name="name"/>
+                            </InputGroup>
+                            <InputGroup className='mb-2'>
+                                <InputGroup.Text>상품가격</InputGroup.Text>
+                                <Form.Control name="price"/>
+                            </InputGroup>
+                            <InputGroup className='mb-2'>
+                                <InputGroup.Text>정보</InputGroup.Text>
+                                <Form.Control name="info"/>
+                            </InputGroup>
+                        </form>
+                        <div className='mt-3'>
+                            <Button onClick={onProductSave} variant="contained" size="sm">등록</Button>
+                        </div>
+                </Card>
             </Row>
         </div>
     )
 }
 
-export default ProductRegisterPage
+export default ProductRegisterPage;

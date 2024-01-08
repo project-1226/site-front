@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import { Box, List, ListSubheader, Divider, ListItemButton, ListItemText, ListItemIcon, Link } from '@mui/material'
+import { Box, List, ListSubheader, Divider, ListItemButton, ListItemText, ListItemIcon } from '@mui/material'
 
 import ManageAccountsOutlineIcon from '@mui/icons-material/ManageAccounts';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
-import LocalShippingOutlinedIcon from '@mui/icons-material/LocalShippingOutlined';
 import HelpCenterOutlinedIcon from '@mui/icons-material/HelpCenterOutlined';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 import CustomerModal from './CustomerModal';
+import { Link } from 'react-router-dom';
 
 
 const AdminSidebar = () => {
@@ -57,21 +57,15 @@ const AdminSidebar = () => {
                 <ListItemButton
                     selected={selectedIndex === 1}
                     onClick={(event) => handleListItemClick(event, 1)}
+                    component={Link}
+                    to="adorder"
                 >
                     <ListItemIcon>
                         <ShoppingBasketOutlinedIcon />
                     </ListItemIcon>
                     <ListItemText primary="주문/배송" />
                 </ListItemButton>
-                <ListItemButton
-                    selected={selectedIndex === 2}
-                    onClick={(event) => handleListItemClick(event, 2)}
-                >
-                    <ListItemIcon>
-                        <LocalShippingOutlinedIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="배송지관리" />
-                </ListItemButton>
+                <List></List>
             </List>
             <Divider />
             <List
@@ -91,24 +85,18 @@ const AdminSidebar = () => {
                 }
             >
                 <ListItemButton
-                    selected={selectedIndex === 3}
-                    onClick={(event) => handleListItemClick(event, 3)}
+                    selected={selectedIndex === 2}
+                    onClick={(event) => handleListItemClick(event, 2)}
+                    component={Link}
+                    to="register"
                 >
                     <ListItemIcon>
                         <AddShoppingCartOutlinedIcon />
                     </ListItemIcon>
-                    <Link href="/admin/product/register" color="inherit">
-                        <ListItemText primary="상품등록" /></Link>
+                    
+                        <ListItemText primary="상품등록" />
                 </ListItemButton>
-                <ListItemButton
-                    selected={selectedIndex === 4}
-                    onClick={(event) => handleListItemClick(event, 4)}
-                >
-                    <ListItemIcon>
-                        <HelpCenterOutlinedIcon />
-                    </ListItemIcon>
-                    <ListItemText primary="문의" />
-                </ListItemButton>
+                <List></List>
             </List>
             <Divider />
             <List
@@ -128,8 +116,10 @@ const AdminSidebar = () => {
                 }
             >
                 <ListItemButton
-                    selected={selectedIndex === 5}
-                    onClick={(event) => handleListItemClick(event, 5)}
+                    selected={selectedIndex === 3}
+                    onClick={(event) => handleListItemClick(event, 3)}
+                    component={Link}
+                    to="adno"
                 >
                     <ListItemIcon>
                         <RateReviewOutlinedIcon />
@@ -137,8 +127,10 @@ const AdminSidebar = () => {
                     <ListItemText primary="공지" />
                 </ListItemButton>
                 <ListItemButton
-                    selected={selectedIndex === 6}
-                    onClick={(event) => handleListItemClick(event, 6)}
+                    selected={selectedIndex === 4}
+                    onClick={(event) => handleListItemClick(event, 4)}
+                    component={Link}
+                    to="adreview"
                 >
                     <ListItemIcon>
                         <RateReviewOutlinedIcon />
@@ -152,4 +144,4 @@ const AdminSidebar = () => {
     )
 }
 
-export default AdminSidebar
+export default AdminSidebar;
