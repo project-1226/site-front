@@ -35,6 +35,10 @@ import Cart from "./cart/Cart";
 import OrderPage from "./cart/OrderPage";
 import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import InsertReview from "./user/mypage/shop/InsertReview";
+import Paycheck from "./cart/Paycheck";
+import KakaoRedirectHandler from "./user/login/KakaoRedirectHandler";
+
+
 
 const RouterPage = () => {
   return (
@@ -50,10 +54,13 @@ const RouterPage = () => {
       {/* 주문 */}
       <Route path="/Cart" element={<Cart />} />
       <Route path="/Order" element={<OrderPage />} />
+      <Route path="/payments" element={<Paycheck />} />
 
       {/* 로그인/회원가입 */}
       <Route path="/login" element={<SigninPage />} />
       <Route path="/join" element={<SignupPage />} />
+      <Route path="/oauth/callback/kakao" element={<KakaoRedirectHandler />} />
+ 
 
       {/* community */}
       <Route path="/community" element={<SideMenu />} />
