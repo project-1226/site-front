@@ -36,6 +36,15 @@ import OrderPage from "./cart/OrderPage";
 import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import InsertReview from "./user/mypage/shop/InsertReview";
 
+import AdminPage from "./admin/AdminPage";
+import ProductRegisterPage from "./admin/ProductRegisterPage";
+import CommunityPageMain from "./community/CommunityPageMain";
+import WriteReview from "./community/WriteReview";
+import CommentPage from "./community/CommentPage";
+import AdminOrderList from "./admin/AdminOrderList";
+import AdminNotice from "./admin/AdminNotice";
+import AdminReview from "./admin/AdminReview";
+
 const RouterPage = () => {
   return (
     <Routes>
@@ -56,9 +65,25 @@ const RouterPage = () => {
       <Route path="/join" element={<SignupPage />} />
 
       {/* community */}
-      <Route path="/community" element={<SideMenu />} />
-      <Route path="/community/notice" element={<NoticePage />} />
-      <Route path="/community/review" element={<ReviewPage />} />
+      <Route path="/community" element={<CommunityPageMain />}>
+        <Route path="" element={<NoticePage />} />
+        <Route path="review" element={<ReviewPage />} />
+        <Route path="review/write" element={<WriteReview />} />
+        <Route path="review/comment" element={<CommentPage/>} />
+      </Route>
+      
+      
+
+      {/* 관리자페이지 */}
+      <Route path="/admin" element={<AdminPage/>} >
+        <Route path="adorder" element={<AdminOrderList />} />
+        <Route path="register" element={<ProductRegisterPage />} />
+        <Route path="adno" element={<AdminNotice />} />
+        <Route path="adreview" element={<AdminReview />} />
+      </Route>
+
+      {/* 상품등록 */}
+      
 
       {/* 마이페이지 */}
       <Route path="/mp" element={<MyPage />}>
