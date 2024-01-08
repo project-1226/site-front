@@ -13,9 +13,9 @@ const DiseaseDetail = () => {
   const recipeList = [{title:"녹차 수제비 전골",image:"이미지",ingredients:"유부 30,시ㄹ파30,....etc",recipe:"ㅇ나ㅣ럼나ㅣㅇ리"},{title:"채소쌈건강롤",image:"이미지",ingredients:"잡곡 100g,양배추40g,....etc",recipe:"sdfasddfsa;sdfasfdsafasfa"},{title:"유자 연어 조림",image:"이미지",ingredients:"연어 120g",recipe:"ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너"}];
 
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [modalQuery, setModalQuery] = useState('');
-  const handleClickBtn = (query) => {
-    setModalQuery(query);
+  const [modalRecipe, setModalRecipe] = useState('');
+  const handleClickBtn = (recipe) => {
+    setModalRecipe(recipe);
     setIsModalOpen(true);
   };
 
@@ -35,7 +35,7 @@ const DiseaseDetail = () => {
                 <h5>재료</h5>
                 <p>{recipe.ingredients}</p>
               </div>
-              <Button variant="contained" size="small" onClick={() => handleClickBtn(recipe.title)}>
+              <Button variant="contained" size="small" onClick={() => handleClickBtn(recipe)}>
                 레시피 - 더보기 & 영상
               </Button>
               
@@ -50,6 +50,13 @@ const DiseaseDetail = () => {
           <div className="contents_title_box">
             <p className="contents_title">내 식단 레시피 보러가기</p>
           </div>
+          <div className='recipe_video_wrap'>
+            <div className='recipe_video'><YouTubeSearchVideo query={recipeList[0].title}size={1}/></div>
+            <div className='recipe_video'><YouTubeSearchVideo query={recipeList[1].title}size={1}/></div>
+            <div className='recipe_video'><YouTubeSearchVideo query={recipeList[2].title}size={1}/></div>
+            
+          </div>
+
           <div className='disease_detail_vidio_wrap'>
             <YouTubeSearchVideo query={recipeList[0].title}size={1}/>
             <YouTubeSearchVideo query={recipeList[1].title}size={1}/>
@@ -86,7 +93,7 @@ const DiseaseDetail = () => {
           </div>
         </section>{/* diet_review */}
       </div>{/* diet_contents */}
-      <DiseaseModal show={isModalOpen} onHide={handleCloseModal} query={modalQuery} />
+      <DiseaseModal show={isModalOpen} onHide={handleCloseModal} recipe={modalRecipe} />
     </div>
   )
 }
