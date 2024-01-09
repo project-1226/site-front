@@ -18,8 +18,6 @@ function App() {
     navigate('/survey/questions');
   };
 
-  
-
   const handleBackButtonClick = () => {
     navigate('/survey');
   };

@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 const QuestionsPage = ({setShowSurvey}) => {
-  const [question1, setQuestion1] = useState('');
-  const [question2, setQuestion2] = useState('');
   const navigate = useNavigate();
 
   const handleBackButtonClick = () => {
@@ -11,8 +9,7 @@ const QuestionsPage = ({setShowSurvey}) => {
   };
 
   const handleNextButtonClick = () => {
-    console.log('Question 1:', question1);
-    console.log('Question 2:', question2);
+
   };
 
   return (
