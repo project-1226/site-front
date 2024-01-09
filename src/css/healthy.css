@@ -6,8 +6,8 @@
 
 .main_text_box {width: 30%; text-align: center; z-index: 1;}
 .main_subtitle {font-size: 18px; letter-spacing: -1px; margin-bottom: 3px; color: #fff;}
-.main_title {font-size: 60px; font-weight: 600; color: #fff; margin-bottom: 70px; letter-spacing: -2px; font-family: 'Noto Serif KR';}
-.main_article {font-size: 20px; font-weight: bold; letter-spacing: -1px; color: #fff;}
+.main_title {font-size: 60px; font-weight: 600; color: #fff; margin-bottom: 70px !important; letter-spacing: -2px; font-family: 'Noto Serif KR';}
+.main_article {font-size: 20px; font-weight: 500; letter-spacing: -1px; color: #fff;}
 
 .recomm_menu {display: flex; flex-wrap: wrap; justify-content: center; z-index: 1; position: relative; bottom: 150px}
 .recomm_menuimg {width: 18%; height: 380px; margin-right: 2%; position: relative; cursor: pointer;}
