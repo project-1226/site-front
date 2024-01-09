@@ -13,17 +13,17 @@ import SigninPage from "./user/SigninPage";
 import SignupPage from "./user/SignupPage";
 import UpdateUser from "./user/mypage/info/UpdateUser";
 import ManageAddress from "./user/mypage/info/ManageAddress";
+import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import MySurvey from "./user/mypage/diary/MySurvey";
 import RecommendPlan from "./user/mypage/diary/RecommendPlan";
 import CustomPlan from "./user/mypage/diary/CustomPlan";
 import Report from "./user/mypage/diary/Report";
-import Scrap from "./user/mypage/activity/Scrap";
 import MyPurchase from "./user/mypage/shop/MyPurchase";
 import CancelReturn from "./user/mypage/shop/CancelReturn";
 import MyWishItem from "./user/mypage/shop/MyWishItem";
-import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import InsertReview from "./user/mypage/shop/InsertReview";
 import ActivityMain from "./user/mypage/activity/ActivityMain";
+import QuestionMain from "./user/mypage/activity/QuestionMain";
 
 import MyDiet from "./myDiet/MyDiet";
 import Healthy from "./healthyDiet/Healthy";
@@ -37,7 +37,6 @@ import Chatbot from "./chatbot/Chatbot";
 
 import Cart from "./cart/Cart";
 import OrderPage from "./cart/OrderPage";
-import QuestionMain from "./user/mypage/activity/QuestionMain";
 
 import AdminPage from "./admin/AdminPage";
 import ProductRegisterPage from "./admin/ProductRegisterPage";
@@ -98,7 +97,6 @@ const RouterPage = () => {
         {/* 활동 */}
         <Route path="mact" element={<ActivityMain />} />
         <Route path="qact" element={<QuestionMain />} />
-        <Route path="scrp" element={<Scrap />} />
         {/* 주문내역 */}
         <Route path="mprch" element={<MyPurchase />} />
         <Route path="cncl" element={<CancelReturn />} />
