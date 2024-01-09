@@ -19,7 +19,7 @@ const CustomerModal = ({ show, hide }) => {
                 <div className='text-center'>
                     <h3>회원 목록</h3>
                 </div>
-                <div className='mt-3'>
+                <div className='mt-5'>
                     <Table className='text-center'>
                         <thead>
                             <tr>

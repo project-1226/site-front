@@ -67,7 +67,7 @@ const ReviewPage = () => {
                     </tbody>
                 </Table>
                 <div className='ms-5 text-end'>
-                    <Button variant='contained' onClick={onClickReview}>후기 작성</Button>
+                    <Button variant='contained' size='small' onClick={onClickReview}>후기 작성</Button>
                 </div>
             </Row>
         </div>

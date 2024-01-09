@@ -1,16 +1,31 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Col, Row, CardBody, CardTitle, CardText } from 'react-bootstrap'
+import { Card, Col, Row, Form, CardBody, CardTitle, CardText } from 'react-bootstrap'
 import { Button, List, ListItem, ListItemText, ListItemAvatar,
          Avatar, Typography, Divider } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import { useParams } from 'react-router-dom';
+import axios from 'axios';
 
 
 const CommentPage = () => {
-    const {commentid} = useParams();
+    const {postid} = useParams();
+
     const [body, setBody] = useState('');
     const [total, setTotal] = useState(0);
+    // const [review, setReview] = useState('');
+
+    // const {userid, title, content, image, regdate} = review;
+
+    // const getReview = async() => {
+    //     const res = await axios.get(`/community/read?`);
+    //     setReview(res.data);
+    // }
+
+    // useEffect(()=> {
+    //     getReview();
+    // }, []);
+
 
     //댓글 목록 가져오기
     const getCommentList = () => {
@@ -26,12 +41,14 @@ const CommentPage = () => {
         window.location.href='/login';
     }
 
-    const onCommentSave = () => {
-        if(body == ""){
+    const onCommentSave = async() => {
+        if(body === ""){
             alert("댓글 내용을 입력하세요.");
-            
         }else{
             //댓글 등록 작업
+            const data = {postid, body};
+            await axios.post('/community/insert/comment', );
+
         }
     }
 
@@ -45,34 +62,37 @@ const CommentPage = () => {
     }
     return (
         <div>
+            <div className='my-3'>Review 상세페이지</div>
             <Row className='justify-content-center p-3'>
-                <div className='my-3'>Review 상세페이지</div>
-                <Card style={{width: '250%', height: 'auto'}}>
-                    <CardBody>
-                        <div className='mb-3 ms-3'>
-                        <CardTitle className='text-center'>title</CardTitle>
-                        <Card.Subtitle className='text-end'>(userid) / (regdate)</Card.Subtitle><hr/>
-                        <CardText>review 읽어오기 <br/>
-                            .....review
-                        </CardText>
-                        </div>
-                    </CardBody>
+                <Card className='justify-content-center p-3' style={{width: '100%', height: 'auto'}}>
+                    <div>
+                        <p className='text-center'>Title</p>
+                        <div className='text-end'>([userid] / [regdate])</div>
+                        <br/>
+                    </div>
+                    <div>
+                        [Review content]
+                        <p>review...</p>
+                        <p>review...</p>
+                        <p>review...</p>
+                    </div>
                 </Card>
+                
 
-                {!sessionStorage.getItem("uid") ?
+                {/* {!sessionStorage.getItem("uid") ?
                     <div className='mt-5 text-end'><Button onClick={onClickWrite} variant='contained'>댓글 작성</Button></div>
-                    :
-                    <div className='mt-5' style={{width: '200%'}}>
+                    : */}
+                    <div className='mt-5' style={{width: '150%'}}>
                         <label>댓글쓰기</label>
-                        <textarea className='form-control mt-2'
-                            rows={3} placeholder='댓글 내용을 입력하세요.' />
+                        <textarea className='form-control mt-3' onChange={(e)=> setBody(e.target.value)} 
+                            rows={3} placeholder='댓글 내용을 입력하세요.' value={body} />
 
                         <div className='text-end mt-2'>
                             <Button onClick={onCommentSave}
                                 className='btn_comment_save' variant='contained' size='small'>등록</Button>
                         </div>
                     </div>
-                }
+                {/* } */}
                 <div className='comment_list mt-5'>
                     <p>댓글 {total}</p>
                     <List sx={{ width: '200%', maxWidth: 360, bgcolor: 'Background.paper' }}>

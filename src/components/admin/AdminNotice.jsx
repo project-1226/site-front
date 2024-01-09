@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { Form, InputGroup, Row } from 'react-bootstrap'
 import { Button } from '@mui/material'
+import axios from 'axios';
 
 const AdminNotice = () => {
     const [list, setList] = useState([]);
@@ -14,9 +15,9 @@ const AdminNotice = () => {
         getList();
     }, []);
     
-    const onClickSave = () => {
+    const onClickSave = async() => {
         if(window.confirm("등록할까요?")){
-            //
+            //await axios.post('/');
             alert("등록 완료!");
         }
     }
