@@ -1,48 +1,47 @@
-import React from 'react'
-import SideMenu from './SideMenu'
-import { Table, Row, Col } from 'react-bootstrap';
-
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import { Table } from 'react-bootstrap';
 
 const NoticePage = () => {
+    const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const getList = async() => {
+        setLoading(true);
+        const res = await axios.get('/');
+        setList(res.data.list);
+        setLoading(false);
+    }
+
+    useEffect(()=> {
+        getList();
+    }, []);
+
+
     return (
-        <div>
-            <Row>
-                <Col md={3}>
-                    <SideMenu />
-                </Col>
-                <Col className='my-5 justify-content-center'>
-                    <Table size="sm" width="80%" className='text-center mb-2'>
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Title</th>
-                                <th>Writer</th>
-                                <th>Date</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>사이트 이용 약관</td>
-                                <td>관리자</td>
-                                <td>2023-12-30</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>no.</td>
-                                <td>title</td>
-                                <td>wirter</td>
-                                <td>regdate</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
+        <div className='my-5 ms-5'>
+            <div className='text-center'>
+                <Table>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Title</th>
+                            <th>Writer</th>
+                            <th>Regdate</th>
+                            <th>Count</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>공지</td>
+                            <td>사이트 이용 약관</td>
+                            <td>관리자</td>
+                            <td>2023-12-30</td>
+                            <td>50</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </div>
         </div>
     )
 }

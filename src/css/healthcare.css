@@ -1,0 +1,38 @@
+.healthcare_wrap {width: 100%;}
+
+/* main_box */
+.healthcare_main {width: 100%; height: 570px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; 
+    padding: 0 40px; background: url('../images/healthcare.jpg') no-repeat 50% 80%; background-size: cover; position: relative;}
+.healthcare_main::before {width: 100%; height: 100%; content: ''; position: absolute; top: 0; left: 0; background: rgba(0, 0, 0, 0.5);}
+.h_main_title_wrap {position: relative; z-index: 1; text-align: center; font-family: 'Oswald'}
+.h_main_title_wrap p {font-size: 36px; font-weight: 500; letter-spacing: -1px; color: #fff; }
+.h_main_title_wrap p:first-child {margin-bottom: -6px;}
+
+/* healthcare_submain */
+.healthcare_submain {width: 100%; margin: 0 auto 180px auto; display: flex; flex-wrap: nowrap; overflow-x: auto;}
+.challenge_box {width: 25vw; height: 25vw; background: #393939; display: flex; align-items: center; justify-content: center; font-size: 2vw; font-weight: 600; cursor: pointer;}
+.challenge_box:nth-child(1) {color: #fff;}
+.challenge_box:nth-child(2) {background: #c9c9c9;}
+.challenge_box:nth-child(3) {background: #9b9b9b;}
+.challenge_box:nth-child(4) {background: rgb(198, 205, 201);}
+
+/* healthcare_contents */
+.healthcare_contents {width: 94.8%; margin: 0 auto 180px auto;}
+
+/* healthcare_video_wrap */
+.healthcare_video_wrap {width: 100%; margin: 0 auto 180px auto; display: flex; flex-wrap: wrap; }
+.healthcare_video {width: 32%; height: 250px; margin-right: 2%; background: #ddd;}
+.healthcare_video:last-child {margin-right: 0;}
+
+/* healthcare_review_wrap */
+.healthcare_review_wrap {width: 100%;}
+.healthcare_review {background: #eeeeee; border-radius: 20px; padding: 40px}
+.carousel_imgwrap { display: flex; align-items: center; justify-content: center; height: auto; }
+
+/* healthcare_card */
+.healthcare_card {margin-right: 2%;}
+.healthcare_card:last-child {margin-right: 0;}
+.carousel-indicators {bottom: -47px;}
+.carousel-indicators { display: none !important;}
+
+
