@@ -46,6 +46,9 @@ import AdminOrderList from "./admin/AdminOrderList";
 import AdminNotice from "./admin/AdminNotice";
 import AdminReview from "./admin/AdminReview";
 
+import SurveyPage from "./SurveyPage";
+import QuestionsPage from "./QuestionsPage";
+
 const RouterPage = () => {
   return (
     <Routes>
@@ -70,13 +73,13 @@ const RouterPage = () => {
         <Route path="" element={<NoticePage />} />
         <Route path="review" element={<ReviewPage />} />
         <Route path="review/write" element={<WriteReview />} />
-        <Route path="review/comment" element={<CommentPage/>} />
+        <Route path="review/comment" element={<CommentPage />} />
       </Route>
-      
-      
+
+
 
       {/* 관리자페이지 */}
-      <Route path="/admin" element={<AdminPage/>} >
+      <Route path="/admin" element={<AdminPage />} >
         <Route path="adorder" element={<AdminOrderList />} />
         <Route path="register" element={<ProductRegisterPage />} />
         <Route path="adno" element={<AdminNotice />} />
@@ -84,7 +87,7 @@ const RouterPage = () => {
       </Route>
 
       {/* 상품등록 */}
-      
+
 
       {/* 마이페이지 */}
       <Route path="/mp" element={<MyPage />}>
@@ -119,6 +122,10 @@ const RouterPage = () => {
 
       {/* 헬스케어 */}
       <Route path="/healthcare" element={<Healthcare />} />
+
+      {/* 설문조사 페이지 */}
+      <Route path="/survey" element={<SurveyPage />} />
+      <Route path="/survey/questions" element={<QuestionsPage />} />
     </Routes>
   );
 };
