@@ -66,6 +66,7 @@ const ImageUploader = forwardRef((props, ref) => {
 
   const onUpload = async () => {
     const downloadURLs = [];
+    const imageNames = [];
     for (const image of images) {
       const fileExtension = image.name
         .split(".")
@@ -77,11 +78,12 @@ const ImageUploader = forwardRef((props, ref) => {
         await uploadBytes(imageRef, image);
         const downloadURL = await getDownloadURL(imageRef);
         downloadURLs.push(downloadURL);
+        imageNames.push(imageName);
       } catch (error) {
         console.error("Error uploading file:", error);
       }
     }
-    return downloadURLs;
+    return [imageNames, downloadURLs];
   };
 
   useImperativeHandle(ref, () => ({
