@@ -12,7 +12,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 
-const AddressList = ({ setClickUpdate, setSelectedList }) => {
+const ReviewList = () => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
   const [total, setTotal] = useState(0);
@@ -25,35 +25,8 @@ const AddressList = ({ setClickUpdate, setSelectedList }) => {
   };
 
   const getList = async () => {
-    setLoading(true);
-    const res = await axios("/address/list", {
-      params: { userid: sessionStorage.getItem("userid"), page, size },
-    });
-    // console.log(res.data);
-    setList(res.data.list);
-    setTotal(res.data.total);
-    setLoading(false);
+    const res = await axios("/product_review/list");
   };
-
-  const onDelete = async (addressid) => {
-    if (window.confirm("해당 배송지를 삭제하시겠습니까?")) {
-      await axios.post("/address/delete", {
-        userid: sessionStorage.getItem("userid"),
-        addressid,
-      });
-      alert("해당 배송지가 삭제되었습니다.");
-      getList();
-    }
-  };
-
-  const onClickUpdate = (data) => {
-    setSelectedList(data);
-    setClickUpdate(true);
-  };
-
-  useEffect(() => {
-    getList();
-  }, [page]);
 
   return (
     <>
@@ -64,7 +37,7 @@ const AddressList = ({ setClickUpdate, setSelectedList }) => {
         <CircularProgress color="inherit" />
       </Backdrop>
       <Typography variant="h6" gutterBottom sx={{ fontWeight: "bolder" }}>
-        배송지 관리
+        리뷰 ({total})
       </Typography>
       {list.map((l) => (
         <Card key={l.addressid} sx={{ mb: 3 }}>
@@ -110,18 +83,10 @@ const AddressList = ({ setClickUpdate, setSelectedList }) => {
               </>
             )}
             <Stack direction="row" spacing={1} mt={1} justifyContent="end">
-              <Button
-                variant="contained"
-                size="small"
-                onClick={() => onClickUpdate(l)}
-              >
+              <Button variant="contained" size="small">
                 수정
               </Button>
-              <Button
-                variant="outlined"
-                size="small"
-                onClick={() => onDelete(l.addressid)}
-              >
+              <Button variant="outlined" size="small">
                 삭제
               </Button>
             </Stack>
@@ -142,4 +107,4 @@ const AddressList = ({ setClickUpdate, setSelectedList }) => {
   );
 };
 
-export default AddressList;
+export default ReviewList;
