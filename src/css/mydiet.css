@@ -23,7 +23,7 @@
 .diet_contents {width: 94.8%; margin: 0 auto 180px auto;}
 .diet_recipe {width: 100%; margin-bottom: 100px;}
 .recipe_video_wrap {width: 100%; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center;}
-.recipe_video {width: 32%; height: auto; margin-right: 2%;}
+.recipe_video {width: 32%; height: auto; margin-right: 2%; border-radius: 25px;}
 .recipe_video:last-child {margin-right: 0;}
 
 
