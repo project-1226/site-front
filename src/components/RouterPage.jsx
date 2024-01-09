@@ -2,9 +2,11 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./HomePage";
 
-import SideMenu from "./community/SideMenu";
 import NoticePage from "./community/NoticePage";
 import ReviewPage from "./community/ReviewPage";
+import CommunityPageMain from "./community/CommunityPageMain";
+import WriteReview from "./community/WriteReview";
+import CommentPage from "./community/CommentPage";
 
 import MyPage from "./user/MyPage";
 import SigninPage from "./user/SigninPage";
@@ -38,9 +40,6 @@ import InsertReview from "./user/mypage/shop/InsertReview";
 
 import AdminPage from "./admin/AdminPage";
 import ProductRegisterPage from "./admin/ProductRegisterPage";
-import CommunityPageMain from "./community/CommunityPageMain";
-import WriteReview from "./community/WriteReview";
-import CommentPage from "./community/CommentPage";
 import AdminOrderList from "./admin/AdminOrderList";
 import AdminNotice from "./admin/AdminNotice";
 import AdminReview from "./admin/AdminReview";
