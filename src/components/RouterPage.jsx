@@ -43,6 +43,7 @@ import ProductRegisterPage from "./admin/ProductRegisterPage";
 import AdminOrderList from "./admin/AdminOrderList";
 import AdminNotice from "./admin/AdminNotice";
 import AdminReview from "./admin/AdminReview";
+import ProductListPage from "./admin/ProductListPage";
 
 import SurveyPage from "./SurveyPage";
 
@@ -81,6 +82,7 @@ const RouterPage = () => {
       <Route path="/admin" element={<AdminPage />}>
         <Route path="adorder" element={<AdminOrderList />} />
         <Route path="register" element={<ProductRegisterPage />} />
+        <Route path="product" element={<ProductListPage />} />
         <Route path="adno" element={<AdminNotice />} />
         <Route path="adreview" element={<AdminReview />} />
       </Route>
