@@ -17,7 +17,7 @@ import {
 import { RemoveCircle } from "@mui/icons-material";
 import { v4 as uuidv4 } from "uuid";
 
-const ImageUploader = forwardRef((props, ref) => {
+const ImageUploader = forwardRef(({ urls }, ref) => {
   const [images, setImages] = useState([]);
   const [imageURLs, setImageURLs] = useState([]);
 

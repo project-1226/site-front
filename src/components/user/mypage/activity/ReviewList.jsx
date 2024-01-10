@@ -119,7 +119,7 @@ const ReviewList = () => {
                       src={i.image_url}
                       alt={"리뷰 이미지"}
                       style={{
-                        height: "100px",
+                        height: "130px",
                         objectFit: "cover",
                         marginRight: "10px",
                       }}
@@ -142,7 +142,7 @@ const ReviewList = () => {
               <Typography variant="body1">{r.content}</Typography>
             </Stack>
             <Stack direction="row" spacing={1} mt={1} justifyContent="end">
-              <UpdateReview product_reviewid={r.product_reviewid} />
+              <UpdateReview review={r} />
               <Button
                 variant="outlined"
                 size="small"

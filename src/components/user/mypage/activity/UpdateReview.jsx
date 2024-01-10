@@ -1,11 +1,12 @@
 import { Star } from "@mui/icons-material";
 import {
+  Backdrop,
   Box,
   Button,
+  CircularProgress,
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   Paper,
   Rating,
@@ -18,10 +19,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 import Draggable from "react-draggable";
 import ImageUploader from "../shop/ImageUploader";
 import axios from "axios";
+import { deleteObject, ref } from "firebase/storage";
+import { storage } from "../../../../FirebaseConfig";
 
 function PaperComponent(props) {
   return (
@@ -46,54 +49,55 @@ function getLabelText(value) {
   return `${value} Star${value !== 1 ? "s" : ""}, ${labels[value]}`;
 }
 
-const UpdateReview = ({ product_reviewid }) => {
+const UpdateReview = ({ review }) => {
   const [loading, setLoading] = useState(false);
-  const [score, setScore] = useState(0);
   const [hover, setHover] = useState(-1);
   const [open, setOpen] = useState(false);
 
-  const [content, setContent] = useState("");
-  let form = {
+  // console.log(review.images);
+  const images = review.images;
+  // console.log(images);
+  const names = [];
+  const urls = [];
+  for (const image of images) {
+    names.push(image.image_name);
+    urls.push(image.image_url);
+  }
+
+  const [form, setForm] = useState({
     userid: sessionStorage.getItem("userid"),
-    productid: 1,
-    score,
-    content,
-    image_names: "",
-    image_urls: "",
+    productid: review.productid,
+    score: review.score,
+    content: review.content,
+    image_urls: urls.join(","),
+  });
+
+  const onChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
   };
+
+  const { score, content, image_urls } = form;
 
   const uploaderRef = useRef(null);
 
-  const getReview = async () => {
-    try {
-      const res = await axios("/product_review/read", {
-        params: {
-          product_reviewid,
-        },
-      });
-    } catch (error) {
-      console.error("Error - read review:", error);
-    }
-  };
-
   const onSubmit = async () => {
     setLoading(true);
-
     try {
       const [imageNames, uploadedURLs] = await uploaderRef.current.onUpload();
-      // console.log(uploadedURLs);
       if (uploadedURLs) {
-        form = {
+        setForm({
           userid: sessionStorage.getItem("userid"),
-          productid: 2,
+          productid: review.productid,
           score,
           content,
           image_names: imageNames.join(","),
           image_urls: uploadedURLs.join(","),
-        };
-        // console.log(form);
+        });
       }
-      //   await axios.post("/product_review/insert", form);
+      //   await axios.post("/product_review/update", form);
       setLoading(false);
       alert("리뷰가 등록되었습니다.");
       window.location.href = "/mp/mprch";
@@ -112,9 +116,12 @@ const UpdateReview = ({ product_reviewid }) => {
     setOpen(false);
   };
 
-  useEffect(() => {
-    getReview();
-  }, [open]);
+  const onPrevImageDelete = async () => {
+    const imageRef = ref(storage, `images/${review}`);
+    await deleteObject(imageRef).catch((error) => {
+      console.error("Error - delete imagefile:", error);
+    });
+  };
 
   return (
     <>
@@ -129,6 +136,12 @@ const UpdateReview = ({ product_reviewid }) => {
         fullWidth
         maxWidth="md"
       >
+        <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+        </Backdrop>
         <DialogTitle component="h6" sx={{ fontWeight: "bolder", ml: 1.7 }}>
           리뷰 수정
         </DialogTitle>
@@ -152,7 +165,7 @@ const UpdateReview = ({ product_reviewid }) => {
                   <TableCell>
                     <Stack spacing={1}>
                       <Typography variant="h6" sx={{ fontWeight: "bolder" }}>
-                        상품명
+                        {review.name}
                       </Typography>
                       <Stack direction="row" spacing={2} alignItems="center">
                         <Rating
@@ -161,9 +174,7 @@ const UpdateReview = ({ product_reviewid }) => {
                           precision={1}
                           size="large"
                           getLabelText={getLabelText}
-                          onChange={(event, newValue) => {
-                            setScore(newValue);
-                          }}
+                          onChange={onChange}
                           onChangeActive={(event, newHover) => {
                             setHover(newHover);
                           }}
@@ -209,8 +220,9 @@ const UpdateReview = ({ product_reviewid }) => {
                       multiline
                       rows={4}
                       placeholder="다른 고객님에게 도움이 되도록 상품에 대한 솔직한 평가를 남겨주세요."
+                      name="content"
                       value={content}
-                      onChange={(e) => setContent(e.target.value)}
+                      onChange={onChange}
                       sx={{ mt: 0.5, mb: 2 }}
                     />
                     <Typography variant="caption" color="grey">
@@ -238,11 +250,11 @@ const UpdateReview = ({ product_reviewid }) => {
                         ml: 0.5,
                       }}
                     >
-                      사진 첨부
+                      사진 수정
                     </Typography>
                   </TableCell>
                   <TableCell>
-                    <ImageUploader ref={uploaderRef} />
+                    <ImageUploader ref={uploaderRef} urls={urls} />
                   </TableCell>
                 </TableRow>
               </TableBody>
