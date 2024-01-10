@@ -7,8 +7,8 @@ const InfoSidebar = ({ selectedIndex, handleListItemClick }) => {
   return (
     <>
       <ListItemButton
-        selected={selectedIndex === 10}
-        onClick={() => handleListItemClick(10)}
+        selected={selectedIndex === 11}
+        onClick={() => handleListItemClick(11)}
         component={Link}
         to="upd"
       >
@@ -18,8 +18,8 @@ const InfoSidebar = ({ selectedIndex, handleListItemClick }) => {
         <ListItemText primary="개인정보확인/수정" />
       </ListItemButton>
       <ListItemButton
-        selected={selectedIndex === 11}
-        onClick={() => handleListItemClick(11)}
+        selected={selectedIndex === 12}
+        onClick={() => handleListItemClick(12)}
         component={Link}
         to="addr"
       >

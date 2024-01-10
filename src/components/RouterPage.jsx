@@ -15,7 +15,6 @@ import UpdateUser from "./user/mypage/info/UpdateUser";
 import ManageAddress from "./user/mypage/info/ManageAddress";
 import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import MySurvey from "./user/mypage/diary/MySurvey";
-import RecommendPlan from "./user/mypage/diary/RecommendPlan";
 import CustomPlan from "./user/mypage/diary/CustomPlan";
 import Report from "./user/mypage/diary/Report";
 import MyPurchase from "./user/mypage/shop/MyPurchase";
@@ -94,7 +93,6 @@ const RouterPage = () => {
       <Route path="/mp" element={<MyPage />}>
         {/* 다이어리 */}
         <Route path="" element={<Report />} />
-        <Route path="rcmp" element={<RecommendPlan />} />
         <Route path="cstp" element={<CustomPlan />} />
         <Route path="mysv" element={<MySurvey />} />
         {/* 활동 */}
