@@ -20,3 +20,14 @@
 .healthy_video {width: 32%; height: 250px; margin-right: 2%; background: #ddd;}
 .healthy_video:last-child {margin-right: 0;}
 
+
+
+
+/* 아름수정부분 */
+/* 태그박스부분 */
+
+.healthy_tag_box{display: flex; flex-wrap: wrap; padding-left:10%;padding-right: 10%; justify-content: center;}
+.healthy_tag_box button { border: 1px solid #ccc; margin: 1%; padding: 10px; width:120px;border-radius: 15px;}
+/* 음식박스부분 */
+.recomm_menuimg_main {height: 330px;}
+.recomm_menuimg_footer {background-color: aquamarine !important;}
