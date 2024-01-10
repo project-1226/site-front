@@ -1,4 +1,9 @@
-import { Inbox } from "@mui/icons-material";
+import {
+  HelpRounded,
+  LocalGroceryStoreRounded,
+  ProductionQuantityLimitsRounded,
+  StarsRounded,
+} from "@mui/icons-material";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -13,7 +18,7 @@ const ShopSidebar = ({ selectedIndex, handleListItemClick }) => {
         to="mprch"
       >
         <ListItemIcon>
-          <Inbox />
+          <LocalGroceryStoreRounded />
         </ListItemIcon>
         <ListItemText primary="주문목록/배송조회" />
       </ListItemButton>
@@ -24,7 +29,7 @@ const ShopSidebar = ({ selectedIndex, handleListItemClick }) => {
         to="cncl"
       >
         <ListItemIcon>
-          <Inbox />
+          <ProductionQuantityLimitsRounded />
         </ListItemIcon>
         <ListItemText primary="취소/반품/환불" />
       </ListItemButton>
@@ -35,7 +40,7 @@ const ShopSidebar = ({ selectedIndex, handleListItemClick }) => {
         to="shqna"
       >
         <ListItemIcon>
-          <Inbox />
+          <HelpRounded />
         </ListItemIcon>
         <ListItemText primary="문의하기" />
       </ListItemButton>
@@ -46,7 +51,7 @@ const ShopSidebar = ({ selectedIndex, handleListItemClick }) => {
         to="wsit"
       >
         <ListItemIcon>
-          <Inbox />
+          <StarsRounded />
         </ListItemIcon>
         <ListItemText primary="찜한 상품" />
       </ListItemButton>

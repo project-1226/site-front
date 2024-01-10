@@ -1,4 +1,4 @@
-import { Inbox } from "@mui/icons-material";
+import { ManageAccountsRounded, PinDropRounded } from "@mui/icons-material";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -13,7 +13,7 @@ const InfoSidebar = ({ selectedIndex, handleListItemClick }) => {
         to="upd"
       >
         <ListItemIcon>
-          <Inbox />
+          <ManageAccountsRounded />
         </ListItemIcon>
         <ListItemText primary="개인정보확인/수정" />
       </ListItemButton>
@@ -24,7 +24,7 @@ const InfoSidebar = ({ selectedIndex, handleListItemClick }) => {
         to="addr"
       >
         <ListItemIcon>
-          <Inbox />
+          <PinDropRounded />
         </ListItemIcon>
         <ListItemText primary="배송지 관리" />
       </ListItemButton>
