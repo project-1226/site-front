@@ -31,3 +31,6 @@
 /* 음식박스부분 */
 .recomm_menuimg_main {height: 330px;}
 .recomm_menuimg_footer {background-color: aquamarine !important;}
+
+.healthy_detail_contents{width: 94.8%; margin: 0 auto 180px auto;}
+.healthy_detail_image{width: 400px;}

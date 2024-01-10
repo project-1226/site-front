@@ -46,6 +46,7 @@ import AdminReview from "./admin/AdminReview";
 
 import SurveyPage from "./SurveyPage";
 import DiseaseDetail from "./diseaseDiet/DiseaseDetail";
+import HealthyDetail from "./healthyDiet/HealthyDetail";
 
 const RouterPage = () => {
   return (
@@ -114,7 +115,7 @@ const RouterPage = () => {
 
       {/* 건강식단 */}
       <Route path="/healthydiet" element={<Healthy />} />
-
+      <Route path="/healthydiet/healthydetail/:tag" element={<HealthyDetail/>}/>
       {/* 질환맞춤식단 */}
       <Route path="/diseasediet" element={<Disease />} />
       <Route path="/disease/diseasedetail/:tag" element={<DiseaseDetail/>}/>

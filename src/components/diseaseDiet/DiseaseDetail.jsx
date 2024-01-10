@@ -9,6 +9,7 @@ import YouTubeSearchVideo from '../YouTubeSearchVideo';
 const DiseaseDetail = () => {
   //선택환 질환에대한 data를 useParams으로 받아옴
   const {tag} = useParams();
+  
   //첫 페이지 랜더링 시 선택환 질환에대한 data랜덤으로 3개 selct해서 넣음
   const recipeList = [{title:"녹차 수제비 전골",image:"이미지",ingredients:"유부 30,시ㄹ파30,....etc",recipe:"ㅇ나ㅣ럼나ㅣㅇ리"},{title:"채소쌈건강롤",image:"이미지",ingredients:"잡곡 100g,양배추40g,....etc",recipe:"sdfasddfsa;sdfasfdsafasfa"},{title:"유자 연어 조림",image:"이미지",ingredients:"연어 120g",recipe:"ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너ㄴㄻㅁㄴㄴㄴㄴㄴㄴㄴㅇㅇㅇㅇㅇㅇㄹㄹㄹ;ㅓㅣ;ㅈ러ㅣ너"}];
 

@@ -14,7 +14,7 @@ const HealthyModal = ({ show, handleClose, selectedFood  }) => {
   };
 
   const rows = [
-    createData(selectedFood, 159, 6.0, 24, 4.0),
+    createData(selectedFood.name, 159, 6.0, 24, 4.0),
   ];
 
   return (
@@ -26,7 +26,9 @@ const HealthyModal = ({ show, handleClose, selectedFood  }) => {
       <Modal.Body>
         <div className="modal_wrap">
           <section className="modal_top">
-            <div className='modal_food_img'>{selectedFood}</div>
+            <div className='modal_food_img'>
+              <img src={selectedFood.image} alt="" className='modal_food_img'/>
+            </div>
           </section>
 
           <section className="modal_btm">

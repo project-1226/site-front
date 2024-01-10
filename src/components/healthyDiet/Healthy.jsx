@@ -1,33 +1,54 @@
 import React, { useEffect, useState } from 'react'
 import HealthyModal from './HealthyModal';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
+import {
+  Backdrop,
+  Button,
+  Card,
+  CardContent,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
 import axios from 'axios';
-import { Button } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
+
+
 
 const Healthy = () => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [selectedFood, setSelectedFood] = React.useState('');
+  const navi = useNavigate();
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedFood, setSelectedFood] = useState('');
   const [foods,setFoods] = useState([]);
   const [tags,setTags] = useState([]);
   const [selectTag,setSelectTag] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [refresh,setRefresh] = useState(0);
+  
 
-  const getTags = async()=>{
-    const res = await axios('/food/categories/health')
-    setTags(res.data);
-    console.log(res.data) 
-  }
-
-  const getFoodList = async()=>{
-    if(selectTag==""){
-      const randomIndex = Math.floor(Math.random() * tags.length);
-      setSelectTag(tags[randomIndex]);
+  const getTags = async () => {
+    try {
+      const res = await axios('/food/categories/health');
+      setTags(res.data);
+  
+      const randomIndex = Math.floor(Math.random() * res.data.length);
+      setSelectTag(res.data[randomIndex]);
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+    }finally {
+      getFoodList();
     }
+  };
 
-    let res = await axios('/food/health.list?categoryid='+selectTag.categoryid);
-    console.log(res.data) 
-    setFoods(res.data)  
+  const getFoodList = async()=>{   
+    setLoading(true);
+    try {
+      let res = await axios('/food/health.list?categoryid=' + selectTag.categoryid);
+      setFoods(res.data);
+      console.error(res.data)
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const handleMenuClick = (food) => {
@@ -36,20 +57,30 @@ const Healthy = () => {
   };
 
   const handleMoreClick = () => {
-    window.location.href = `disease/diseasedetail/`+selectTag.categoryid;
+    //navigate 함수는 두 번째 인자로 state를 받아 해당 경로로 이동할 때 상태를 전달할 수 있음
+    navi(`/healthydiet/healthydetail/${selectTag.categoryid}`, {
+      state: { initialFoods: foods },    
+    });
+    
   };
 
   const handleTagClick = (tag) => {
     setSelectTag(tag)
-    getFoodList();
   };
 
+  const handleRefreshClick=()=>{
+    setRefresh(refresh+1)
+  }
   useEffect(()=>{
     getTags();
-    getFoodList();
   },[])
+
+  useEffect(()=>{
+    getFoodList();
+  },[selectTag,refresh])
   
   return (
+    
     <div className='healthy_wrap'>
       <div className='healthy_main_wrap'>
         <div className='healthy_main'>
@@ -61,13 +92,17 @@ const Healthy = () => {
             <p className="main_article">--!!{selectTag.name}!!--</p>
           </div>
         </div>{/* healthy_main */}
+
         <div className='recomm_menu'>
           {/* card수정 - 아름 2024.1.10 */}
-          {foods.slice(0, 3).map((food)=>       
+          
+          {foods.slice(0, 3).map((food)=>    
+            food.categoryid == selectTag.categoryid ? 
             <div className='recomm_menuimg'>
             <Card  className='recomm_menuimg_main' onClick={() => handleMenuClick(food)}>
             <CardContent>
-              <Typography variant="h5" component="div"> 
+              <Typography variant="h5" component="div">
+                <h4>{food.name}</h4> 
                 <img src={food.image} alt="" />
               </Typography>
             </CardContent>
@@ -78,8 +113,24 @@ const Healthy = () => {
             </CardContent>
           </Card>
           </div>
+          :
+          <Backdrop
+          sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+          open={loading}
+        >
+          <CircularProgress color="inherit" />
+          </Backdrop>
           )}
+          
+          <Button
+              variant="contained"
+              size="small"
+              onClick={() => handleRefreshClick()}
+            >세가지추천메뉴 refresh버튼</Button>
         </div>
+
+        
+
       </div>{/* healthy_main_wrap */}
 
       {/* categoryTags box */}
@@ -107,12 +158,16 @@ const Healthy = () => {
         </div>{/* categoryTags box */}
 
         {/* 카테고리 대표식단 세부내용++  */}
-        <div>
-        오늘의 추천식단중 대표하나 세부내용++++ db테이블에도 식단관련 설명 description 컬럼을 추가해서 내용을 뿌려야할듯
-        food[1]에서 데이터 뿌리기
+        {/* 로딩되는동안 유지될 box추가해야함 */}
+        <div className='healthy_detail_contents'>
+          카테고리식단 세부내용
+          {foods.length > 0 && foods[0].categoryid == selectTag.categoryid &&
+          <>
+              <h1 className='text-center'>{foods[0].name}</h1>
+              <img src={foods.length > 0 && foods[0].image} alt="" className='healthy_detail_image'/><div>{foods[0].description}</div>
+              </>
+          }  
         </div>
-
-
       <div className='healthy_contents'>
         <section className='healthy_recipe'>
           <div className="contents_title_box">
@@ -120,9 +175,9 @@ const Healthy = () => {
           </div>
 
           <div className='healthy_video_wrap'>
-            <div className='healthy_video'>유튜브 레시피 영상 food[0].name으로 검색한 영상</div>
-            <div className='healthy_video'>유튜브 레시피 영상 food[1].name으로 검색한 영상</div>
-            <div className='healthy_video'>유튜브 레시피 영상</div>
+            <div className='healthy_video'>유튜브 레시피 영상 foods[0].name으로 검색한 영상</div>
+            <div className='healthy_video'>유튜브 레시피 영상 foods[1].name으로 검색한 영상</div>
+            <div className='healthy_video'>유튜브 레시피 영상 foods[2].name으로 검색한 영상</div>
           </div>
         </section>{/* diet_recipe */}
       </div>
