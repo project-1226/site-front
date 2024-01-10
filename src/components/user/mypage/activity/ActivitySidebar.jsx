@@ -21,12 +21,12 @@ const ActivitySidebar = ({ selectedIndex, handleListItemClick }) => {
         selected={selectedIndex === 12}
         onClick={() => handleListItemClick(12)}
         component={Link}
-        to="qact"
+        to="sact"
       >
         <ListItemIcon>
           <Inbox />
         </ListItemIcon>
-        <ListItemText primary="문의 내역" />
+        <ListItemText primary="스크랩" />
       </ListItemButton>
     </>
   );

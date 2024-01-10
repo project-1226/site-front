@@ -32,6 +32,17 @@ const ShopSidebar = ({ selectedIndex, handleListItemClick }) => {
         selected={selectedIndex === 9}
         onClick={() => handleListItemClick(9)}
         component={Link}
+        to="shqna"
+      >
+        <ListItemIcon>
+          <Inbox />
+        </ListItemIcon>
+        <ListItemText primary="문의하기" />
+      </ListItemButton>
+      <ListItemButton
+        selected={selectedIndex === 10}
+        onClick={() => handleListItemClick(10)}
+        component={Link}
         to="wsit"
       >
         <ListItemIcon>

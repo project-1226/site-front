@@ -22,8 +22,9 @@ import MyPurchase from "./user/mypage/shop/MyPurchase";
 import CancelReturn from "./user/mypage/shop/CancelReturn";
 import MyWishItem from "./user/mypage/shop/MyWishItem";
 import InsertReview from "./user/mypage/shop/InsertReview";
+import QuestionMain from "./user/mypage/shop/QuestionMain";
 import ActivityMain from "./user/mypage/activity/ActivityMain";
-import QuestionMain from "./user/mypage/activity/QuestionMain";
+import ScrapPage from "./user/mypage/activity/ScrapPage";
 
 import MyDiet from "./myDiet/MyDiet";
 import Healthy from "./healthyDiet/Healthy";
@@ -52,7 +53,7 @@ const RouterPage = () => {
     <Routes>
       {sessionStorage.getItem("userid") ? (
         <Route path="/" element={<HomePage />} />
-      ) : (      
+      ) : (
         <Route path="/" element={<SurveyPage />} />
       )}
 
@@ -98,12 +99,13 @@ const RouterPage = () => {
         <Route path="mysv" element={<MySurvey />} />
         {/* 활동 */}
         <Route path="mact" element={<ActivityMain />} />
-        <Route path="qact" element={<QuestionMain />} />
+        <Route path="sact" element={<ScrapPage />} />
         {/* 주문내역 */}
         <Route path="mprch" element={<MyPurchase />} />
         <Route path="cncl" element={<CancelReturn />} />
         <Route path="wsit" element={<MyWishItem />} />
         <Route path="revw" element={<InsertReview />} />
+        <Route path="shqna" element={<QuestionMain />} />
         {/* 정보 */}
         <Route path="upd" element={<UpdateUser />} />
         <Route path="addr" element={<ManageAddress />} />
