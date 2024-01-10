@@ -7,11 +7,15 @@ import {
   ImageList,
   ImageListItem,
   Pagination,
+  Rating,
   Stack,
   Typography,
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { storage } from "../../../../FirebaseConfig";
+import { ref, deleteObject } from "firebase/storage";
+import UpdateReview from "./UpdateReview";
 
 const ReviewList = () => {
   const [loading, setLoading] = useState(false);
@@ -50,15 +54,34 @@ const ReviewList = () => {
       data.push(reviewWithImages);
     }
     setReviews(data);
-    // console.log(reviews);
     setLoading(false);
   };
 
-  const onDelete = async (e, id) => {
+  const onDelete = async (e, product_reviewid, images) => {
     e.preventDefault();
+    // console.log(images);
     if (window.confirm("해당 리뷰를 삭제하시겠습니까?")) {
-      // await axios("/product_review/delete");
-      alert("해당 리뷰가 삭제되었습니다.");
+      try {
+        setLoading(true);
+        if (images) {
+          for (const i of images) {
+            // console.log(i.image_name);
+            const imageRef = ref(storage, `images/${i.image_name}`);
+            await deleteObject(imageRef).catch((error) => {
+              console.error("Error - delete imagefile:", error);
+            });
+          }
+        }
+        await axios.delete("/product_review/delete", {
+          params: { product_reviewid },
+        });
+        setLoading(false);
+        alert("해당 리뷰가 삭제되었습니다.");
+        getList();
+      } catch (error) {
+        console.error("Error - delete review:", error);
+        alert("리뷰 삭제가 실패하였습니다.\n관리자에게 문의해주세요!");
+      }
     }
   };
 
@@ -96,7 +119,7 @@ const ReviewList = () => {
                       src={i.image_url}
                       alt={"리뷰 이미지"}
                       style={{
-                        height: "100px",
+                        height: "130px",
                         objectFit: "cover",
                         marginRight: "10px",
                       }}
@@ -112,18 +135,18 @@ const ReviewList = () => {
             >
               {r.fmtdate}
             </Typography>
-            <Typography variant="body2" color="text.secondary">
-              (별점 넣을 자리~~~)
-            </Typography>
-            <Typography variant="body1">{r.content}</Typography>
+            <Stack spacing={1.5}>
+              <Typography variant="body2" color="text.secondary">
+                <Rating value={r.score} readOnly />
+              </Typography>
+              <Typography variant="body1">{r.content}</Typography>
+            </Stack>
             <Stack direction="row" spacing={1} mt={1} justifyContent="end">
-              <Button variant="contained" size="small">
-                수정
-              </Button>
+              <UpdateReview review={r} />
               <Button
                 variant="outlined"
                 size="small"
-                onClick={(e) => onDelete(e, r.product_reviewid)}
+                onClick={(e) => onDelete(e, r.product_reviewid, r.images)}
               >
                 삭제
               </Button>

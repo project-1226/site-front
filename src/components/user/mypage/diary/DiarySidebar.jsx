@@ -18,17 +18,6 @@ const DiarySidebar = ({ selectedIndex, handleListItemClick }) => {
         <ListItemText primary="상세 리포트" />
       </ListItemButton>
       <ListItemButton
-        selected={selectedIndex === 2}
-        onClick={() => handleListItemClick(2)}
-        component={Link}
-        to="rcmp"
-      >
-        <ListItemIcon>
-          <Inbox />
-        </ListItemIcon>
-        <ListItemText primary="맞춤형 추천 플랜" />
-      </ListItemButton>
-      <ListItemButton
         selected={selectedIndex === 3}
         onClick={() => handleListItemClick(3)}
         component={Link}
