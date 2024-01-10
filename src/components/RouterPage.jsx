@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Router, Routes } from "react-router-dom";
 import HomePage from "./HomePage";
 
 import NoticePage from "./community/NoticePage";
@@ -45,6 +45,7 @@ import AdminNotice from "./admin/AdminNotice";
 import AdminReview from "./admin/AdminReview";
 
 import SurveyPage from "./SurveyPage";
+import DiseaseDetail from "./diseaseDiet/DiseaseDetail";
 
 const RouterPage = () => {
   return (
@@ -116,7 +117,7 @@ const RouterPage = () => {
 
       {/* 질환맞춤식단 */}
       <Route path="/diseasediet" element={<Disease />} />
-
+      <Route path="/disease/diseasedetail/:tag" element={<DiseaseDetail/>}/>
       {/* 헬스케어 */}
       <Route path="/healthcare" element={<Healthcare />} />
 

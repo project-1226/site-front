@@ -8,13 +8,13 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
-const HealthyModal = ({ show, handleClose, selectedMenu  }) => {
+const HealthyModal = ({ show, handleClose, selectedFood  }) => {
   const createData = (name, calories, fat, carbs, protein) => {
     return { name, calories, fat, carbs, protein };
   };
 
   const rows = [
-    createData(selectedMenu, 159, 6.0, 24, 4.0),
+    createData(selectedFood, 159, 6.0, 24, 4.0),
   ];
 
   return (
@@ -26,7 +26,7 @@ const HealthyModal = ({ show, handleClose, selectedMenu  }) => {
       <Modal.Body>
         <div className="modal_wrap">
           <section className="modal_top">
-            <div className='modal_food_img'>{selectedMenu}</div>
+            <div className='modal_food_img'>{selectedFood}</div>
           </section>
 
           <section className="modal_btm">

@@ -17,7 +17,7 @@ const Disease = () => {
 
 
   const handleClickMore = ()=>{
-    window.location.href = `/diseasedetail/${selectTag}`;
+    window.location.href = `disease/diseasedetail/${selectTag}`;
   }
 
   return (

@@ -8,40 +8,42 @@ import { Button } from '@mui/material';
 
 const Healthy = () => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [selectedMenu, setSelectedMenu] = React.useState('');
+  const [selectedFood, setSelectedFood] = React.useState('');
   const [foods,setFoods] = useState([]);
   const [tags,setTags] = useState([]);
   const [selectTag,setSelectTag] = useState("");
 
-  const getTags=async()=>{
+  const getTags = async()=>{
     const res = await axios('/food/categories/health')
     setTags(res.data);
-    //console.log(res.data)
-    
+    console.log(res.data) 
   }
+
   const getFoodList = async()=>{
-    let res ="";
     if(selectTag==""){
-      res = await axios('/food/health.list?categoryid='+14);
-    } else {
-      res = await axios('/food/health.list?categoryid='+selectTag.categoryid);
-    }  
-    //console.log(res.data)    
+      const randomIndex = Math.floor(Math.random() * tags.length);
+      setSelectTag(tags[randomIndex]);
+    }
+
+    let res = await axios('/food/health.list?categoryid='+selectTag.categoryid);
+    console.log(res.data) 
+    setFoods(res.data)  
   }
 
   const handleMenuClick = (food) => {
-    setSelectedMenu(food);
+    setSelectedFood(food);
     setIsModalOpen(true);
   };
 
   const handleMoreClick = () => {
-    //페이지이동 링크 -> food가지고가서 페이지 랜더링
+    window.location.href = `disease/diseasedetail/`+selectTag.categoryid;
   };
 
   const handleTagClick = (tag) => {
     setSelectTag(tag)
     getFoodList();
   };
+
   useEffect(()=>{
     getTags();
     getFoodList();
@@ -60,32 +62,23 @@ const Healthy = () => {
           </div>
         </div>{/* healthy_main */}
         <div className='recomm_menu'>
-          {/* card수정예시 */}
-          <div className='recomm_menuimg'>
-            <Card  className='recomm_menuimg_main' onClick={() => handleMenuClick('food[0]')}>
+          {/* card수정 - 아름 2024.1.10 */}
+          {foods.slice(0, 3).map((food)=>       
+            <div className='recomm_menuimg'>
+            <Card  className='recomm_menuimg_main' onClick={() => handleMenuClick(food)}>
             <CardContent>
-              <Typography variant="h5" component="div"> food[0].image 음식사진1</Typography>
+              <Typography variant="h5" component="div"> 
+                <img src={food.image} alt="" />
+              </Typography>
             </CardContent>
-          </Card>
-          {/* 식단 더알아보기페이지로 이동 */}
+          </Card>         
           <Card className='recomm_menuimg_footer' onClick={() => handleMoreClick()}>
             <CardContent>
               <Typography variant="h7" component="div"> 식단더알아보기 +++</Typography>
             </CardContent>
           </Card>
           </div>
-          
-          <Card className='recomm_menuimg' onClick={() => handleMenuClick('음식사진2')}>
-            <CardContent>
-              <Typography variant="h5" component="div"> 음식사진2 </Typography>
-            </CardContent>
-          </Card>
-          <Card className='recomm_menuimg' onClick={() => handleMenuClick('음식사진3')}>
-            <CardContent>
-              <Typography variant="h5" component="div"> 음식사진3 </Typography>
-            </CardContent>
-            
-          </Card>
+          )}
         </div>
       </div>{/* healthy_main_wrap */}
 
@@ -134,7 +127,7 @@ const Healthy = () => {
         </section>{/* diet_recipe */}
       </div>
 
-      <HealthyModal show={isModalOpen} handleClose={() => setIsModalOpen(false)} selectedMenu={selectedMenu} />
+      <HealthyModal show={isModalOpen} handleClose={() => setIsModalOpen(false)} selectedFood={selectedFood} />
     </div>
   )
 }
