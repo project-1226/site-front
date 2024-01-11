@@ -1,15 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import HealthyModal from './HealthyModal';
-import {
-  Backdrop,
-  Button,
-  Card,
-  CardContent,
-  CircularProgress,
-  Typography,
+import {Backdrop, Button, CircularProgress,
 } from "@mui/material";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { LuRefreshCcw } from "react-icons/lu";
 
 
 
@@ -99,8 +94,8 @@ const Healthy = ({pagetype}) => {
             <p className="main_subtitle"> {text.subtitle} </p>
             <p className="main_title"> {text.title} </p>
 
-            <p className="main_article"> 오늘의 추천메뉴 </p>
-            <p className="main_article">--!!{selectTag.name}!!--</p>
+            <p className="main_article"> 오늘의 추천메뉴 [ {selectTag.name} ] </p>
+            <Button variant="contained" size="small" onClick={() => handleRefreshClick()}> refresh </Button>
           </div>
         </div>{/* healthy_main */}
 
@@ -128,16 +123,7 @@ const Healthy = ({pagetype}) => {
                 <CircularProgress color="inherit" />
               </Backdrop>
           )}
-
-          <Button
-            variant="contained"
-            size="small"
-            onClick={() => handleRefreshClick()}
-          >세가지추천메뉴 refresh버튼</Button>
         </div>
-
-
-
       </div>{/* healthy_main_wrap */}
 
       {/* categoryTags box */}
