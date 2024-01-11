@@ -84,11 +84,15 @@ const PostList = () => {
                   }}
                 >
                   <TableCell>
-                    <Stack direction="row" spacing={1} alignItems="center">
+                    <Stack
+                      direction="row"
+                      spacing={1}
+                      alignItems="center"
+                      sx={{ ml: 2 }}
+                    >
                       <Typography
                         variant="body1"
                         color="WindowText"
-                        sx={{ ml: 2 }}
                         component={Link}
                         to={`/community/review/comment/${l.postid}`}
                       >
