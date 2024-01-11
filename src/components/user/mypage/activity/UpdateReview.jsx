@@ -97,7 +97,7 @@ const UpdateReview = ({ review }) => {
           image_urls: uploadedURLs.join(","),
         });
       }
-      //   await axios.post("/product_review/update", form);
+      //   await axios.post("/product-review/update", form);
       setLoading(false);
       alert("리뷰가 등록되었습니다.");
       window.location.href = "/mp/mprch";

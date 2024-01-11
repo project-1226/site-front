@@ -30,7 +30,7 @@ const ReviewList = () => {
   };
 
   const getImage = async (id) => {
-    const res = await axios("/product_review/image", {
+    const res = await axios("/product-review/image", {
       params: { product_reviewid: id },
     });
     return res.data;
@@ -38,7 +38,7 @@ const ReviewList = () => {
 
   const getList = async () => {
     setLoading(true);
-    const res = await axios("/product_review/list", {
+    const res = await axios("/product-review/list", {
       params: { userid: sessionStorage.getItem("userid"), page, size },
     });
     setTotal(res.data.total);
@@ -72,7 +72,7 @@ const ReviewList = () => {
             });
           }
         }
-        await axios.delete("/product_review/delete", {
+        await axios.delete("/product-review/delete", {
           params: { product_reviewid },
         });
         setLoading(false);

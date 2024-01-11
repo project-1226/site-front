@@ -1,14 +1,19 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
-import React from "react";
+import React, { useState } from "react";
 import FAQPage from "./FAQPage";
 import QNAPage from "./QNAPage";
+import axios from "axios";
 
 const QuestionMain = () => {
-  const [value, setValue] = React.useState("1");
+  const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
+  };
+
+  const getCategory = () => {
+    // const res = await axios("/")
   };
 
   return (
@@ -29,6 +34,7 @@ const QuestionMain = () => {
           </TabList>
         </Box>
         <TabPanel value="1">
+          {}
           <FAQPage />
         </TabPanel>
         <TabPanel value="2">
