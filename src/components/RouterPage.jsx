@@ -69,7 +69,7 @@ const RouterPage = () => {
         <Route path="" element={<NoticePage />} />
         <Route path="review" element={<ReviewPage />} />
         <Route path="review/write" element={<WriteReview />} />
-        <Route path="review/comment" element={<CommentPage/>} />
+        <Route path="review/comment/:pid" element={<CommentPage />} />
       </Route>
       
       
