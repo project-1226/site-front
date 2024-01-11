@@ -3,7 +3,6 @@ import { Box, List, ListSubheader, Divider, ListItemButton, ListItemText, ListIt
 
 import ManageAccountsOutlineIcon from '@mui/icons-material/ManageAccounts';
 import ShoppingBasketOutlinedIcon from '@mui/icons-material/ShoppingBasketOutlined';
-import HelpCenterOutlinedIcon from '@mui/icons-material/HelpCenterOutlined';
 import AddShoppingCartOutlinedIcon from '@mui/icons-material/AddShoppingCartOutlined';
 import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
 import CustomerModal from './CustomerModal';
@@ -96,6 +95,18 @@ const AdminSidebar = () => {
                     
                         <ListItemText primary="상품등록" />
                 </ListItemButton>
+                <ListItemButton
+                    selected={selectedIndex === 3}
+                    onClick={(event) => handleListItemClick(event, 3)}
+                    component={Link}
+                    to="product"
+                >
+                    <ListItemIcon>
+                        <AddShoppingCartOutlinedIcon />
+                    </ListItemIcon>
+                    
+                        <ListItemText primary="상품 가져오기" />
+                </ListItemButton>
                 <List></List>
             </List>
             <Divider />
@@ -116,8 +127,8 @@ const AdminSidebar = () => {
                 }
             >
                 <ListItemButton
-                    selected={selectedIndex === 3}
-                    onClick={(event) => handleListItemClick(event, 3)}
+                    selected={selectedIndex === 4}
+                    onClick={(event) => handleListItemClick(event, 4)}
                     component={Link}
                     to="adno"
                 >
@@ -127,8 +138,8 @@ const AdminSidebar = () => {
                     <ListItemText primary="공지" />
                 </ListItemButton>
                 <ListItemButton
-                    selected={selectedIndex === 4}
-                    onClick={(event) => handleListItemClick(event, 4)}
+                    selected={selectedIndex === 5}
+                    onClick={(event) => handleListItemClick(event, 5)}
                     component={Link}
                     to="adreview"
                 >

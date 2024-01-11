@@ -6,6 +6,7 @@ import { Card, Row, Col, Form } from 'react-bootstrap'
 const WriteReview = () => {
     const [body, setBody] = useState('');
     const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const ref_file = useRef(null);
     const [file, setFile] = useState(null);
@@ -27,9 +28,12 @@ const WriteReview = () => {
         }
     }
 
-    const getList = () => { //후기목록 
-        const res = '/';
-        //setList(res.data.list);
+    const getList = async() => { //후기목록
+        setLoading(true);
+        const res = await axios.get(`/community/list/`);
+        console.log(res.data);
+        setList(res.data.list);
+        setLoading(false);
     }
 
     useEffect(()=> {
