@@ -1,48 +1,72 @@
-import React from 'react'
-import SideMenu from './SideMenu'
-import { Table, Row, Col } from 'react-bootstrap';
-
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import { Col, Row, Table } from 'react-bootstrap';
+import { Button } from '@mui/material';
+import { FaPlus } from "react-icons/fa6";
 
 const NoticePage = () => {
+    const [content, setContent] = useState(false);
+    const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    const getList = async () => {
+        setLoading(true);
+        const res = await axios.get('/');
+        setList(res.data.list);
+        setLoading(false);
+    }
+
+    useEffect(() => {
+        getList();
+    }, []);
+
+    const onClickPlus = () => {
+        setContent(!content);
+    }
+
+    const onClickNotice = () => {
+        if(sessionStorage.getItem("userid") === 'admin'){
+            window.location.href='/admin/adno';
+        }
+    }
+
     return (
-        <div>
-            <Row>
-                <Col md={3}>
-                    <SideMenu />
-                </Col>
-                <Col className='my-5 justify-content-center'>
-                    <Table size="sm" width="80%" className='text-center mb-3'>
-                        <thead>
+        <div className='my-5 ms-5'>
+            <Col className='justify-content-center'>
+                <table width={850}>
+                    <thead>
+                        <tr>
+                            <th>공지사항</th>
+                        </tr>
+                    </thead><br/>
+                    <tbody>
+                        <tr>
+                            <td>공지</td>
+                            <td colSpan={2}>사이트 이용 약관</td>
+                            <td>2023-12-30</td>
+                            <td onClick={onClickPlus}><FaPlus/></td>
+                        </tr><br/>
+                        {content &&
                             <tr>
-                                <th>No.</th>
-                                <th>Title</th>
-                                <th>Writer</th>
-                                <th>Date</th>
+                                <td colSpan={5} width={200} height={300}>
+                                    detail content
+                                </td>
                             </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>사이트 이용 약관</td>
-                                <td>관리자</td>
-                                <td>2023-12-30</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>no.</td>
-                                <td>title</td>
-                                <td>wirter</td>
-                                <td>regdate</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                </Col>
-            </Row>
+                        }
+                        <tr>
+                            <td>공지</td>
+                            <td colSpan={2}>개인 정보 보호 관련 안내</td>
+                            <td>2024-01-01</td>
+                            <td><FaPlus/></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </Col>
+            <div className='text-end mt-5'>
+                {sessionStorage.getItem("userid") === 'admin' &&
+                    <Button onClick={onClickNotice} variant='contained' size='small'>공지등록</Button>
+                }
+            </div>
         </div>
     )
 }
