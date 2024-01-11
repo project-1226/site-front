@@ -7,7 +7,7 @@
 
 /* disease_main페이지 css*/
 /* disease_main_box */
-.disease_main_box {width: 100%; margin: 50px auto 100px auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; padding: 0 40px; background: #ddd;}
+.disease_main_box {width: 100%; margin: 0 auto 100px auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; padding: 0 40px; background: #ddd;}
 .t1 {margin-top: 100px;}              
 .t2 {margin-top: 25px;}
 .t3 {margin-top: 75px;}                
@@ -25,6 +25,7 @@
 .disease_detail_text{height: 50%;width: 70%; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center;}
 .disease_detail_text p {white-space: normal;overflow-wrap: break-word;max-width: 100%; }
 .disease_detail_contents button {margin-top: 30px; }
+
 
 /* disease_sub 패이지 */
 /* disease_sub_box */

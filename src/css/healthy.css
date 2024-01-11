@@ -16,7 +16,12 @@
 /* healthy_contents */
 .healthy_contents {width: 94.8%; margin: 0 auto 180px auto;}
 .healthy_recipe {width: 100%; margin-bottom: 100px;}
-.healthy_video_wrap {width: 100%; margin: 0 auto; display: flex; flex-wrap: wrap;}
+/* .healthy_video_wrap {width: 100%; margin: 0 auto; display: flex; flex-wrap: wrap;}
+.healthy_video {width: 32%; height: auto; margin-right: 2%;}
+.healthy_video:last-child {margin-right: 0;} */
+
+/* healthy_video_wrap */
+.healthy_video_wrap {width: 100%; margin: 0 auto 180px auto; display: flex; flex-wrap: wrap; }
 .healthy_video {width: 32%; height: 250px; margin-right: 2%; background: #ddd;}
 .healthy_video:last-child {margin-right: 0;}
 

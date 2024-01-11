@@ -1,6 +1,6 @@
 /* SurveyPage */
 .survey_wrap {width: 100%; margin: 0 auto; height: 700px; display: flex; align-items: center; justify-content: center;}
-.survey_contents {width: 45%; margin: 100px auto;}
+.survey_contents {width: 45%; margin: 0 auto;}
 .survey_title_box, .survey_btn {text-align: center;}
 .survey_title {font-size: 30px; letter-spacing: -3px; font-weight: 600;}
 .survey_article {margin-top: 30px; font-size: 14px; letter-spacing: -1px;}
@@ -11,6 +11,18 @@
 
 
 /* QuestionsPage */
-.q_wrap {width: 100%;}
-.q_contents {width: 45%; margin: 100px auto;}
-.q_title_box, .q_btn_wrap {text-align: center;}
+.q_wrap {width: 50%; height: auto; margin: 0 auto;}
+.q_contents {width: 50%; margin: 150px auto;}
+.q_title_box {width: 90%; margin: 0 auto; font-size: 24px; font-weight: 700; letter-spacing: -2px; text-align: left;}
+.q_btn_wrap {text-align: center;}
+
+/* q_select_box_wrap */
+.q_select_box_wrap {width: 80%; margin: 35px auto 60px auto; position: unset; display: flex; flex-direction: column; overflow: hidden; gap: 12px; align-items: center;}
+.q_select_box {width: 100%; height: 68px; flex-direction: column; gap: 2px; border-radius: 100px; cursor: pointer; display: flex; -webkit-box-pack: center; justify-content: center; -webkit-box-align: center; align-items: center; background: rgb(248, 249, 248);}
+
+.q_btn_wrap button {width: 100px; height: 40px; line-height: 40px; background: rgb(116, 135, 105); color: rgb(255, 255, 255); font-weight: 500; font-size: 14px; border-radius: 50px; border: none;}
+.q_btn_wrap button:first-child {margin-right: 15px;}
+
+
+
+

@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React from "react";
 import { useNavigate } from "react-router-dom";
 
 const QuestionsPage = ({ setShow }) => {
-  const [question1, setQuestion1] = useState("");
-  const [question2, setQuestion2] = useState("");
   const navigate = useNavigate();
 
   const handleBackButtonClick = () => {
-    setShow(false);
+    navigate('/');
   };
 
   const handleNextButtonClick = () => {
-    console.log('Question 1:', question1);
-    console.log('Question 2:', question2);
+
   };
 
   return (
@@ -24,11 +21,11 @@ const QuestionsPage = ({ setShow }) => {
 
         <div className="q_select_wrap">
           <div className="q_select_box_wrap">
-            <div className="q_select_box"></div>
-            <div className="q_select_box"></div>
-            <div className="q_select_box"></div>
-            <div className="q_select_box"></div>
-            <div className="q_select_box"></div>
+            <div className="q_select_box"> 1 </div>
+            <div className="q_select_box"> 2 </div>
+            <div className="q_select_box"> 3 </div>
+            <div className="q_select_box"> 4 </div>
+            <div className="q_select_box"> 5 </div>
           </div>
         </div>
 

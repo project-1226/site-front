@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import HomePage from "./HomePage";
 
 import NoticePage from "./community/NoticePage";
@@ -46,84 +46,103 @@ import AdminReview from "./admin/AdminReview";
 import ProductListPage from "./admin/ProductListPage";
 
 import SurveyPage from "./SurveyPage";
+import HeaderPage from "./HeaderPage";
+import FooterPage from "./FooterPage";
+
+import QuestionsPage from "./QuestionsPage";
 
 const RouterPage = () => {
+  const isUserLoggedIn = sessionStorage.getItem("userid") !== null;
+  const isSurveyPage = window.location.pathname === '/';
+
   return (
-    <Routes>
-      {sessionStorage.getItem("userid") ? (
-        <Route path="/" element={<HomePage />} />
-      ) : (      
+    <>
+      {/* 조건부로 HeaderPage를 표시 */}
+      {!isSurveyPage && <HeaderPage />}
+
+      <Routes>
+        {/* 설문조사 페이지 */}
         <Route path="/" element={<SurveyPage />} />
-      )}
 
-      <Route path="/AIimg" element={<Imagereader />} />
-      <Route path="/AImotion" element={<MotionReader />} />
-      <Route path="/Ailist" element={<AiList />} />
+        {/* MyDiet 페이지 - 로그인 상태에 따라 라우팅 */}
+        {isUserLoggedIn ? (
+          <Route path="/mydiet" element={<MyDiet />} />
+        ) : (
+          // 로그인되지 않은 상태에서 설문조사가 끝난 경우 MyDiet 페이지로 이동
+          <Route
+            path="/"
+            element={<Navigate to="/mydiet" replace />}
+          />
+        )}
 
-      <Route path="/Chatbot" element={<Chatbot />} />
+        <Route path="/AIimg" element={<Imagereader />} />
+        <Route path="/AImotion" element={<MotionReader />} />
+        <Route path="/Ailist" element={<AiList />} />
 
-      {/* 주문 */}
-      <Route path="/Cart" element={<Cart />} />
-      <Route path="/Order" element={<OrderPage />} />
+        <Route path="/Chatbot" element={<Chatbot />} />
 
-      {/* 로그인/회원가입 */}
-      <Route path="/login" element={<SigninPage />} />
-      <Route path="/join" element={<SignupPage />} />
+        {/* 주문 */}
+        <Route path="/Cart" element={<Cart />} />
+        <Route path="/Order" element={<OrderPage />} />
 
-      {/* community */}
-      <Route path="/community" element={<CommunityPageMain />}>
-        <Route path="" element={<NoticePage />} />
-        <Route path="review" element={<ReviewPage />} />
-        <Route path="review/write" element={<WriteReview />} />
-        <Route path="review/comment" element={<CommentPage />} />
-      </Route>
+        {/* 로그인/회원가입 */}
+        <Route path="/login" element={<SigninPage />} />
+        <Route path="/join" element={<SignupPage />} />
 
-      {/* 관리자페이지 */}
-      <Route path="/admin" element={<AdminPage />}>
-        <Route path="adorder" element={<AdminOrderList />} />
-        <Route path="register" element={<ProductRegisterPage />} />
-        <Route path="product" element={<ProductListPage />} />
-        <Route path="adno" element={<AdminNotice />} />
-        <Route path="adreview" element={<AdminReview />} />
-      </Route>
+        {/* community */}
+        <Route path="/community" element={<CommunityPageMain />}>
+          <Route path="" element={<NoticePage />} />
+          <Route path="review" element={<ReviewPage />} />
+          <Route path="review/write" element={<WriteReview />} />
+          <Route path="review/comment" element={<CommentPage />} />
+        </Route>
 
-      {/* 상품등록 */}
+        {/* 관리자페이지 */}
+        <Route path="/admin" element={<AdminPage />}>
+          <Route path="adorder" element={<AdminOrderList />} />
+          <Route path="register" element={<ProductRegisterPage />} />
+          <Route path="product" element={<ProductListPage />} />
+          <Route path="adno" element={<AdminNotice />} />
+          <Route path="adreview" element={<AdminReview />} />
+        </Route>
 
-      {/* 마이페이지 */}
-      <Route path="/mp" element={<MyPage />}>
-        {/* 다이어리 */}
-        <Route path="" element={<Report />} />
-        <Route path="rcmp" element={<RecommendPlan />} />
-        <Route path="cstp" element={<CustomPlan />} />
-        <Route path="mysv" element={<MySurvey />} />
-        {/* 활동 */}
-        <Route path="mact" element={<ActivityMain />} />
-        <Route path="qact" element={<QuestionMain />} />
-        {/* 주문내역 */}
-        <Route path="mprch" element={<MyPurchase />} />
-        <Route path="cncl" element={<CancelReturn />} />
-        <Route path="wsit" element={<MyWishItem />} />
-        <Route path="revw" element={<InsertReview />} />
-        {/* 정보 */}
-        <Route path="upd" element={<UpdateUser />} />
-        <Route path="addr" element={<ManageAddress />} />
-        <Route path="upaddr" element={<UpdateAddress />} />
-      </Route>
+        {/* 상품등록 */}
 
-      {/* 내식단 */}
-      <Route path="/mydiet" element={<MyDiet />} />
+        {/* 마이페이지 */}
+        <Route path="/mp" element={<MyPage />}>
+          {/* 다이어리 */}
+          <Route path="" element={<Report />} />
+          <Route path="rcmp" element={<RecommendPlan />} />
+          <Route path="cstp" element={<CustomPlan />} />
+          <Route path="mysv" element={<MySurvey />} />
+          {/* 활동 */}
+          <Route path="mact" element={<ActivityMain />} />
+          <Route path="qact" element={<QuestionMain />} />
+          {/* 주문내역 */}
+          <Route path="mprch" element={<MyPurchase />} />
+          <Route path="cncl" element={<CancelReturn />} />
+          <Route path="wsit" element={<MyWishItem />} />
+          <Route path="revw" element={<InsertReview />} />
+          {/* 정보 */}
+          <Route path="upd" element={<UpdateUser />} />
+          <Route path="addr" element={<ManageAddress />} />
+          <Route path="upaddr" element={<UpdateAddress />} />
+        </Route>
 
-      {/* 건강식단 */}
-      <Route path="/healthydiet" element={<Healthy />} />
+        {/* 건강식단 */}
+        <Route path="/healthydiet" element={<Healthy />} />
 
-      {/* 질환맞춤식단 */}
-      <Route path="/diseasediet" element={<Disease />} />
+        {/* 질환맞춤식단 */}
+        <Route path="/diseasediet" element={<Disease />} />
 
-      {/* 헬스케어 */}
-      <Route path="/healthcare" element={<Healthcare />} />
+        {/* 헬스케어 */}
+        <Route path="/healthcare" element={<Healthcare />} />
 
-      {/* 설문조사 페이지 */}
-    </Routes>
+        {/* 설문조사 */}
+        <Route path="/q_page" element={<QuestionsPage />} />
+      </Routes>
+      {!isSurveyPage && <FooterPage />}
+    </>
   );
 };
 
