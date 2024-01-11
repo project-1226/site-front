@@ -2179,7 +2179,20 @@
   dependencies:
     "@babel/runtime" "^7.23.6"
 
-"@mui/material@^5.0.0", "@mui/material@^5.15.2", "@mui/material@^5.8.6":
+"@mui/lab@^5.0.0-alpha.159":
+  version "5.0.0-alpha.159"
+  resolved "https://registry.npmjs.org/@mui/lab/-/lab-5.0.0-alpha.159.tgz"
+  integrity sha512-42Y8nf2/mDgYSLOw6PhOfHNV6P7tPcQkQEL0DTbY7a+gc+hXDsyVEzBMYST1MrV64EHTH68msfQm+k3CvLON/g==
+  dependencies:
+    "@babel/runtime" "^7.23.6"
+    "@mui/base" "5.0.0-beta.30"
+    "@mui/system" "^5.15.3"
+    "@mui/types" "^7.2.12"
+    "@mui/utils" "^5.15.3"
+    clsx "^2.0.0"
+    prop-types "^15.8.1"
+
+"@mui/material@^5.0.0", "@mui/material@^5.15.2", "@mui/material@^5.8.6", "@mui/material@>=5.10.11":
   version "5.15.3"
   resolved "https://registry.npmjs.org/@mui/material/-/material-5.15.3.tgz"
   integrity sha512-DODBBMouyq1B5f3YkEWL9vO8pGCxuEGqtfpltF6peMJzz/78tJFyLQsDas9MNLC/8AdFu2BQdkK7wox5UBPTAA==
@@ -11326,6 +11339,11 @@ uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.npmjs.org/uuid/-/uuid-8.3.2.tgz"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
+uuid@^9.0.1:
+  version "9.0.1"
+  resolved "https://registry.npmjs.org/uuid/-/uuid-9.0.1.tgz"
+  integrity sha512-b+1eJOlsR9K8HJpow9Ok3fiWOWSIcIzXodvv0rQjVoOVNpWMpxf1wZNpt4y9h10odCNrqnYp1OBzRktckBe3sA==
 
 v8-to-istanbul@^8.1.0:
   version "8.1.1"

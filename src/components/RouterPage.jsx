@@ -13,15 +13,17 @@ import SigninPage from "./user/SigninPage";
 import SignupPage from "./user/SignupPage";
 import UpdateUser from "./user/mypage/info/UpdateUser";
 import ManageAddress from "./user/mypage/info/ManageAddress";
+import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import MySurvey from "./user/mypage/diary/MySurvey";
-import RecommendPlan from "./user/mypage/diary/RecommendPlan";
 import CustomPlan from "./user/mypage/diary/CustomPlan";
 import Report from "./user/mypage/diary/Report";
-import MyActivity from "./user/mypage/activity/MyActivity";
-import Scrap from "./user/mypage/activity/Scrap";
 import MyPurchase from "./user/mypage/shop/MyPurchase";
 import CancelReturn from "./user/mypage/shop/CancelReturn";
 import MyWishItem from "./user/mypage/shop/MyWishItem";
+import InsertReview from "./user/mypage/shop/InsertReview";
+import QuestionMain from "./user/mypage/shop/QuestionMain";
+import ActivityMain from "./user/mypage/activity/ActivityMain";
+import ScrapPage from "./user/mypage/activity/ScrapPage";
 
 import MyDiet from "./myDiet/MyDiet";
 import Healthy from "./healthyDiet/Healthy";
@@ -35,8 +37,6 @@ import Chatbot from "./chatbot/Chatbot";
 
 import Cart from "./cart/Cart";
 import OrderPage from "./cart/OrderPage";
-import UpdateAddress from "./user/mypage/info/UpdateAddress";
-import InsertReview from "./user/mypage/shop/InsertReview";
 
 import AdminPage from "./admin/AdminPage";
 import ProductRegisterPage from "./admin/ProductRegisterPage";
@@ -45,10 +45,16 @@ import AdminNotice from "./admin/AdminNotice";
 import AdminReview from "./admin/AdminReview";
 import ProductListPage from "./admin/ProductListPage";
 
+import SurveyPage from "./SurveyPage";
+
 const RouterPage = () => {
   return (
     <Routes>
-      <Route path="/" element={<HomePage />} />
+      {sessionStorage.getItem("userid") ? (
+        <Route path="/" element={<HomePage />} />
+      ) : (
+        <Route path="/" element={<SurveyPage />} />
+      )}
 
       <Route path="/AIimg" element={<Imagereader />} />
       <Route path="/AImotion" element={<MotionReader />} />
@@ -70,12 +76,11 @@ const RouterPage = () => {
         <Route path="review" element={<ReviewPage />} />
         <Route path="review/write" element={<WriteReview />} />
         <Route path="review/comment/:pid" element={<CommentPage />} />
+
       </Route>
-      
-      
 
       {/* 관리자페이지 */}
-      <Route path="/admin" element={<AdminPage/>} >
+      <Route path="/admin" element={<AdminPage />}>
         <Route path="adorder" element={<AdminOrderList />} />
         <Route path="register" element={<ProductRegisterPage />} />
         <Route path="product" element={<ProductListPage />} />
@@ -84,23 +89,22 @@ const RouterPage = () => {
       </Route>
 
       {/* 상품등록 */}
-      
 
       {/* 마이페이지 */}
       <Route path="/mp" element={<MyPage />}>
         {/* 다이어리 */}
         <Route path="" element={<Report />} />
-        <Route path="rcmp" element={<RecommendPlan />} />
         <Route path="cstp" element={<CustomPlan />} />
         <Route path="mysv" element={<MySurvey />} />
         {/* 활동 */}
-        <Route path="mact" element={<MyActivity />} />
-        <Route path="scrp" element={<Scrap />} />
+        <Route path="mact" element={<ActivityMain />} />
+        <Route path="sact" element={<ScrapPage />} />
         {/* 주문내역 */}
         <Route path="mprch" element={<MyPurchase />} />
         <Route path="cncl" element={<CancelReturn />} />
         <Route path="wsit" element={<MyWishItem />} />
         <Route path="revw" element={<InsertReview />} />
+        <Route path="shqna" element={<QuestionMain />} />
         {/* 정보 */}
         <Route path="upd" element={<UpdateUser />} />
         <Route path="addr" element={<ManageAddress />} />
@@ -118,6 +122,8 @@ const RouterPage = () => {
 
       {/* 헬스케어 */}
       <Route path="/healthcare" element={<Healthcare />} />
+
+      {/* 설문조사 페이지 */}
     </Routes>
   );
 };

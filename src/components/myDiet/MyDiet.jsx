@@ -78,21 +78,21 @@ const MyDiet = () => {
             <p className="contents_title">리뷰 모아보기</p>
           </div>
 
-          <div className='review_wrap'>
+          <div className='mydiet_review_wrap'>
             <Carousel data-bs-theme="dark" interval={null}>
-              <Carousel.Item>
+              <Carousel.Item className='mydiet_carousel'>
                 <div className='carousel_textwrap'>
                   <p> 리뷰1 </p>
                 </div>
               </Carousel.Item>
 
-              <Carousel.Item>
+              <Carousel.Item className='mydiet_carousel'>
                 <div className='carousel_textwrap'>
                   <p> 리뷰2 </p>
                 </div>
               </Carousel.Item>
 
-              <Carousel.Item>
+              <Carousel.Item className='mydiet_carousel'>
                 <div className='carousel_textwrap'>
                   <p> 리뷰3 </p>
                 </div>

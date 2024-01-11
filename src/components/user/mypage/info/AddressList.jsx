@@ -1,5 +1,5 @@
 import {
-  Box,
+  Backdrop,
   Button,
   Card,
   CardContent,
@@ -55,15 +55,14 @@ const AddressList = ({ setClickUpdate, setSelectedList }) => {
     getList();
   }, [page]);
 
-  if (loading)
-    return (
-      <Box sx={{ my: 15, textAlign: "center" }}>
-        <CircularProgress />
-      </Box>
-    );
-
   return (
     <>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Typography variant="h6" gutterBottom sx={{ fontWeight: "bolder" }}>
         배송지 관리
       </Typography>
