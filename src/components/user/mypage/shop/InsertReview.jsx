@@ -66,7 +66,7 @@ const InsertReview = () => {
         };
         // console.log(form);
       }
-      await axios.post("/product_review/insert", form);
+      await axios.post("/product-review/insert", form);
       setLoading(false);
       alert("리뷰가 등록되었습니다.");
       window.location.href = "/mp/mprch";

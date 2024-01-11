@@ -1,5 +1,5 @@
 import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import HomePage from "./HomePage";
 
 import NoticePage from "./community/NoticePage";
@@ -15,15 +15,15 @@ import UpdateUser from "./user/mypage/info/UpdateUser";
 import ManageAddress from "./user/mypage/info/ManageAddress";
 import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import MySurvey from "./user/mypage/diary/MySurvey";
-import RecommendPlan from "./user/mypage/diary/RecommendPlan";
 import CustomPlan from "./user/mypage/diary/CustomPlan";
 import Report from "./user/mypage/diary/Report";
 import MyPurchase from "./user/mypage/shop/MyPurchase";
 import CancelReturn from "./user/mypage/shop/CancelReturn";
 import MyWishItem from "./user/mypage/shop/MyWishItem";
 import InsertReview from "./user/mypage/shop/InsertReview";
+import QuestionMain from "./user/mypage/shop/QuestionMain";
 import ActivityMain from "./user/mypage/activity/ActivityMain";
-import QuestionMain from "./user/mypage/activity/QuestionMain";
+import ScrapPage from "./user/mypage/activity/ScrapPage";
 
 import MyDiet from "./myDiet/MyDiet";
 import Healthy from "./healthyDiet/Healthy";
@@ -46,6 +46,8 @@ import AdminReview from "./admin/AdminReview";
 import ProductListPage from "./admin/ProductListPage";
 
 import SurveyPage from "./SurveyPage";
+import DiseaseDetail from "./diseaseDiet/DiseaseDetail";
+import HealthyDetail from "./healthyDiet/HealthyDetail";
 import HeaderPage from "./HeaderPage";
 import FooterPage from "./FooterPage";
 
@@ -94,7 +96,8 @@ const RouterPage = () => {
           <Route path="" element={<NoticePage />} />
           <Route path="review" element={<ReviewPage />} />
           <Route path="review/write" element={<WriteReview />} />
-          <Route path="review/comment" element={<CommentPage />} />
+          <Route path="review/comment/:pid" element={<CommentPage />} />
+
         </Route>
 
         {/* 관리자페이지 */}
@@ -112,17 +115,17 @@ const RouterPage = () => {
         <Route path="/mp" element={<MyPage />}>
           {/* 다이어리 */}
           <Route path="" element={<Report />} />
-          <Route path="rcmp" element={<RecommendPlan />} />
-          <Route path="cstp" element={<CustomPlan />} />
+            <Route path="cstp" element={<CustomPlan />} />
           <Route path="mysv" element={<MySurvey />} />
           {/* 활동 */}
           <Route path="mact" element={<ActivityMain />} />
-          <Route path="qact" element={<QuestionMain />} />
+          <Route path="sact" element={<ScrapPage />} />
           {/* 주문내역 */}
           <Route path="mprch" element={<MyPurchase />} />
           <Route path="cncl" element={<CancelReturn />} />
           <Route path="wsit" element={<MyWishItem />} />
           <Route path="revw" element={<InsertReview />} />
+        <Route path="shqna" element={<QuestionMain />} />
           {/* 정보 */}
           <Route path="upd" element={<UpdateUser />} />
           <Route path="addr" element={<ManageAddress />} />
@@ -131,10 +134,10 @@ const RouterPage = () => {
 
         {/* 건강식단 */}
         <Route path="/healthydiet" element={<Healthy />} />
-
+      <Route path="/healthydiet/healthydetail/:tag" element={<HealthyDetail/>}/>
         {/* 질환맞춤식단 */}
         <Route path="/diseasediet" element={<Disease />} />
-
+      <Route path="/disease/diseasedetail/:tag" element={<DiseaseDetail/>}/>
         {/* 헬스케어 */}
         <Route path="/healthcare" element={<Healthcare />} />
 
