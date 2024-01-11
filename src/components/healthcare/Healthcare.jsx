@@ -1,5 +1,5 @@
 // Healthcare.jsx
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import HealthcareModal from './HealthcareModal';
 import Card from '@mui/material/Card';
@@ -12,11 +12,33 @@ import healthcareImage2 from '../../images/healthcare_img2.jpg';
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
+import axios from 'axios';
 
 const Healthcare = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedChallenge, setSelectedChallenge] = useState('');
-
+  const [categories,setCategories] = useState([]);
+  
+  
+  const getCategories = async () => {
+    try {
+      //food페이지에서 카테고리가져오는 api공유
+      const res = await axios(`/food/categories/exercise`);
+      setCategories(res.data);
+      console.log(res.data)
+      // const randomIndex = Math.floor(Math.random() * res.data.length);
+      // setSelectTag(res.data[randomIndex]);
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+    } finally {
+      //카테고리들고와서 하는 내용
+    }
+  };
+  
+  useEffect(() => {
+    getCategories();
+  }, [])
+  
   const handleChallengeClick = (challenge) => {
     setSelectedChallenge(challenge);
     setIsModalOpen(true);
@@ -34,12 +56,10 @@ const Healthcare = () => {
           <p>TOU GET BETTER.</p>
         </div>
       </div>
-
       <div className='healthcare_submain'>
-        <div className='challenge_box' onClick={() => handleChallengeClick('푸시업 챌린지')}> 푸시업 챌린지 </div>
-        <div className='challenge_box' onClick={() => handleChallengeClick('스쿼트 챌린지')}> 스쿼트 챌린지 </div>
-        <div className='challenge_box' onClick={() => handleChallengeClick('런지 챌린지')}> 런지 챌린지 </div>
-        <div className='challenge_box' onClick={() => handleChallengeClick('벤치딥스 챌린지')}> 벤치딥스 챌린지 </div>
+        {categories.slice(0,5).map((category)=>        
+          <div className='challenge_box' onClick={() => handleChallengeClick('푸시업 챌린지')}> {category.name} </div>       
+        )}      
       </div>
 
       <div className='healthcare_contents'>

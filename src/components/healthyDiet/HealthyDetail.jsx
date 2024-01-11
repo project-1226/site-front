@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
-import { Backdrop, Button, CircularProgress, } from "@mui/material";
-import { useParams, useLocation } from 'react-router-dom';
+import {
+  Backdrop,
+  CircularProgress,
+} from "@mui/material";
+import { useParams,useLocation } from 'react-router-dom';
 
 //useNavigate두번째 인자로 getFoodList()함수도 props로 전달가능하면 이후 수정
 const HealthyDetail = ({ initialFoods }) => {
@@ -14,7 +17,7 @@ const HealthyDetail = ({ initialFoods }) => {
   const getFoodList = async () => {
     setLoading(true);
     try {
-      let res = await axios('/food/health.list?categoryid=' + tag);
+      let res = await axios('/food/list?categoryid=' + tag);
       setFoods(res.data);
       console.error(res.data)
     } catch (error) {
