@@ -1,25 +1,30 @@
 import React, { useEffect, useState } from 'react'
-import { Table, Row, Col, Spinner } from 'react-bootstrap'
+import { Col, Spinner } from 'react-bootstrap'
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 const ReviewPage = () => {
     const navi = useNavigate();
-    const [review, setReview] = useState([]);
+    const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [favoriteCnt, setFavoriteCnt] = useState(0);
+    //const [favoriteCnt, setFavoriteCnt] = useState(0);
+    const categoryid = 102;
 
-    const getReviewList = () => { //review list 가져오기
-        //setLoading(true)
-        const res = '/';
-        //setReview(res.data.list);
-        
-
+    const getList = async() => { //review list 가져오기
+        setLoading(true)
+        const res = await axios.get("/community/list?categoryid=" + categoryid);
+        // , {
+        //     params: {categoryid}
+        // });
+        console.log(res.data);
+        setList(res.data);
+        setLoading(false);
     }
 
     useEffect(()=> {
-        getReviewList();
+        getList();
     }, []);
 
 
@@ -46,27 +51,17 @@ const ReviewPage = () => {
                         </tr>
                     </thead><br/>
                     <tbody>
-                        <tr>
-                            <td>1</td>
-                            <td><a href='review/comment'>회원 후기입니다.</a></td>
-                            <td>nickname</td>
-                            <td>2023-12-30</td>
-                            <td>11</td>
-                        </tr><br/>
-                        <tr>
-                            <td>2</td>
-                            <td>일주일 식단 후기입니다.</td>
-                            <td>Thornton</td>
-                            <td>@fat</td>
-                            <td>5</td>
-                        </tr><br/>
-                        <tr>
-                            <td>3</td>
-                            <td>후기</td>
-                            <td>24a5a319-3e17-45c7-b</td>
-                            <td>2024-01-11</td>
-                            <td>9</td>
-                        </tr>
+                        {list.map((r)=>
+                        <>
+                            <tr key={r.categoryid}>
+                                <td>{r.postid}</td>
+                                <td><Link to={`comment/${r.postid}`}>{r.title}</Link></td>
+                                <td>{r.userid}</td>
+                                <td>{r.regdate}</td>
+                                <td>11</td>
+                            </tr><br />
+                        </>    
+                        )}
                     </tbody>
                 </table>
             </Col>
@@ -75,6 +70,6 @@ const ReviewPage = () => {
             </div>
         </div>
     )
-}
+} 
 
 export default ReviewPage
