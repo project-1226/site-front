@@ -9,3 +9,8 @@ a{text-decoration:none !important;}
 img{border:0; max-width:100%;}
 code {font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;}
 
+/* header style변경 */
+.css-9tjrg8-MuiPaper-root-MuiAppBar-root {background: none !important; color: #748769 !important;}
+.css-1ci0kpw-MuiTypography-root {font-weight: 700 !important; font-size: 1.063rem !important; letter-spacing: -0.5px !important;}
+.login, .logout {font-weight: 700 !important; letter-spacing: -0.5px !important;}
+.active-link {border-bottom: 2px solid #000; font-weight: bold; color: #000 !important;}
