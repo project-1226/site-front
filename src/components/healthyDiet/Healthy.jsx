@@ -21,7 +21,6 @@ const Healthy = () => {
   const [tags,setTags] = useState([]);
   const [selectTag,setSelectTag] = useState("");
   const [loading, setLoading] = useState(false);
-  const [refresh,setRefresh] = useState(0);
   
 
   const getTags = async () => {
@@ -41,7 +40,7 @@ const Healthy = () => {
   const getFoodList = async()=>{   
     setLoading(true);
     try {
-      let res = await axios('/food/health.list?categoryid=' + selectTag.categoryid);
+      let res = await axios('/food/list?categoryid=' + selectTag.categoryid);
       setFoods(res.data);
       console.error(res.data)
     } catch (error) {
@@ -68,16 +67,14 @@ const Healthy = () => {
     setSelectTag(tag)
   };
 
-  const handleRefreshClick=()=>{
-    setRefresh(refresh+1)
-  }
+  
   useEffect(()=>{
     getTags();
   },[])
 
   useEffect(()=>{
     getFoodList();
-  },[selectTag,refresh])
+  },[selectTag])
   
   return (
     
@@ -121,12 +118,7 @@ const Healthy = () => {
           <CircularProgress color="inherit" />
           </Backdrop>
           )}
-          
-          <Button
-              variant="contained"
-              size="small"
-              onClick={() => handleRefreshClick()}
-            >세가지추천메뉴 refresh버튼</Button>
+
         </div>
 
         
@@ -136,7 +128,7 @@ const Healthy = () => {
       {/* categoryTags box */}
       <div className='healthy_tag_box'>
           {tags.map((tag) => (
-            tag.categoryid === selectTag ?
+            tag.categoryid == selectTag.categoryid ?
               <Button
               key={tag.name}
               variant="outlined"
@@ -168,6 +160,7 @@ const Healthy = () => {
               </>
           }  
         </div>
+        
       <div className='healthy_contents'>
         <section className='healthy_recipe'>
           <div className="contents_title_box">

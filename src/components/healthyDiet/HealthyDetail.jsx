@@ -2,10 +2,7 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import {
   Backdrop,
-  Card,
-  CardContent,
   CircularProgress,
-  Typography
 } from "@mui/material";
 import { useParams,useLocation } from 'react-router-dom';
 
@@ -20,7 +17,7 @@ const HealthyDetail = ({ initialFoods}) => {
   const getFoodList= async()=>{
     setLoading(true);
     try {
-      let res = await axios('/food/health.list?categoryid=' + tag);
+      let res = await axios('/food/list?categoryid=' + tag);
       setFoods(res.data);
       console.error(res.data)
     } catch (error) {

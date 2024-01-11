@@ -1,53 +1,139 @@
-import React, { useState,useEffect } from 'react'
-import { Button } from '@mui/material';
-import Carousel from 'react-bootstrap/Carousel'; 
-import YouTubeSearchVideo from "../YouTubeSearchVideo"
+import React, { useState, useEffect } from 'react'
+import {
+  Backdrop,
+  Button,
+  Card,
+  CardContent,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
+import Carousel from 'react-bootstrap/Carousel';
+
 import axios from 'axios';
+import DiseaseModal from './DiseaseModal';
 
 const Disease = () => {
-  const [tags,setTags] = useState([]);
-  const [selectTag,setSelectTag] = useState("");
-  const [diseaseFoods,setDiseaseFoods] = useState("");
+  const [tags, setTags] = useState([]);
+  const [selectTag, setSelectTag] = useState("");
+  const [foods, setfoods] = useState("");
+  const [selectedFoods, setSelectedFoods] = useState('');
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
   //예시데이터
   //선택한 태그(where절조건으로)로 필터링한데이터중 랜덤으로 하나만 가져오는 예시데이터
   const data = {
     "신장실환": { image: "신장실환 신장실환", ingredients: '신장실환 신장실환, 신장실환,....신장실환' },
     "위암식단": { image: "위암식단 사진이미지이이이이", ingredients: '잡곡 100g, 양배추40g,....etc' }
   }
-  const getDiseaseFoodList =()=>{
-
+  const getDiseaseFoodList = async () => {
+    setLoading(true);
+    try {
+      let res = await axios('/food/list?categoryid=' + selectTag.categoryid);
+      setfoods(res.data);
+      console.error(res.data)
+    } catch (error) {
+      console.error("Error fetching tags:", error);
+    } finally {
+      setLoading(false);
+    }
   }
   //질환식단 카테고리 
   const getTags = async () => {
     try {
       const res = await axios('/food/categories/disease');
       setTags(res.data);
-      // console.log(res.data)
+      console.log(res.data)
 
       const randomIndex = Math.floor(Math.random() * res.data.length);
       setSelectTag(res.data[randomIndex]);
       console.log(res.data[randomIndex])
     } catch (error) {
       console.error("Error fetching tags:", error);
-    }finally {
+    } finally {
       //getFoodList();
     }
   };
-  
 
-  //페이지 첫랜더링시 기본 세팅 위암식단
-  useEffect(()=>{
-    getTags();
-  },[])
-
-
-  const handleClickMore = ()=>{
-    window.location.href = `disease/diseasedetail/${selectTag}`;
+  const handleMenuClick = (food) => {
+    setSelectedFoods(food);
+    setIsModalOpen(true);
+  };
+  const handleMoreClick = () => {
+    window.location.href = `disease/diseasedetail/${selectTag.categoryid}`;
   }
+
+  //페이지 첫랜더링시 tags가져와서 selectTag 램덤으로지정 
+  useEffect(() => {
+    getTags();
+  }, [])
+  useEffect(() => {
+    getDiseaseFoodList();
+  }, [selectTag])
+
+
 
   return (
     <div className='disease_wrap'>
+      <div className='healthy_main_wrap'>
+        <div className='healthy_main'>
+          <div className="main_text_box">
+            <p className="main_subtitle"> 건강 목적과 필요에 따라 골라먹는 </p>
+            <p className="main_title"> 건강식단 </p>
+
+            <p className="main_article"> 오늘의 추천메뉴 </p>
+            <p className="main_article">--!!{selectTag.name}!!--</p>
+          </div>
+        </div>{/* healthy_main */}
+
+        <div className='recomm_menu'>
+          {/* card수정 - 아름 2024.1.10 */}
+
+          {foods.slice(0, 3).map((food) =>
+            food.categoryid == selectTag.categoryid ?
+              <div className='recomm_menuimg'>
+                <Card className='recomm_menuimg_main' onClick={() => handleMenuClick(food)}>
+                  <CardContent>
+                    <Typography variant="h5" component="div">
+                      <h4>{food.name}</h4>
+                      <img src={food.image} alt="" />
+                    </Typography>
+                  </CardContent>
+                </Card>
+                <Card className='recomm_menuimg_footer' onClick={() => handleMoreClick()}>
+                  <CardContent>
+                    <Typography variant="h7" component="div"> 식단더알아보기 +++</Typography>
+                  </CardContent>
+                </Card>
+              </div>
+              :
+              <Backdrop
+                sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+                open={loading}
+              >
+                <CircularProgress color="inherit" />
+              </Backdrop>
+          )}
+
+        </div>
+
+
+
+      </div>{/* healthy_main_wrap */}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
       <div className='disease_main_box'>
         <div className='text-center'>
           <h3 className='t1'>신재료 선정부터 조리까지 섬세하게</h3>
@@ -63,7 +149,7 @@ const Disease = () => {
       <div className='disease_contents'>
 
 
-         {/* 첫 번째 행의 버튼 */}
+        {/* 첫 번째 행의 버튼 */}
         <div className='disease_tag_box'>
           {tags.slice(0, 6).map((tag, index) => (
             <Button
@@ -87,7 +173,7 @@ const Disease = () => {
             >
               {tag.name}
             </Button>
-          ))}              
+          ))}
         </div>
 
         <div className='disease_detail_wrap'>
@@ -95,9 +181,9 @@ const Disease = () => {
             <div className='disease_detail_img'>data[selectTag].image</div>
             <div className='disease_detail_contents'>
               <div className='disease_detail_text'>
-                <p>data[selectTag]?.ingredients</p>       
+                <p>data[selectTag]?.ingredients</p>
               </div>
-              <Button variant="contained" size="small" onClick={handleClickMore}> 자세히보기 </Button>               
+              <Button variant="contained" size="small" onClick={handleMoreClick}> 자세히보기 </Button>
             </div>
           </div>
         </div>
@@ -140,6 +226,7 @@ const Disease = () => {
           </div>
         </section>{/* diet_review */}
       </div>{/* diet_contents */}
+      <DiseaseModal show={isModalOpen} handleClose={() => setIsModalOpen(false)} selectedFoods={selectedFoods} />
     </div>
   )
 }
