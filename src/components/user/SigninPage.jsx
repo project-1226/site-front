@@ -18,6 +18,7 @@ import {
 import LockIcon from "@mui/icons-material/Lock";
 import axios from "axios";
 import GoogleLogin from "./login/GoogleLogin";
+import KakaoLogin from "./login/KakaoLogin";
 
 const SigninPage = () => {
   const {
@@ -130,6 +131,7 @@ const SigninPage = () => {
           </Button>
           <Stack sx={{ mt: 3, mb: 5 }}>
             <GoogleLogin />
+            <KakaoLogin/>
           </Stack>
         </Box>
       </Box>
