@@ -14,15 +14,15 @@ import UpdateUser from "./user/mypage/info/UpdateUser";
 import ManageAddress from "./user/mypage/info/ManageAddress";
 import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import MySurvey from "./user/mypage/diary/MySurvey";
-import CustomPlan from "./user/mypage/diary/CustomPlan";
 import Report from "./user/mypage/diary/Report";
+import ScrapPage from "./user/mypage/diary/ScrapPage";
 import MyPurchase from "./user/mypage/shop/MyPurchase";
 import CancelReturn from "./user/mypage/shop/CancelReturn";
 import MyWishItem from "./user/mypage/shop/MyWishItem";
 import InsertReview from "./user/mypage/shop/InsertReview";
 import QuestionMain from "./user/mypage/shop/QuestionMain";
 import ActivityMain from "./user/mypage/activity/ActivityMain";
-import ScrapPage from "./user/mypage/activity/ScrapPage";
+import ReviewList from "./user/mypage/activity/ReviewList";
 
 import MyDiet from "./myDiet/MyDiet";
 import Healthy from "./healthyDiet/Healthy";
@@ -54,7 +54,7 @@ import QuestionsPage from "./QuestionsPage";
 
 const RouterPage = () => {
   const isUserLoggedIn = sessionStorage.getItem("userid") !== null;
-  const isSurveyPage = window.location.pathname === '/';
+  const isSurveyPage = window.location.pathname === "/";
 
   return (
     <>
@@ -70,10 +70,7 @@ const RouterPage = () => {
           <Route path="/mydiet" element={<MyDiet />} />
         ) : (
           // 로그인되지 않은 상태에서 설문조사가 끝난 경우 MyDiet 페이지로 이동
-          <Route
-            path="/"
-            element={<Navigate to="/mydiet" replace />}
-          />
+          <Route path="/" element={<Navigate to="/mydiet" replace />} />
         )}
 
         <Route path="/AIimg" element={<Imagereader />} />
@@ -96,7 +93,6 @@ const RouterPage = () => {
           <Route path="review" element={<ReviewPage />} />
           <Route path="review/write" element={<WriteReview />} />
           <Route path="review/comment/:pid" element={<CommentPage />} />
-
         </Route>
 
         {/* 관리자페이지 */}
@@ -114,17 +110,17 @@ const RouterPage = () => {
         <Route path="/mp" element={<MyPage />}>
           {/* 다이어리 */}
           <Route path="" element={<Report />} />
-            <Route path="cstp" element={<CustomPlan />} />
+          <Route path="scrp" element={<ScrapPage />} />
           <Route path="mysv" element={<MySurvey />} />
           {/* 활동 */}
           <Route path="mact" element={<ActivityMain />} />
-          <Route path="sact" element={<ScrapPage />} />
+          <Route path="ract" element={<ReviewList />} />
           {/* 주문내역 */}
           <Route path="mprch" element={<MyPurchase />} />
           <Route path="cncl" element={<CancelReturn />} />
           <Route path="wsit" element={<MyWishItem />} />
           <Route path="revw" element={<InsertReview />} />
-        <Route path="shqna" element={<QuestionMain />} />
+          <Route path="shqna" element={<QuestionMain />} />
           {/* 정보 */}
           <Route path="upd" element={<UpdateUser />} />
           <Route path="addr" element={<ManageAddress />} />
@@ -133,10 +129,13 @@ const RouterPage = () => {
 
         {/* 건강식단 */}
         <Route path="/healthydiet" element={<Healthy />} />
-      <Route path="/healthydiet/healthydetail/:tag" element={<HealthyDetail/>}/>
+        <Route
+          path="/healthydiet/healthydetail/:tag"
+          element={<HealthyDetail />}
+        />
         {/* 질환맞춤식단 */}
         <Route path="/diseasediet" element={<Disease />} />
-      <Route path="/disease/diseasedetail/:tag" element={<DiseaseDetail/>}/>
+        <Route path="/disease/diseasedetail/:tag" element={<DiseaseDetail />} />
         {/* 헬스케어 */}
         <Route path="/healthcare" element={<Healthcare />} />
 
