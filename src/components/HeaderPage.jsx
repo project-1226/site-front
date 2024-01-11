@@ -80,9 +80,9 @@ const HeaderPage = () => {
               sessionStorage.getItem("userid") &&
               sessionStorage.getItem("userid") !== "2fa0017c-053b-4983-8" && (
                 <>
-                  <Typography color="inherit" component={Link} to="/mp" sx={{ textDecoration: "none" }}>
-                    <AccountCircle sx={{ fontSize: "2.3rem" }} />
-                  </Typography>
+                  <div color="inherit" component={Link} to="/mp" sx={{ textDecoration: "none" }}>
+                    <AccountCircle sx={{ fontSize: "2.3rem" }}/>
+                  </div>
                   <Button color="inherit" onClick={onLogout} className="logout"> Logout </Button>
                 </>
               )}
