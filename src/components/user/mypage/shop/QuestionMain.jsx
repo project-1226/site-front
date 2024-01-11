@@ -27,7 +27,7 @@ const QuestionMain = () => {
       }}
     >
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="FAQ" value="1" />
             <Tab label="1:1문의" value="2" />

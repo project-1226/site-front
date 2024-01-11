@@ -20,8 +20,8 @@ const ScrapPage = () => {
       }}
     >
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
+        <Box>
+          <TabList onChange={handleChange} aria-label="secondary tabs example">
             <Tab label="식단" value="1" />
             <Tab label="운동" value="2" />
           </TabList>

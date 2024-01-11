@@ -91,15 +91,7 @@ const ReviewList = () => {
   }, []);
 
   return (
-    <Box
-      sx={{
-        width: "100%",
-        typography: "body1",
-        bgcolor: "transparent",
-        py: 4.5,
-        pr: 3,
-      }}
-    >
+    <Box sx={{ width: "100%", bgcolor: "transparent", py: 5, pr: 3 }}>
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}

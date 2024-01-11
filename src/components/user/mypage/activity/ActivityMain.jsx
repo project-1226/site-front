@@ -22,7 +22,7 @@ const ActivityMain = () => {
       }}
     >
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="작성한 글" value="1" />
             <Tab label="작성한 댓글" value="2" />

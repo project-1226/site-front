@@ -40,7 +40,7 @@ const SigninPage = () => {
       alert("로그인 성공!");
       const userid = res.data.user.userid;
       sessionStorage.setItem("userid", userid);
-      window.location.href = "/";
+      window.location.href = "/mydiet";
     }
   };
 
@@ -131,7 +131,7 @@ const SigninPage = () => {
           </Button>
           <Stack sx={{ mt: 3, mb: 5 }}>
             <GoogleLogin />
-            <KakaoLogin/>
+            <KakaoLogin />
           </Stack>
         </Box>
       </Box>
