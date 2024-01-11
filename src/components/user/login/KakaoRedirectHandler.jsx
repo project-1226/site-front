@@ -29,11 +29,11 @@ const KakaoRedirectHandler = () => {
             console.log(decodedToken.nickname);
             console.log(decodedToken.email);
 
-
+            const email = decodedToken.email;
             //로그인로직
             // const res = await axios.post("/user/login", { email, password: "0" });
             // console.log(res.data);
-              // if (res.data === 0) {
+              // if (res.data === 0) { 
               //   await axios.post("/user/insert", {
               //     email,
               //     photo: photoURL,
