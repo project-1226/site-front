@@ -132,10 +132,11 @@ const RouterPage = () => {
         </Route>
 
         {/* 건강식단 */}
-        <Route path="/healthydiet" element={<Healthy />} />
+        <Route path="/healthydiet" element={<Healthy pagetype="health"/>} />
       <Route path="/healthydiet/healthydetail/:tag" element={<HealthyDetail/>}/>
         {/* 질환맞춤식단 */}
-        <Route path="/diseasediet" element={<Disease />} />
+        {/* healthy컴포넌트사용*/}
+        <Route path="/diseasediet" element={<Healthy pagetype="disease"/>} />
       <Route path="/disease/diseasedetail/:tag" element={<DiseaseDetail/>}/>
         {/* 헬스케어 */}
         <Route path="/healthcare" element={<Healthcare />} />

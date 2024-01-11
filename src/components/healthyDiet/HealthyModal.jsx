@@ -8,6 +8,9 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 
+
+// 좋아요버튼 수정
+
 const HealthyModal = ({ show, handleClose, selectedFood  }) => {
   const createData = (name, calories, fat, carbs, protein) => {
     return { name, calories, fat, carbs, protein };

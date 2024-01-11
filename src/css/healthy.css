@@ -1,6 +1,6 @@
 .diet_wrap {width: 100%;}
 .healthy_main_wrap {width: 100%; height: 816px; margin-bottom: 100px;}
-.healthy_main {width: 100%; height: 570px; margin: 0 auto; display: flex; align-items: center; justify-content: center;
+.health_main {width: 100%; height: 570px; margin: 0 auto; display: flex; align-items: center; justify-content: center;
     background: url('../images/healthy_main.jpg') no-repeat 50% 45%; background-size: cover; position: relative;}
 .healthy_main::before {width: 100%; height: 570px; content: ''; position: absolute; top: 0; left: 0; background: rgba(0, 0, 0, 0.5) }
 
@@ -55,3 +55,8 @@ box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); transition: 
 .healthy_tag_detail_image{width: 45%; border-radius: 30px; margin-bottom: 30px !important;}
 .healthy_detail_contents_article {font-size: 22px; letter-spacing: -1px;}
 
+
+
+
+.disease_main {width: 100%; height: 570px; margin: 0 auto; display: flex; align-items: center; justify-content: center;
+    background: url('../images/exbannerdiseace.jpg') no-repeat 50% 45%; background-size: cover; position: relative;}
