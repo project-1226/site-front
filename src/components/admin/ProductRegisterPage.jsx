@@ -37,20 +37,20 @@ const ProductRegisterPage = () => {
     }
 
     return (
-        <div className='my-4'>
-            <Row className='justify-content-center ms-5'>
+        <div className='my-4 ms-5'>
+            <Col className='justify-content-center'>
                 <h5 className='text-center mb-4'> [상품등록] </h5>
-                <Card className='text-center p-4' style={{width: '250%', height: 'auto'}}>
+                <Card className='text-center p-4' style={{width: '150%', height: 'auto'}}>
                     <div>
                         <img onClick={()=> ref_productFile.current.click()} 
-                            src={src || 'http://via.placeholder.com/150x150'} width= '50%' />
+                            src={src || 'http://via.placeholder.com/150x150'} width= '200' />
                         <input onChange={onChangeFile} type='file' ref={ref_productFile} style={{display: 'none'}}/>
                         <br/>
                         <div className='mt-3'>
                             <Button onClick={onSaveImage} variant='contained'>사진등록</Button>
                         </div>
                     </div>
-                        <form className='mt-5 justify-content-center' style={{width: '80%', margin: '0 auto'}}>
+                        <form className='mt-5 justify-content-center' style={{width: '90%', margin: '0 auto'}}>
                             <InputGroup className='mb-2'>
                                 <InputGroup.Text>상품명</InputGroup.Text>
                                 <Form.Control name="name"/>
@@ -61,14 +61,14 @@ const ProductRegisterPage = () => {
                             </InputGroup>
                             <InputGroup className='mb-2'>
                                 <InputGroup.Text>정보</InputGroup.Text>
-                                <Form.Control name="info"/>
+                                <Form.Control as="textarea" rows="3" name="info"/>
                             </InputGroup>
                         </form>
                         <div className='mt-3'>
                             <Button onClick={onProductSave} variant="contained" size="sm">등록</Button>
                         </div>
                 </Card>
-            </Row>
+            </Col>
         </div>
     )
 }

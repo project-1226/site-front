@@ -28,17 +28,6 @@ const ActivitySidebar = ({ selectedIndex, handleListItemClick }) => {
         </ListItemIcon>
         <ListItemText primary="문의 내역" />
       </ListItemButton>
-      <ListItemButton
-        selected={selectedIndex === 6}
-        onClick={() => handleListItemClick(6)}
-        component={Link}
-        to="scrp"
-      >
-        <ListItemIcon>
-          <Inbox />
-        </ListItemIcon>
-        <ListItemText primary="스크랩" />
-      </ListItemButton>
     </>
   );
 };

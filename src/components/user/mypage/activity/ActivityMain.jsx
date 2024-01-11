@@ -26,17 +26,19 @@ const ActivityMain = () => {
         <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="작성한 글" value="1" />
-            <Tab label="작성한 댓글" value="2" />
-            <Tab label="작성한 리뷰" value="3" />
+            <Tab label="스크랩" value="2" />
+            <Tab label="작성한 댓글" value="3" />
+            <Tab label="작성한 리뷰" value="4" />
           </TabList>
         </Box>
         <TabPanel value="1">
           <PostList />
         </TabPanel>
-        <TabPanel value="2">
+        <TabPanel value="2"></TabPanel>
+        <TabPanel value="3">
           <CommentList />
         </TabPanel>
-        <TabPanel value="3">
+        <TabPanel value="4">
           <ReviewList />
         </TabPanel>
       </TabContext>

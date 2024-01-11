@@ -6,47 +6,8 @@ import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import { Button } from '@mui/material';
 
-const Healthy = () => {
-  const [isModalOpen, setIsModalOpen] = React.useState(false);
-  const [selectedMenu, setSelectedMenu] = React.useState('');
-  const [foods,setFoods] = useState([]);
-  const [tags,setTags] = useState([]);
-  const [selectTag,setSelectTag] = useState("");
+const HealthyDetail = () => {
 
-  const getTags=async()=>{
-    const res = await axios('/food/categories/health')
-    setTags(res.data);
-    //console.log(res.data)
-    
-  }
-  const getFoodList = async()=>{
-    let res ="";
-    if(selectTag==""){
-      res = await axios('/food/health.list?categoryid='+14);
-    } else {
-      res = await axios('/food/health.list?categoryid='+selectTag.categoryid);
-    }  
-    //console.log(res.data)    
-  }
-
-  const handleMenuClick = (food) => {
-    setSelectedMenu(food);
-    setIsModalOpen(true);
-  };
-
-  const handleMoreClick = () => {
-    //페이지이동 링크 -> food가지고가서 페이지 랜더링
-  };
-
-  const handleTagClick = (tag) => {
-    setSelectTag(tag)
-    getFoodList();
-  };
-  useEffect(()=>{
-    getTags();
-    getFoodList();
-  },[])
-  
   return (
     <div className='healthy_wrap'>
       <div className='healthy_main_wrap'>
@@ -62,25 +23,25 @@ const Healthy = () => {
         <div className='recomm_menu'>
           {/* card수정예시 */}
           <div className='recomm_menuimg'>
-            <Card  className='recomm_menuimg_main' onClick={() => handleMenuClick('food[0]')}>
+            <Card  className='recomm_menuimg_main' >
             <CardContent>
               <Typography variant="h5" component="div"> food[0].image 음식사진1</Typography>
             </CardContent>
           </Card>
           {/* 식단 더알아보기페이지로 이동 */}
-          <Card className='recomm_menuimg_footer' onClick={() => handleMoreClick()}>
+          <Card className='recomm_menuimg_footer' >
             <CardContent>
               <Typography variant="h7" component="div"> 식단더알아보기 +++</Typography>
             </CardContent>
           </Card>
           </div>
           
-          <Card className='recomm_menuimg' onClick={() => handleMenuClick('음식사진2')}>
+          <Card className='recomm_menuimg' >
             <CardContent>
               <Typography variant="h5" component="div"> 음식사진2 </Typography>
             </CardContent>
           </Card>
-          <Card className='recomm_menuimg' onClick={() => handleMenuClick('음식사진3')}>
+          <Card className='recomm_menuimg' >
             <CardContent>
               <Typography variant="h5" component="div"> 음식사진3 </Typography>
             </CardContent>
@@ -91,26 +52,24 @@ const Healthy = () => {
 
       {/* categoryTags box */}
       <div className='healthy_tag_box'>
-          {tags.map((tag) => (
-            tag.categoryid === selectTag ?
+    
               <Button
               key={tag.name}
               variant="outlined"
               size="small" 
               onClick={() => setSelectTag(tag)}             
             >
-              {tag.name}
+          
             </Button>
-            :
+        
             <Button
               key={tag.categoryid}
               variant="contained"
               size="small"
-              onClick={() => handleTagClick(tag)}
+              
             >
-              {tag.name}
             </Button>   
-          ))}
+          
         </div>{/* categoryTags box */}
 
         {/* 카테고리 대표식단 세부내용++  */}
@@ -132,11 +91,9 @@ const Healthy = () => {
             <div className='healthy_video'>유튜브 레시피 영상</div>
           </div>
         </section>{/* diet_recipe */}
-      </div>
-
-      <HealthyModal show={isModalOpen} handleClose={() => setIsModalOpen(false)} selectedMenu={selectedMenu} />
+      </div>     
     </div>
   )
 }
 
-export default Healthy
+export default HealthyDetail

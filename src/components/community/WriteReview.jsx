@@ -6,6 +6,7 @@ import { Card, Row, Col, Form } from 'react-bootstrap'
 const WriteReview = () => {
     const [body, setBody] = useState('');
     const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(false);
 
     const ref_file = useRef(null);
     const [file, setFile] = useState(null);
@@ -27,9 +28,12 @@ const WriteReview = () => {
         }
     }
 
-    const getList = () => { //후기목록 
-        const res = '/';
-        //setList(res.data.list);
+    const getList = async() => { //후기목록
+        setLoading(true);
+        const res = await axios.get(`/community/list/`);
+        console.log(res.data);
+        setList(res.data.list);
+        setLoading(false);
     }
 
     useEffect(()=> {
@@ -60,7 +64,7 @@ const WriteReview = () => {
                 <Card className='text-center p-3' style={{width: '300%', height: 'auto'}}>
                     <div>
                         <img onClick={()=> ref_file.current.click()}
-                            src={src || 'http://via.placeholder.com/300x150'} width= 'auto' />
+                            src={src || 'http://via.placeholder.com/300x150'} width= '50%' />
                         <input type='file' ref={ref_file} onChange={onChangeFile} style={{display:'none'}} />
                         <br/>
                         <Button onClick={onUpdatePhoto}
@@ -72,9 +76,9 @@ const WriteReview = () => {
                     </Col>
                 </Card>
                 <div className='text-center'>
-                    <Button type='reset' className='mt-3' variant='outlined'>취소</Button>
+                    <Button type="reset" className='mt-3' variant='outlined'>취소</Button>
                     <Button onClick={onSave}
-                        type='submit' className='mt-3 ms-4' variant='contained'>등록</Button>
+                        type="submit" className='mt-3 ms-4' variant='contained'>등록</Button>
                 </div>
 
                 

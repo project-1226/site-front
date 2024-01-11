@@ -2,26 +2,28 @@ import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./HomePage";
 
-import SideMenu from "./community/SideMenu";
 import NoticePage from "./community/NoticePage";
 import ReviewPage from "./community/ReviewPage";
+import CommunityPageMain from "./community/CommunityPageMain";
+import WriteReview from "./community/WriteReview";
+import CommentPage from "./community/CommentPage";
 
 import MyPage from "./user/MyPage";
 import SigninPage from "./user/SigninPage";
 import SignupPage from "./user/SignupPage";
 import UpdateUser from "./user/mypage/info/UpdateUser";
 import ManageAddress from "./user/mypage/info/ManageAddress";
+import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import MySurvey from "./user/mypage/diary/MySurvey";
 import RecommendPlan from "./user/mypage/diary/RecommendPlan";
 import CustomPlan from "./user/mypage/diary/CustomPlan";
 import Report from "./user/mypage/diary/Report";
-import Scrap from "./user/mypage/activity/Scrap";
 import MyPurchase from "./user/mypage/shop/MyPurchase";
 import CancelReturn from "./user/mypage/shop/CancelReturn";
 import MyWishItem from "./user/mypage/shop/MyWishItem";
-import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import InsertReview from "./user/mypage/shop/InsertReview";
 import ActivityMain from "./user/mypage/activity/ActivityMain";
+import QuestionMain from "./user/mypage/activity/QuestionMain";
 
 import MyDiet from "./myDiet/MyDiet";
 import Healthy from "./healthyDiet/Healthy";
@@ -35,16 +37,13 @@ import Chatbot from "./chatbot/Chatbot";
 
 import Cart from "./cart/Cart";
 import OrderPage from "./cart/OrderPage";
-import QuestionMain from "./user/mypage/activity/QuestionMain";
 
 import AdminPage from "./admin/AdminPage";
 import ProductRegisterPage from "./admin/ProductRegisterPage";
-import CommunityPageMain from "./community/CommunityPageMain";
-import WriteReview from "./community/WriteReview";
-import CommentPage from "./community/CommentPage";
 import AdminOrderList from "./admin/AdminOrderList";
 import AdminNotice from "./admin/AdminNotice";
 import AdminReview from "./admin/AdminReview";
+import ProductListPage from "./admin/ProductListPage";
 
 import SurveyPage from "./SurveyPage";
 
@@ -83,6 +82,7 @@ const RouterPage = () => {
       <Route path="/admin" element={<AdminPage />}>
         <Route path="adorder" element={<AdminOrderList />} />
         <Route path="register" element={<ProductRegisterPage />} />
+        <Route path="product" element={<ProductListPage />} />
         <Route path="adno" element={<AdminNotice />} />
         <Route path="adreview" element={<AdminReview />} />
       </Route>
@@ -99,7 +99,6 @@ const RouterPage = () => {
         {/* 활동 */}
         <Route path="mact" element={<ActivityMain />} />
         <Route path="qact" element={<QuestionMain />} />
-        <Route path="scrp" element={<Scrap />} />
         {/* 주문내역 */}
         <Route path="mprch" element={<MyPurchase />} />
         <Route path="cncl" element={<CancelReturn />} />

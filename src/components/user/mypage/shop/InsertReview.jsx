@@ -43,6 +43,7 @@ const InsertReview = () => {
     productid: 1,
     score,
     content,
+    image_names: "",
     image_urls: "",
   };
 
@@ -52,25 +53,27 @@ const InsertReview = () => {
     setLoading(true);
 
     try {
-      const uploadedURLs = await uploaderRef.current.onUpload();
+      const [imageNames, uploadedURLs] = await uploaderRef.current.onUpload();
       // console.log(uploadedURLs);
       if (uploadedURLs) {
-        // setURLs(uploadedURLs.join(","));
         form = {
           userid: sessionStorage.getItem("userid"),
-          productid: 1,
+          productid: 2,
           score,
           content,
+          image_names: imageNames.join(","),
           image_urls: uploadedURLs.join(","),
         };
-        console.log(form);
+        // console.log(form);
       }
       await axios.post("/product_review/insert", form);
       setLoading(false);
       alert("리뷰가 등록되었습니다.");
+      window.location.href = "/mp/mprch";
     } catch (error) {
       setLoading(false);
-      alert("사진 업로드가 실패하였습니다.\n관리자에게 문의해주세요.");
+      console.log("insert review:", error);
+      alert("리뷰 등록이 실패하였습니다.\n관리자에게 문의해주세요.");
     }
   };
 
