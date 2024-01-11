@@ -1,5 +1,6 @@
 import {
   Backdrop,
+  Box,
   Button,
   Card,
   CardContent,
@@ -66,7 +67,7 @@ const ReviewList = () => {
         if (images) {
           for (const i of images) {
             // console.log(i.image_name);
-            const imageRef = ref(storage, `images/${i.image_name}`);
+            const imageRef = ref(storage, `images/review/${i.image_name}`);
             await deleteObject(imageRef).catch((error) => {
               console.error("Error - delete imagefile:", error);
             });
@@ -90,7 +91,15 @@ const ReviewList = () => {
   }, []);
 
   return (
-    <>
+    <Box
+      sx={{
+        width: "100%",
+        typography: "body1",
+        bgcolor: "transparent",
+        py: 4.5,
+        pr: 3,
+      }}
+    >
       <Backdrop
         sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
         open={loading}
@@ -164,7 +173,7 @@ const ReviewList = () => {
           onChange={handleChange}
         />
       </Stack>
-    </>
+    </Box>
   );
 };
 

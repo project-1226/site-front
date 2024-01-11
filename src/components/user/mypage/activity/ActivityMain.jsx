@@ -3,7 +3,6 @@ import { Box, Tab } from "@mui/material";
 import React from "react";
 import PostList from "./PostList";
 import CommentList from "./CommentList";
-import ReviewList from "./ReviewList";
 
 const ActivityMain = () => {
   const [value, setValue] = React.useState("1");
@@ -27,7 +26,6 @@ const ActivityMain = () => {
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="작성한 글" value="1" />
             <Tab label="작성한 댓글" value="2" />
-            <Tab label="작성한 리뷰" value="3" />
           </TabList>
         </Box>
         <TabPanel value="1">
@@ -35,9 +33,6 @@ const ActivityMain = () => {
         </TabPanel>
         <TabPanel value="2">
           <CommentList />
-        </TabPanel>
-        <TabPanel value="3">
-          <ReviewList />
         </TabPanel>
       </TabContext>
     </Box>

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { Fragment, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const PostList = () => {
   const [loading, setLoading] = useState(false);
@@ -83,8 +84,18 @@ const PostList = () => {
                   }}
                 >
                   <TableCell>
-                    <Stack direction="row" spacing={1} alignItems="center">
-                      <Typography variant="body1" sx={{ ml: 2 }}>
+                    <Stack
+                      direction="row"
+                      spacing={1}
+                      alignItems="center"
+                      sx={{ ml: 2 }}
+                    >
+                      <Typography
+                        variant="body1"
+                        color="WindowText"
+                        component={Link}
+                        to={`/community/review/comment/${l.postid}`}
+                      >
                         {l.title}
                       </Typography>
                       <Avatar
@@ -92,7 +103,7 @@ const PostList = () => {
                           bgcolor: "#748769",
                           width: 19,
                           height: 19,
-                          fontSize: 14,
+                          fontSize: 12,
                         }}
                       >
                         {l.commentCnt}

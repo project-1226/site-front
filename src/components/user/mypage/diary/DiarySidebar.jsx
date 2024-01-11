@@ -1,6 +1,6 @@
 import {
   AssessmentRounded,
-  FitnessCenterRounded,
+  FolderSpecialRounded,
   SummarizeRounded,
 } from "@mui/icons-material";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
@@ -25,12 +25,12 @@ const DiarySidebar = ({ selectedIndex, handleListItemClick }) => {
         selected={selectedIndex === 3}
         onClick={() => handleListItemClick(3)}
         component={Link}
-        to="cstp"
+        to="scrp"
       >
         <ListItemIcon>
-          <FitnessCenterRounded />
+          <FolderSpecialRounded />
         </ListItemIcon>
-        <ListItemText primary="커스텀 운동 플랜" />
+        <ListItemText primary="스크랩" />
       </ListItemButton>
       <ListItemButton
         selected={selectedIndex === 4}
