@@ -66,7 +66,7 @@ const ReviewList = () => {
         if (images) {
           for (const i of images) {
             // console.log(i.image_name);
-            const imageRef = ref(storage, `images/${i.image_name}`);
+            const imageRef = ref(storage, `images/review/${i.image_name}`);
             await deleteObject(imageRef).catch((error) => {
               console.error("Error - delete imagefile:", error);
             });
