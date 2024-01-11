@@ -7,7 +7,7 @@ function DiseaseModal({ show, onHide,recipe }) {
   const size =1;
   return (
     <>
-      <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size="lg" >
+      {/* <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size="lg" >
         <Modal.Header closeButton variant='white'>
           <Modal.Title> {recipe.title} 레시피 영상 </Modal.Title>
         </Modal.Header>
@@ -16,7 +16,7 @@ function DiseaseModal({ show, onHide,recipe }) {
         <Modal.Body>
         {recipe.title} 유튜브영상
         </Modal.Body>
-      </Modal>
+      </Modal> */}
     </>
   );
 }
