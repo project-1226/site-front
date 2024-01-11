@@ -16,7 +16,8 @@ const QuestionsPage = ({ setShow }) => {
     <div className="q_wrap">
       <div className="q_contents">
         <div className="q_title_box">
-          <p>회원님이 식단으로 이루고 싶은 목표를 알려주세요</p>
+          <p>회원님이 식단으로 </p>
+          <p>이루고 싶은 목표를 알려주세요</p>
         </div>
 
         <div className="q_select_wrap">

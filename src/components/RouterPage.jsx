@@ -1,6 +1,5 @@
 import React from "react";
-import { Route, Routes } from "react-router-dom";
-import HomePage from "./HomePage";
+import { Route, Routes, Navigate } from "react-router-dom";
 
 import NoticePage from "./community/NoticePage";
 import ReviewPage from "./community/ReviewPage";
