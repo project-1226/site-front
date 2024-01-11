@@ -9,7 +9,7 @@ import {
   Typography,
 } from "@mui/material";
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 
 const HeaderPage = () => {
   // const [avatar, setAvatar] = useState("");
@@ -36,6 +36,7 @@ const HeaderPage = () => {
   //     getAvatar();
   //   }
   // }, []);
+  const location = useLocation();
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -48,15 +49,20 @@ const HeaderPage = () => {
           <Stack direction="row" spacing={4} sx={{ flexGrow: 1 }} justifyContent="center">
             {sessionStorage.getItem("userid") &&
               <>
-                <Typography color="inherit" component={Link} to="/mydiet" sx={{ textDecoration: "none" }}> 내 식단</Typography>
+                <Typography color="inherit" component={Link} to="/mydiet" sx={{ textDecoration: "none" }}
+                  className={location.pathname === "/mydiet" ? "active-link" : ""}> 내 식단</Typography>
 
-                <Typography color="inherit" component={Link} to="/healthydiet" sx={{ textDecoration: "none" }}> 건강식단</Typography>
+                <Typography color="inherit" component={Link} to="/healthydiet" sx={{ textDecoration: "none" }}
+                  className={location.pathname === "/healthydiet" ? "active-link" : ""}> 건강식단</Typography>
 
-                <Typography color="inherit" component={Link} to="/diseasediet" sx={{ textDecoration: "none" }}> 질환맞춤식단</Typography>
+                <Typography color="inherit" component={Link} to="/diseasediet" sx={{ textDecoration: "none" }}
+                  className={location.pathname === "/diseasediet" ? "active-link" : ""}> 질환맞춤식단</Typography>
 
-                <Typography color="inherit" component={Link} to="/healthcare" sx={{ textDecoration: "none" }}> 헬스케어 </Typography>
+                <Typography color="inherit" component={Link} to="/healthcare" sx={{ textDecoration: "none" }}
+                  className={location.pathname === "/healthcare" ? "active-link" : ""}> 헬스케어 </Typography>
 
-                <Typography color="inherit" component={Link} to="/community" sx={{ textDecoration: "none" }}> 커뮤니티 </Typography>
+                <Typography color="inherit" component={Link} to="/community" sx={{ textDecoration: "none" }}
+                  className={location.pathname === "/community" ? "active-link" : ""}> 커뮤니티 </Typography>
               </>
             }
           </Stack>
@@ -74,15 +80,15 @@ const HeaderPage = () => {
               sessionStorage.getItem("userid") &&
               sessionStorage.getItem("userid") !== "2fa0017c-053b-4983-8" && (
                 <>
-                  <Typography color="inherit" component={Link} to="/mp" sx={{ textDecoration: "none" }}>
-                    <AccountCircle sx={{ fontSize: "2.3rem" }} />
-                  </Typography>
-                  <Button color="inherit" onClick={onLogout}> Logout </Button>
+                  <div color="inherit" component={Link} to="/mp" sx={{ textDecoration: "none" }}>
+                    <AccountCircle sx={{ fontSize: "2.3rem" }}/>
+                  </div>
+                  <Button color="inherit" onClick={onLogout} className="logout"> Logout </Button>
                 </>
               )}
             {/* 비로그인 상태 */
               !sessionStorage.getItem("userid") && (
-                <Button color="inherit" component={Link} to="/login"> Login </Button>
+                <Button color="inherit" component={Link} to="/login" className="login"> Login </Button>
               )}
           </Stack>
         </Toolbar>
