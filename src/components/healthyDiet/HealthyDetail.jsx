@@ -1,7 +1,12 @@
-import React, { useEffect, useState } from "react";
-import axios from "axios";
-import { Backdrop, Button, CircularProgress } from "@mui/material";
-import { useParams, useLocation } from "react-router-dom";
+
+import React, { useEffect, useState } from 'react'
+import axios from 'axios';
+import {
+  Button,
+  Backdrop,
+  CircularProgress,
+} from "@mui/material";
+import { useParams,useLocation } from 'react-router-dom';
 
 //useNavigate두번째 인자로 getFoodList()함수도 props로 전달가능하면 이후 수정
 const HealthyDetail = ({ initialFoods }) => {
