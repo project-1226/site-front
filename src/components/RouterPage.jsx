@@ -44,6 +44,7 @@ import AdminOrderList from "./admin/AdminOrderList";
 import AdminNotice from "./admin/AdminNotice";
 import AdminReview from "./admin/AdminReview";
 import ProductListPage from "./admin/ProductListPage";
+import Chat from "./community/Chat";
 
 const RouterPage = () => {
   return (
@@ -68,9 +69,10 @@ const RouterPage = () => {
       <Route path="/community" element={<CommunityPageMain />}>
         <Route path="" element={<NoticePage />} />
         <Route path="review" element={<ReviewPage />} />
-        <Route path="review/write" element={<WriteReview />} />
+        <Route path="rwrite" element={<WriteReview />} />
         <Route path="review/comment/:pid" element={<CommentPage />} />
       </Route>
+      <Route path="/chat" element={<Chat />} />
       
       
 
