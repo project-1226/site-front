@@ -60,7 +60,9 @@ const QuestionsPage = ({ setIsHeader }) => {
             </div>
 
             <>
-              {question.length > 0 && question[page] && question[page].type === 1 && (
+              {console.log("Page:", page, "Questions:", question)}
+
+              {question.length > 0 && question[page].type === 1 && (
                 <div className="q_select_wrap">
                   <div className="q_select_box_wrap">
                     {answer
@@ -74,16 +76,12 @@ const QuestionsPage = ({ setIsHeader }) => {
                 </div>
               )}
 
-              {question.length > 0 && page < question.length && question[page].type === 3 && (
+              {question.length > 0 && question[page].type === 3 && (
                 <div className="q_input_wrap">
                   <div className="q_input_box_wrap">
-                    {answer
-                      .filter(a => a.questionid === question[page].questionid)
-                      .map((a, index) => (
-                        <div key={index} className="q_input_box">
-                          <input type="text" placeholder="입력" />
-                        </div>
-                      ))}
+                    <div className="q_input_box">
+                      <input type="text" placeholder="입력" />
+                    </div>
                   </div>
                 </div>
               )}
