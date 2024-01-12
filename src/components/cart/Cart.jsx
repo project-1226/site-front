@@ -357,8 +357,8 @@ const handleRadioChange = (addressid) => {
           // 오류 처리 로직을 여기에 작성하세요.
         }
       } else {
-        console.log("기존로직");
-        
+        console.log("기존로직"); 
+
 
 
 
