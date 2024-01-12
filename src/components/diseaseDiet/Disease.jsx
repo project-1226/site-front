@@ -2,10 +2,7 @@ import React, { useState, useEffect } from 'react'
 import {
   Backdrop,
   Button,
-  Card,
-  CardContent,
   CircularProgress,
-  Typography,
 } from "@mui/material";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
