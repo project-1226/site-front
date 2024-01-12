@@ -2,21 +2,26 @@
 import React, { useState,useEffect } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import HealthcareModal from './HealthcareModal';
-import Card from '@mui/material/Card';
-import CardMedia from '@mui/material/CardMedia';
-import CardContent from '@mui/material/CardContent';
-import CardActions from '@mui/material/CardActions';
-import Typography from '@mui/material/Typography';
-import healthcareImage from '../../images/healthcare_img.jpg';
-import healthcareImage2 from '../../images/healthcare_img2.jpg';
+import {
+  Backdrop,
+  Button,
+  Card,
+  CardMedia,
+  CardContent,
+  CardActions,
+  CircularProgress,
+  Typography,
+} from "@mui/material";
 import IconButton, { IconButtonProps } from '@mui/material/IconButton';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
+import healthcareImage from '../../images/healthcare_img.jpg';
+import healthcareImage2 from '../../images/healthcare_img2.jpg';
 import axios from 'axios';
 
 const Healthcare = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedChallenge, setSelectedChallenge] = useState('');
+  const [selectedCategory, setSelectedCategory] = useState('');
   const [categories,setCategories] = useState([]);
   
   
@@ -38,9 +43,10 @@ const Healthcare = () => {
   useEffect(() => {
     getCategories();
   }, [])
+
   
-  const handleChallengeClick = (challenge) => {
-    setSelectedChallenge(challenge);
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
     setIsModalOpen(true);
   };
 
@@ -57,10 +63,12 @@ const Healthcare = () => {
         </div>
       </div>
       <div className='healthcare_submain'>
-        {categories.slice(0,5).map((category)=>        
-          <div className='challenge_box' onClick={() => handleChallengeClick('푸시업 챌린지')}> {category.name} </div>       
+        {categories.slice(0,4).map((category)=>        
+          <div className='challenge_box' onClick={() => handleCategoryClick(category)}> {category.name} </div>       
         )}      
       </div>
+
+
 
       <div className='healthcare_contents'>
         <section>
@@ -214,7 +222,7 @@ const Healthcare = () => {
           </div>
         </section>
       </div>
-      <HealthcareModal show={isModalOpen} handleClose={handleCloseModal} selectedChall={selectedChallenge} />
+      <HealthcareModal show={isModalOpen} handleClose={handleCloseModal} selectedCategory={selectedCategory} />
     </div>
   );
 }
