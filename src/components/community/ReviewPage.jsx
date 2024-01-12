@@ -1,84 +1,75 @@
 import React, { useEffect, useState } from 'react'
-import SideMenu from './SideMenu'
-import { Table, Row, Col, Spinner } from 'react-bootstrap'
+import { Col, Spinner } from 'react-bootstrap'
 import { Button } from '@mui/material';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
+import axios from 'axios';
 
 
 const ReviewPage = () => {
     const navi = useNavigate();
-    const [review, setReview] = useState([]);
+    const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [favoriteCnt, setFavoriteCnt] = useState(0);
+    //const [favoriteCnt, setFavoriteCnt] = useState(0);
+    const categoryid = 102;
 
-    const getReviewList = () => { //review list 가져오기
-        //setLoading(true)
-        const res = '/';
-        //setReview(res.data.list);
-        
-
+    const getList = async() => { //review list 가져오기
+        setLoading(true)
+        const res = await axios.get("/community/list?categoryid=" + categoryid);
+        // , {
+        //     params: {categoryid}
+        // });
+        console.log(res.data);
+        setList(res.data);
+        setLoading(false);
     }
 
     useEffect(()=> {
-        getReviewList();
+        getList();
     }, []);
 
 
     const onClickReview = () => {
-        if(sessionStorage.getItem("uid") == null){
-            navi('/login');
-        }else{
-            navi('/community/review/write');
-        }
+        // if(sessionStorage.getItem("uid") == null){
+        //     navi('/login');
+        navi('/community/review/write');
+        
     }
 
     if(loading) return <div className='text-center my-5'><Spinner/></div>
 
     return (
-        <div>
-            <Row>
-                <Col md={3}>
-                    <SideMenu />
-                </Col>
-                <Col className='my-5 justify-content-center'>
-                    <Table size="sm" width="80%" className='text-center mb-3'>
-                        <thead>
-                            <tr>
-                                <th>No.</th>
-                                <th>Title</th>
-                                <th>Writer</th>
-                                <th>Date</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td><a href='/community/comment'>회원 후기입니다.</a></td>
-                                <td>userid</td>
-                                <td>2023-12-30</td>
-                            </tr>
-                            <tr>
-                                <td>2</td>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <td>no.</td>
-                                <td>title</td>
-                                <td>wirter</td>
-                                <td>regdate</td>
-                            </tr>
-                        </tbody>
-                    </Table>
-                    <div className='ms-5 text-end'>
-                        <Button variant='contained' onClick={onClickReview}>후기 작성</Button>
-                    </div>
-                </Col>
-            </Row>
+        <div className='my-5 ms-5'>
+            <Col className='justify-content-center'>
+                <table width={850} className='text-center'>
+                    <thead>
+                        <tr>
+                            <th>No.</th>
+                            <th>Title</th>
+                            <th>Writer</th>
+                            <th>Date</th>
+                            <th></th>
+                        </tr>
+                    </thead><br/>
+                    <tbody>
+                        {list.map((r)=>
+                        <>
+                            <tr key={r.categoryid}>
+                                <td>{r.postid}</td>
+                                <td><Link to={`comment/${r.postid}`}>{r.title}</Link></td>
+                                <td>{r.userid}</td>
+                                <td>{r.regdate}</td>
+                                <td>11</td>
+                            </tr><br />
+                        </>    
+                        )}
+                    </tbody>
+                </table>
+            </Col>
+            <div className='mt-5 text-end'>
+                    <Button variant='contained' size='small' onClick={onClickReview}>후기 작성</Button>
+            </div>
         </div>
     )
-}
+} 
 
 export default ReviewPage

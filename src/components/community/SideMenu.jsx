@@ -1,5 +1,9 @@
 import React, { useState } from 'react'
-import { Box, List, ListItemButton, ListItemText, Divider, Link } from '@mui/material'
+import { Box, List, ListItemButton, ListItemText, Divider, ListItemIcon } from '@mui/material'
+import { Link } from 'react-router-dom';
+
+import RateReviewOutlinedIcon from '@mui/icons-material/RateReviewOutlined';
+import SimCardAlertOutlinedIcon from '@mui/icons-material/SimCardAlertOutlined';
 
 const SideMenu = () => {
     const [selectedIndex, setSelectedIndex] = useState(0);
@@ -9,22 +13,29 @@ const SideMenu = () => {
     };
 
     return (
-        <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper', p: 3}}>
-            <List component="nav" aria-label="main mailbox folders" className='my-3 ms-3'>
+        <Box sx={{ width: '100%', maxWidth: 360, bgcolor: 'transparent', p: 3}}>
+            <List>
                 <ListItemButton
                     selected={selectedIndex === 0}
-                    onClick={(e) => handleListItemClick(e, 0)}
+                    onClick={(event) => handleListItemClick(event, 0)}
+                    component={Link}
+                    to=""
                 >
-                    <Link href='/community/notice' color="inherit">
-                        <ListItemText primary="공지" /></Link>
+                    <ListItemIcon>
+                        <SimCardAlertOutlinedIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary="공지"/>
                 </ListItemButton>
-
                 <ListItemButton
                     selected={selectedIndex === 1}
-                    onClick={(e) => handleListItemClick(e, 1)}
+                    onClick={(event) => handleListItemClick(event, 1)}
+                    component={Link}
+                    to="review"
                 >
-                    <Link href='/community/review' color="inherit">
-                        <ListItemText primary="후기" /></Link>
+                    <ListItemIcon>
+                        <RateReviewOutlinedIcon/>
+                    </ListItemIcon>
+                    <ListItemText primary="후기" />
                 </ListItemButton>
             </List>
             <Divider />

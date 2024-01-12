@@ -1,4 +1,4 @@
-import { Inbox } from "@mui/icons-material";
+import { ArticleRounded, FolderSpecialRounded } from "@mui/icons-material";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -13,18 +13,18 @@ const ActivitySidebar = ({ selectedIndex, handleListItemClick }) => {
         to="mact"
       >
         <ListItemIcon>
-          <Inbox />
+          <ArticleRounded />
         </ListItemIcon>
         <ListItemText primary="활동 내역" />
       </ListItemButton>
       <ListItemButton
-        selected={selectedIndex === 6}
-        onClick={() => handleListItemClick(6)}
+        selected={selectedIndex === 12}
+        onClick={() => handleListItemClick(12)}
         component={Link}
-        to="scrp"
+        to="sact"
       >
         <ListItemIcon>
-          <Inbox />
+          <FolderSpecialRounded />
         </ListItemIcon>
         <ListItemText primary="스크랩" />
       </ListItemButton>

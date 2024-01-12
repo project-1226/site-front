@@ -1,4 +1,8 @@
-import { Inbox } from "@mui/icons-material";
+import {
+  AssessmentRounded,
+  FitnessCenterRounded,
+  SummarizeRounded,
+} from "@mui/icons-material";
 import { ListItemButton, ListItemIcon, ListItemText } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
@@ -13,20 +17,9 @@ const DiarySidebar = ({ selectedIndex, handleListItemClick }) => {
         to=""
       >
         <ListItemIcon>
-          <Inbox />
+          <AssessmentRounded />
         </ListItemIcon>
         <ListItemText primary="상세 리포트" />
-      </ListItemButton>
-      <ListItemButton
-        selected={selectedIndex === 2}
-        onClick={() => handleListItemClick(2)}
-        component={Link}
-        to="rcmp"
-      >
-        <ListItemIcon>
-          <Inbox />
-        </ListItemIcon>
-        <ListItemText primary="맞춤형 추천 플랜" />
       </ListItemButton>
       <ListItemButton
         selected={selectedIndex === 3}
@@ -35,7 +28,7 @@ const DiarySidebar = ({ selectedIndex, handleListItemClick }) => {
         to="cstp"
       >
         <ListItemIcon>
-          <Inbox />
+          <FitnessCenterRounded />
         </ListItemIcon>
         <ListItemText primary="커스텀 운동 플랜" />
       </ListItemButton>
@@ -46,7 +39,7 @@ const DiarySidebar = ({ selectedIndex, handleListItemClick }) => {
         to="mysv"
       >
         <ListItemIcon>
-          <Inbox />
+          <SummarizeRounded />
         </ListItemIcon>
         <ListItemText primary="설문조사 결과 확인/수정" />
       </ListItemButton>
