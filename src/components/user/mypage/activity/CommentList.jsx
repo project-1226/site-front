@@ -1,6 +1,8 @@
+import { LaunchRounded } from "@mui/icons-material";
 import {
   Backdrop,
   CircularProgress,
+  Link,
   Pagination,
   Paper,
   Stack,
@@ -82,7 +84,14 @@ const CommentList = () => {
                       textAlign="end"
                       sx={{ mr: 2, mt: 1 }}
                     >
-                      해당 게시글 : {l.title} ({l.post_regdate})
+                      해당 게시글 :{" "}
+                      <Link
+                        href={`/community/review/comment/${l.postid}`}
+                        underline="hover"
+                      >
+                        {l.title} ({l.post_regdate}){" "}
+                        <LaunchRounded sx={{ fontSize: 17 }} />
+                      </Link>
                     </Typography>
                   </TableCell>
                 </TableRow>
