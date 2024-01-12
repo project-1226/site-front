@@ -23,6 +23,9 @@ const MyWishItem = () => {
   const [list, setList] = useState([]);
   const [total, setTotal] = useState(0);
 
+  const [checkedSum, setCheckedSum] = useState(0);
+  const [cnt, setCnt] = useState(0);
+
   const size = 5;
   const [page, setPage] = useState(1);
   const handleChange = (e, value) => {
@@ -54,6 +57,7 @@ const MyWishItem = () => {
         const productWithImage = {
           ...list,
           image: imageData,
+          checked: false,
         };
         data.push(productWithImage);
       } catch (error) {
@@ -71,9 +75,50 @@ const MyWishItem = () => {
     getFavoriteList();
   };
 
+  const onChangeAll = (e) => {
+    const data = list.map((l) => l && { ...l, checked: e.target.checked });
+    setList(data);
+  };
+
+  const onChangeSingle = (e, favoriteid) => {
+    const data = list.map((l) =>
+      l.favoriteid === favoriteid ? { ...l, checked: e.target.checked } : l
+    );
+    setList(data);
+  };
+
+  const onDeleteChecked = async () => {
+    if (cnt === 0) {
+      alert("삭제할 상품을 선택하세요.");
+    } else {
+      for (const l of list) {
+        if (l.checked) {
+          await axios.delete("/user-favorite/delete", {
+            params: { favoriteid: l.favoriteid },
+          });
+        }
+      }
+      alert("선택된 상품들이 삭제되었습니다.");
+      getFavoriteList();
+    }
+  };
+
   useEffect(() => {
     getFavoriteList();
   }, [page]);
+
+  useEffect(() => {
+    let count = 0;
+    let sum = 0;
+    list.forEach((l) => {
+      if (l.checked) {
+        count++;
+        sum += l.sum;
+      }
+    });
+    setCnt(count);
+    setCheckedSum(sum);
+  }, [list]);
 
   return (
     <Box sx={{ width: "100%", bgcolor: "transparent", py: 5, pr: 3 }}>
@@ -93,8 +138,15 @@ const MyWishItem = () => {
             <TableRow>
               <TableCell colSpan={4}>
                 <Stack direction="row" spacing={4}>
-                  <Checkbox />
-                  <Button variant="outlined" color="error">
+                  <Checkbox
+                    onClick={onChangeAll}
+                    checked={list.length === cnt}
+                  />
+                  <Button
+                    variant="outlined"
+                    color="error"
+                    onClick={onDeleteChecked}
+                  >
                     선택삭제
                   </Button>
                 </Stack>
@@ -111,7 +163,10 @@ const MyWishItem = () => {
                 }}
               >
                 <TableCell sx={{ width: 30 }}>
-                  <Checkbox />
+                  <Checkbox
+                    checked={l.checked}
+                    onClick={(e) => onChangeSingle(e, l.favoriteid)}
+                  />
                 </TableCell>
                 <TableCell width={140}>
                   {l.image.length === 0 ? (
@@ -145,7 +200,7 @@ const MyWishItem = () => {
                       fullWidth
                       onClick={(e) => onDelete(e, l.favoriteid)}
                     >
-                      삭제 {l.favoriteid}
+                      삭제
                     </Button>
                   </Stack>
                 </TableCell>

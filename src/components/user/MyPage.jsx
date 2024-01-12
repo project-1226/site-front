@@ -5,7 +5,7 @@ import { Outlet } from "react-router";
 
 const MyPage = () => {
   return (
-    <Box sx={{ minWidth: "960px" }}>
+    <Box sx={{ minWidth: "960px", bgcolor: "white" }}>
       <Stack direction="row" spacing={1}>
         <Sidebar />
         <Outlet />

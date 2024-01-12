@@ -19,7 +19,7 @@ import { Link } from "react-router-dom";
 const PostList = () => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
-  const [totalPost, setTotalPost] = useState(0);
+  const [total, setTotal] = useState(0);
 
   const size = 10;
   const [page, setPage] = useState(1);
@@ -34,7 +34,7 @@ const PostList = () => {
       params: { userid: sessionStorage.getItem("userid"), page, size },
     });
     // console.log(res.data);
-    setTotalPost(res.data.total);
+    setTotal(res.data.total);
     const list = res.data.list;
     const data = [];
     for (const post of list) {
@@ -70,9 +70,6 @@ const PostList = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <Typography variant="h6" gutterBottom sx={{ fontWeight: "bolder" }}>
-        작성한 글 ({totalPost})
-      </Typography>
       <TableContainer component={Paper} sx={{ mt: 2, mb: 3 }}>
         <Table>
           <TableBody>
@@ -121,16 +118,18 @@ const PostList = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Stack justifyContent="center">
+      {total == 0 ? (
+        <Typography>작성된 글이 없습니다.</Typography>
+      ) : (
         <Pagination
-          count={Math.ceil(totalPost / size)}
+          count={Math.ceil(total / size)}
           shape="rounded"
           color="primary"
           page={page}
           sx={{ marginBottom: 5 }}
           onChange={handleChange}
         />
-      </Stack>
+      )}
     </>
   );
 };
