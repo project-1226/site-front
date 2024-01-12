@@ -1,6 +1,6 @@
 /* SurveyPage */
 .survey_wrap {width: 100%; margin: 0 auto; height: 700px; display: flex; align-items: center; justify-content: center;}
-.survey_contents {width: 45%; margin: 150px auto;}
+.survey_contents {width: 45%; margin: 0 auto;}
 .survey_title_box, .survey_btn {text-align: center;}
 .survey_title {font-size: 30px; letter-spacing: -3px; font-weight: 600;}
 .survey_article {margin-top: 30px; font-size: 14px; letter-spacing: -1px;}
