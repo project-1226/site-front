@@ -54,9 +54,6 @@ const CommentList = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <Typography variant="h6" gutterBottom sx={{ fontWeight: "bolder" }}>
-        작성한 댓글 ({total})
-      </Typography>
       <TableContainer component={Paper} sx={{ mt: 2, mb: 3 }}>
         <Table>
           <TableBody>
@@ -100,7 +97,9 @@ const CommentList = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Stack justifyContent="center">
+      {total == 0 ? (
+        <Typography>작성된 댓글이 없습니다.</Typography>
+      ) : (
         <Pagination
           count={Math.ceil(total / size)}
           shape="rounded"
@@ -109,7 +108,7 @@ const CommentList = () => {
           sx={{ marginBottom: 5 }}
           onChange={handleChange}
         />
-      </Stack>
+      )}
     </>
   );
 };
