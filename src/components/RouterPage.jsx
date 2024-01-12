@@ -22,7 +22,7 @@ import MyWishItem from "./user/mypage/shop/MyWishItem";
 import InsertReview from "./user/mypage/shop/InsertReview";
 import QuestionMain from "./user/mypage/shop/QuestionMain";
 import ActivityMain from "./user/mypage/activity/ActivityMain";
-import ReviewList from "./user/mypage/activity/ReviewList";
+//import ReviewList from "./user/mypage/activity/ReviewList";
 
 import MyDiet from "./myDiet/MyDiet";
 import Healthy from "./healthyDiet/Healthy";
@@ -120,7 +120,7 @@ const RouterPage = () => {
           <Route path="mysv" element={<MySurvey />} />
           {/* 활동 */}
           <Route path="mact" element={<ActivityMain />} />
-          <Route path="ract" element={<ReviewList />} />
+          {/* <Route path="ract" element={<ReviewList />} /> */}
           {/* 주문내역 */}
           <Route path="mprch" element={<MyPurchase />} />
           <Route path="cncl" element={<CancelReturn />} />
