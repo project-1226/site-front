@@ -3,17 +3,12 @@ import { Box, Tab } from "@mui/material";
 import React, { useState } from "react";
 import FAQPage from "./FAQPage";
 import QNAPage from "./QNAPage";
-import axios from "axios";
 
 const QuestionMain = () => {
   const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const getCategory = () => {
-    // const res = await axios("/")
   };
 
   return (
@@ -27,7 +22,7 @@ const QuestionMain = () => {
       }}
     >
       <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
+        <Box>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
             <Tab label="FAQ" value="1" />
             <Tab label="1:1문의" value="2" />
