@@ -97,7 +97,6 @@ const HeaderPage = () => {
                     location.pathname === "/diseasediet" ? "active-link" : ""
                   }
                 >
-                  {" "}
                   질환맞춤식단
                 </Typography>
 
@@ -110,8 +109,7 @@ const HeaderPage = () => {
                     location.pathname === "/healthcare" ? "active-link" : ""
                   }
                 >
-                  {" "}
-                  헬스케어{" "}
+                  헬스케어
                 </Typography>
 
                 <Typography
@@ -123,8 +121,7 @@ const HeaderPage = () => {
                     location.pathname === "/community" ? "active-link" : ""
                   }
                 >
-                  {" "}
-                  커뮤니티{" "}
+                  커뮤니티
                 </Typography>
               </>
             )}
@@ -146,12 +143,10 @@ const HeaderPage = () => {
                   to="/"
                   sx={{ textDecoration: "none" }}
                 >
-                  {" "}
-                  관리자{" "}
+                  관리자
                 </Typography>
                 <Button color="inherit" onClick={onLogout}>
-                  {" "}
-                  Logout{" "}
+                  Logout
                 </Button>
               </>
             )}
@@ -168,8 +163,7 @@ const HeaderPage = () => {
                     <AccountCircle sx={{ fontSize: "2.3rem" }} />
                   </Typography>
                   <Button color="inherit" onClick={onLogout} className="logout">
-                    {" "}
-                    Logout{" "}
+                    Logout
                   </Button>
                 </>
               )}
@@ -181,8 +175,7 @@ const HeaderPage = () => {
                 to="/login"
                 className="login"
               >
-                {" "}
-                Login{" "}
+                Login
               </Button>
             )}
           </Stack>

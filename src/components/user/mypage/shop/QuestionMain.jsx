@@ -3,17 +3,12 @@ import { Box, Tab } from "@mui/material";
 import React, { useState } from "react";
 import FAQPage from "./FAQPage";
 import QNAPage from "./QNAPage";
-import axios from "axios";
 
 const QuestionMain = () => {
   const [value, setValue] = useState("1");
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
-  };
-
-  const getCategory = () => {
-    // const res = await axios("/")
   };
 
   return (

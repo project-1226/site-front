@@ -88,7 +88,7 @@ const MyWishItem = () => {
   };
 
   const onDeleteChecked = async () => {
-    if (cnt == 0) {
+    if (cnt === 0) {
       alert("삭제할 상품을 선택하세요.");
     } else {
       for (const l of list) {

@@ -19,6 +19,7 @@ import {
 import React, { useRef, useState } from "react";
 import ImageUploader from "./ImageUploader";
 import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const labels = {
   1: "나쁨",
@@ -38,11 +39,18 @@ const InsertReview = () => {
   const [hover, setHover] = useState(-1);
   const [content, setContent] = useState("");
 
+  const location = useLocation();
+  const itemInfo = location.state;
+  const navi = useNavigate();
+
+  console.log(itemInfo);
+
   let form = {
     userid: sessionStorage.getItem("userid"),
-    productid: 1,
+    productid: itemInfo.productid,
     score,
     content,
+    purchasedetailid: itemInfo.purchasedetailid,
     image_names: "",
     image_urls: "",
   };
@@ -58,9 +66,10 @@ const InsertReview = () => {
       if (uploadedURLs) {
         form = {
           userid: sessionStorage.getItem("userid"),
-          productid: 2,
+          productid: itemInfo.productid,
           score,
           content,
+          purchasedetailid: itemInfo.purchasedetailid,
           image_names: imageNames.join(","),
           image_urls: uploadedURLs.join(","),
         };
@@ -69,12 +78,16 @@ const InsertReview = () => {
       await axios.post("/product-review/insert", form);
       setLoading(false);
       alert("리뷰가 등록되었습니다.");
-      window.location.href = "/mp/mprch";
+      window.location.href = "/mp/ract";
     } catch (error) {
       setLoading(false);
       console.log("insert review:", error);
       alert("리뷰 등록이 실패하였습니다.\n관리자에게 문의해주세요.");
     }
+  };
+
+  const onCancel = () => {
+    navi(sessionStorage.getItem("path"));
   };
 
   return (
@@ -108,12 +121,12 @@ const InsertReview = () => {
               }}
             >
               <TableCell width={150}>
-                <img src="http://via.placeholder.com/500x500" alt="product" />
+                <img src={itemInfo.image_url} alt="product" />
               </TableCell>
               <TableCell>
                 <Stack spacing={1}>
                   <Typography variant="h6" sx={{ fontWeight: "bolder" }}>
-                    상품명
+                    {itemInfo.name}
                   </Typography>
                   <Stack direction="row" spacing={2} alignItems="center">
                     <Rating
@@ -214,7 +227,9 @@ const InsertReview = () => {
                 <Button variant="contained" sx={{ mr: 2 }} onClick={onSubmit}>
                   리뷰 등록
                 </Button>
-                <Button variant="outlined">등록 취소</Button>
+                <Button variant="outlined" onClick={onCancel}>
+                  등록 취소
+                </Button>
               </TableCell>
             </TableRow>
           </TableBody>
