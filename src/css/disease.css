@@ -1,7 +1,3 @@
-/*공통서식*/
-.contents_title_box {width: 100%; margin: 0 auto; margin-bottom: 35px; font-family:'Cormorant Infant' ;}
-.contents_title { font-size: 30px; letter-spacing: -3px; color: #3d3d3d; font-weight: 500; margin-bottom: -3px; }
-
 .disease_wrap {width: 100%;}
 .long_text {white-space: normal;overflow-wrap: break-word;max-width: 100%; }
 
@@ -21,7 +17,7 @@
 /* disease_contents */
 .disease_contents {width: 94.8%; margin: 0 auto 180px auto;  background: #ddd; padding-bottom: 50px;}
 .disease_tag_box{display: flex; flex-wrap: wrap; padding-left:10%;padding-right: 10%; justify-content: center;}
-.disease_tag_box button { border: 1px solid #ccc; margin: 1%; padding: 10px; width:110px;}
+.disease_tag_box button { border: 1px solid #ccc; margin: 1%; padding: 10px; width:110px;border-radius: 15px;}
 .disease_detail_wrap {margin: auto; width: 45%;height: 450px;background: #685d5ddd; margin-top: 50px;}
 .disease_detail_plan {width: 100%; height: 450px; display: flex;}
 .disease_detail_img {width: 40%;height:300px;background: #ddd; margin: auto;} 
@@ -37,3 +33,4 @@
 .disease_sub_img {width: 30%; background: #685d5ddd; margin: 10px;}
 .disease_sub_contents {width: 65%;height:450px; display: flex;flex-direction: column;justify-content: center;align-items: center; background: #685d5ddd;margin: 10px;}
 .disease_sub_contents button {margin-top: 30px; }
+

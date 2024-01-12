@@ -1,0 +1,16 @@
+/* SurveyPage */
+.survey_wrap {width: 100%; margin: 0 auto; height: 700px; display: flex; align-items: center; justify-content: center;}
+.survey_contents {width: 45%; margin: 100px auto;}
+.survey_title_box, .survey_btn {text-align: center;}
+.survey_title {font-size: 30px; letter-spacing: -3px; font-weight: 600;}
+.survey_article {margin-top: 30px; font-size: 14px; letter-spacing: -1px;}
+.survey_btn {margin-top: 220px;}
+.survey_btn button {cursor: pointer; -webkit-box-pack: center; justify-content: center; -webkit-box-align: center; align-items: center; border: none; letter-spacing: -2px;
+ width: 343px; height: 64px; background: rgb(116, 135, 105); color: rgb(255, 255, 255); font-weight: 700; font-size: 20px; line-height: 140%; border-radius: 50px;}
+
+
+
+/* QuestionsPage */
+.q_wrap {width: 100%;}
+.q_contents {width: 45%; margin: 100px auto;}
+.q_title_box, .q_btn_wrap {text-align: center;}
