@@ -15,6 +15,8 @@ import {
   InputAdornment
 } from '@mui/material';
 import ModatPostCode from "../user/mypage/info/ModatPostCode"
+import { Link } from 'react-router-dom';
+
 
 
 import { Form, InputGroup } from 'react-bootstrap'
@@ -56,10 +58,11 @@ const Cart = () => {
     totalprice:"",
     card:"",
     status:1,
-    request:""
+    request:"",
+    addressid:0
   });
   const {
-
+    addressid,
     selected,
     recipient,
     recipient_phone,
@@ -78,7 +81,7 @@ const Cart = () => {
   const [submitted, setSubmitted] = useState(false);
 
   const getList = async () => {
-    const res = await axios(`/cart/list.json?&userid=4e398468-197c-4b8f-a`);
+    const res = await axios(`/cart/list.json?&userid=${sessionStorage.getItem("userid")}`);
     const data = res.data.list.map(product => product && { ...product, checked: false });
    
     setTotal(res.data.total);
@@ -181,7 +184,7 @@ const Cart = () => {
       ...form,
       [e.target.name]: e.target.value,
     });
-    console.log(form);
+    //console.log(form);
   };
   const onSubmit = async () => {
     setSubmitted(true);
@@ -209,7 +212,7 @@ const Cart = () => {
   }, [adrlist]);
 
   useEffect(() => {
-    console.log(form);
+  // console.log(form);
 
 
   }, [form]);
@@ -352,15 +355,28 @@ const handleRadioChange = (addressid) => {
         try {
           await axios.post("/order/insert", form);
           // 추가로 처리할 로직이 있다면 여기에 작성하세요.
+          navigate('/order');
         } catch (error) {
           console.error("새 배송지 추가 중 오류 발생:", error);
           // 오류 처리 로직을 여기에 작성하세요.
         }
       } else {
-        console.log("기존로직"); 
+        console.log("기존로직",selectedAddressId); 
+            
+        setForm({
+            ...form,
+            addressid: selectedAddressId
+          })
+        console.log(form)
+        try {
+          await axios.post("/order/insertpd", form);
+          // 추가로 처리할 로직이 있다면 여기에 작성하세요.
 
-
-
+          navigate('/order');
+        } catch (error) {
+          console.error("주문추가중오류발생:", error);
+          // 오류 처리 로직을 여기에 작성하세요.
+        }
 
 
 
@@ -405,7 +421,8 @@ const handlecardradiochange = (event) => {
 
 
 
-
+  {list.length > 0 ? (
+    <>
           <TableContainer component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0' }}  >
             <Table>
               <TableHead>
@@ -525,6 +542,7 @@ const handlecardradiochange = (event) => {
             </Table>
 
           </TableContainer>
+         
           <hr></hr>
 
           <Typography variant="h6" style={{ fontSize: '25px', flexGrow: 1, color: "black", marginTop: '40px' }}>
@@ -719,69 +737,77 @@ const handlecardradiochange = (event) => {
         
           
           <Button  onClick={onSubmit} style={{ border: '1px solid #ddd', width: '200px', height: '30px', borderRadius: '0', backgroundColor: '#748769', color: 'white', fontSize: '13px', fontWeight: 'bold', textAlign: 'center',marginTop: '10px' }}>배송지 추가</Button>
-          <TableContainer component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', marginTop: '40px' }}>
-          <Grid container spacing={1}>
+  
+  
+          <div style={{ width: '600px', margin: 'auto' }}>
+            <TableContainer component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', marginTop: '40px' }}>
+    <Grid container spacing={1}>
+      <Grid item xs={6} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <Typography>결제방식</Typography>
+      </Grid>
+      <Grid item xs={6} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+        <label>
+          <input
+            type="radio"
+            name="card"
+            value="kcp"
+            checked={card === 'kcp'} // 선택된 값에 따라 checked 상태 설정
+            onChange={handlecardradiochange} 
+          />
+          실시간 계좌이체
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="card"
+            value="danal"
+            checked={card === 'danal'} // 선택된 값에 따라 checked 상태 설정
+            onChange={handlecardradiochange}
+          />
+          휴대폰결제
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="card"
+            value="kakaopay"
+            checked={card === 'kakaopay'} // 선택된 값에 따라 checked 상태 설정
+            onChange={handlecardradiochange} 
+          />
+          카카오페이
+        </label>
+      </Grid>
+    </Grid>
+    <Grid item xs={12} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC' }}>
+      <Typography>결제예정금액 : {sum} </Typography>
+    </Grid>
+  </TableContainer>
+  <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
+    <Button onClick={() => orderBtnClick(selectedAddressId)} style={{ border: '1px solid #ddd', width: '300px', height: '50px', borderRadius: '0', backgroundColor: '#748769', color: 'white', fontSize: '20px', fontWeight: 'bold', textAlign: 'center' }}>
+      {sum}원 결제하기
+    </Button>
+  </div>
+</div>
+
+
+          </>                   
+      ) : (
+        <Typography variant="body1" style={{ marginTop: '20px' }}>
+          장바구니가 비어 있습니다.
+
+          <Button variant="contained" color="primary" component={Link} to="/">
+         쇼핑하러가기
+       </Button>
+       
+        </Typography>
         
-
-
-            <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-              <Typography>결제방식</Typography>
-            </Grid>
-            <Grid item xs={6} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-              <label>
-                <input
-                  type="radio"
-                  name="card"
-                  value="kcp"
-                  checked={card === 'kcp'} // 선택된 값에 따라 checked 상태 설정
-                  onChange={handlecardradiochange} 
-
-                />
-                실시간 계좌이체
-              </label>
-              <label>
-                <input
-                     type="radio"
-                     name="card"
-                     value="danal"
-                     checked={card === 'danal'} // 선택된 값에 따라 checked 상태 설정
-                     onChange={handlecardradiochange} //
-                />
-                휴대폰결제
-              </label>
-              <label>
-                <input
-                  type="radio"
-                  name="card"
-                  value="kakaopay"
-                  checked={card === 'kakaopay'} // 선택된 값에 따라 checked 상태 설정
-                  onChange={handlecardradiochange} 
-
-                />
-                카카오페이
-              </label>
-
-            </Grid>
-          
-
-          </Grid>
-          <Grid item xs={12} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC' }}>
-              <Typography>결제예정금액 : {sum} </Typography>
-            </Grid>
-        </TableContainer>
-          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-
-            <Button onClick={() => orderBtnClick(selectedAddressId)} style={{ border: '1px solid #ddd', width: '600px', height: '100px', borderRadius: '0', backgroundColor: '#748769', color: 'white', fontSize: '40px', fontWeight: 'bold', textAlign: 'center' }}>{sum}원 결제하기</Button>
-
-
-
-          </div>
+      )}
 
         </Box>
       
-
+     
       </div>
-                 
+
       
 
 
