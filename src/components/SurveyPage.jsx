@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SurveyPage = () => {
+const SurveyPage = ({setIsHeader,setIsFooter}) => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
+    setIsHeader(false);
+    setIsFooter(false);
     navigate('/q_page');
   };
 
+  useEffect(()=>{
+    setIsFooter(false);
+  },[])
   return (
     <div className='survey_wrap'>
       <div className='survey_contents'>
