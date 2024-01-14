@@ -6,8 +6,8 @@ import {
   TableCell,
   TableContainer,
   TableRow,
-  Typography,
   Button,
+  TextField,
 } from "@mui/material";
 import React from "react";
 
@@ -31,7 +31,63 @@ const UpdateFit = () => {
               </TableCell>
               <TableCell>
                 <Stack direction="row" alignItems="center" spacing={3}>
-                  <Typography>목표</Typography>
+                  <TextField
+                    label="목표체중"
+                    size="small"
+                    name="goal"
+                    value={""}
+                    width="30%"
+                  />
+                </Stack>
+              </TableCell>
+            </TableRow>
+
+            <TableRow>
+              <TableCell
+                component="th"
+                sx={{
+                  width: "20%",
+                  color: "gray",
+                  fontWeight: "bold",
+                  py: 3.2,
+                }}
+              >
+                키
+              </TableCell>
+              <TableCell>
+                <Stack direction="row" alignItems="center" spacing={3}>
+                  <TextField
+                    label="키"
+                    size="small"
+                    name="height"
+                    value={""}
+                    width="30%"
+                  />
+                </Stack>
+              </TableCell>
+            </TableRow>
+
+            <TableRow>
+              <TableCell
+                component="th"
+                sx={{
+                  width: "20%",
+                  color: "gray",
+                  fontWeight: "bold",
+                  py: 3.2,
+                }}
+              >
+                몸무게
+              </TableCell>
+              <TableCell>
+                <Stack direction="row" alignItems="center" spacing={3}>
+                  <TextField
+                    label="몸무게"
+                    size="small"
+                    name="weight"
+                    value={""}
+                    width="30%"
+                  />
                 </Stack>
               </TableCell>
             </TableRow>

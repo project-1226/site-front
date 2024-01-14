@@ -4,14 +4,21 @@ import React, { useState } from "react";
 import UpdateFood from "./UpdateFood";
 import UpdateExcercise from "./UpdateExcercise";
 import UpdateFit from "./UpdateFit";
+import SurveyResult from "./SurveyResult";
+import axios from "axios";
 
 const MySurvey = () => {
-  // 식단정보, 운동정보, 신체정보 로 나눠서 변경할 수 있게 하고 첫 페이지에는 그 결과를 보여주는걸로!
+  const [list, setList] = useState([]);
+
+  const getList = async () => {
+    // const res = await axios("/")
+  };
 
   const [value, setValue] = useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
   return (
     <Box sx={{ width: "100%", bgcolor: "transparent", py: 5, pr: 3 }}>
       <TabContext value={value}>
@@ -23,7 +30,9 @@ const MySurvey = () => {
             <Tab label="운동정보" value="4" />
           </TabList>
         </Box>
-        <TabPanel value="1">설문결과</TabPanel>
+        <TabPanel value="1">
+          <SurveyResult />
+        </TabPanel>
         <TabPanel value="2">
           <UpdateFit />
         </TabPanel>

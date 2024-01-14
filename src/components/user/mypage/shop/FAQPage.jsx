@@ -24,7 +24,7 @@ const FAQPage = () => {
     const res = await axios("/shoppingqna/list", {
       params: { categoryid },
     });
-    console.log(res.data);
+    // console.log(res.data);
     setList(res.data);
   };
 
@@ -32,7 +32,7 @@ const FAQPage = () => {
     const newPosts = list.map((l) =>
       l.postid === id ? { ...l, open: !l.open } : l
     );
-    console.log(newPosts);
+    // console.log(newPosts);
     setList(newPosts);
   };
 
