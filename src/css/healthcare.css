@@ -35,4 +35,6 @@
 .carousel-indicators {bottom: -47px;}
 .carousel-indicators { display: none !important;}
 
-
+/* healthcare-modal  */
+.healthcare_modal_top{display: flex; margin: 10px; justify-content: end;}
+.healthcare_modal_top p{margin: 5px;}

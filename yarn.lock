@@ -2287,7 +2287,7 @@
     prop-types "^15.8.1"
 
 "@mui/system@^5.15.3", "@mui/system@^5.8.0":
->>>>>>> origin/develop
+>>>>>>>>> Temporary merge branch 2
   version "5.15.3"
   resolved "https://registry.npmjs.org/@mui/system/-/system-5.15.3.tgz"
   integrity sha512-ewVU4eRgo4VfNMGpO61cKlfWmH7l9s6rA8EknRzuMX3DbSLfmtW2WJJg6qPwragvpPIir0Pp/AdWVSDhyNy5Tw==
