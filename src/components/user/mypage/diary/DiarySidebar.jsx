@@ -30,7 +30,7 @@ const DiarySidebar = ({ selectedIndex, handleListItemClick }) => {
         <ListItemIcon>
           <FolderSpecialRounded />
         </ListItemIcon>
-        <ListItemText primary="스크랩" />
+        <ListItemText primary="플랜" />
       </ListItemButton>
       <ListItemButton
         selected={selectedIndex === 4}
