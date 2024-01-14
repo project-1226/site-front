@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import {
   Alert,
@@ -18,8 +18,11 @@ import {
 import LockIcon from "@mui/icons-material/Lock";
 import axios from "axios";
 import GoogleLogin from "./login/GoogleLogin";
+import KakaoLogin from "./login/KakaoLogin";
+import { useNavigate } from "react-router";
 
-const SigninPage = () => {
+const SigninPage = ({setIsHeader,setIsFooter}) => {
+  const navi = useNavigate();
   const {
     register, // React Hook Form 에 등록
     handleSubmit, // 폼의 제출 -> 제출되기 전 유효성 검사
@@ -38,11 +41,16 @@ const SigninPage = () => {
     } else {
       alert("로그인 성공!");
       const userid = res.data.user.userid;
+      //헤더 푸터 보이는여부 -> 설문질문페이지 마지막에서 이벤트로 처리예정
+      setIsHeader(true);
+      setIsFooter(true);
       sessionStorage.setItem("userid", userid);
-      window.location.href = "/";
+      navi("/mydiet");
     }
   };
-
+  useEffect(()=>{   
+    setIsHeader(true);
+  },[])
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -130,6 +138,7 @@ const SigninPage = () => {
           </Button>
           <Stack sx={{ mt: 3, mb: 5 }}>
             <GoogleLogin />
+            <KakaoLogin/>
           </Stack>
         </Box>
       </Box>

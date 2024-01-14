@@ -1,32 +1,32 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import PostList from "./PostList";
-import CommentList from "./CommentList";
+import ReviewAfterList from "./ReviewAfterList";
+import ReviewBeforeList from "./ReviewBeforeList";
 import axios from "axios";
 
-const ActivityMain = () => {
+const ReviewMain = () => {
   const [value, setValue] = useState("1");
 
-  const [postCnt, setPostCnt] = useState(0);
-  const [commentCnt, setCommentCnt] = useState(0);
+  const [reviewXCnt, setReviewXCnt] = useState(0);
+  const [reviewOCnt, setReviewOCnt] = useState(0);
 
-  const getTotalPost = async () => {
-    const res = await axios("/activity/total-post", {
+  const getReviewXCnt = async () => {
+    const res = await axios("/product-review/reviewXCnt", {
       params: {
         userid: sessionStorage.getItem("userid"),
       },
     });
-    setPostCnt(res.data);
+    setReviewXCnt(res.data);
   };
 
-  const getTotalComment = async () => {
-    const res = await axios("/activity/total-comment", {
+  const getReviewOCnt = async () => {
+    const res = await axios("/product-review/reviewOCnt", {
       params: {
         userid: sessionStorage.getItem("userid"),
       },
     });
-    setCommentCnt(res.data);
+    setReviewOCnt(res.data);
   };
 
   const handleChange = (event, newValue) => {
@@ -34,8 +34,8 @@ const ActivityMain = () => {
   };
 
   useEffect(() => {
-    getTotalPost();
-    getTotalComment();
+    getReviewXCnt();
+    getReviewOCnt();
   }, []);
 
   return (
@@ -51,19 +51,19 @@ const ActivityMain = () => {
       <TabContext value={value}>
         <Box>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label={`작성한 글 (${postCnt})`} value="1" />
-            <Tab label={`작성한 댓글 (${commentCnt})`} value="2" />
+            <Tab label={`리뷰 작성 (${reviewXCnt})`} value="1" />
+            <Tab label={`작성한 리뷰 (${reviewOCnt})`} value="2" />
           </TabList>
         </Box>
         <TabPanel value="1">
-          <PostList />
+          <ReviewBeforeList />
         </TabPanel>
         <TabPanel value="2">
-          <CommentList />
+          <ReviewAfterList />
         </TabPanel>
       </TabContext>
     </Box>
   );
 };
 
-export default ActivityMain;
+export default ReviewMain;
