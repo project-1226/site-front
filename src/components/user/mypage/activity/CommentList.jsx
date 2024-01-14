@@ -1,6 +1,8 @@
+import { LaunchRounded } from "@mui/icons-material";
 import {
   Backdrop,
   CircularProgress,
+  Link,
   Pagination,
   Paper,
   Stack,
@@ -52,9 +54,6 @@ const CommentList = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <Typography variant="h6" gutterBottom sx={{ fontWeight: "bolder" }}>
-        작성한 댓글 ({total})
-      </Typography>
       <TableContainer component={Paper} sx={{ mt: 2, mb: 3 }}>
         <Table>
           <TableBody>
@@ -82,7 +81,14 @@ const CommentList = () => {
                       textAlign="end"
                       sx={{ mr: 2, mt: 1 }}
                     >
-                      해당 게시글 : {l.title} ({l.post_regdate})
+                      해당 게시글 :{" "}
+                      <Link
+                        href={`/community/review/comment/${l.postid}`}
+                        underline="hover"
+                      >
+                        {l.title} ({l.post_regdate}){" "}
+                        <LaunchRounded sx={{ fontSize: 17 }} />
+                      </Link>
                     </Typography>
                   </TableCell>
                 </TableRow>
@@ -91,7 +97,9 @@ const CommentList = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      <Stack justifyContent="center">
+      {total == 0 ? (
+        <Typography>작성된 댓글이 없습니다.</Typography>
+      ) : (
         <Pagination
           count={Math.ceil(total / size)}
           shape="rounded"
@@ -100,7 +108,7 @@ const CommentList = () => {
           sx={{ marginBottom: 5 }}
           onChange={handleChange}
         />
-      </Stack>
+      )}
     </>
   );
 };

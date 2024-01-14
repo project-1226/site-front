@@ -9,7 +9,7 @@ const Sidebar = () => {
   const [selectedIndex, setSelectedIndex] = useState(1);
 
   return (
-    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "transparent", p: 3 }}>
+    <Box sx={{ width: "100%", maxWidth: 360, bgcolor: "white", p: 3 }}>
       <List component="nav" aria-labelledby="list1-diary">
         <ListItem>
           <ListItemText
