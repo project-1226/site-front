@@ -22,7 +22,7 @@ const Healthy = ({pagetype}) => {
 
   const TextMaker =()=>{
     if(pagetype =="disease"){
-      setText({"title" : "질환맞춤식단","subtitle":"재료 선정부터 조리까지 섬세하게 "})  
+      setText({"title" : "질환맞춤식단","subtitle":"재료 선정부터 조리까지 섬세하게 ","button":""})  
     }
     if(pagetype =="health"){
       setText({"title" : "건강식단","subtitle":"건강 목적과 필요에 따라 골라먹는 "})
@@ -33,7 +33,7 @@ const Healthy = ({pagetype}) => {
     try {
       const res = await axios(`/food/categories/${pagetype}`);
       setTags(res.data);
-
+      console.log(res.data)
       const randomIndex = Math.floor(Math.random() * res.data.length);
       setSelectTag(res.data[randomIndex]);
     } catch (error) {
@@ -126,9 +126,34 @@ const Healthy = ({pagetype}) => {
         </div>
       </div>{/* healthy_main_wrap */}
 
-      {/* categoryTags box */}
-      <div className='healthy_tag_box'>
-        {tags.map((tag) => (
+      {/* categoryTags box  페이지따라 다르게 나열*/}
+      {pagetype =="health"?
+      <div className={`${pagetype}_tag_box`}>        
+      {tags.map((tag) => (
+        tag.categoryid == selectTag.categoryid ?
+          <Button
+            key={tag.name}
+            variant="outlined"
+            size="small"
+            onClick={() => setSelectTag(tag)}
+          >
+            {tag.name}
+          </Button>
+          :
+          <Button
+            key={tag.categoryid}
+            variant="contained"
+            size="small"
+            onClick={() => handleTagClick(tag)}
+          >
+            {tag.name}
+          </Button>
+      ))}
+    </div>      
+      :
+      <>
+      <div className={`${pagetype}_tag_box`}>        
+        {tags.slice(0,6).map((tag) => (
           tag.categoryid == selectTag.categoryid ?
             <Button
               key={tag.name}
@@ -148,7 +173,34 @@ const Healthy = ({pagetype}) => {
               {tag.name}
             </Button>
         ))}
-      </div>{/* categoryTags box */}
+      </div>
+      <div className={`${pagetype}_tag_box`}>        
+      {tags.slice(6).map((tag) => (
+        tag.categoryid == selectTag.categoryid ?
+          <Button
+            key={tag.name}
+            variant="outlined"
+            size="small"
+            onClick={() => setSelectTag(tag)}
+          >
+            {tag.name}
+          </Button>
+          :
+          <Button
+            key={tag.categoryid}
+            variant="contained"
+            size="small"
+            onClick={() => handleTagClick(tag)}
+          >
+            {tag.name}
+          </Button>
+      ))}
+    </div>
+    </>
+      }
+      
+      {/* categoryTags box */}
+    
 
       {/* 카테고리 대표식단 세부내용++  */}
       {/* 로딩되는동안 유지될 box추가해야함 */}
