@@ -3,22 +3,23 @@ import { Col, Spinner } from 'react-bootstrap'
 import { Button } from '@mui/material';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import WriteReview from './WriteReview';
 
 
 const ReviewPage = () => {
     const navi = useNavigate();
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
+    const [count, setCount] = useState(0);
+
     //const [favoriteCnt, setFavoriteCnt] = useState(0);
     const categoryid = 102;
 
-    const getList = async() => { //review list 가져오기
+    const getList = async() => {
         setLoading(true)
-        const res = await axios.get("/community/list?categoryid=" + categoryid);
-        // , {
-        //     params: {categoryid}
-        // });
-        console.log(res.data);
+        const res = await axios.get("/community/list_review");
+        //const res = await axios.get("/community/list?categoryid=" + categoryid);
+        //console.log(res.data);
         setList(res.data);
         setLoading(false);
     }
@@ -27,11 +28,18 @@ const ReviewPage = () => {
         getList();
     }, []);
 
+    const onClickList = async(postid) => {
+        await axios.post("/community/update/cnt", {postid});
+        setCount(count + 1);
+        getList();
+        console.log(count);
+    }
+
 
     const onClickReview = () => {
         // if(sessionStorage.getItem("uid") == null){
         //     navi('/login');
-        navi('/community/review/write');
+        window.location.href= 'rwrite';
         
     }
 
@@ -44,7 +52,7 @@ const ReviewPage = () => {
                     <thead>
                         <tr>
                             <th>No.</th>
-                            <th>Title</th>
+                            <th colSpan={2}>Title</th>
                             <th>Writer</th>
                             <th>Date</th>
                             <th></th>
@@ -55,10 +63,10 @@ const ReviewPage = () => {
                         <>
                             <tr key={r.categoryid}>
                                 <td>{r.postid}</td>
-                                <td><Link to={`comment/${r.postid}`}>{r.title}</Link></td>
-                                <td>{r.userid}</td>
+                                <td colSpan={2}><Link to={`comment/${r.postid}`}>{r.title}</Link></td>
+                                <td>{r.nickname}</td>
                                 <td>{r.regdate}</td>
-                                <td>11</td>
+                                <td>{count}</td>
                             </tr><br />
                         </>    
                         )}

@@ -1,5 +1,5 @@
-import React from "react";
-import { Route, Routes, Navigate } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Route, Routes, Navigate, useNavigate } from "react-router-dom";
 
 import NoticePage from "./community/NoticePage";
 import ReviewPage from "./community/ReviewPage";
@@ -43,6 +43,7 @@ import AdminOrderList from "./admin/AdminOrderList";
 import AdminNotice from "./admin/AdminNotice";
 import AdminReview from "./admin/AdminReview";
 import ProductListPage from "./admin/ProductListPage";
+import Chat from "./community/Chat";
 
 import SurveyPage from "./SurveyPage";
 import DiseaseDetail from "./diseaseDiet/DiseaseDetail";
@@ -53,25 +54,33 @@ import FooterPage from "./FooterPage";
 import QuestionsPage from "./QuestionsPage";
 
 const RouterPage = () => {
+  const navi = useNavigate();
   const isUserLoggedIn = sessionStorage.getItem("userid") !== null;
-  const isSurveyPage = window.location.pathname === "/";
+  // const [isStartQ,setIsStartQ] = useState(false);
+  const [isHeader, setIsHeader] = useState(true);
+  const [isFooter, setIsFooter] = useState(true);
+  // const [isStartQ,setIsStartQ] = useState(window.location.pathname !="/q_page");
+  // const [isSurvey,setIsSurvey] = useState(window.location.pathname != "/");
+  //let isSurveyPage = window.location.pathname === "/";
+  // const isStartQ = window.location.pathname === "/q_page";
+
+  useEffect(() => {}, [isHeader, isFooter]);
 
   return (
     <>
       {/* 조건부로 HeaderPage를 표시 */}
-      {!isSurveyPage && <HeaderPage />}
+      {isHeader && <HeaderPage />}
 
       <Routes>
         {/* 설문조사 페이지 */}
-        <Route path="/" element={<SurveyPage />} />
+        <Route
+          path="/"
+          element={
+            <SurveyPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />
+          }
+        />
 
-        {/* MyDiet 페이지 - 로그인 상태에 따라 라우팅 */}
-        {isUserLoggedIn ? (
-          <Route path="/mydiet" element={<MyDiet />} />
-        ) : (
-          // 로그인되지 않은 상태에서 설문조사가 끝난 경우 MyDiet 페이지로 이동
-          <Route path="/" element={<Navigate to="/mydiet" replace />} />
-        )}
+        <Route path="/mydiet" element={<MyDiet />} />
 
         <Route path="/AIimg" element={<Imagereader />} />
         <Route path="/AImotion" element={<MotionReader />} />
@@ -84,7 +93,12 @@ const RouterPage = () => {
         <Route path="/Order" element={<OrderPage />} />
 
         {/* 로그인/회원가입 */}
-        <Route path="/login" element={<SigninPage />} />
+        <Route
+          path="/login"
+          element={
+            <SigninPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />
+          }
+        />
         <Route path="/join" element={<SignupPage />} />
 
         {/* community */}
@@ -94,6 +108,8 @@ const RouterPage = () => {
           <Route path="review/write" element={<WriteReview />} />
           <Route path="review/comment/:pid" element={<CommentPage />} />
         </Route>
+
+        <Route path="/chat" element={<Chat />} />
 
         {/* 관리자페이지 */}
         <Route path="/admin" element={<AdminPage />}>
@@ -142,9 +158,13 @@ const RouterPage = () => {
         <Route path="/healthcare" element={<Healthcare />} />
 
         {/* 설문조사 */}
-        <Route path="/q_page" element={<QuestionsPage />} />
+        <Route
+          path="/q_page"
+          element={<QuestionsPage setIsHeader={setIsHeader} />}
+        />
       </Routes>
-      {!isSurveyPage && <FooterPage />}
+      {/* isSurvey  false ,isStartQ true ->false */}
+      {isFooter && <FooterPage />}
     </>
   );
 };

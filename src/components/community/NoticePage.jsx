@@ -1,18 +1,21 @@
-import React, { useEffect, useState } from 'react'
+import React, { Fragment, useEffect, useState } from 'react'
 import axios from 'axios';
-import { Col, Row, Table } from 'react-bootstrap';
+import { Col, Spinner } from 'react-bootstrap';
 import { Button } from '@mui/material';
 import { FaPlus } from "react-icons/fa6";
 
+
 const NoticePage = () => {
-    const [content, setContent] = useState(false);
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
+    const categoryid = 101;
 
-    const getList = async () => {
+    const getList = async() => {
         setLoading(true);
-        const res = await axios.get('/');
-        setList(res.data.list);
+        const res = await axios.get('/community/list?categoryid=' + categoryid);
+        //console.log(res.data);
+        const addList = res.data.map(item => ({ ...item, body: false}));
+        setList(addList);
         setLoading(false);
     }
 
@@ -20,8 +23,10 @@ const NoticePage = () => {
         getList();
     }, []);
 
-    const onClickPlus = () => {
-        setContent(!content);
+    const onClickPlus = (index) => {
+        const addList = [...list];
+        addList[index].body = !addList[index].body;
+        setList(addList);
     }
 
     const onClickNotice = () => {
@@ -29,6 +34,8 @@ const NoticePage = () => {
             window.location.href='/admin/adno';
         }
     }
+
+    if(loading) return <div className='text-center my-5'><Spinner/></div>
 
     return (
         <div className='my-5 ms-5'>
@@ -40,25 +47,29 @@ const NoticePage = () => {
                         </tr>
                     </thead><br/>
                     <tbody>
-                        <tr>
-                            <td>공지</td>
-                            <td colSpan={2}>사이트 이용 약관</td>
-                            <td>2023-12-30</td>
-                            <td onClick={onClickPlus}><FaPlus/></td>
-                        </tr><br/>
-                        {content &&
-                            <tr>
-                                <td colSpan={5} width={200} height={300}>
-                                    detail content
-                                </td>
-                            </tr>
-                        }
-                        <tr>
-                            <td>공지</td>
-                            <td colSpan={2}>개인 정보 보호 관련 안내</td>
-                            <td>2024-01-01</td>
-                            <td><FaPlus/></td>
-                        </tr>
+                        {list.map((n, index) =>
+                        <>
+                            <tr key={n.categoryid}>
+                                <td>공지</td>
+                                <td colSpan={2}>{n.title}</td>
+                                <td>{n.regdate}</td>
+                                <td onClick={()=> onClickPlus(index)}><FaPlus/></td>
+                            </tr><br/>
+                            {n.body &&
+                                <tr>
+                                    <td colSpan={5} width={200} height={300}>
+                                        {n.content.split('\n').map((line, index) =>(
+                                            <Fragment key={index}>
+                                                {line}
+                                                <br/>
+                                            </Fragment>
+                                        ))}
+                                    </td>
+                                </tr>
+                            }
+                        </>
+                        )}
+                        
                     </tbody>
                 </table>
             </Col>
