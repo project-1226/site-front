@@ -27,7 +27,7 @@ import axios from 'axios';
 
 const Healthcare = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [isModalOpen2, setIsModalOpen2] = useState(false);
+  // const [isModalOpen2, setIsModalOpen2] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState('');
   const [categories,setCategories] = useState([]);
   const [myExercise,setMyExercise] = useState([]);
@@ -46,7 +46,7 @@ const Healthcare = () => {
         <Button
           variant="contained"
           color="primary"
-          onClick={(e) => isModalOpen2(true)}
+          // onClick={(e) => isModalOpen2(true)}
         >
           운동영상
         </Button>
@@ -61,7 +61,7 @@ const Healthcare = () => {
         <Button
           variant="contained"
           color="primary" 
-          onClick={(e) => isModalOpen2(true)}       
+          // onClick={(e) => isModalOpen2(true)}       
         >
           AI와 운동하기
         </Button>
@@ -105,23 +105,23 @@ const Healthcare = () => {
   const handleCloseModal = () => { 
     setIsModalOpen(false);
   };
-  const handleCloseModal2 = () => { 
-    setIsModalOpen2(false);
-  };
+  // const handleCloseModal2 = () => { 
+  //   setIsModalOpen2(false);
+  // };
   useEffect(()=>{
     getMyExercise();
   },[value])
 
-  //운동영상보러가기 클릭 
-  const handleYoutubeClick = (event,row) => {
-    event.stopPropagation();    
-    console.log('Button clicked for row:', row);
-  };
-  //AI와 운동하기 선택
-  const handleAIClick =(event,row) =>{
-    event.stopPropagation();   
-    console.log('ai!!!!!!!!Button clicked for row:', row);
-  }
+  // //운동영상보러가기 클릭 
+  // const handleYoutubeClick = (event,row) => {
+  //   event.stopPropagation();    
+  //   console.log('Button clicked for row:', row);
+  // };
+  // //AI와 운동하기 선택
+  // const handleAIClick =(event,row) =>{
+  //   event.stopPropagation();   
+  //   console.log('ai!!!!!!!!Button clicked for row:', row);
+  // }
 
 
   return (
@@ -332,7 +332,7 @@ const Healthcare = () => {
         </section>
       </div>
       <HealthcareModal show={isModalOpen} handleClose={handleCloseModal} selectedCategory={selectedCategory} />
-      <HealthcareModal2 show={isModalOpen2} handleClose={handleCloseModal2} selectedCategory={selectedCategory} />
+      {/* <HealthcareModal2 show={isModalOpen2} handleClose={handleCloseModal2} selectedCategory={selectedCategory} /> */}
     </div>
   );
 }
