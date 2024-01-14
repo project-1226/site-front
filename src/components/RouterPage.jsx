@@ -43,6 +43,7 @@ import AdminOrderList from "./admin/AdminOrderList";
 import AdminNotice from "./admin/AdminNotice";
 import AdminReview from "./admin/AdminReview";
 import ProductListPage from "./admin/ProductListPage";
+import Chat from "./community/Chat";
 
 import SurveyPage from "./SurveyPage";
 import DiseaseDetail from "./diseaseDiet/DiseaseDetail";
@@ -100,6 +101,8 @@ const RouterPage = () => {
           <Route path="review/write" element={<WriteReview />} />
           <Route path="review/comment/:pid" element={<CommentPage />} />
         </Route>
+
+        <Route path="/chat" element={<Chat />} />
 
         {/* 관리자페이지 */}
         <Route path="/admin" element={<AdminPage />}>

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Row } from 'react-bootstrap'
-import { Button, List, ListItem, ListItemText, ListItemAvatar,
-         Avatar, Typography, Divider } from '@mui/material';
+import { Card, Row, Spinner } from 'react-bootstrap'
+import { Button } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
 import axios from 'axios';
@@ -9,25 +8,33 @@ import { useParams } from 'react-router-dom'
 
 
 const CommentPage = () => {
-    const [body, setBody] = useState('');
-    const [total, setTotal] = useState(0);
+    const {pid} = useParams();
+    const [review, setReview] = useState('');
     const [loading, setLoading] = useState(false);
     const [commentList, setCommentList] = useState([]);
 
-    const {pid} = useParams();
-
-    const [review, setReview] = useState('');
-
-    const {postid, userid, title, content, image, regdate} = review;
+    const [content, setContent] = useState('');
+    const [total, setTotal] = useState(0);
+    
+    const {postid, nickname, title, content: reviewContent, image, regdate} = review;
 
     const getReview = async() => {
         setLoading(true);
-        const res = await axios(`/community/read?postid=${pid}`);
-        console.log(res.data);
+        const res = await axios(`/community/read/review?postid=${pid}`);
+        //console.log(res.data);
         setReview(res.data);
         setLoading(false);
-    }
 
+        const totalRes = await axios(`/community/total/comment?postid=${pid}`);
+        setTotal(totalRes.data);
+        //console.log(totalRes.data);
+    }
+    
+    // const updatePostCnt = async() => {
+    //     const data = {postid, content, userid:sessionStorage.getItem("userid")};
+    //     console.log(data);
+    //     await axios.post('/community/update/cnt', data);
+    // }
 
     useEffect(()=> {
         getReview();
@@ -39,101 +46,110 @@ const CommentPage = () => {
         const res = await axios(`/community/read/comment?postid=${pid}`);
         console.log(res.data);
         setCommentList(res.data);
-        
     }
+
+   
 
     useEffect(() => {
         getCommentList();
+        //updatePostCnt();
     }, []);
 
-    const onClickWrite = () => {
-        window.location.href='/login';
-    }
+
+    // const onClickWrite = () => {
+    //     if(!sessionStorage.getItem("uid")){
+    //         window.location.href='/login';
+    //     }else{
+
+    //     }
+        
+    // }
 
     const onCommentSave = async() => {
-        if(body === ""){
+        if(content === ""){
             alert("댓글 내용을 입력하세요.");
         }else{
-            //댓글 등록 작업
-            const data = {postid, body, userid:sessionStorage.getItem("userid")};
+            const data = {postid, content, userid:sessionStorage.getItem("userid")};
+            //console.log(data);
             await axios.post('/community/insert/comment', data);
             alert("댓글 등록!");
             getCommentList();
         }
     }
 
-    const onClickFavorite = (commentid) => {
-        if(sessionStorage.getItem("uid")){
-            //좋아요 작업
+    const onClickFavorite = async() => {
+        if(!sessionStorage.getItem("userid")){
+            sessionStorage.setItem("target", `/community/read/comment/${pid}`);
+            window.location.href='/login';
         }else{
-            //sessionStorage.getItem("uid") == "null"
-            //window.location.href="/login";
+            //좋아요 추가 작업
+            await axios.get(`/`);
+            alert("좋아요 추가!");
+            getCommentList();
         }
     }
+
+    //좋아요 취소
+    const onClickHeart = async() => {
+        await axios.get(`/`);
+        alert("좋아요 취소!");
+        getCommentList();
+    }
+
+
+    if(loading) return <div className='text-center my-5'><Spinner/></div>
+
     return (
-        <div>
-            <div className='my-3'>Review 상세페이지</div>
-            <Row className='justify-content-center p-3'>
-                <Card className='p-3' style={{width: '80%', height: '70%'}}>
+        <div className='my-5'>
+            <Row className='p-3'>
+                <Card className='p-3' style={{width: '80%', height: '80%'}}>
                     <div>
                         <p className='text-center'>{title}</p>
-                        <div className='text-end'>([{userid}] / [{regdate}])</div>
+                        <div className='text-end ms-3'>
+                            <small>작성자 : {nickname}</small><br/>
+                            <small>({regdate})</small>
+                        </div>
                         <br/>
                     </div>
                     <div>
                         <div>{image}</div>
-                        <div>{content}</div>
+                        <div>{reviewContent}</div>
                     </div>
                 </Card>
                 
  
-                {!sessionStorage.getItem("uid") ?
+                {/* {!sessionStorage.getItem("uid") ?
                     <div className='mt-5 text-end'><Button onClick={onClickWrite} variant='contained'>댓글 작성</Button></div>
-                    :
-                    <div className='mt-5' style={{width: '150%'}}>
+                    : */}
+                    <div className='mt-5' style={{width: '80%'}}>
                         <label>댓글쓰기</label>
-                        <textarea className='form-control mt-3' onChange={(e)=> setBody(e.target.value)} 
-                            rows={3} placeholder='댓글 내용을 입력하세요.' value={body} />
+                        <textarea className='form-control mt-3' onChange={(e)=> setContent(e.target.value)} 
+                            rows={3} placeholder='댓글 내용을 입력하세요.' value={content} />
 
                         <div className='text-end mt-2'>
                             <Button onClick={onCommentSave}
                                 className='btn_comment_save' variant='contained' size='small'>등록</Button>
                         </div>
                     </div>
-                }
+                {/* } */}
                 <div className='comment_list mt-5'>
                     <p>댓글 {total}</p>
-                    <List sx={{ width: '200%', maxWidth: 360, bgcolor: 'Background.paper' }}>
-
-                    {commentList.map((r)=>
-                    <>
-                        <ListItem alignItems='flex-start'>
-                                <ListItemAvatar>
-                                    <Avatar alt="user1" src="/static/images/avatar/1.jpg" />
-                                </ListItemAvatar>
-                                <ListItemText
-                                    secondary={
-                                        <React.Fragment>
-                                            <Typography
-                                                sx={{ display: 'inline' }}
-                                                component="span"
-                                                variant="body2"
-                                                color="text.primary"
-                                            >
-                                                {r.userid} / {r.regdate}
-                                                <span className='text-end ms-2'>
-                                                    <FavoriteIcon onClick={()=> onClickFavorite()} fontSize='small'/>10</span>
-                                            </Typography><br/>
-                                            {r.content}
-                                        </React.Fragment>
-                                    }
-                                />
-                            </ListItem>
-                            <Divider variant="inset" component="li" />
-                    </>    
-                    )}
-                        
-                    </List> 
+                    <div>
+                        {commentList.map((r)=>
+                            <div key={r.commentid}>
+                                <div>
+                                    <small>{r.nickname}  ({r.regdate})</small>
+                                    <span className='heart'>
+                                        
+                                        <small className='ms-2'>
+                                            <FavoriteBorderOutlinedIcon onClick={()=> onClickFavorite()} fontSize='small'/> 0 </small>
+                                    </span>
+                                    <div>{r.content}</div>
+                                </div>
+                                <br/>
+                            </div>
+                        )}
+                    </div>
                 </div>
             </Row>
         </div>

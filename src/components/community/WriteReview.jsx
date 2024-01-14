@@ -2,8 +2,12 @@ import { Button } from '@mui/material'
 import axios from 'axios';
 import React, { useEffect, useRef, useState } from 'react'
 import { Card, Row, Col, Form } from 'react-bootstrap'
+import { useLocation } from 'react-router-dom';
 
 const WriteReview = () => {
+    const location = useLocation();
+    //console.log(location.pathname);
+    
     const [body, setBody] = useState('');
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
@@ -28,18 +32,6 @@ const WriteReview = () => {
         }
     }
 
-    const getList = async() => { //후기목록
-        setLoading(true);
-        const res = await axios.get(`/community/list/`);
-        console.log(res.data);
-        setList(res.data.list);
-        setLoading(false);
-    }
-
-    useEffect(()=> {
-        getList();
-    }, []);
-
 
     const onSave = async() => {
         if(body == ""){
@@ -50,7 +42,7 @@ const WriteReview = () => {
             await axios.post('/community/insert', data);
             alert("후기 등록완료!")
             setBody("");
-            getList();
+            //getList();
         }
     }
 
