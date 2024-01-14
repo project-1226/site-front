@@ -19,15 +19,26 @@
 /* q_select_box_wrap */
 .q_select_wrap {height: 650px;}
 .q_select_box {width: 100%; height: 68px; flex-direction: column; gap: 2px; border-radius: 100px; cursor: pointer; display: flex; -webkit-box-pack: center; justify-content: center; -webkit-box-align: center; align-items: center; background: rgb(248, 249, 248);}
+
+/* q_allergy_wrap */
+.q_allergy_wrap {height: 650px;}
+.q_allergy_box_wrap {width: 80%; margin: 35px auto 60px auto; position: unset; display: flex; flex-wrap: wrap; overflow: hidden; gap: 12px; align-items: center;}
+.q_allergy_box { width: 30%; height: 48px; gap: 2px; border-radius: 100px; cursor: pointer; display: flex; -webkit-box-pack: center; justify-content: center; -webkit-box-align: center; align-items: center; background: rgb(248, 249, 248);}
+
+/* q_input_wrap */
 .q_input_wrap {width: 100%; height: 650px; flex-direction: column; gap: 2px;}
-.q_select_box_wrap, .q_input_box_wrap {width: 80%; margin: 35px auto 60px auto; position: unset; display: flex; flex-direction: column; overflow: hidden; gap: 12px; align-items: center;}
 .q_input_box input {border: none;  padding: 8px;  outline: none; }
 .q_input_box {width: 100%; border-radius: 4px; border: 1px solid rgb(219, 221, 220); outline: none;
 font-weight: 700; font-size: 14px; line-height: 21px; letter-spacing: 0px; padding: 14px 12px; color: rgb(36, 38, 36); margin: 8px 0px 6px; caret-color: auto;}
 
-.q_btn_wrap button {width: 100px; height: 40px; line-height: 40px; background: rgb(116, 135, 105); color: rgb(255, 255, 255); font-weight: 500; font-size: 14px; border-radius: 50px; border: none;}
-.q_btn_wrap button:first-child {margin-right: 15px;}
+/* question_contents 공통 css */
+.q_select_box_wrap, .q_input_box_wrap {width: 80%; margin: 35px auto 60px auto; position: unset; display: flex; flex-direction: column; overflow: hidden; gap: 12px; align-items: center;}
+.q_select_box.selected, .q_allergy_box.selected { background-color: #666; color: #fff; }
 
-
-
+.q_btn_wrap button { width: 100px; height: 40px; line-height: 40px; font-weight: 500; font-size: 14px; border-radius: 50px; border: none;}
+.q_btn_wrap button:first-child { margin-right: 15px; background: rgb(116, 135, 105); color: rgb(255, 255, 255); cursor: pointer; }
+.q_btn_wrap button:last-child { cursor: auto; background: #ddd; color: #000; }
+.q_btn_wrap button-inactive { background: #ddd; color: #000; cursor: not-allowed; }
+.q_btn_wrap button.active { background: rgb(116, 135, 105); color: rgb(255, 255, 255); cursor: pointer; }
+  
 
