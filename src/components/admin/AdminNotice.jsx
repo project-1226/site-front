@@ -10,12 +10,13 @@ const AdminNotice = () => {
     const [loading, setLoading] = useState(false);
 
     const [form, setForm] = useState({
+        categoryid : '101',
         title: '',
         userid: '',
         content: ''
     });
 
-    const {title, userid, content} = form;
+    const {categoryid, title, userid, content} = form;
 
     const onChange = (e) => {
         setForm({

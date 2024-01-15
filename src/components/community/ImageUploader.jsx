@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
-import { storage } from "../../../FirebaseConfig";
+import { storage } from "../FirebaseConfig";
 import {
   getDownloadURL,
   ref as storageRef,
@@ -73,7 +73,7 @@ const ImageUploader = forwardRef(({ urls }, ref) => {
         .pop()
         .toLowerCase();
       const imageName = `${uuidv4()}.${fileExtension}`;
-      const imageRef = storageRef(storage, `images/${imageName}`);
+      const imageRef = storageRef(storage, `images/community/${imageName}`);
       try {
         await uploadBytes(imageRef, image);
         const downloadURL = await getDownloadURL(imageRef);

@@ -5,7 +5,6 @@ import HomePage from "./HomePage";
 import NoticePage from "./community/NoticePage";
 import ReviewPage from "./community/ReviewPage";
 import CommunityPageMain from "./community/CommunityPageMain";
-import WriteReview from "./community/WriteReview";
 import CommentPage from "./community/CommentPage";
 
 import MyPage from "./user/MyPage";
@@ -75,16 +74,11 @@ const RouterPage = () => {
       <Route path="/community" element={<CommunityPageMain />}>
         <Route path="" element={<NoticePage />} />
         <Route path="review" element={<ReviewPage />} />
-        <Route path="rwrite" element={<WriteReview />} />
         <Route path="review/comment/:pid" element={<CommentPage />} />
-
       </Route>
-<<<<<<< HEAD
       <Route path="/chat" element={<Chat />} />
       
       
-=======
->>>>>>> 65c68df538821a286b7198322e14ff83b06e7bf6
 
       {/* 관리자페이지 */}
       <Route path="/admin" element={<AdminPage />}>

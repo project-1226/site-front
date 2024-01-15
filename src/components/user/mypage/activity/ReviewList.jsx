@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { storage } from "../../../../FirebaseConfig";
+import { storage } from "../../../FirebaseConfig";
 import { ref, deleteObject } from "firebase/storage";
 import UpdateReview from "./UpdateReview";
 
