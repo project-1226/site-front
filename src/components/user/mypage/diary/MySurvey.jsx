@@ -48,16 +48,16 @@ const MySurvey = () => {
           </TabList>
         </Box>
         <TabPanel className="seon-mypage-MuiTabPanel-root" value="1">
-          <SurveyResult list={list} />
+          <SurveyResult list={list} getList={getList} />
         </TabPanel>
         <TabPanel className="seon-mypage-MuiTabPanel-root" value="2">
-          <UpdateFit list={list} />
+          <UpdateFit list={list} getList={getList} />
         </TabPanel>
         <TabPanel className="seon-mypage-MuiTabPanel-root" value="3">
-          <UpdateFood list={list} />
+          <UpdateFood list={list} getList={getList} />
         </TabPanel>
         <TabPanel className="seon-mypage-MuiTabPanel-root" value="4">
-          <UpdateExcercise list={list} />
+          <UpdateExcercise list={list} getList={getList} />
         </TabPanel>
       </TabContext>
     </Box>
