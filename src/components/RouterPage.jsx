@@ -52,6 +52,7 @@ import HeaderPage from "./HeaderPage";
 import FooterPage from "./FooterPage";
 
 import QuestionsPage from "./QuestionsPage";
+import SurveySigninPage from "./SurveySigninPage";
 
 const RouterPage = () => {
   const navi = useNavigate();
@@ -73,12 +74,10 @@ const RouterPage = () => {
 
       <Routes>
         {/* 설문조사 페이지 */}
-        <Route
-          path="/"
-          element={
-            <SurveyPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />
-          }
-        />
+        <Route path="/" element={<SurveyPage setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
+        {/* 설문조사 */}
+        <Route path="/q_page" element={<QuestionsPage setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
+        <Route path="/SurveySigninPage" element={<SurveySigninPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />}/>
 
         <Route path="/mydiet" element={<MyDiet />} />
 
@@ -156,15 +155,10 @@ const RouterPage = () => {
 
         {/* 헬스케어 */}
         <Route path="/healthcare" element={<Healthcare />} />
-
-        {/* 설문조사 */}
-        <Route
-          path="/q_page"
-          element={<QuestionsPage setIsHeader={setIsHeader} />}
-        />
+        
       </Routes>
       {/* isSurvey  false ,isStartQ true ->false */}
-      {isFooter && <FooterPage />}
+      { isFooter && <FooterPage />}
     </>
   );
 };

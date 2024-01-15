@@ -1,18 +1,26 @@
-import React, { useEffect } from 'react';
+import React, { useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 
-const SurveySigninPage = ({ setIsHeader, setIsFooter }) => {
+//result -< navigater로 보낸훅
+const SurveySigninPage = ({ setIsHeader, setIsFooter,result}) => {
   const navigate = useNavigate();
+  const location = useLocation();
+  
 
   const handleButtonClick = () => {
     setIsHeader(false);
     setIsFooter(false);
-    navigate('/signin');
+    // navigate('/signin',{state:{result:result}});
+    navigate('/signin',{
+      state: { result: location.state?.result },});
   };
 
   useEffect(() => {
     setIsFooter(false);
-  }, []);
+    console.log("로그인페이지이이")
+    console.log(location.state?.result);
+  }, [location]);
 
   return (
     <div className='survey_wrap'>
