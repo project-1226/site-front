@@ -22,21 +22,25 @@ const Report = () => {
     setList(res.data);
   };
 
-  const goalWeigh = list.map((l, index) => {
-    if (l.questionid === 10) {
-      return <span key={index}>{l.input_text}kg</span>;
-    }
-    return null;
-  });
+  const goalWeigh = parseInt(
+    list.find((l) => l.questionid === 10)?.input_text || "0"
+  );
 
-  const currentWeigh = list.map((l, index) => {
-    if (l.questionid === 9) {
-      return <span key={index}>{l.input_text}kg</span>;
-    }
-    return null;
-  });
+  // const goalWeigh = 58;
 
-  const calcurateWeek = currentWeigh - goalWeigh / 0.5 / 7;
+  const currentWeigh = parseInt(
+    list.find((l) => l.questionid === 9)?.input_text || "0"
+  );
+
+  // const currentWeigh = 52;
+
+  const calculateWeek = () => {
+    if (currentWeigh > goalWeigh) {
+      return (currentWeigh - goalWeigh) / 0.5;
+    } else {
+      return (goalWeigh - currentWeigh) / 0.5;
+    }
+  };
 
   const nickname = list.map((l, index) => {
     if (l.questionid === 1) {
@@ -58,29 +62,50 @@ const Report = () => {
             color="primary"
             sx={{ fontWeight: "bolder" }}
           >
-            목표 체중 : {goalWeigh}
+            목표 체중 : {goalWeigh}kg
           </Typography>
           <Typography variant="h5" color="text.secondary">
-            현재 체중 : {currentWeigh}
+            현재 체중 : {currentWeigh}kg
           </Typography>
           <Divider />
           <Typography>
-            {nickname}님께 가장 이상적인 감량 속도는 1주당 -0.5kg으로 {nickname}
-            님의 목표 체중인 {goalWeigh}까지의 예상 소요기간은 {calcurateWeek}주
-            입니다.
+            <strong>{nickname}</strong>님께 가장 이상적인{" "}
+            {currentWeigh > goalWeigh ? "감량" : "증량"} 속도는 1주당 -0.5kg으로{" "}
+            <strong>{nickname}</strong>
+            님의 목표 체중인 <strong>{goalWeigh}</strong>kg까지의 예상
+            소요기간은 <strong>{calculateWeek()}</strong>주 입니다.
           </Typography>
           <Typography>
-            무리한 식습관은 근 손실, 요요 등 건강상의 문제를 일으킬 수 있으니
+            무리한 식습관은 근손실, 요요 등 건강상의 문제를 일으킬 수 있으니
             영양 정보에 맞춰 목표를 달성하세요.
           </Typography>
         </Stack>
         <LineChart
-          xAxis={[{ scaleType: "band", data: ["1", "현재", "목표", "2"] }]}
+          xAxis={[
+            {
+              scaleType: "band",
+              data: ["1", "현재", "목표", "2"],
+              tickLabelInterval: (value, index) => index === 1 || index === 2,
+            },
+          ]}
           series={[
             {
               color: "#748769",
               curve: "natural",
-              data: [58.2, 58, 52, 51.8],
+              data:
+                currentWeigh > goalWeigh
+                  ? [
+                      currentWeigh * 1.005,
+                      currentWeigh,
+                      goalWeigh,
+                      goalWeigh * 0.995,
+                    ]
+                  : [
+                      currentWeigh * 0.995,
+                      currentWeigh,
+                      goalWeigh,
+                      goalWeigh * 1.005,
+                    ],
               showMark: ({ index }) => index === 1 || index === 2,
             },
           ]}
