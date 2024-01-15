@@ -19,9 +19,9 @@ const DiarySidebar = ({ selectedIndex, handleListItemClick }) => {
         <ListItemIcon>
           <AssessmentRounded />
         </ListItemIcon>
-        <ListItemText primary="상세 리포트" />
+        <ListItemText primary="진단 및 맞춤 플랜" />
       </ListItemButton>
-      <ListItemButton
+      {/* <ListItemButton
         selected={selectedIndex === 3}
         onClick={() => handleListItemClick(3)}
         component={Link}
@@ -31,7 +31,7 @@ const DiarySidebar = ({ selectedIndex, handleListItemClick }) => {
           <FolderSpecialRounded />
         </ListItemIcon>
         <ListItemText primary="플랜" />
-      </ListItemButton>
+      </ListItemButton> */}
       <ListItemButton
         selected={selectedIndex === 4}
         onClick={() => handleListItemClick(4)}

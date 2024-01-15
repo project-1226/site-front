@@ -30,16 +30,16 @@ const MySurvey = () => {
             <Tab label="운동정보" value="4" />
           </TabList>
         </Box>
-        <TabPanel value="1">
+        <TabPanel className="seon-mypage-MuiTabPanel-root" value="1">
           <SurveyResult />
         </TabPanel>
-        <TabPanel value="2">
+        <TabPanel className="seon-mypage-MuiTabPanel-root" value="2">
           <UpdateFit />
         </TabPanel>
-        <TabPanel value="3">
+        <TabPanel className="seon-mypage-MuiTabPanel-root" value="3">
           <UpdateFood />
         </TabPanel>
-        <TabPanel value="4">
+        <TabPanel className="seon-mypage-MuiTabPanel-root" value="4">
           <UpdateExcercise />
         </TabPanel>
       </TabContext>
