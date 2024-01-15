@@ -1,6 +1,6 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
-import { Box, Tab } from "@mui/material";
-import React, { useState } from "react";
+import { Backdrop, Box, CircularProgress, Tab } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import UpdateFood from "./UpdateFood";
 import UpdateExcercise from "./UpdateExcercise";
 import UpdateFit from "./UpdateFit";
@@ -8,19 +8,36 @@ import SurveyResult from "./SurveyResult";
 import axios from "axios";
 
 const MySurvey = () => {
-  const [list, setList] = useState([]);
-
-  const getList = async () => {
-    // const res = await axios("/")
-  };
-
   const [value, setValue] = useState("1");
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
 
+  const [loading, setLoading] = useState(false);
+  const [list, setList] = useState([]);
+
+  const getList = async () => {
+    setLoading(true);
+    const res = await axios("/user/survey/read", {
+      params: { userid: sessionStorage.getItem("userid") },
+    });
+    // console.log(res.data);
+    setList(res.data);
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    getList();
+  }, []);
+
   return (
     <Box sx={{ width: "100%", bgcolor: "transparent", py: 5, pr: 3 }}>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <TabContext value={value}>
         <Box>
           <TabList onChange={handleChange} aria-label="lab API tabs example">
@@ -31,16 +48,16 @@ const MySurvey = () => {
           </TabList>
         </Box>
         <TabPanel className="seon-mypage-MuiTabPanel-root" value="1">
-          <SurveyResult />
+          <SurveyResult list={list} />
         </TabPanel>
         <TabPanel className="seon-mypage-MuiTabPanel-root" value="2">
-          <UpdateFit />
+          <UpdateFit list={list} />
         </TabPanel>
         <TabPanel className="seon-mypage-MuiTabPanel-root" value="3">
-          <UpdateFood />
+          <UpdateFood list={list} />
         </TabPanel>
         <TabPanel className="seon-mypage-MuiTabPanel-root" value="4">
-          <UpdateExcercise />
+          <UpdateExcercise list={list} />
         </TabPanel>
       </TabContext>
     </Box>
