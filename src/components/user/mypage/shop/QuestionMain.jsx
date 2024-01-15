@@ -28,11 +28,11 @@ const QuestionMain = () => {
             <Tab label="1:1문의" value="2" />
           </TabList>
         </Box>
-        <TabPanel value="1">
+        <TabPanel className="seon-mypage-MuiTabPanel-root" value="1">
           {}
           <FAQPage />
         </TabPanel>
-        <TabPanel value="2">
+        <TabPanel className="seon-mypage-MuiTabPanel-root" value="2">
           <QNAPage />
         </TabPanel>
       </TabContext>

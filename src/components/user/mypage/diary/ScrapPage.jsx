@@ -18,7 +18,6 @@ const ScrapPage = () => {
         typography: "body1",
         bgcolor: "transparent",
         py: 4.5,
-        pr: 3,
       }}
     >
       <TabContext value={value}>

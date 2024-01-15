@@ -73,7 +73,7 @@ const MyPurchase = () => {
         console.error("Error processing image data:", error);
       }
     }
-    // console.log(data);
+    console.log(data);
     setList(data);
     setLoading(false);
   };

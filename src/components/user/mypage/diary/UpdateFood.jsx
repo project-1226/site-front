@@ -15,17 +15,47 @@ import {
   Select,
   MenuItem,
 } from "@mui/material";
-import React, { useState } from "react";
+import axios from "axios";
+import React, { useEffect, useState } from "react";
 
-const UpdateFood = () => {
-  const [goal, setGoal] = useState("");
+const UpdateFood = ({ list, getList }) => {
+  const [goal, setGoal] = useState(
+    parseInt(list.find((l) => l.questionid === 1)?.selectid || 1)
+  );
+  const [allergies, setAllergies] = useState([]);
+  const [checkedAllergies, setCheckedAllergies] = useState([]);
+
+  const answersForQuestion4 = list
+    .filter((l) => l.questionid === 4)
+    .map((l) => l.selectid);
+  // console.log(answersForQuestion4);
+
+  const getListAllergy = async () => {
+    const res = await axios("/user/list-allergy");
+    // console.log(res.data);
+    setAllergies(res.data);
+  };
 
   const handleChange = (e) => {
     setGoal(e.target.value);
   };
 
+  const handleAllergyChange = () => {
+    // checked 상태를 변경하는 로직
+  };
+
+  const onSubmit = () => {};
+
+  useEffect(() => {
+    getListAllergy();
+  }, []);
+
+  useEffect(() => {
+    setCheckedAllergies(answersForQuestion4);
+  }, [answersForQuestion4]);
+
   return (
-    <>
+    <form onSubmit={onSubmit}>
       <TableContainer component={Paper} sx={{ mt: 3 }}>
         <Table sx={{ minWidth: 800 }} aria-label="simple table">
           <TableBody>
@@ -78,16 +108,18 @@ const UpdateFood = () => {
               <TableCell>
                 <Stack direction="row" alignItems="center" spacing={3}>
                   <Typography>
-                    <FormControlLabel control={<Checkbox />} label="유제품" />
-                    <FormControlLabel control={<Checkbox />} label="해산물" />
-                    <FormControlLabel control={<Checkbox />} label="견과류" />
-                    <FormControlLabel control={<Checkbox />} label="계란" />
-                    <FormControlLabel control={<Checkbox />} label="복숭아" />
-                    <FormControlLabel control={<Checkbox />} label="밀가루" />
-                    <FormControlLabel control={<Checkbox />} label="알류" />
-                    <FormControlLabel control={<Checkbox />} label="갑각류" />
-                    <FormControlLabel control={<Checkbox />} label="돼지고기" />
-                    <FormControlLabel control={<Checkbox />} label="쇠고기" />
+                    {allergies.map((item) => (
+                      <FormControlLabel
+                        key={item.selectid}
+                        control={
+                          <Checkbox
+                            checked={checkedAllergies.includes(item.selectid)}
+                            onChange={handleAllergyChange}
+                          />
+                        }
+                        label={item.answer}
+                      />
+                    ))}
                   </Typography>
                 </Stack>
               </TableCell>
@@ -96,12 +128,14 @@ const UpdateFood = () => {
         </Table>
       </TableContainer>
       <Stack direction="row" sx={{ my: 2 }} spacing={2} justifyContent="center">
-        <Button variant="contained">수정하기</Button>
+        <Button variant="contained" type="submit">
+          수정하기
+        </Button>
         <Button variant="contained" color="secondary">
           돌아가기
         </Button>
       </Stack>
-    </>
+    </form>
   );
 };
 
