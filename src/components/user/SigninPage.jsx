@@ -20,12 +20,9 @@ import axios from "axios";
 import GoogleLogin from "./login/GoogleLogin";
 import KakaoLogin from "./login/KakaoLogin";
 import { useNavigate } from "react-router";
-import { useLocation } from 'react-router-dom';
 
-const SigninPage = ({setIsHeader,setIsFooter,result}) => {
-  const location = useLocation();
-  //설문결과
-  const s_result = location.state?.result;
+const SigninPage = ({setIsHeader,setIsFooter}) => {
+
   const navi = useNavigate();
   const {
     register, // React Hook Form 에 등록
