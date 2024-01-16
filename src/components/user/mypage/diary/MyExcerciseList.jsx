@@ -12,7 +12,6 @@ const MyExcerciseList = () => {
   const [categories, setCategories] = useState([]);
   const [myExercise, setMyExercise] = useState([]);
   const columns = [
-    { field: "excerciseid", headerName: "Exercise ID", width: 120 },
     { field: "name", headerName: "Name", width: 200 },
     {
       field: "description",
@@ -21,7 +20,7 @@ const MyExcerciseList = () => {
     },
     {
       field: "action1",
-      headerName: "",
+      headerName: "운동영상",
       width: 150,
       renderCell: (params) => (
         <Button
@@ -124,7 +123,7 @@ const MyExcerciseList = () => {
             <TabPanel value={value}>
               {myExercise.length == 0 ? (
                 <div>
-                  <h1>해당 카테고리에서 선택한운동이 없습니다</h1>
+                  <h6>해당 카테고리에 선택한 운동이 없습니다</h6>
                 </div>
               ) : (
                 <DataGrid
