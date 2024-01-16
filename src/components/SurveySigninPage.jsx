@@ -12,7 +12,7 @@ const SurveySigninPage = ({ setIsHeader, setIsFooter,result}) => {
     setIsHeader(false);
     setIsFooter(false);
     // navigate('/signin',{state:{result:result}});
-    navigate('/signin',{
+    navigate('/join',{
       state: { result: location.state?.result },});
   };
 
