@@ -21,7 +21,7 @@ const FAQPage = () => {
   const [list, setList] = useState([]);
 
   const getList = async (categoryid) => {
-    const res = await axios("/shoppingqna/list", {
+    const res = await axios("/shoppingqna/faq/list", {
       params: { categoryid },
     });
     // console.log(res.data);
