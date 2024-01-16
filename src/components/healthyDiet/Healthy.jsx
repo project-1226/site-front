@@ -63,7 +63,7 @@ const Healthy = ({pagetype}) => {
 
   const handleMoreClick = () => {
     //navigate 함수는 두 번째 인자로 state를 받아 해당 경로로 이동할 때 상태를 전달할 수 있음
-    navi(`/healthydiet/healthydetail/${selectTag.categoryid}`, {
+    navi(`/health/healthydetail/${selectTag.categoryid}`, {
       state: { initialFoods: foods },
     });
 
@@ -116,10 +116,7 @@ const Healthy = ({pagetype}) => {
                 </div>
               </div>
               :
-              <Backdrop
-                sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={loading}
-              >
+              <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>
                 <CircularProgress color="inherit" />
               </Backdrop>
           )}
@@ -131,21 +128,11 @@ const Healthy = ({pagetype}) => {
       <div className={`${pagetype}_tag_box`}>        
       {tags.map((tag) => (
         tag.categoryid == selectTag.categoryid ?
-          <Button
-            key={tag.name}
-            variant="outlined"
-            size="small"
-            onClick={() => setSelectTag(tag)}
-          >
+          <Button key={tag.name} variant="outlined" size="small" onClick={() => setSelectTag(tag)}>
             {tag.name}
           </Button>
           :
-          <Button
-            key={tag.categoryid}
-            variant="contained"
-            size="small"
-            onClick={() => handleTagClick(tag)}
-          >
+          <Button key={tag.categoryid} variant="contained" size="small" onClick={() => handleTagClick(tag)}>
             {tag.name}
           </Button>
       ))}
@@ -155,21 +142,11 @@ const Healthy = ({pagetype}) => {
       <div className={`${pagetype}_tag_box`}>        
         {tags.slice(0,6).map((tag) => (
           tag.categoryid == selectTag.categoryid ?
-            <Button
-              key={tag.name}
-              variant="outlined"
-              size="small"
-              onClick={() => setSelectTag(tag)}
-            >
+            <Button key={tag.name} variant="outlined" size="small" onClick={() => setSelectTag(tag)}>
               {tag.name}
             </Button>
             :
-            <Button
-              key={tag.categoryid}
-              variant="contained"
-              size="small"
-              onClick={() => handleTagClick(tag)}
-            >
+            <Button key={tag.categoryid} variant="contained" size="small" onClick={() => handleTagClick(tag)}>
               {tag.name}
             </Button>
         ))}
@@ -177,21 +154,11 @@ const Healthy = ({pagetype}) => {
       <div className={`${pagetype}_tag_box`}>        
       {tags.slice(6).map((tag) => (
         tag.categoryid == selectTag.categoryid ?
-          <Button
-            key={tag.name}
-            variant="outlined"
-            size="small"
-            onClick={() => setSelectTag(tag)}
-          >
+          <Button key={tag.name} variant="outlined" size="small" onClick={() => setSelectTag(tag)}>
             {tag.name}
           </Button>
           :
-          <Button
-            key={tag.categoryid}
-            variant="contained"
-            size="small"
-            onClick={() => handleTagClick(tag)}
-          >
+          <Button key={tag.categoryid} variant="contained" size="small" onClick={() => handleTagClick(tag)}>
             {tag.name}
           </Button>
       ))}
@@ -212,7 +179,7 @@ const Healthy = ({pagetype}) => {
           <div className='healthy_tag_detail_contents'>
             <p className='healthy_detail_contents_name'>{foods[0].name}</p>
             <img src={foods.length > 0 && foods[0].image} alt="" className='healthy_tag_detail_image' />
-            <p className='healthy_detail_contents_article'>{foods[0].description}</p>
+            <p className='healthy_detail_contents_article'><strong>상세설명: &nbsp;</strong>{foods[0].description}</p>
           </div>
         }
       </div>

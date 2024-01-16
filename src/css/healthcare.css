@@ -1,23 +1,25 @@
 .healthcare_wrap {width: 100%;}
 
 /* main_box */
-.healthcare_main {width: 100%; height: 570px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; 
-    padding: 0 40px; background: url('../images/healthcare.jpg') no-repeat 50% 80%; background-size: cover; position: relative;}
+.healthcare_main {width: 100%; height: 880px; margin: 0 auto; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; 
+    padding: 0 40px; background: url('../images/healthcare.jpg') no-repeat 50% 80%; background-size: cover; position: relative; margin-bottom: 180;}
 .healthcare_main::before {width: 100%; height: 100%; content: ''; position: absolute; top: 0; left: 0; background: rgba(0, 0, 0, 0.5);}
 .h_main_title_wrap {position: relative; z-index: 1; text-align: center; font-family: 'Oswald'}
-.h_main_title_wrap p {font-size: 36px; font-weight: 500; letter-spacing: -1px; color: #fff; }
-.h_main_title_wrap p:first-child {margin-bottom: -6px;}
+.h_main_title_wrap p {font-size: 66px; font-weight: 500; letter-spacing: -1px; color: #fff; }
+.h_main_title_wrap p:nth-child(1){margin-bottom: -15px !important;}
+.h_main_title_wrap p:nth-child(2) {margin-bottom: 30px !important;}
+.h_main_title_wrap p:nth-child(3) { font-size: 16px; font-weight: 300; letter-spacing: -0.5px;}
 
-/* healthcare_submain */
-.healthcare_submain {width: 100%; margin: 0 auto 180px auto; display: flex; flex-wrap: nowrap; overflow-x: auto;}
-.challenge_box {width: 25vw; height: 18vw; background: #393939; display: flex; align-items: center; justify-content: center; font-size: 2vw; font-weight: 600; cursor: pointer;}
-.challenge_box:nth-child(1) {color: #fff;}
-.challenge_box:nth-child(2) {background: #c9c9c9;}
-.challenge_box:nth-child(3) {background: #9b9b9b;}
-.challenge_box:nth-child(4) {background: rgb(198, 205, 201);}
 
 /* healthcare_contents */
-.healthcare_contents {width: 94.8%; margin: 0 auto 180px auto;}
+.healthcare_contents {width: 94.8%; margin: 180px auto 180px auto;}
+.select_challenge_wrap {margin-bottom: 180px !important;}
+.challenge_box_wrap {display: flex; flex-wrap: wrap; margin-bottom: 20px !important;}
+.challenge_box_wrap:last-child { margin-bottom: 0 !important;}
+.challenge_box {width: 22.2vw; height: 9vw; margin-right: 1.7vw; display: flex; align-items: center; justify-content: center; border-radius: 20px;
+cursor: pointer; font-size: 24px; font-weight: bold; font-family: 'GmarketSansMedium'; border: 2px solid #748769}
+.challenge_box:hover { background: #393939; color: #fff; border: none;}
+.challenge_box:last-child {margin-right: 0;}
 
 /* healthcare_video_wrap */
 .healthcare_video_wrap {width: 100%; margin: 0 auto 180px auto; display: flex; flex-wrap: wrap; }
@@ -35,6 +37,11 @@
 .carousel-indicators {bottom: -47px;}
 .carousel-indicators { display: none !important;}
 
-/* healthcare-modal  */
-.healthcare_modal_top{display: flex; margin: 10px; justify-content: end;}
-.healthcare_modal_top p{margin: 5px;}
+/* ----------------------------- HealthcareModal ----------------------------- */
+.healthcare_modal_body {width: 100%; height: 400px; margin-bottom: 30px !important;}
+.healthcare_modal_btm_wrap {width: 50%; margin: 0 auto; padding: 15px 30px; border: 1px solid #c8c8c8; border-radius: 20px; margin-bottom: 30px !important;}
+.healthcare_modal_btm {width: 100%; height: auto; margin: 0 auto; ; padding: 20px;}
+.healthcare_modal_selected_title {font-size: 28px; font-weight: 600; text-align: left; margin-bottom: 15px !important;}
+.healthcare_modal_unselected {text-align: center; color: red; font-weight: 500;}
+.healthcare_modal_selected_name {font-size: 16px; font-weight: 500;}
+.healthcare_modal_btn{text-align: center;}
