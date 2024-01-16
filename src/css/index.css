@@ -1,7 +1,13 @@
 /* default */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&family=Noto+Serif+KR:wght@200;300;400;500;600;700;900&family=Oswald:wght@200;300;400;500;600;700&display=swap');
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
 
-body {margin: 0 auto; font-family: 'Noto Sans KR', 'Noto Serif KR', 'Oswald', sans-serif, serif !important;
+body {margin: 0 auto; font-family: 'Noto Sans KR', 'Noto Serif KR', 'GmarketSansMedium', 'Oswald', sans-serif, serif !important;
 -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale;}
 *{margin:0; padding:0; vertical-align: top;}
 li{list-style:none !important;}
@@ -11,7 +17,7 @@ code {font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', mono
 
 /* header style변경 */
 .css-9tjrg8-MuiPaper-root-MuiAppBar-root {background: none !important; color: #748769 !important;}
-.css-1ci0kpw-MuiTypography-root {font-weight: 700 !important; font-size: 1.063rem !important; letter-spacing: -0.5px !important;
+.menu-item {font-weight: 700 !important; font-size: 1.063rem !important; letter-spacing: -0.5px !important;
  height: 64px !important; line-height: 64px !important; width: 115px !important; text-align: center !important;}
 .login, .logout {font-weight: 700 !important; letter-spacing: -0.5px !important; font-family: 'Noto Sans KR' !important;}
 .active-link {border-bottom: 3px solid #66765e; font-weight: bold; color: #000 !important;}
