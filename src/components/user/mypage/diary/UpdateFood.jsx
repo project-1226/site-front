@@ -23,36 +23,52 @@ const UpdateFood = ({ list, getList }) => {
     parseInt(list.find((l) => l.questionid === 1)?.selectid || 1)
   );
   const [allergies, setAllergies] = useState([]);
-  const [checkedAllergies, setCheckedAllergies] = useState([]);
 
   const answersForQuestion4 = list
     .filter((l) => l.questionid === 4)
     .map((l) => l.selectid);
-  // console.log(answersForQuestion4);
 
   const getListAllergy = async () => {
     const res = await axios("/user/list-allergy");
-    // console.log(res.data);
-    setAllergies(res.data);
+    const data = res.data.map(
+      (a) => a && { ...a, checked: answersForQuestion4.includes(a.selectid) }
+    );
+    setAllergies(data);
+    // console.log(allergies);
   };
 
   const handleChange = (e) => {
     setGoal(e.target.value);
   };
 
-  const handleAllergyChange = () => {
-    // checked 상태를 변경하는 로직
+  const handleAllergyChange = (e, id) => {
+    const data = allergies.map((a) =>
+      a.selectid === id ? { ...a, checked: e.target.checked } : a
+    );
+    setAllergies(data);
   };
 
-  const onSubmit = () => {};
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    const checked = allergies.filter((a) => a.checked).map((a) => a.selectid);
+    for (const id of checked) {
+      // console.log({
+      //   userid: sessionStorage.getItem("userid"),
+      //   questionid: 4,
+      //   selectid: id,
+      // });
+      await axios.post("/user/survey/change", {
+        userid: sessionStorage.getItem("userid"),
+        questionid: 4,
+        selectid: id,
+      });
+    }
+    // 로직 수정 필요!!!!!!!!!!!
+  };
 
   useEffect(() => {
     getListAllergy();
   }, []);
-
-  useEffect(() => {
-    setCheckedAllergies(answersForQuestion4);
-  }, [answersForQuestion4]);
 
   return (
     <form onSubmit={onSubmit}>
@@ -113,8 +129,11 @@ const UpdateFood = ({ list, getList }) => {
                         key={item.selectid}
                         control={
                           <Checkbox
-                            checked={checkedAllergies.includes(item.selectid)}
-                            onChange={handleAllergyChange}
+                            value={item.selectid}
+                            checked={item.checked}
+                            onClick={(e) =>
+                              handleAllergyChange(e, item.selectid)
+                            }
                           />
                         }
                         label={item.answer}
