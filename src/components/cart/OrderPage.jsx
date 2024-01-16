@@ -1,33 +1,22 @@
-import React, { useState } from 'react'
-import {
-  Container,
-  Typography,
-  Button,
-  Grid,
-  Card,
-  CardContent,
-  AppBar,
-  Toolbar,
-  Box,
-  CardMedia,
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField
+import React, { useState } from 'react';
 
-} from '@mui/material';
-import Checkbox from '@mui/material/Checkbox';
 import Purchaseitems from './Purchaseitems';
+import OrderList from './OrderList';
 
 const OrderPage = () => {
 
-
+  const userid = sessionStorage.getItem("userid");
+  const orderid = "e91b8eb6-24af-404a-b1705309558426"
 
   return (
     <div className='ak_wrap'>
       <div className='ak_contents'>
-       <Purchaseitems></Purchaseitems>
-
+        {/* <OrderList orderid={orderid}/>*/}
+        <Purchaseitems userid={userid} />
+        
       </div>
     </div>
   )
 }
 
-export default OrderPage
+export default OrderPage;

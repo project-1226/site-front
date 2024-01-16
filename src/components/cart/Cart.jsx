@@ -30,6 +30,7 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import SvgIcon from "@mui/material/SvgIcon";
 import { SvgIconComponent } from "@mui/icons-material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import Chatbot from '../chatbot/Chatbot';
 
 const Cart = () => {
   const [loading, setLoading] = useState(false);
@@ -45,6 +46,8 @@ const Cart = () => {
   const [checkSum, setCheckSum] = useState(0);
   const [checkpayok, setCheckpayok] = useState(0);
   const [useraddress, setUseraddress] = useState([]);
+  const currentTime = new Date().getTime();
+
 
   const [form, setForm] = useState({
     userid: sessionStorage.getItem("userid")?sessionStorage.getItem("userid"):"",
@@ -326,7 +329,7 @@ const handleRadioChange = (addressid) => {
     const paydata = {
       pg: card,                           // PG사
       pay_method: 'card',                           // 결제수단
-      merchant_uid: `${sessionStorage.getItem("userid")}${new Date().getTime()}`,   // 주문번호
+      merchant_uid: `${sessionStorage.getItem("userid")}${currentTime}`,   // 주문번호
       amount: sum,                                 // 결제금액
       name: '밀조이 결제',                  // 주문명
       buyer_name: recipient,                           // 구매자 이름
@@ -804,7 +807,7 @@ const handlecardradiochange = (event) => {
       )}
 
         </Box>
-      
+        <Chatbot/>
      
       </div>
 

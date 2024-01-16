@@ -1,10 +1,15 @@
-import React from 'react'
+import React, { useState } from 'react';
 import ChatBot from 'react-simple-chatbot'
 import {ThemeProvider} from 'styled-components'
+import "react-chatbot-kit/build/main.css";
+import "../../css/chatbot.css";
 
-const Chatbot = () => {
-
-
+const Chatbot = ({ userid }) => {
+    const [chatbotOpened, setChatbotOpened] = useState(false);
+    const handleChatbotToggle = () => {
+        setChatbotOpened(!chatbotOpened);
+      };
+    
     const steps = [
         {
             id: '0',
@@ -76,19 +81,60 @@ const Chatbot = () => {
         botFontColor: '#FFF',
         userBubbleColor: '#fff',
         userFontColor: '#4a4a4a',
+        posision: 'relative',
+        bottom: '120px'
     };
+    const handleCloseChatbot = () => {
+        setChatbotOpened(false);
+      };
 
-    return (
-        <>
-           <ThemeProvider theme={theme}>
-               <ChatBot
+    const ChatbotContent = () => {
+        return (
+          <ThemeProvider theme={theme}>
+            <ChatBot
+              steps={steps}
+              hideHeader={true}
+              placeholder={'채팅이 불가능한 채널입니다.'}
+            />
+          </ThemeProvider>
+        );
+      };
+
+
+
+    
+      return (
+        <div className='ak_wrap'>
+          <div className='ak_contents'>
+     
+            <div class='cbfloat-container'>
+            {chatbotOpened &&   
+             <>
+            <button onClick={handleCloseChatbot}>닫기</button>
+              <ThemeProvider theme={theme}>
+                <ChatBot
                   steps={steps}
                   hideHeader={true}
                   placeholder={'채팅이 불가능한 채널입니다.'}
-               />
-            </ThemeProvider>
-        </>
-    );
-};
-
+                />
+              </ThemeProvider>
+    
+            </>}
+                <div class='cbfloat-button-container'>
+                    <button
+                    class='cbfloat-button'
+                    onClick={handleChatbotToggle}
+                    >
+                    챗봇
+                    </button>
+                </div>
+              
+            </div>
+        
+          </div>
+      
+        </div>
+      );
+    };
+    
 export default Chatbot

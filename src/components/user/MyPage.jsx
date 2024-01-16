@@ -2,6 +2,8 @@ import { Box, Stack } from "@mui/material";
 import React from "react";
 import Sidebar from "./mypage/Sidebar";
 import { Outlet } from "react-router";
+import Chatbot from "../chatbot/Chatbot";
+
 
 const MyPage = () => {
   return (
@@ -10,6 +12,7 @@ const MyPage = () => {
         <Sidebar />
         <Outlet />
       </Stack>
+      <Chatbot/>
     </Box>
   );
 };
