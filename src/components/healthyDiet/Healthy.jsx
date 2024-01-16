@@ -95,7 +95,7 @@ const Healthy = ({pagetype}) => {
             <p className="main_title"> {text.title} </p>
 
             <p className="main_article"> 오늘의 추천메뉴 [ {selectTag.name} ] </p>
-            <Button variant="contained" size="small" onClick={() => handleRefreshClick()}> refresh </Button>
+            <Button className='refresh_btn' variant="contained" size="small" onClick={() => handleRefreshClick()}> refresh </Button>
           </div>
         </div>{/* healthy_main */}
 
@@ -168,7 +168,6 @@ const Healthy = ({pagetype}) => {
       
       {/* categoryTags box */}
     
-
       {/* 카테고리 대표식단 세부내용++  */}
       {/* 로딩되는동안 유지될 box추가해야함 */}
       <div className='healthy_tag_detail'>

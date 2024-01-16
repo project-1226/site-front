@@ -187,12 +187,12 @@ const Healthcare = () => {
 
           <div className='challenge_box_wrap'>
             {categories.slice(0, 4).map((category) =>
-              <div className='challenge_box' onClick={() => handleCategoryClick(category)}> {category.name} </div>
+              <div className='challenge_box' onClick={() => handleCategoryClick(category)}> #{category.name} </div>
             )}
           </div>
           <div className='challenge_box_wrap'>
             {categories.slice(4, 8).map((category) =>
-              <div className='challenge_box' onClick={() => handleCategoryClick(category)}> {category.name} </div>
+              <div className='challenge_box' onClick={() => handleCategoryClick(category)}> #{category.name} </div>
             )}
           </div>
 

@@ -53,6 +53,7 @@ import FooterPage from "./FooterPage";
 
 import QuestionsPage from "./QuestionsPage";
 import SurveySigninPage from "./SurveySigninPage";
+import HealthyDetailModal from "./healthyDiet/HealthyDetailModal";
 
 const RouterPage = () => {
   const navi = useNavigate();
@@ -148,6 +149,7 @@ const RouterPage = () => {
           path="/health/healthydetail/:tag"
           element={<HealthyDetail />}
         />
+        <Route path="/healthydetailmodal" element={<HealthyDetailModal />} />
         {/* 질환맞춤식단 */}
         {/* healthy컴포넌트사용*/}
         <Route path="/diseasediet" element={<Healthy pagetype="disease" />} />
