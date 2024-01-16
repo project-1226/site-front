@@ -7,7 +7,6 @@ import {
   CardContent,
   CardMedia,
   CircularProgress,
-  Divider,
   IconButton,
   InputAdornment,
   Pagination,
@@ -18,6 +17,7 @@ import {
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import CancelModal from "./CancelModal";
 
 const MyPurchase = () => {
   const [loading, setLoading] = useState(false);
@@ -173,15 +173,15 @@ const MyPurchase = () => {
                     ))}
                   </Stack>
                 </CardContent>
-                <Divider orientation="vertical" />
                 <CardContent sx={{ width: 170, alignSelf: "center", pt: 3 }}>
                   <Stack spacing={1}>
                     <Button variant="outlined" size="small" fullWidth>
                       배송조회
                     </Button>
-                    <Button variant="outlined" size="small" fullWidth>
+                    {/* <Button variant="outlined" size="small" fullWidth>
                       교환, 반품 신청
-                    </Button>
+                    </Button> */}
+                    <CancelModal purchaseid={l.purchaseid} />
                     <Button
                       variant="contained"
                       size="small"
