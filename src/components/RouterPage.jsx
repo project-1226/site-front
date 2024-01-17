@@ -41,11 +41,12 @@ import AdminPage from "./admin/AdminPage";
 import ProductRegisterPage from "./admin/ProductRegisterPage";
 import AdminOrderList from "./admin/AdminOrderList";
 import AdminNotice from "./admin/AdminNotice";
+import AdminNoticeList from "./admin/AdminNoticeList";
 import AdminReview from "./admin/AdminReview";
 import ProductListPage from "./admin/ProductListPage";
-import Chat from "./community/Chat";
 
 import SurveyPage from "./SurveyPage";
+
 
 const RouterPage = () => {
   return (
@@ -76,9 +77,6 @@ const RouterPage = () => {
         <Route path="review" element={<ReviewPage />} />
         <Route path="review/comment/:pid" element={<CommentPage />} />
       </Route>
-      <Route path="/chat" element={<Chat />} />
-      
-      
 
       {/* 관리자페이지 */}
       <Route path="/admin" element={<AdminPage />}>
@@ -86,6 +84,7 @@ const RouterPage = () => {
         <Route path="register" element={<ProductRegisterPage />} />
         <Route path="product" element={<ProductListPage />} />
         <Route path="adno" element={<AdminNotice />} />
+        <Route path="adnoud" element={<AdminNoticeList />} />
         <Route path="adreview" element={<AdminReview />} />
       </Route>
 

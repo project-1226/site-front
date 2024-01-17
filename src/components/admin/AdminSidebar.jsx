@@ -141,6 +141,17 @@ const AdminSidebar = () => {
                     selected={selectedIndex === 5}
                     onClick={(event) => handleListItemClick(event, 5)}
                     component={Link}
+                    to="adnoud"
+                >
+                    <ListItemIcon>
+                        <RateReviewOutlinedIcon />
+                    </ListItemIcon>
+                    <ListItemText primary="공지목록" />
+                </ListItemButton>
+                <ListItemButton
+                    selected={selectedIndex === 6}
+                    onClick={(event) => handleListItemClick(event, 6)}
+                    component={Link}
                     to="adreview"
                 >
                     <ListItemIcon>

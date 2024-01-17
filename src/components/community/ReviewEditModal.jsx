@@ -1,9 +1,41 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { Fragment, useEffect, useRef, useState } from 'react'
 import { Modal, Button, Box } from '@mui/material';
 import { Card, Form, InputGroup } from 'react-bootstrap'
 import axios from 'axios';
+import ImageUploader from './ImageUploader';
+import { uploadBytes, getDownloadURL, ref as storageRef } from 'firebase/storage';
+import { v4 as uuidv4 } from 'uuid'
+import { storage } from '../FirebaseConfig';
 
-const ReviewEditModal = ({ show, hide, reviewData, postid, getReview }) => {
+
+// 이미지를 업로드하여 URL을 받아오는 함수
+const uploadImagesToStorage = async (images) => {
+    const downloadURLs = [];
+    const imageNames = [];
+
+    for (const image of images) {
+        const fileExtension = image.name
+            .split(".")
+            .pop()
+            .toLowerCase();
+        const imageName = `${uuidv4()}.${fileExtension}`;
+        const imageRef = storageRef(storage, `images/community/${imageName}`);
+
+        try {
+            await uploadBytes(imageRef, image);
+            const downloadURL = await getDownloadURL(imageRef);
+            downloadURLs.push(downloadURL);
+            imageNames.push(imageName);
+        } catch (error) {
+            console.error("Error uploading file:", error);
+        }
+    }
+
+    return [imageNames, downloadURLs];
+};
+
+
+const ReviewEditModal = ({ show, hide, reviewData, postid, getReview, imageList, setImageList }) => {
     const [data, setData] = useState('');
     const [form, setForm] = useState({
         categoryid: '102',
@@ -25,14 +57,23 @@ const ReviewEditModal = ({ show, hide, reviewData, postid, getReview }) => {
     }
 
     const onUpdatePhoto = async() => {
-        if(window.confirm("사진을 등록할까요?")){
-            const formData = new FormData();
-            formData.append("file", file);
+        if(window.confirm("사진을 변경할까요?")){
+            try{
+                const [imageNames, downloadURLs] = await uploadImagesToStorage([file]);
 
-            await axios.post('/', formData);
-            alert("등록완료!");
+                const updatedImages = imageList.map((image, index) => ({
+                    ...image,
+                    image_url: downloadURLs[index] || image.image_url,
+                }));
+
+                setImageList(updatedImages);
+                alert("수정완료!");
+            }catch(error){
+                console.log("사진업로드 오류:", error);
+                alert("사진수정변경 오류");
+            }
         }
-    }
+    };
 
     const onChange = (e) => {
         setForm({
@@ -43,12 +84,13 @@ const ReviewEditModal = ({ show, hide, reviewData, postid, getReview }) => {
 
     const onSubmit = async(e) => {
         e.preventDefault();
+        console.log({file});
         if(window.confirm("수정된 내용을 저장할까요?")){
             await axios.post("/community/update", form);
             alert("수정완료!");
             hide();
 
-            const updateData = await axios(`/community/read/review?postid=${postid}`);
+            const updateData = await axios(`/community/read/review?postid=${postid}&categoryid=${categoryid}`);
             setData(updateData);
 
             getReview();
@@ -84,10 +126,15 @@ const ReviewEditModal = ({ show, hide, reviewData, postid, getReview }) => {
                     <Card className='text-center p-3' style={{ width: '100%' }}>
                         <form onSubmit={onSubmit}>
                             <div style={{ width: '100%' }}>
-                                <img onClick={() => ref_file.current.click()}
-                                    src={src || 'http://via.placeholder.com/200x100'} width='200px' height='100px' />
-                                <input type='file' ref={ref_file} onChange={onChangeFile} style={{ display: 'none' }} />
-                                <br />
+                            {imageList.map((i, index)=>
+                                <Fragment key={index}>
+                                    <img onClick={() => ref_file.current.click()}
+                                    src={i.image_url || 'http://via.placeholder.com/200x100'} width='100px' height='100px' alt={'Image Preview ${index}'} />
+                                    <input type='file' ref={ref_file} onChange={onChangeFile} style={{ display: 'none' }} />
+                                </Fragment>
+                            )}
+                                
+                                <br></br>
                                 <Button onClick={onUpdatePhoto}
                                     className='mt-2' variant='contained' size='small'>사진 변경</Button>
                             </div>

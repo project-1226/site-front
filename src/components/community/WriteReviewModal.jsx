@@ -1,9 +1,8 @@
 import React, { useRef, useState } from 'react'
 import { Modal, Button, Box } from '@mui/material';
-import { Card, Form, InputGroup } from 'react-bootstrap'
+import { Card, Form, InputGroup, Spinner } from 'react-bootstrap'
 import axios from 'axios';
 import ImageUploader from './ImageUploader'
-
 
 const WriteReviewModal = ({ show, hide, updateReviewList }) => {
     const [loading, setLoading] = useState(false);
@@ -17,7 +16,6 @@ const WriteReviewModal = ({ show, hide, updateReviewList }) => {
 
     const { categoryid, userid, title, content } = form;
 
-
     const onChange = (e) => {
         setForm({
             ...form,
@@ -27,7 +25,8 @@ const WriteReviewModal = ({ show, hide, updateReviewList }) => {
 
     // 자식 컴포넌트 함수 호출!!!
     const uploaderRef = useRef(null);
-    const onSubmit = async () => {
+    const onSubmit = async (e) => {
+        e.preventDefault();
         setLoading(true);
 
         try {
@@ -36,14 +35,16 @@ const WriteReviewModal = ({ show, hide, updateReviewList }) => {
 
             if (uploadedURLs) {
                 form = {
+                    categoryid: '102',
                     userid: sessionStorage.getItem("userid"),
                     title,
                     content,
                     image_names: imageNames.join(","),
                     image_urls: uploadedURLs.join(","),
                 };
-                console.log(form);
+                //console.log(form);
             }
+
             if(content === ""){
                 alert("내용을 입력하세요!");
             }else{
@@ -59,7 +60,6 @@ const WriteReviewModal = ({ show, hide, updateReviewList }) => {
             alert("리뷰 등록이 실패하였습니다.\n관리자에게 문의해주세요.");
         }
     };
-            
 
     return (
         <Modal

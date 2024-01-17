@@ -16,7 +16,7 @@ const AdminNotice = () => {
         content: ''
     });
 
-    const {categoryid, title, userid, content} = form;
+    const {title, userid, content} = form;
 
     const onChange = (e) => {
         setForm({

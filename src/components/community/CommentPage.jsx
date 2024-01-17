@@ -17,12 +17,15 @@ const CommentPage = () => {
     const [total, setTotal] = useState(0);
     const [updateContent, setUpdateContent] = useState('');
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const categoryid = '102';
     
-    const {postid, nickname, title, content: reviewContent, image, regdate} = review;
+    const [imageList, setImageList] = useState([]);
+    
+    const {postid, nickname, title, content: reviewContent, regdate} = review;
 
     const getReview = async() => {
         setLoading(true);
-        const res = await axios(`/community/read/review?postid=${pid}`);
+        const res = await axios(`/community/read/review?postid=${pid}&categoryid=${categoryid}`);
         //console.log(res.data);
         setReview(res.data);
         setLoading(false);
@@ -30,6 +33,10 @@ const CommentPage = () => {
         const totalRes = await axios(`/community/total/comment?postid=${pid}`);
         setTotal(totalRes.data);
         //console.log(totalRes.data);
+
+        const imageRes = await axios(`/community/image_list?postid=${pid}`);
+        setImageList(imageRes.data);
+        //console.log(imageRes.data);
     }
     
     const updatePostCnt = async() => {
@@ -65,9 +72,11 @@ const CommentPage = () => {
     const getCommentList = async() => {
         const res = await axios(`/community/read/comment?userid=${sessionStorage.getItem("userid")}&postid=${pid}`);
         //console.log(res.data);
+        //setCommentList(res.data);
+
         let data = res.data.map(r=> r && {...r, view: true, text: r.content});
         setCommentList(data);
-        //setCommentList(res.data);
+        
     }
 
     useEffect(() => {
@@ -98,7 +107,7 @@ const CommentPage = () => {
             await axios.get(`/community/insert/commentFavorite?commentid=${commentid}&userid=${sessionStorage.getItem("userid")}`);
             alert("좋아요 추가!");
             getCommentList();
-            console.log(commentid);
+            //console.log(commentid);
         }
     }
 
@@ -125,32 +134,23 @@ const CommentPage = () => {
 
     const onDelete = async(commentid) => {
         if(window.confirm(`${commentid}번 댓글을 삭제할까요?`)){
-            console.log(commentid);
+            //console.log(commentid);
             await axios.post("/community/delete/comment?commentid=" + commentid);
             getCommentList();
         }
     }
 
-    // const onChangeBody = (e, commentid) => {
-    //     const data = commentList.map(r=> r.commentid === commentid ? {...r, content:e.target.value} : r);
-    //     setCommentList(data);
-    // }
-
     //댓글 수정 저장
     const onClickSave = async(commentid, text) => {
-
         if(text === updateContent){
             onClickCancel(commentid);
         }else{
             if(window.confirm(`${commentid}번 댓글을 수정할까요?`)){
-                //댓글 수정
                 try{
-                    console.log(commentid);
-                    console.log(updateContent);
                     await axios.post("/community/update/comment", {commentid, updateContent});
                     alert("수정완료!");
-                    console.log(commentid);
-                    console.log(updateContent);
+                    //console.log(commentid);
+                    //console.log(updateContent);
 
                     const updateCommentList = commentList.map(r=> r.commentid === commentid ? {...r, view: true, text: updateContent} : r);
                     setCommentList(updateCommentList);
@@ -172,7 +172,7 @@ const CommentPage = () => {
     return (
         <div className='my-5'>
             <Row className='p-3'>
-                <Card className='p-3' style={{width: '80%', height: '300px'}}>
+                <Card className='p-3' style={{width: '900px', height: 'auto'}}>
                     <div>
                         <p className='text-center'>{title}</p>
                         <div className='text-end ms-3'>
@@ -181,9 +181,11 @@ const CommentPage = () => {
                         </div>
                         <br/>
                     </div>
-                    <div>
-                        <div>{image}</div>
-                        <div>{reviewContent}</div>
+                    <div className='text-center'>
+                        {imageList.map((i)=>
+                            <img src={i.image_url} style={{width: '200px', height: '130px', paddingRight:'10px'}} />
+                        )}
+                        <div className='mt-5'>{reviewContent}</div><br/>
                     </div>
                 </Card>
 
@@ -196,7 +198,8 @@ const CommentPage = () => {
                 }
 
                 {isModalOpen &&
-                    <ReviewEditModal show={isModalOpen} hide={()=> setIsModalOpen(false)} reviewData={review} postid={postid} getReview={getReview} />
+                    <ReviewEditModal show={isModalOpen} hide={()=> setIsModalOpen(false)} reviewData={review} postid={postid} 
+                    getReview={getReview} imageList={imageList} />
                 }
 
                 <div className='mt-5' style={{width: '80%'}}>
