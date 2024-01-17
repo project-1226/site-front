@@ -24,7 +24,7 @@ import Draggable from "react-draggable";
 import ImageUploader from "../shop/ImageUploader";
 import axios from "axios";
 import { deleteObject, ref } from "firebase/storage";
-import { storage } from "../../../FirebaseConfig";
+import { storage } from "../../../../FirebaseConfig";
 
 function PaperComponent(props) {
   return (
