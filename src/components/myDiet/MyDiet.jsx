@@ -1,23 +1,45 @@
-import * as React from 'react';
-import { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react'
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DateCalendar } from '@mui/x-date-pickers/DateCalendar';
-import { Button } from '@mui/material';
+import { Backdrop,CircularProgress } from '@mui/material';
 import Carousel from 'react-bootstrap/Carousel';
 import DietModal from './DietModal';
 import YouTubeSearchVideo from '../YouTubeSearchVideo';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+//함수(IngredientArrayMaker:하나의인수만,IngredientsArraytMaker2개 이상인수 가능)
+import { IngredientArrayMaker,IngredientsArraytMaker } from './IngredientArrayMaker'
 
 
 // MyDiet 컴포넌트 정의
 const MyDiet = ({ setIsHeader, setIsFooter }) => {
+  const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedDay, setSelectedDay] = useState(1);
-
   const navigate = useNavigate();
 
+  const [myFoods,setMyFoods] = useState([]);
+  const [selectedMyFood,setSelectedMyFood] = useState("");
+  const [ingredientList,SetIngredientList] = useState("");
+
+  const getMyList= async()=>{
+    setLoading(true);
+    const res = await axios("/food/my_food_list?userid="+sessionStorage.getItem("userid"));
+    setMyFoods(res.data);
+    setSelectedMyFood(res.data[0]); //myFoods[0]안됨
+    setLoading(false);
+  }
+
+  useEffect(()=>{    
+    getMyList();  
+  },[])
+
+  //myFoods(0,3)의 name뽑아서?
   const recipeTitle = ["연어샐러드", "포케샐러드", "닭가슴살 샐러드"];
+
+
+
 
   const handleImageClick = () => {
     setIsModalOpen(true);
@@ -29,10 +51,32 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   const handleDayButtonClick = (day) => {
     setSelectedDay(day);
+    setSelectedMyFood(myFoods[day-1]);
+    console.log(selectedMyFood);
   };
 
-  const handleCart = () => {
-    navigate('/cart');
+  const handleCart = async() => {
+
+    if (selectedMyFood) {
+      let ingreList = IngredientArrayMaker(selectedMyFood.ingredients);
+      // 2024.1.17-아름
+      // 1. {ingreList(배열), userid}? -> post로 어떻게 보내고 받을지(자료형)
+      // 2. cart에 insert할때 필요한데이터, 어떤 api? ,api날릴때 필요한 파라미터?
+      // 3. 2번 선행이후 ingreList로 어떻게 select해올지 쿼리작성(mapper)
+      // 4. cart에 insert할때 필요한 VO 수정 or 생성
+
+      //5. 1.과 2. service로 묶기(재료담기 click -> 재료에해당하는 product검색 + cart insert)
+      //6 endpoint : navigate('/cart');
+      const res = await axios.post("/??????")
+      
+      //
+
+    } else {
+      // 선택된 음식이 없을 때의 처리
+      console.error("No selectedMyFood available.");
+    }
+
+    //navigate('/cart');
   }
 
   useEffect(() => {
@@ -42,6 +86,9 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   return (
     <div className='diet_wrap'>
+      <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <div className="main_box">
         <div className="main_calendar">
           <LocalizationProvider dateAdapter={AdapterDayjs}>
@@ -58,10 +105,14 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
               </button>
             ))}
           </div>
-
+          
           <div className='date_plan_img'>
+
+          {/*아름 -제목한번추가해봄  */}
+          <div className='text-center'><h3>{selectedMyFood.name}</h3> </div>
+
             <div className='date_plan_imgbox'>
-              {`${selectedDay}일차 음식 이미지`}
+              <img src={selectedMyFood.image}/>
             </div>
           </div>
 
@@ -79,9 +130,11 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
           </div>
 
           <div className='recipe_video_wrap'>
-            <div className='recipe_video'><YouTubeSearchVideo query={recipeTitle[0]} size={1} /></div>
-            <div className='recipe_video'><YouTubeSearchVideo query={recipeTitle[1]} size={1} /></div>
-            <div className='recipe_video'><YouTubeSearchVideo query={recipeTitle[2]} size={1} /></div>
+            {/*  map이 함수 내에서 JSX를 반환할 때 중괄호 {} 대신 괄호 ()를 사용해야함..!!!!*/}
+            {/* iframe으로할지 react-youtube사용할지 결정해야함 */}
+            {myFoods.slice(0, 3).map((food) => (
+              <iframe key={food?.vidioid} className='recipe_video' width="400" height="315" src={`https://www.youtube.com/embed/${food?.vidioid}`} itle={food?.name} frameBorder="0" allowFullScreen />
+            ))}
           </div>
         </section>{/* diet_recipe */}
 
@@ -176,7 +229,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
           </div>
         </section>
       </div>{/* diet_contents */}
-      <DietModal show={isModalOpen} onHide={handleCloseModal} />
+      <DietModal show={isModalOpen} onHide={handleCloseModal} selectedMyFood={selectedMyFood} />
     </div>
   );
 }
