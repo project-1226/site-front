@@ -10,6 +10,7 @@ const AdminNotice = () => {
     const [loading, setLoading] = useState(false);
 
     const [form, setForm] = useState({
+        categoryid : '101',
         title: '',
         userid: '',
         content: ''
