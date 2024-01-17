@@ -12,6 +12,17 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 
 const HeaderPage = () => {
+  // const [avatar, setAvatar] = useState("");
+
+  // const getAvatar = async () => {
+  //   const res = await axios("/user/read", {
+  //     params: {
+  //       userid: sessionStorage.getItem("userid"),
+  //     },
+  //   });
+  //   setAvatar(res.data.avatar);
+  // };
+
   const onLogout = (e) => {
     e.preventDefault();
     if (window.confirm("로그아웃하시겠습니까?")) {
@@ -20,6 +31,11 @@ const HeaderPage = () => {
     }
   };
 
+  // useEffect(() => {
+  //   if (sessionStorage.getItem("userid")) {
+  //     getAvatar();
+  //   }
+  // }, []);
   const location = useLocation();
 
   return (

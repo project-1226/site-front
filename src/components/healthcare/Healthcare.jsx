@@ -130,7 +130,7 @@ const Healthcare = () => {
         <div className="h_main_title_wrap">
           <p>IT DOESN'T GET EASIER.</p>
           <p>TOU GET BETTER.</p>
-          <p>MEALJOY의 노력이 현대인들의 삶을 건강하고, 행복하게 바꿉니다.</p> 
+          <p>MEALJOY의 노력이 현대인들의 삶을 건강하고, 행복하게 바꿉니다.</p>
         </div>
       </div>
       {/* <div className='healthcare_submain'>
@@ -185,17 +185,18 @@ const Healthcare = () => {
             <p className="contents_title">챌린지를 선택해주세요!</p>
           </div>
 
-          <div className='challenge_box_wrap'>
-            {categories.slice(0, 4).map((category) =>
-              <div className='challenge_box' onClick={() => handleCategoryClick(category)}> #{category.name} </div>
-            )}
+          <div className='challenge_wrap'>
+            <div className='challenge_box_wrap'>
+              {categories.slice(0, 4).map((category) =>
+                <div className='challenge_box' onClick={() => handleCategoryClick(category)}> #{category.name} </div>
+              )}
+            </div>
+            <div className='challenge_box_wrap'>
+              {categories.slice(4, 8).map((category) =>
+                <div className='challenge_box' onClick={() => handleCategoryClick(category)}> #{category.name} </div>
+              )}
+            </div>
           </div>
-          <div className='challenge_box_wrap'>
-            {categories.slice(4, 8).map((category) =>
-              <div className='challenge_box' onClick={() => handleCategoryClick(category)}> #{category.name} </div>
-            )}
-          </div>
-
         </section>
 
         <section>

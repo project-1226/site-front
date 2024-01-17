@@ -54,7 +54,6 @@ import QuestionsPage from "./QuestionsPage";
 import SurveySigninPage from "./SurveySigninPage";
 import HealthyDetailModal from "./healthyDiet/HealthyDetailModal";
 
-
 const RouterPage = () => {
   const navi = useNavigate();
   const isUserLoggedIn = sessionStorage.getItem("userid") !== null;
@@ -75,43 +74,43 @@ const RouterPage = () => {
 
       <Routes>
         {/* 설문조사 페이지 */}
-        <Route path="/" element={<SurveyPage setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
+        <Route
+          path="/"
+          element={
+            <SurveyPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />
+          }
+        />
         {/* 설문조사 */}
-        <Route path="/q_page" element={<QuestionsPage setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
-        <Route path="/SurveySigninPage" element={<SurveySigninPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />}/>
+        <Route
+          path="/q_page"
+          element={
+            <QuestionsPage
+              setIsHeader={setIsHeader}
+              setIsFooter={setIsFooter}
+            />
+          }
+        />
+        <Route
+          path="/SurveySigninPage"
+          element={
+            <SurveySigninPage
+              setIsHeader={setIsHeader}
+              setIsFooter={setIsFooter}
+            />
+          }
+        />
 
         <Route path="/mydiet" element={<MyDiet />} />
-
         <Route path="/AIimg" element={<Imagereader />} />
         <Route path="/AImotion" element={<MotionReader />} />
         <Route path="/Ailist" element={<AiList />} />
-
-      {/* community */}
-      <Route path="/community" element={<CommunityPageMain />}>
-        <Route path="" element={<NoticePage />} />
-        <Route path="review" element={<ReviewPage />} />
-        <Route path="review/comment/:pid" element={<CommentPage />} />
-      </Route>
-
-      {/* 관리자페이지 */}
-      <Route path="/admin" element={<AdminPage />}>
-        <Route path="adorder" element={<AdminOrderList />} />
-        <Route path="register" element={<ProductRegisterPage />} />
-        <Route path="product" element={<ProductListPage />} />
-        <Route path="adno" element={<AdminNotice />} />
-        <Route path="adnoud" element={<AdminNoticeList />} />
-        <Route path="adreview" element={<AdminReview />} />
-      </Route>
 
         {/* community */}
         <Route path="/community" element={<CommunityPageMain />}>
           <Route path="" element={<NoticePage />} />
           <Route path="review" element={<ReviewPage />} />
-          <Route path="review/write" element={<WriteReview />} />
           <Route path="review/comment/:pid" element={<CommentPage />} />
         </Route>
-
-        <Route path="/chat" element={<Chat />} />
 
         {/* 관리자페이지 */}
         <Route path="/admin" element={<AdminPage />}>
@@ -119,8 +118,24 @@ const RouterPage = () => {
           <Route path="register" element={<ProductRegisterPage />} />
           <Route path="product" element={<ProductListPage />} />
           <Route path="adno" element={<AdminNotice />} />
+          <Route path="adnoud" element={<AdminNoticeList />} />
           <Route path="adreview" element={<AdminReview />} />
         </Route>
+
+        <Route path="/Chatbot" element={<Chatbot />} />
+
+        {/* 주문 */}
+        <Route path="/Cart" element={<Cart />} />
+        <Route path="/Order" element={<OrderPage />} />
+
+        {/* 로그인/회원가입 */}
+        <Route
+          path="/login"
+          element={
+            <SigninPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />
+          }
+        />
+        <Route path="/join" element={<SignupPage />} />
 
         {/* 상품등록 */}
 
@@ -147,10 +162,7 @@ const RouterPage = () => {
 
         {/* 건강식단 */}
         <Route path="/health" element={<Healthy pagetype="health" />} />
-        <Route
-          path="/health/healthydetail/:tag"
-          element={<HealthyDetail />}
-        />
+        <Route path="/health/healthydetail/:tag" element={<HealthyDetail />} />
         <Route path="/healthydetailmodal" element={<HealthyDetailModal />} />
         {/* 질환맞춤식단 */}
         {/* healthy컴포넌트사용*/}
@@ -159,10 +171,9 @@ const RouterPage = () => {
 
         {/* 헬스케어 */}
         <Route path="/healthcare" element={<Healthcare />} />
-        
       </Routes>
       {/* isSurvey  false ,isStartQ true ->false */}
-      { isFooter && <FooterPage />}
+      {isFooter && <FooterPage />}
     </>
   );
 };
