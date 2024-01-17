@@ -2,6 +2,8 @@ import { Box, Container, Stack } from "@mui/material";
 import React from "react";
 import Sidebar from "./mypage/Sidebar";
 import { Outlet } from "react-router";
+
+import Chatbot from "../chatbot/Chatbot";
 import "../../css/user.css";
 
 const MyPage = () => {
@@ -12,6 +14,7 @@ const MyPage = () => {
           <Sidebar />
           <Outlet />
         </Stack>
+        <Chatbot/>
       </Container>
     </Box>
   );

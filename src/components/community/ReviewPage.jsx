@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react'
 import { Col, Spinner } from 'react-bootstrap'
 import { Button } from '@mui/material';
-import { useNavigate, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import WriteReview from './WriteReview';
+import WriteReviewModal from './WriteReviewModal';
 
 
 const ReviewPage = () => {
-    const navi = useNavigate();
     const [list, setList] = useState([]);
     const [loading, setLoading] = useState(false);
-    const [count, setCount] = useState(0);
-
-    //const [favoriteCnt, setFavoriteCnt] = useState(0);
+    const [showModal, setShowModal] = useState(false);
     const categoryid = 102;
 
     const getList = async() => {
         setLoading(true)
-        const res = await axios.get("/community/list_review");
-        //const res = await axios.get("/community/list?categoryid=" + categoryid);
+        const res = await axios.get("/community/list?categoryid=" + categoryid);
         //console.log(res.data);
         setList(res.data);
         setLoading(false);
@@ -28,20 +24,11 @@ const ReviewPage = () => {
         getList();
     }, []);
 
-    const onClickList = async(postid) => {
-        await axios.post("/community/update/cnt", {postid});
-        setCount(count + 1);
-        getList();
-        console.log(count);
-    }
-
-
+    
     const onClickReview = () => {
-        // if(sessionStorage.getItem("uid") == null){
-        //     navi('/login');
-        window.location.href= 'rwrite';
-        
+        setShowModal(true);
     }
+
 
     if(loading) return <div className='text-center my-5'><Spinner/></div>
 
@@ -66,7 +53,7 @@ const ReviewPage = () => {
                                 <td colSpan={2}><Link to={`comment/${r.postid}`}>{r.title}</Link></td>
                                 <td>{r.nickname}</td>
                                 <td>{r.regdate}</td>
-                                <td>{count}</td>
+                                <td>{r.cnt}</td>
                             </tr><br />
                         </>    
                         )}
@@ -74,8 +61,11 @@ const ReviewPage = () => {
                 </table>
             </Col>
             <div className='mt-5 text-end'>
-                    <Button variant='contained' size='small' onClick={onClickReview}>후기 작성</Button>
+                <Button variant='contained' size='small' onClick={onClickReview}>후기 작성</Button>
             </div>
+            {showModal && (
+                <WriteReviewModal show={showModal} hide={()=> setShowModal(false)} updateReviewList={getList} />
+            )}
         </div>
     )
 } 

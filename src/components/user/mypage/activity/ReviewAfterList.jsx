@@ -12,10 +12,16 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
+<<<<<<< HEAD:src/components/user/mypage/activity/ReviewList.jsx
+import React, { useEffect, useState } from "react";
+import { storage } from "../../../FirebaseConfig";
+import { ref, deleteObject } from "firebase/storage";
+=======
 import { deleteObject, ref } from "firebase/storage";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { storage } from "../../../../FirebaseConfig";
+>>>>>>> f09192c53c8520a72d029fc8a112a42896814ccb:src/components/user/mypage/activity/ReviewAfterList.jsx
 import UpdateReview from "./UpdateReview";
 
 const ReviewAfterList = () => {
