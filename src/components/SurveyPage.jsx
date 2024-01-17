@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const SurveyPage = ({setIsHeader,setIsFooter}) => {
+const SurveyPage = ({ setIsHeader, setIsFooter }) => {
   const navigate = useNavigate();
 
   const handleButtonClick = () => {
@@ -10,9 +10,10 @@ const SurveyPage = ({setIsHeader,setIsFooter}) => {
     navigate('/q_page');
   };
 
-  useEffect(()=>{
+  useEffect(() => {
     setIsFooter(false);
-  },[])
+  }, [])
+
   return (
     <div className='survey_wrap'>
       <div className='survey_contents'>

@@ -1,6 +1,8 @@
 import { TabContext, TabList, TabPanel } from "@mui/lab";
 import { Box, Tab } from "@mui/material";
 import React from "react";
+import MyFood from "./MyFood";
+import MyExcercise from "./MyExcercise";
 
 const ScrapPage = () => {
   const [value, setValue] = React.useState("1");
@@ -16,7 +18,6 @@ const ScrapPage = () => {
         typography: "body1",
         bgcolor: "transparent",
         py: 4.5,
-        pr: 3,
       }}
     >
       <TabContext value={value}>
@@ -26,8 +27,12 @@ const ScrapPage = () => {
             <Tab label="운동" value="2" />
           </TabList>
         </Box>
-        <TabPanel value="1">식단 스크랩</TabPanel>
-        <TabPanel value="2">운동 스크랩</TabPanel>
+        <TabPanel value="1">
+          <MyFood />
+        </TabPanel>
+        <TabPanel value="2">
+          <MyExcercise />
+        </TabPanel>
       </TabContext>
     </Box>
   );

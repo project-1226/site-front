@@ -22,7 +22,7 @@ const Healthy = ({pagetype}) => {
 
   const TextMaker =()=>{
     if(pagetype =="disease"){
-      setText({"title" : "질환맞춤식단","subtitle":"재료 선정부터 조리까지 섬세하게 "})  
+      setText({"title" : "질환맞춤식단","subtitle":"재료 선정부터 조리까지 섬세하게 ","button":""})  
     }
     if(pagetype =="health"){
       setText({"title" : "건강식단","subtitle":"건강 목적과 필요에 따라 골라먹는 "})
@@ -33,7 +33,7 @@ const Healthy = ({pagetype}) => {
     try {
       const res = await axios(`/food/categories/${pagetype}`);
       setTags(res.data);
-
+      console.log(res.data)
       const randomIndex = Math.floor(Math.random() * res.data.length);
       setSelectTag(res.data[randomIndex]);
     } catch (error) {
@@ -63,7 +63,7 @@ const Healthy = ({pagetype}) => {
 
   const handleMoreClick = () => {
     //navigate 함수는 두 번째 인자로 state를 받아 해당 경로로 이동할 때 상태를 전달할 수 있음
-    navi(`/healthydiet/healthydetail/${selectTag.categoryid}`, {
+    navi(`/health/healthydetail/${selectTag.categoryid}`, {
       state: { initialFoods: foods },
     });
 
@@ -95,7 +95,7 @@ const Healthy = ({pagetype}) => {
             <p className="main_title"> {text.title} </p>
 
             <p className="main_article"> 오늘의 추천메뉴 [ {selectTag.name} ] </p>
-            <Button variant="contained" size="small" onClick={() => handleRefreshClick()}> refresh </Button>
+            <Button className='refresh_btn' variant="contained" size="small" onClick={() => handleRefreshClick()}> refresh </Button>
           </div>
         </div>{/* healthy_main */}
 
@@ -116,40 +116,58 @@ const Healthy = ({pagetype}) => {
                 </div>
               </div>
               :
-              <Backdrop
-                sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }}
-                open={loading}
-              >
+              <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open={loading}>
                 <CircularProgress color="inherit" />
               </Backdrop>
           )}
         </div>
       </div>{/* healthy_main_wrap */}
 
-      {/* categoryTags box */}
-      <div className='healthy_tag_box'>
-        {tags.map((tag) => (
+      {/* categoryTags box  페이지따라 다르게 나열*/}
+      {pagetype =="health"?
+      <div className={`${pagetype}_tag_box`}>        
+      {tags.map((tag) => (
+        tag.categoryid == selectTag.categoryid ?
+          <Button key={tag.name} variant="outlined" size="small" onClick={() => setSelectTag(tag)}>
+            {tag.name}
+          </Button>
+          :
+          <Button key={tag.categoryid} variant="contained" size="small" onClick={() => handleTagClick(tag)}>
+            {tag.name}
+          </Button>
+      ))}
+    </div>      
+      :
+      <>
+      <div className={`${pagetype}_tag_box`}>        
+        {tags.slice(0,6).map((tag) => (
           tag.categoryid == selectTag.categoryid ?
-            <Button
-              key={tag.name}
-              variant="outlined"
-              size="small"
-              onClick={() => setSelectTag(tag)}
-            >
+            <Button key={tag.name} variant="outlined" size="small" onClick={() => setSelectTag(tag)}>
               {tag.name}
             </Button>
             :
-            <Button
-              key={tag.categoryid}
-              variant="contained"
-              size="small"
-              onClick={() => handleTagClick(tag)}
-            >
+            <Button key={tag.categoryid} variant="contained" size="small" onClick={() => handleTagClick(tag)}>
               {tag.name}
             </Button>
         ))}
-      </div>{/* categoryTags box */}
-
+      </div>
+      <div className={`${pagetype}_tag_box`}>        
+      {tags.slice(6).map((tag) => (
+        tag.categoryid == selectTag.categoryid ?
+          <Button key={tag.name} variant="outlined" size="small" onClick={() => setSelectTag(tag)}>
+            {tag.name}
+          </Button>
+          :
+          <Button key={tag.categoryid} variant="contained" size="small" onClick={() => handleTagClick(tag)}>
+            {tag.name}
+          </Button>
+      ))}
+    </div>
+    </>
+      }
+      
+      {/* categoryTags box */}
+    
       {/* 카테고리 대표식단 세부내용++  */}
       {/* 로딩되는동안 유지될 box추가해야함 */}
       <div className='healthy_tag_detail'>
@@ -160,7 +178,7 @@ const Healthy = ({pagetype}) => {
           <div className='healthy_tag_detail_contents'>
             <p className='healthy_detail_contents_name'>{foods[0].name}</p>
             <img src={foods.length > 0 && foods[0].image} alt="" className='healthy_tag_detail_image' />
-            <p className='healthy_detail_contents_article'>{foods[0].description}</p>
+            <p className='healthy_detail_contents_article'><strong>상세설명: &nbsp;</strong>{foods[0].description}</p>
           </div>
         }
       </div>
