@@ -80,13 +80,13 @@ const RouterPage = () => {
         <Route path="/q_page" element={<QuestionsPage setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
         <Route path="/SurveySigninPage" element={<SurveySigninPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />}/>
 
-        <Route path="/mydiet" element={<MyDiet />} />
+        <Route path="/mydiet" element={<MyDiet setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
 
         <Route path="/AIimg" element={<Imagereader />} />
         <Route path="/AImotion" element={<MotionReader />} />
         <Route path="/Ailist" element={<AiList />} />
 
-<<<<<<< HEAD
+
       {/* community */}
       <Route path="/community" element={<CommunityPageMain />}>
         <Route path="" element={<NoticePage />} />
@@ -103,7 +103,7 @@ const RouterPage = () => {
         <Route path="adnoud" element={<AdminNoticeList />} />
         <Route path="adreview" element={<AdminReview />} />
       </Route>
-=======
+
         <Route path="/Chatbot" element={<Chatbot />} />
 
         {/* 주문 */}
@@ -118,17 +118,14 @@ const RouterPage = () => {
           }
         />
         <Route path="/join" element={<SignupPage />} />
->>>>>>> f09192c53c8520a72d029fc8a112a42896814ccb
+
 
         {/* community */}
         <Route path="/community" element={<CommunityPageMain />}>
           <Route path="" element={<NoticePage />} />
           <Route path="review" element={<ReviewPage />} />
-          <Route path="review/write" element={<WriteReview />} />
           <Route path="review/comment/:pid" element={<CommentPage />} />
         </Route>
-
-        <Route path="/chat" element={<Chat />} />
 
         {/* 관리자페이지 */}
         <Route path="/admin" element={<AdminPage />}>

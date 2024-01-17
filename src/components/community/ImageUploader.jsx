@@ -1,5 +1,5 @@
 import React, { forwardRef, useImperativeHandle, useRef } from "react";
-import { storage } from "../FirebaseConfig";
+import { storage } from "../../FirebaseConfig";
 import {
     getDownloadURL,
     ref as storageRef,
