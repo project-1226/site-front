@@ -31,21 +31,20 @@ const ProductRegisterPage = () => {
             //console.log(uploadedURLs);
 
             if (uploadedURLs) {
-                const updateForm = {
-                    name: '',
-                    price: '',
-                    content: '',
+                form = {
+                    name,
+                    price,
+                    content,
                     image_names: imageNames.join(","),
                     image_urls: uploadedURLs.join(","),
                 };
                 //console.log(form);
-                setForm(updateForm);
-
-                if(window.confirm("상품을 등록할까요?")){
-                    await axios.post("/admin/insertProR", updateForm);
-                    alert("상품등록 완료!");
-                }
             }
+            if(window.confirm("상품을 등록할까요?")){
+                await axios.post("/admin/insertProR", form);
+                alert("상품등록 완료!");
+            }
+
         }catch (error) {
             setLoading(false);
             console.log("상품등록 오류:", error);

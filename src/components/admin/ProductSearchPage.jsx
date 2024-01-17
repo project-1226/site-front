@@ -2,14 +2,18 @@ import { Button } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Col, Form, InputGroup, Spinner, Table } from 'react-bootstrap';
-import '../../css/adminnotice.css'
+import Pagination from "react-js-pagination";
+import '../../css/admin.css'
+import "./Pagination.css";
 
-const ProductListPage = () => {
+const ProductSearchPage = () => {
     const [loading, setLoading] = useState(false);
     const [list, setList] = useState([]);
     const [page, setPage] = useState(1);
-    const [query, setQuery] = useState("고구마");
+    const [query, setQuery] = useState("저염식단");
     const [cnt, setCnt] = useState(0);
+    const [total, setTotal] = useState();
+    const size=5;
     
 
     const getList = async() => {
@@ -20,13 +24,14 @@ const ProductListPage = () => {
         let data = res.data.items.map(p=> p && {...p, name:stripHtmlTags(p.title), price:p.lprice});
         data= data.map(item=>item && {...item, checked:false});
         setList(data);
+        setTotal(res.data.total);
         setLoading(false);
         //console.log(list);
     }
 
     useEffect(() => {
         getList();
-    }, []);
+    }, [page]);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -35,6 +40,11 @@ const ProductListPage = () => {
         }else{
             getList();
         }
+    }
+
+    const changeGetList = (cpage) => {
+        //console.log(cpage);
+        setPage(cpage);
     }
 
     //HTML 태그 제거하는 함수
@@ -126,8 +136,18 @@ const ProductListPage = () => {
                     )}
                 </tbody>
             </Table>
+                {total > size &&
+                    <Pagination
+                        activePage={page}
+                        itemsCountPerPage={size}
+                        totalItemsCount={total}
+                        pageRangeDisplayed={10}
+                        prevPageText={"‹"}
+                        nextPageText={"›"}
+                        onChange={(cpage)=>{changeGetList(cpage)}}/>
+                }
         </div>
     )
 }
 
-export default ProductListPage
+export default ProductSearchPage

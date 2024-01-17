@@ -3,7 +3,7 @@ import { Form, InputGroup } from 'react-bootstrap'
 import { Button } from '@mui/material'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import "../../css/adminnotice.css"
+import "../../css/admin.css"
 
 const AdminNotice = () => {
     const navi = useNavigate();
@@ -50,7 +50,7 @@ const AdminNotice = () => {
                         <Form.Control name='userid' value={userid} onChange={onChange} />
                     </InputGroup>
                     <textarea className='form-control mt-3' name='content' value={content}
-                        onChange={onChange} rows={7} placeholder='내용을 입력하세요.' />
+                        onChange={onChange} rows={10} placeholder='내용을 입력하세요.' />
                     <div className='text-center mt-5'>
                         <Button type="reset" variant='outlined' color='error'>취소</Button>
                         <Button type="submit" className='ms-3' variant='contained'>등록</Button>

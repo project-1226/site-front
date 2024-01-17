@@ -42,7 +42,7 @@ import AdminOrderList from "./admin/AdminOrderList";
 import AdminNotice from "./admin/AdminNotice";
 import AdminNoticeList from "./admin/AdminNoticeList";
 import AdminReview from "./admin/AdminReview";
-import ProductListPage from "./admin/ProductListPage";
+import ProductSearchPage from "./admin/ProductSearchPage";
 
 import SurveyPage from "./SurveyPage";
 import DiseaseDetail from "./diseaseDiet/DiseaseDetail";
@@ -53,6 +53,8 @@ import FooterPage from "./FooterPage";
 import QuestionsPage from "./QuestionsPage";
 import SurveySigninPage from "./SurveySigninPage";
 import HealthyDetailModal from "./healthyDiet/HealthyDetailModal";
+import ProductList from "./admin/ProductList";
+
 
 
 const RouterPage = () => {
@@ -86,24 +88,6 @@ const RouterPage = () => {
         <Route path="/AImotion" element={<MotionReader />} />
         <Route path="/Ailist" element={<AiList />} />
 
-<<<<<<< HEAD
-      {/* community */}
-      <Route path="/community" element={<CommunityPageMain />}>
-        <Route path="" element={<NoticePage />} />
-        <Route path="review" element={<ReviewPage />} />
-        <Route path="review/comment/:pid" element={<CommentPage />} />
-      </Route>
-
-      {/* 관리자페이지 */}
-      <Route path="/admin" element={<AdminPage />}>
-        <Route path="adorder" element={<AdminOrderList />} />
-        <Route path="register" element={<ProductRegisterPage />} />
-        <Route path="product" element={<ProductListPage />} />
-        <Route path="adno" element={<AdminNotice />} />
-        <Route path="adnoud" element={<AdminNoticeList />} />
-        <Route path="adreview" element={<AdminReview />} />
-      </Route>
-=======
         <Route path="/Chatbot" element={<Chatbot />} />
 
         {/* 주문 */}
@@ -118,24 +102,23 @@ const RouterPage = () => {
           }
         />
         <Route path="/join" element={<SignupPage />} />
->>>>>>> f09192c53c8520a72d029fc8a112a42896814ccb
+
 
         {/* community */}
         <Route path="/community" element={<CommunityPageMain />}>
           <Route path="" element={<NoticePage />} />
           <Route path="review" element={<ReviewPage />} />
-          <Route path="review/write" element={<WriteReview />} />
           <Route path="review/comment/:pid" element={<CommentPage />} />
         </Route>
-
-        <Route path="/chat" element={<Chat />} />
 
         {/* 관리자페이지 */}
         <Route path="/admin" element={<AdminPage />}>
           <Route path="adorder" element={<AdminOrderList />} />
           <Route path="register" element={<ProductRegisterPage />} />
-          <Route path="product" element={<ProductListPage />} />
+          <Route path="product" element={<ProductSearchPage />} />
+          <Route path="plist" element={<ProductList />} />
           <Route path="adno" element={<AdminNotice />} />
+          <Route path="adnoud" element={<AdminNoticeList />} />
           <Route path="adreview" element={<AdminReview />} />
         </Route>
 

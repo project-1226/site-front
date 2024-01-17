@@ -10,6 +10,7 @@ import "./css/healthy.css";
 import "./css/healthcare.css";
 import "./css/disease.css";
 import "./css/survey.css";
+import "./css/admin.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
