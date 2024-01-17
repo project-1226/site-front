@@ -12,10 +12,17 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useLocation } from 'react-router-dom';
+import { useNavigate } from "react-router";
 
-const SignupPage = () => {
+const SignupPage = ({result}) => {
+  const navi = useNavigate();
+  const location = useLocation();
+  //설문결과
+  const [s_result,setS_result] = useState(location.state?.result);
+
   const {
     register,
     handleSubmit,
@@ -27,22 +34,34 @@ const SignupPage = () => {
   password.current = watch("password", "");
 
   const onSubmit = async (data) => {
-    console.log(data);
+    if(!s_result){
+      alert(
+        "설문을 먼저 작성해주세요!"
+      );
+      navi("/")
+      return
+    }
+    // console.log(data);
     if (window.confirm("회원 가입을 진행하시겠습니까?")) {
       await axios
-        .post("/user/insert", data)
+        .post("/user/insert",{"user":data,"result":s_result})
         .then((response) => {
+
           alert(
             "회원가입을 환영합니다!\n가입 기념으로 3000포인트를 지급해드렸습니다!"
           );
-          window.location.href = "/";
+          
         })
         .catch((error) => {
           alert("이미 가입된 이메일입니다.");
         });
+        //회원가입 이후 로직
+        navi("/mydiet");
     }
   };
-
+  useEffect(()=>{
+    console.log(s_result)
+  },[location])
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -139,13 +158,18 @@ const SignupPage = () => {
           >
             Sign Up
           </Button>
+          
           <Grid container justifyContent="flex-end">
             <Grid item>
+            {!s_result &&
               <Link href="/login" variant="body2">
                 이미 계정이 있으신가요?
               </Link>
+            }
             </Grid>
           </Grid>
+          
+          
         </Box>
       </Box>
     </Container>

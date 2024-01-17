@@ -40,7 +40,7 @@ const HeaderPage = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" className="seon_muipaper_shadow_none">
         <Toolbar>
           <IconButton
             size="large"
@@ -83,9 +83,9 @@ const HeaderPage = () => {
                   component={Link}
                   to="/mydiet"
                   sx={{ textDecoration: "none" }}
-                  className={
+                  className={`menu-item ${
                     location.pathname === "/mydiet" ? "active-link" : ""
-                  }
+                  }`}
                 >
                   {" "}
                   내 식단
@@ -94,11 +94,11 @@ const HeaderPage = () => {
                 <Typography
                   color="inherit"
                   component={Link}
-                  to="/healthydiet"
+                  to="/health"
                   sx={{ textDecoration: "none" }}
-                  className={
+                  className={`menu-item ${
                     location.pathname === "/healthydiet" ? "active-link" : ""
-                  }
+                  }`}
                 >
                   {" "}
                   건강식단
@@ -109,10 +109,11 @@ const HeaderPage = () => {
                   component={Link}
                   to="/diseasediet"
                   sx={{ textDecoration: "none" }}
-                  className={
+                  className={`menu-item ${
                     location.pathname === "/diseasediet" ? "active-link" : ""
-                  }
+                  }`}
                 >
+                  {" "}
                   질환맞춤식단
                 </Typography>
 
@@ -121,11 +122,12 @@ const HeaderPage = () => {
                   component={Link}
                   to="/healthcare"
                   sx={{ textDecoration: "none" }}
-                  className={
+                  className={`menu-item ${
                     location.pathname === "/healthcare" ? "active-link" : ""
-                  }
+                  }`}
                 >
-                  헬스케어
+                  {" "}
+                  헬스케어{" "}
                 </Typography>
 
                 <Typography
@@ -133,11 +135,12 @@ const HeaderPage = () => {
                   component={Link}
                   to="/community"
                   sx={{ textDecoration: "none" }}
-                  className={
+                  className={`menu-item ${
                     location.pathname === "/community" ? "active-link" : ""
-                  }
+                  }`}
                 >
-                  커뮤니티
+                  {" "}
+                  커뮤니티{" "}
                 </Typography>
 >>>>>>> f09192c53c8520a72d029fc8a112a42896814ccb
               </>
@@ -209,11 +212,13 @@ const HeaderPage = () => {
                     component={Link}
                     to="/mp"
                     sx={{ textDecoration: "none" }}
+                    className="no-active-link"
                   >
                     <AccountCircle sx={{ fontSize: "2.3rem" }} />
                   </Typography>
                   <Button color="inherit" onClick={onLogout} className="logout">
-                    Logout
+                    {" "}
+                    Logout{" "}
                   </Button>
                 </>
               )}

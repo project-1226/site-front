@@ -7,6 +7,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { useParams,useLocation } from 'react-router-dom';
+import HealthyDetailModal from './HealthyDetailModal';
 
 //useNavigate두번째 인자로 getFoodList()함수도 props로 전달가능하면 이후 수정
 const HealthyDetail = ({ initialFoods }) => {
@@ -14,6 +15,7 @@ const HealthyDetail = ({ initialFoods }) => {
   const location = useLocation();
   const [foods, setFoods] = useState(location.state?.initialFoods || []);
   const [loading, setLoading] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const getFoodList = async () => {
     setLoading(true);
@@ -36,6 +38,14 @@ const HealthyDetail = ({ initialFoods }) => {
     console.log(foods);
   }, [location.state?.initialFoods]);
 
+  const handleDetailClick = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <div className="healthyDetail_wrap">
       {/* 로딩 */}
@@ -47,7 +57,7 @@ const HealthyDetail = ({ initialFoods }) => {
       </Backdrop>
 
       {foods.map((food, index) => (
-        <section key={index} className="healthyDetail_section1">
+        <section key={index} className="healthyDetail_section">
           {index % 2 == 0 ? (
             <div className="hd_img">
               <img src={food.image} alt="" />
@@ -57,7 +67,8 @@ const HealthyDetail = ({ initialFoods }) => {
             <p className="hd_title">홈메이드 레시피</p>
             <p className="hd_name">{food.name} 재료</p>
             <p className="hd_material">{food.ingredients}</p>
-            <Button variant="contained" size="small">
+            <p className="hd_recipe" dangerouslySetInnerHTML={{ __html: `${food.recipe}` }}></p>
+            <Button variant="contained" size="small"  onClick={handleDetailClick}>
               {" "}
               레시피 보러가기{" "}
             </Button>
@@ -70,6 +81,7 @@ const HealthyDetail = ({ initialFoods }) => {
           ) : null}
         </section>
       ))}
+      <HealthyDetailModal show={isModalOpen} onHide={handleCloseModal}/>
     </div>
   );
 };

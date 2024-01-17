@@ -21,7 +21,7 @@ import MyWishItem from "./user/mypage/shop/MyWishItem";
 import InsertReview from "./user/mypage/shop/InsertReview";
 import QuestionMain from "./user/mypage/shop/QuestionMain";
 import ActivityMain from "./user/mypage/activity/ActivityMain";
-//import ReviewList from "./user/mypage/activity/ReviewList";
+import ReviewMain from "./user/mypage/activity/ReviewMain";
 
 import MyDiet from "./myDiet/MyDiet";
 import Healthy from "./healthyDiet/Healthy";
@@ -51,22 +51,22 @@ import HeaderPage from "./HeaderPage";
 import FooterPage from "./FooterPage";
 
 import QuestionsPage from "./QuestionsPage";
+import SurveySigninPage from "./SurveySigninPage";
+import HealthyDetailModal from "./healthyDiet/HealthyDetailModal";
 
 
 const RouterPage = () => {
   const navi = useNavigate();
   const isUserLoggedIn = sessionStorage.getItem("userid") !== null;
   // const [isStartQ,setIsStartQ] = useState(false);
-  const [isHeader,setIsHeader] = useState(true);
-  const [isFooter,setIsFooter] = useState(true);
+  const [isHeader, setIsHeader] = useState(true);
+  const [isFooter, setIsFooter] = useState(true);
   // const [isStartQ,setIsStartQ] = useState(window.location.pathname !="/q_page");
   // const [isSurvey,setIsSurvey] = useState(window.location.pathname != "/");
   //let isSurveyPage = window.location.pathname === "/";
- // const isStartQ = window.location.pathname === "/q_page";
+  // const isStartQ = window.location.pathname === "/q_page";
 
-  useEffect(() => {
-    
-  }, [isHeader,isFooter])
+  useEffect(() => {}, [isHeader, isFooter]);
 
   return (
     <>
@@ -76,7 +76,9 @@ const RouterPage = () => {
       <Routes>
         {/* 설문조사 페이지 */}
         <Route path="/" element={<SurveyPage setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
-
+        {/* 설문조사 */}
+        <Route path="/q_page" element={<QuestionsPage setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
+        <Route path="/SurveySigninPage" element={<SurveySigninPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />}/>
 
         <Route path="/mydiet" element={<MyDiet />} />
 
@@ -109,7 +111,12 @@ const RouterPage = () => {
         <Route path="/Order" element={<OrderPage />} />
 
         {/* 로그인/회원가입 */}
-        <Route path="/login" element={<SigninPage setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
+        <Route
+          path="/login"
+          element={
+            <SigninPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />
+          }
+        />
         <Route path="/join" element={<SignupPage />} />
 >>>>>>> f09192c53c8520a72d029fc8a112a42896814ccb
 
@@ -142,7 +149,7 @@ const RouterPage = () => {
           <Route path="mysv" element={<MySurvey />} />
           {/* 활동 */}
           <Route path="mact" element={<ActivityMain />} />
-          {/* <Route path="ract" element={<ReviewList />} /> */}
+          <Route path="ract" element={<ReviewMain />} />
           {/* 주문내역 */}
           <Route path="mprch" element={<MyPurchase />} />
           <Route path="cncl" element={<CancelReturn />} />
@@ -156,8 +163,12 @@ const RouterPage = () => {
         </Route>
 
         {/* 건강식단 */}
-        <Route path="/healthydiet" element={<Healthy pagetype="health" />} />
-        <Route path="/healthydiet/healthydetail/:tag" element={<HealthyDetail />} />
+        <Route path="/health" element={<Healthy pagetype="health" />} />
+        <Route
+          path="/health/healthydetail/:tag"
+          element={<HealthyDetail />}
+        />
+        <Route path="/healthydetailmodal" element={<HealthyDetailModal />} />
         {/* 질환맞춤식단 */}
         {/* healthy컴포넌트사용*/}
         <Route path="/diseasediet" element={<Healthy pagetype="disease" />} />
@@ -165,12 +176,10 @@ const RouterPage = () => {
 
         {/* 헬스케어 */}
         <Route path="/healthcare" element={<Healthcare />} />
-
-        {/* 설문조사 */}
-        <Route path="/q_page" element={<QuestionsPage setIsHeader={setIsHeader}/>} />
+        
       </Routes>
       {/* isSurvey  false ,isStartQ true ->false */}
-       { isFooter && <FooterPage />}
+      { isFooter && <FooterPage />}
     </>
   );
 };

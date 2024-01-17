@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, } from "react";
 import { useForm } from "react-hook-form";
 import {
   Alert,
@@ -22,6 +22,7 @@ import KakaoLogin from "./login/KakaoLogin";
 import { useNavigate } from "react-router";
 
 const SigninPage = ({setIsHeader,setIsFooter}) => {
+
   const navi = useNavigate();
   const {
     register, // React Hook Form 에 등록
