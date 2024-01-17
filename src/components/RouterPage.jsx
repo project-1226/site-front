@@ -86,7 +86,6 @@ const RouterPage = () => {
         <Route path="/AImotion" element={<MotionReader />} />
         <Route path="/Ailist" element={<AiList />} />
 
-<<<<<<< HEAD
       {/* community */}
       <Route path="/community" element={<CommunityPageMain />}>
         <Route path="" element={<NoticePage />} />
@@ -103,22 +102,6 @@ const RouterPage = () => {
         <Route path="adnoud" element={<AdminNoticeList />} />
         <Route path="adreview" element={<AdminReview />} />
       </Route>
-=======
-        <Route path="/Chatbot" element={<Chatbot />} />
-
-        {/* 주문 */}
-        <Route path="/Cart" element={<Cart />} />
-        <Route path="/Order" element={<OrderPage />} />
-
-        {/* 로그인/회원가입 */}
-        <Route
-          path="/login"
-          element={
-            <SigninPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />
-          }
-        />
-        <Route path="/join" element={<SignupPage />} />
->>>>>>> f09192c53c8520a72d029fc8a112a42896814ccb
 
         {/* community */}
         <Route path="/community" element={<CommunityPageMain />}>
