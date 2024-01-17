@@ -1,6 +1,6 @@
 import React from "react";
 
-import { auth } from "../../FirebaseConfig";
+import { auth } from "../../../FirebaseConfig";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 import { Button } from "@mui/material";
