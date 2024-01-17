@@ -9,12 +9,12 @@
 .modal_foodname p {font-size: 20px; font-weight: bold; letter-spacing: -1px;}
 
 .modal_contents {display: flex; flex-wrap: wrap;}
-.imgbox {width: 45%; height: 150px; background: #ccc; margin-right: 15px;}
+.imgbox {width: 45%; height: 150px; background: #ccc; margin-right: 15px; border-radius: 20px;}
 
 .modal_article_wrap {padding: 18px 80px;}
 .modal_article {display: flex; align-items: center; justify-content: center; margin-bottom: 20px;}
-.modal_calorie p:first-child {font-size: 18px; font-weight: 300; margin-bottom: 0;}
-.modal_calorie p:last-child {font-size: 12px; color: #ddd; letter-spacing: -0.5px;}
+.modal_calorie p:first-child {font-size: 18px; font-weight: 500; margin-bottom: 0;}
+.modal_calorie p:last-child {font-size: 12px; color: #929292; letter-spacing: -0.5px;}
 
 .modal_btnwrap1 button:first-child {margin-right: 15px;}
 
