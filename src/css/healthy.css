@@ -1,36 +1,51 @@
 .diet_wrap {width: 100%;}
-.healthy_main_wrap {width: 100%; height: 800px; margin-bottom: 100px;}
-.healthy_main {width: 100%; height: 570px; margin: 0 auto; display: flex; align-items: center; justify-content: center;
+.healthy_main_wrap {width: 100%; height: 816px; margin-bottom: 100px;}
+.health_main {width: 100%; height: 570px; margin: 0 auto; display: flex; align-items: center; justify-content: center;
     background: url('../images/healthy_main.jpg') no-repeat 50% 45%; background-size: cover; position: relative;}
 .healthy_main::before {width: 100%; height: 570px; content: ''; position: absolute; top: 0; left: 0; background: rgba(0, 0, 0, 0.5) }
 
 .main_text_box {width: 30%; text-align: center; z-index: 1;}
 .main_subtitle {font-size: 18px; letter-spacing: -1px; margin-bottom: 3px; color: #fff;}
-.main_title {font-size: 60px; font-weight: 600; color: #fff; margin-bottom: 70px; letter-spacing: -2px; font-family: 'Noto Serif KR';}
-.main_article {font-size: 20px; font-weight: bold; letter-spacing: -1px; color: #fff;}
-
-.recomm_menu {display: flex; flex-wrap: wrap; justify-content: center; z-index: 1; position: relative; bottom: 150px}
-.recomm_menuimg {width: 18%; height: 380px; margin-right: 2%; position: relative; cursor: pointer;}
-.recomm_menuimg:last-child {margin-right: 0;}
+.main_title {font-size: 60px; font-weight: 600; color: #fff; margin-bottom: 70px !important; letter-spacing: -2px; font-family: 'Noto Serif KR';}
+.main_article {font-size: 20px; font-weight: 500; letter-spacing: -1px; color: #fff;}
 
 /* healthy_contents */
 .healthy_contents {width: 94.8%; margin: 0 auto 180px auto;}
 .healthy_recipe {width: 100%; margin-bottom: 100px;}
-.healthy_video_wrap {width: 100%; margin: 0 auto; display: flex; flex-wrap: wrap;}
+/* .healthy_video_wrap {width: 100%; margin: 0 auto; display: flex; flex-wrap: wrap;}
+.healthy_video {width: 32%; height: auto; margin-right: 2%;}
+.healthy_video:last-child {margin-right: 0;} */
+
+/* healthy_video_wrap */
+.healthy_video_wrap {width: 100%; margin: 0 auto 180px auto; display: flex; flex-wrap: wrap; }
 .healthy_video {width: 32%; height: 250px; margin-right: 2%; background: #ddd;}
 .healthy_video:last-child {margin-right: 0;}
 
 
+/* 음식박스부분 - Card */
+.recomm_card_wrap {display: flex; flex-wrap: wrap; justify-content: center; z-index: 1; position: relative; bottom: 150px}
+.recomm_card {width: 18%; height: 450px; margin-right: 2%; position: relative; cursor: pointer; background: #fff; padding: 20px; border-radius: 20px;
+box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); transition: all 0.3s cubic-bezier(.25,.8,.25,1); overflow: hidden;}
+.recomm_card:hover {box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);}
+.recomm_card:last-child {margin-right: 0;}
+.recomm_card_foodname {font-size: 20px; font-weight: 500; margin-bottom: 70px !important;}
 
+.recomm_card_footer {position: absolute; left: 0; bottom: 0; padding-left: 20px; width: 260px; line-height: 48px; font-size: 18px; color: #666; background: #d9e1d4; border-radius: 0 20px 0 0; text-align: left;}
+.recomm_card_img img {width: 100%; height: 250px; border-radius: 20px; margin-bottom: 20px;}
 
-/* 아름수정부분 */
-/* 태그박스부분 */
-
-.healthy_tag_box{display: flex; flex-wrap: wrap; padding-left:10%;padding-right: 10%; justify-content: center;}
+/* healthy_tag_box - 태그박스부분 */
+.healthy_tag_box{display: flex; flex-wrap: wrap; justify-content: center; background: #f5f5f5;}
 .healthy_tag_box button { border: 1px solid #ccc; margin: 1%; padding: 10px; width:120px;border-radius: 15px;}
-/* 음식박스부분 */
-.recomm_menuimg_main {height: 330px;}
-.recomm_menuimg_footer {background-color: aquamarine !important;}
 
-.healthy_detail_contents{width: 94.8%; margin: 0 auto 180px auto;}
-.healthy_detail_image{width: 400px;}
+/* healthy_tag_detail */
+.healthy_tag_detail{width: 94.8%; margin: 50px auto 180px auto;}
+.healthy_tag_detail_titlebox {text-align: center; font-size: 46px; letter-spacing: -2px; font-weight: 600; font-family: 'Noto Serif KR'; margin: 30px 0;}
+.healthy_tag_detail_contents {text-align: center;}
+.healthy_detail_contents_name {font-size: 30px; font-weight: 600; letter-spacing: -2px; margin-bottom: 30px !important; color: #748769;}
+.healthy_tag_detail_image{width: 45%; border-radius: 30px; margin-bottom: 30px !important;}
+.healthy_detail_contents_article {font-size: 22px; letter-spacing: -1px;}
+
+
+
+.disease_main {width: 100%; height: 570px; margin: 0 auto; display: flex; align-items: center; justify-content: center;
+    background: url('../images/exbannerdiseace.jpg') no-repeat 50% 45%; background-size: cover; position: relative;}
