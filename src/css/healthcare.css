@@ -10,7 +10,7 @@
 
 /* healthcare_submain */
 .healthcare_submain {width: 100%; margin: 0 auto 180px auto; display: flex; flex-wrap: nowrap; overflow-x: auto;}
-.challenge_box {width: 25vw; height: 25vw; background: #393939; display: flex; align-items: center; justify-content: center; font-size: 2vw; font-weight: 600; cursor: pointer;}
+.challenge_box {width: 25vw; height: 18vw; background: #393939; display: flex; align-items: center; justify-content: center; font-size: 2vw; font-weight: 600; cursor: pointer;}
 .challenge_box:nth-child(1) {color: #fff;}
 .challenge_box:nth-child(2) {background: #c9c9c9;}
 .challenge_box:nth-child(3) {background: #9b9b9b;}

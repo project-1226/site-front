@@ -12,14 +12,21 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
+<<<<<<< HEAD:src/components/user/mypage/activity/ReviewList.jsx
 import React, { useEffect, useState } from "react";
 import { storage } from "../../../FirebaseConfig";
 import { ref, deleteObject } from "firebase/storage";
+=======
+import { deleteObject, ref } from "firebase/storage";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { storage } from "../../../../FirebaseConfig";
+>>>>>>> f09192c53c8520a72d029fc8a112a42896814ccb:src/components/user/mypage/activity/ReviewAfterList.jsx
 import UpdateReview from "./UpdateReview";
 
-const ReviewList = () => {
+const ReviewAfterList = () => {
   const [loading, setLoading] = useState(false);
-  const [reviews, setReviews] = useState([]);
+  const [list, setList] = useState([]);
   const [total, setTotal] = useState(0);
 
   const size = 5;
@@ -29,13 +36,6 @@ const ReviewList = () => {
     setPage(value);
   };
 
-  const getImage = async (id) => {
-    const res = await axios("/product-review/image", {
-      params: { product_reviewid: id },
-    });
-    return res.data;
-  };
-
   const getList = async () => {
     setLoading(true);
     const res = await axios("/product-review/list", {
@@ -43,17 +43,21 @@ const ReviewList = () => {
     });
     setTotal(res.data.total);
 
-    const list = res.data.list;
+    const list_prev = res.data.list;
     const data = [];
-    for (const review of list) {
-      const imageData = await getImage(review.product_reviewid);
+    for (const review of list_prev) {
+      const imageData = await axios("/product-review/image", {
+        params: { product_reviewid: review.product_reviewid },
+      });
+      // console.log("이미지데이타 : ", imageData.data);
       const reviewWithImages = {
         ...review,
-        images: imageData,
+        images: imageData.data,
       };
       data.push(reviewWithImages);
     }
-    setReviews(data);
+    setList(data);
+    // console.log(list);
     setLoading(false);
   };
 
@@ -66,7 +70,7 @@ const ReviewList = () => {
         if (images) {
           for (const i of images) {
             // console.log(i.image_name);
-            const imageRef = ref(storage, `images/${i.image_name}`);
+            const imageRef = ref(storage, `images/review/${i.image_name}`);
             await deleteObject(imageRef).catch((error) => {
               console.error("Error - delete imagefile:", error);
             });
@@ -97,11 +101,8 @@ const ReviewList = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
-      <Typography variant="h6" gutterBottom sx={{ fontWeight: "bolder" }}>
-        리뷰 ({total})
-      </Typography>
-      {reviews.map((r) => (
-        <Card key={r.product_reviewid} sx={{ my: 3 }}>
+      {list.map((l) => (
+        <Card key={l.product_reviewid} sx={{ my: 3 }}>
           <CardContent>
             <Typography
               variant="h6"
@@ -109,22 +110,20 @@ const ReviewList = () => {
               sx={{ fontWeight: "bolder" }}
               flexGrow="1"
             >
-              {r.name} / {r.count}개
+              {l.name} / {l.count}개
             </Typography>
             <ImageList cols={5} gap={10} sx={{ mt: 1 }}>
-              {r.images.map((i) => (
+              {l.images.map((i) => (
                 <ImageListItem key={i.imageid}>
-                  {i.image_url !== "" && (
-                    <img
-                      src={i.image_url}
-                      alt={"리뷰 이미지"}
-                      style={{
-                        height: "130px",
-                        objectFit: "cover",
-                        marginRight: "10px",
-                      }}
-                    />
-                  )}
+                  <img
+                    src={i.image_url}
+                    alt={"리뷰 이미지"}
+                    style={{
+                      height: "130px",
+                      objectFit: "cover",
+                      marginRight: "10px",
+                    }}
+                  />
                 </ImageListItem>
               ))}
             </ImageList>
@@ -133,20 +132,20 @@ const ReviewList = () => {
               color="text.secondary"
               sx={{ fontStyle: "italic", mb: 2 }}
             >
-              {r.fmtdate}
+              {l.fmtdate}
             </Typography>
             <Stack spacing={1.5}>
               <Typography variant="body2" color="text.secondary">
-                <Rating value={r.score} readOnly />
+                <Rating value={l.score} readOnly />
               </Typography>
-              <Typography variant="body1">{r.content}</Typography>
+              <Typography variant="body1">{l.content}</Typography>
             </Stack>
             <Stack direction="row" spacing={1} mt={1} justifyContent="end">
-              <UpdateReview review={r} />
+              <UpdateReview review={l} />
               <Button
                 variant="outlined"
                 size="small"
-                onClick={(e) => onDelete(e, r.product_reviewid, r.images)}
+                onClick={(e) => onDelete(e, l.product_reviewid, l.images)}
               >
                 삭제
               </Button>
@@ -154,7 +153,10 @@ const ReviewList = () => {
           </CardContent>
         </Card>
       ))}
-      <Stack justifyContent="center">
+
+      {total == 0 ? (
+        <Typography>작성된 리뷰가 없습니다.</Typography>
+      ) : (
         <Pagination
           count={Math.ceil(total / size)}
           shape="rounded"
@@ -163,9 +165,9 @@ const ReviewList = () => {
           sx={{ marginBottom: 5 }}
           onChange={handleChange}
         />
-      </Stack>
+      )}
     </>
   );
 };
 
-export default ReviewList;
+export default ReviewAfterList;
