@@ -107,7 +107,18 @@ const AdminSidebar = () => {
                     
                         <ListItemText primary="상품 가져오기" />
                 </ListItemButton>
-                <List></List>
+                <ListItemButton
+                    selected={selectedIndex === 4}
+                    onClick={(event) => handleListItemClick(event, 4)}
+                    component={Link}
+                    to="plist"
+                >
+                    <ListItemIcon>
+                        <AddShoppingCartOutlinedIcon />
+                    </ListItemIcon>
+                    
+                        <ListItemText primary="상품 목록" />
+                </ListItemButton>
             </List>
             <Divider />
             <List
@@ -127,8 +138,8 @@ const AdminSidebar = () => {
                 }
             >
                 <ListItemButton
-                    selected={selectedIndex === 4}
-                    onClick={(event) => handleListItemClick(event, 4)}
+                    selected={selectedIndex === 5}
+                    onClick={(event) => handleListItemClick(event, 5)}
                     component={Link}
                     to="adno"
                 >
@@ -138,8 +149,8 @@ const AdminSidebar = () => {
                     <ListItemText primary="공지" />
                 </ListItemButton>
                 <ListItemButton
-                    selected={selectedIndex === 5}
-                    onClick={(event) => handleListItemClick(event, 5)}
+                    selected={selectedIndex === 6}
+                    onClick={(event) => handleListItemClick(event, 6)}
                     component={Link}
                     to="adnoud"
                 >
@@ -149,8 +160,8 @@ const AdminSidebar = () => {
                     <ListItemText primary="공지목록" />
                 </ListItemButton>
                 <ListItemButton
-                    selected={selectedIndex === 6}
-                    onClick={(event) => handleListItemClick(event, 6)}
+                    selected={selectedIndex === 7}
+                    onClick={(event) => handleListItemClick(event, 7)}
                     component={Link}
                     to="adreview"
                 >
