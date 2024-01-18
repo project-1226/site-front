@@ -6,34 +6,28 @@ import "react-chatbot-kit/build/main.css";
 import "../../css/chatbot.css";
 import ChatIcon from '@mui/icons-material/Chat';
 import ContactSupportIcon from '@mui/icons-material/ContactSupport';
-const Chatbot = () => {
-    const [chatbotOpened, setChatbotOpened] = useState(false);
+const Chatbotchatstart = () => {
     const [user, setUser] = useState("");
 
-
     const getUser = async () => {
-      const res = await axios("/user/read", {
-        params: {
-          userid: sessionStorage.getItem("userid"),
-        },
-      });
-      setUser(res.data);
-      console.log(user);
-    };
-  
-    const handleChatbotToggle = () => {
-        setChatbotOpened(!chatbotOpened);
+        const res = await axios("/user/read", {
+          params: {
+            userid: sessionStorage.getItem("userid"),
+          },
+        });
+        setUser(res.data);
+        console.log(user);
       };
-      const userid = sessionStorage.getItem("userid");
-      
 
-      useEffect(() => {
-        getUser();
-      }, [userid]);
-   
+        const userid = sessionStorage.getItem("userid");
+        
+  
+        useEffect(() => {
+          getUser();
+        }, [userid]);
 
 
-    
+     
     const steps = [
         {
             id: '0',
@@ -95,6 +89,7 @@ const Chatbot = () => {
     
     ]
 
+
     const theme = {
         background: '#f5f8fb',
         fontFamily: 'Helvetica Neue',
@@ -108,60 +103,19 @@ const Chatbot = () => {
         posision: 'relative',
         bottom: '120px'
     };
-    const handleCloseChatbot = () => {
-        setChatbotOpened(false);
-      };
 
-    const ChatbotContent = () => {
-        return (
-          <ThemeProvider theme={theme}>
+  return (
+  <>
+   <ThemeProvider theme={theme}>
             <ChatBot
               steps={steps}
               hideHeader={true}
               placeholder={'채팅이 불가능한 채널입니다.'}
             />
           </ThemeProvider>
-        );
-      };
+          </>
+       
+  )
+}
 
-
-
-    
-      return (
-        <div className='ak_wrap'>
-          <div className='ak_contents'>
-        
-            <div class='cbfloat-container'>
-            {chatbotOpened &&   
-             <>
-         <div className='leDQrA'>
-         <ThemeProvider theme={theme}>
-                <ChatBot
-                  steps={steps}
-                  hideHeader={true}
-                  placeholder={'채팅이 불가능한  채널입니다.'}
-                />
-              </ThemeProvider>
-         </div>
-             
-    
-            </>}
-                <div class='cbfloat-button-container'>
-                    <button
-                    class='btn-hover color-5'
-                    onClick={handleChatbotToggle}
-             >
-                      <ContactSupportIcon       style={{ fontSize: '3rem' }}/>
-                    </button>
-                
-                </div>
-              
-            </div>
-        
-          </div>
-      
-        </div>
-      );
-    };
-    
-export default Chatbot
+export default Chatbotchatstart

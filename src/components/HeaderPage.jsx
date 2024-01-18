@@ -1,4 +1,5 @@
-import { SetMeal, AccountCircle } from "@mui/icons-material";
+import { SetMeal, AccountCircle,ShoppingCart} from "@mui/icons-material";
+
 import {
   AppBar,
   Box,
@@ -107,6 +108,9 @@ const HeaderPage = () => {
               sessionStorage.getItem("userid") &&
               sessionStorage.getItem("userid") !== "2fa0017c-053b-4983-8" && (
                 <>
+                 <Typography color="inherit" component={Link} to="/cart" sx={{ textDecoration: "none" }} className="no-active-link">
+                    <ShoppingCart sx={{ fontSize: "2.3rem" }} />
+                  </Typography>
                   <Typography color="inherit" component={Link} to="/mp" sx={{ textDecoration: "none" }} className="no-active-link">
                     <AccountCircle sx={{ fontSize: "2.3rem" }} />
                   </Typography>
