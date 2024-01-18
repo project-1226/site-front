@@ -19,7 +19,7 @@ const ProductSearchPage = () => {
     const getList = async() => {
         setLoading(true);
         const res = await axios.get(`/admin/product/list?page=${page}&size=5&query=${query}`);
-        //console.log(res.data);
+        console.log(res.data);
 
         let data = res.data.items.map(p=> p && {...p, name:stripHtmlTags(p.title), price:p.lprice});
         data= data.map(item=>item && {...item, checked:false});
@@ -103,7 +103,7 @@ const ProductSearchPage = () => {
     return (
         <div className='my-3'>
             <h5 className='mb-3'>상품검색</h5>
-            <Col md={3} className='mt-5'>
+            <Col md={4} className='mt-5'>
                 <form onSubmit={onSubmit}>
                     <InputGroup>
                         <Form.Control onChange={(e)=> setQuery(e.target.value)} placeholder='상품명' value={query} />
@@ -111,27 +111,33 @@ const ProductSearchPage = () => {
                     </InputGroup>
                 </form>
             </Col>
-            <Col className='text-end'>
-                <Button onClick={onCheckedSave}>선택저장</Button>
-            </Col>
-            <Table className='mt-3' style={{width:'1000px'}}>
+            <div className='text-end mx-5' style={{paddingRight: '8%'}}>
+                <Button onClick={onCheckedSave} variant='outlined' size='small'>선택저장</Button>
+            </div>
+            <Table className='mt-3' style={{width:'1100px'}}>
                 <thead>
                     <tr>
-                        <th><input type='checkbox' onChange={onChangeAll} checked={list.length === cnt} /></th>
-                        <th>Brand</th>
-                        <th>title</th>
-                        <th>가격</th>
+                        <th className='text-center'><input type='checkbox' onChange={onChangeAll} checked={list.length === cnt} /></th>
+                        <th style={{width:'130px'}}>Image</th>
+                        <th className='text-center' style={{width:'480px'}}>title</th>
+                        <th className='text-center'>가격</th>
                     </tr>
                 </thead>
                 <tbody>
                     {list.map(p=>
                         <tr key={p.productId}>
-                            <td><input type='checkbox' onChange={(e)=> onChangeSingle(e, p.productId)}
+                            <td className='text-center'><input type='checkbox' onChange={(e)=> onChangeSingle(e, p.productId)}
                                 checked={p.checked} /></td>
-                            <td>{p.brand}</td>
+                            <td>
+                                {p.image ?
+                                    <img src={p.image} width='50px' height='50px' />
+                                    :
+                                    <img src='http://via.placeholder.com/50x50' />
+                                }
+                            </td>
                             <td ><div className='ellipsis_adpro'>{p.name}</div></td>
-                            <td>{p.lprice}</td>
-                            <td><Button onClick={()=> onSave(p.name, p.price)} variant='contained' size='small'>등록</Button></td>
+                            <td className='text-center'>{p.lprice}원</td>
+                            <div><Button onClick={()=> onSave(p.name, p.price)} variant='contained' size='small'>등록</Button></div>
                         </tr>
                     )}
                 </tbody>

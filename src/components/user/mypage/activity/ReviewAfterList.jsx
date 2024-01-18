@@ -15,7 +15,7 @@ import axios from "axios";
 import { deleteObject, ref } from "firebase/storage";
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { storage } from "../../../../FirebaseConfig";
+import { storage } from "../../../FirebaseConfig";
 import UpdateReview from "./UpdateReview";
 
 const ReviewAfterList = () => {
