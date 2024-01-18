@@ -284,7 +284,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
       <DietModal
         show={isModalOpen}
         onHide={handleCloseModal}
-        selectedMyFood={selectedMyFood}
+        selectedMyFood={1}
       />
     </div>
   );

@@ -1,22 +1,74 @@
-import { ExpandMore } from "@mui/icons-material";
+import { ArrowRight, ExpandMore, LaunchRounded } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Backdrop,
   CircularProgress,
+  Grid,
+  IconButton,
+  Stack,
   Typography,
 } from "@mui/material";
+import axios from "axios";
 import React, { useEffect, useState } from "react";
+import DietModal from "../../../myDiet/DietModal";
 
-const MyFood = () => {
+const MyFood = ({ userInfo }) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
 
-  const getList = async () => {};
+  const getPlan = async (regdate) => {
+    const res = await axios("/food/mypage/plan", {
+      params: {
+        userid: sessionStorage.getItem("userid"),
+        regdate,
+      },
+    });
+    // console.log(res.data);
+    return res.data;
+  };
+
+  const getDates = async () => {
+    setLoading(true);
+    const res = await axios("/food/mypage/plandate", {
+      params: { userid: sessionStorage.getItem("userid") },
+    });
+    // console.log(res.data);
+    const dates = res.data;
+
+    const data = [];
+    for (const date of dates) {
+      try {
+        const res1 = await getPlan(date.regdate);
+        const plan = {
+          ...date,
+          food_plans: res1,
+        };
+        data.push(plan);
+      } catch (error) {
+        console.error("Error - 주차별 식단 데이터 출력 : ", error);
+      }
+    }
+    // console.log(data);
+    setList(data);
+    setLoading(false);
+  };
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedFood, setSelectedFood] = useState("");
+
+  const handleImageClick = (food) => {
+    setIsModalOpen(true);
+    setSelectedFood(food);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
-    getList();
+    getDates();
   }, []);
 
   return (
@@ -28,18 +80,44 @@ const MyFood = () => {
         <CircularProgress color="inherit" />
       </Backdrop>
       <div>
-        <Typography sx={{ pb: 2 }}>OO님을 위한 추천 식단</Typography>
-        <Accordion sx={{ width: "60%" }}>
-          <AccordionSummary
-            expandIcon={<ExpandMore />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-          >
-            식단?????
-          </AccordionSummary>
-          <AccordionDetails sx={{ ml: 5 }}>세부식단????</AccordionDetails>
-        </Accordion>
+        <Typography variant="h6" sx={{ pb: 2 }}>
+          {userInfo.nickname}님을 위한 추천 식단
+        </Typography>
+        {list.map((l, index) => (
+          <Accordion key={index}>
+            <AccordionSummary
+              expandIcon={<ExpandMore />}
+              aria-controls="panel1-content"
+              id="panel1-header"
+            >
+              <Typography>
+                {index + 1}주차 ( {l.start_date} ~ {l.end_date} ) 식단
+              </Typography>
+            </AccordionSummary>
+            <AccordionDetails>
+              <Stack direction="row">
+                <Grid container>
+                  {l.food_plans.map((f, index) => (
+                    <Grid item sm={6} key={index}>
+                      <Typography>
+                        <ArrowRight /> {index + 1}일차 : {f.name}
+                        <IconButton onClick={() => handleImageClick(f)}>
+                          <LaunchRounded sx={{ fontSize: 17 }} />
+                        </IconButton>
+                      </Typography>
+                    </Grid>
+                  ))}
+                </Grid>
+              </Stack>
+            </AccordionDetails>
+          </Accordion>
+        ))}
       </div>
+      <DietModal
+        show={isModalOpen}
+        onHide={handleCloseModal}
+        selectedMyFood={selectedFood}
+      />
     </>
   );
 };
