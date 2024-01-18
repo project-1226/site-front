@@ -1,5 +1,5 @@
 const axios = require("axios");
-
+//작성중.....
 async function run() {
 
   //설문결과값받아오기

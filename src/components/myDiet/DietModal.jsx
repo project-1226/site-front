@@ -2,10 +2,14 @@ import Modal from 'react-bootstrap/Modal';
 import { Button } from '@mui/material';
 import { useState } from 'react';
 import { CiCircleMore } from 'react-icons/ci';
+import React, { useEffect} from 'react'
 
-function DietModal({ show, onHide }) {
+
+function DietModal({ show, onHide,selectedMyFood }) {
   const [changeProdVisible, setChangeProdVisible] = useState(false);
   const [currentImages, setCurrentImages] = useState(['img1', 'img2']);
+
+  
 
   const handleClose = () => {
     setChangeProdVisible(false);
@@ -47,11 +51,11 @@ function DietModal({ show, onHide }) {
 
             <section className="modal_btm">
               <div className="modal_foodname">
-                <p>food name</p>
+                <p>{selectedMyFood.name}</p>
               </div>
 
               <div className="modal_contents">
-                <div className="imgbox">img</div>
+                <div className="imgbox"><img src={selectedMyFood.image}/></div>
 
                 <div className="modal_article_wrap">
                   <div className="modal_article">
