@@ -39,21 +39,9 @@ function DietModal({ show, onHide }) {
           <div className="modal_wrap">
             <section className="modal_top">
               <div className="modal_date">
-                <Button variant="contained" size="small">
+                <Button variant="contained" size="lg">
                   1일차
                 </Button>
-              </div>
-
-              <div className="date_plan_info">
-                <p>
-                  <strong>탄수화물</strong> 51g
-                </p>
-                <p>
-                  <strong>단백질</strong> 30g
-                </p>
-                <p>
-                  <strong>지방</strong> 9g
-                </p>
               </div>
             </section>
 

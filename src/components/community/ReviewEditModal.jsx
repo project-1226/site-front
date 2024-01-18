@@ -5,7 +5,7 @@ import axios from 'axios';
 import ImageUploader from './ImageUploader';
 import { uploadBytes, getDownloadURL, ref as storageRef } from 'firebase/storage';
 import { v4 as uuidv4 } from 'uuid'
-import { storage } from '../FirebaseConfig';
+import { storage } from "../../FirebaseConfig";
 
 
 // 이미지를 업로드하여 URL을 받아오는 함수

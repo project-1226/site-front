@@ -82,12 +82,12 @@ const RouterPage = () => {
         <Route path="/q_page" element={<QuestionsPage setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
         <Route path="/SurveySigninPage" element={<SurveySigninPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />}/>
 
-        <Route path="/mydiet" element={<MyDiet />} />
+        <Route path="/mydiet" element={<MyDiet setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
 
         <Route path="/AIimg" element={<Imagereader />} />
         <Route path="/AImotion" element={<MotionReader />} />
         <Route path="/Ailist" element={<AiList />} />
-
+          
         <Route path="/Chatbot" element={<Chatbot />} />
 
         {/* 주문 */}

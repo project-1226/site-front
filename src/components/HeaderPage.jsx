@@ -93,7 +93,7 @@ const HeaderPage = () => {
                   <Typography
                     color="inherit"
                     component={Link}
-                    to="/admin"
+                    to="/"
                     sx={{ textDecoration: "none" }}
                   >
                     관리자

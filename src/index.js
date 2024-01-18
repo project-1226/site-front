@@ -11,6 +11,7 @@ import "./css/healthcare.css";
 import "./css/disease.css";
 import "./css/survey.css";
 import "./css/admin.css";
+import "./css/chatbot.css";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 

@@ -12,9 +12,10 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import React, { useEffect, useState } from "react";
-import { storage } from "../../../FirebaseConfig";
-import { ref, deleteObject } from "firebase/storage";
+import { deleteObject, ref } from "firebase/storage";
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { storage } from "../../../../FirebaseConfig";
 import UpdateReview from "./UpdateReview";
 
 const ReviewAfterList = () => {
