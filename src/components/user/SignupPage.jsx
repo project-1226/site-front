@@ -178,3 +178,6 @@ const SignupPage = ({result}) => {
 };
 
 export default SignupPage;
+
+
+

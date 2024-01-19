@@ -14,7 +14,6 @@ import ManageAddress from "./user/mypage/info/ManageAddress";
 import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import MySurvey from "./user/mypage/diary/MySurvey";
 import Report from "./user/mypage/diary/Report";
-import ScrapPage from "./user/mypage/diary/ScrapPage";
 import MyPurchase from "./user/mypage/shop/MyPurchase";
 import CancelReturn from "./user/mypage/shop/CancelReturn";
 import MyWishItem from "./user/mypage/shop/MyWishItem";
@@ -25,7 +24,6 @@ import ReviewMain from "./user/mypage/activity/ReviewMain";
 
 import MyDiet from "./myDiet/MyDiet";
 import Healthy from "./healthyDiet/Healthy";
-import Disease from "./diseaseDiet/Disease";
 import Healthcare from "./healthcare/Healthcare";
 
 import Imagereader from "./ai/Imagereader";
@@ -56,6 +54,7 @@ import SurveySigninPage from "./SurveySigninPage";
 import HealthyDetailModal from "./healthyDiet/HealthyDetailModal";
 
 
+import Chatbotchatstart from "./chatbot/Chatbotchatstart";
 
 
 const RouterPage = () => {
@@ -78,22 +77,49 @@ const RouterPage = () => {
 
       <Routes>
         {/* 설문조사 페이지 */}
-        <Route path="/" element={<SurveyPage setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
+        <Route
+          path="/"
+          element={
+            <SurveyPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />
+          }
+        />
         {/* 설문조사 */}
-        <Route path="/q_page" element={<QuestionsPage setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
-        <Route path="/SurveySigninPage" element={<SurveySigninPage setIsHeader={setIsHeader} setIsFooter={setIsFooter} />}/>
+        <Route
+          path="/q_page"
+          element={
+            <QuestionsPage
+              setIsHeader={setIsHeader}
+              setIsFooter={setIsFooter}
+            />
+          }
+        />
+        <Route
+          path="/SurveySigninPage"
+          element={
+            <SurveySigninPage
+              setIsHeader={setIsHeader}
+              setIsFooter={setIsFooter}
+            />
+          }
+        />
 
-        <Route path="/mydiet" element={<MyDiet setIsHeader={setIsHeader} setIsFooter={setIsFooter}/>} />
+        <Route
+          path="/mydiet"
+          element={
+            <MyDiet setIsHeader={setIsHeader} setIsFooter={setIsFooter} />
+          }
+        />
 
         <Route path="/AIimg" element={<Imagereader />} />
-        <Route path="/AImotion" element={<MotionReader />} />
+        <Route path="/aisquat" element={<MotionReader />} />
         <Route path="/Ailist" element={<AiList />} />
-          
+
         <Route path="/Chatbot" element={<Chatbot />} />
 
         {/* 주문 */}
         <Route path="/Cart" element={<Cart />} />
         <Route path="/Order" element={<OrderPage />} />
+        <Route path="/chatstart" element={<Chatbotchatstart />} />
 
         {/* 로그인/회원가입 */}
         <Route
@@ -103,7 +129,6 @@ const RouterPage = () => {
           }
         />
         <Route path="/join" element={<SignupPage />} />
-
 
         {/* community */}
         <Route path="/community" element={<CommunityPageMain />}>
@@ -129,7 +154,6 @@ const RouterPage = () => {
         <Route path="/mp" element={<MyPage />}>
           {/* 다이어리 */}
           <Route path="" element={<Report />} />
-          <Route path="scrp" element={<ScrapPage />} />
           <Route path="mysv" element={<MySurvey />} />
           {/* 활동 */}
           <Route path="mact" element={<ActivityMain />} />
@@ -148,10 +172,7 @@ const RouterPage = () => {
 
         {/* 건강식단 */}
         <Route path="/health" element={<Healthy pagetype="health" />} />
-        <Route
-          path="/health/healthydetail/:tag"
-          element={<HealthyDetail />}
-        />
+        <Route path="/health/healthydetail/:tag" element={<HealthyDetail />} />
         <Route path="/healthydetailmodal" element={<HealthyDetailModal />} />
         {/* 질환맞춤식단 */}
         {/* healthy컴포넌트사용*/}
@@ -160,10 +181,9 @@ const RouterPage = () => {
 
         {/* 헬스케어 */}
         <Route path="/healthcare" element={<Healthcare />} />
-        
       </Routes>
       {/* isSurvey  false ,isStartQ true ->false */}
-      { isFooter && <FooterPage />}
+      {isFooter && <FooterPage />}
     </>
   );
 };
