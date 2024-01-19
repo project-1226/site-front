@@ -36,7 +36,10 @@ const GoogleLogin = () => {
 
   return (
     <Button
-      variant="contained"
+      fullWidth
+      disableElevation
+      sx={{ height: "100%" }}
+      variant="outlined"
       startIcon={<GoogleIcon />}
       onClick={handleGoogleLogin}
     >

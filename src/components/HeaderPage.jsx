@@ -1,16 +1,9 @@
-import { SetMeal, AccountCircle, ShoppingCart } from "@mui/icons-material";
+import { AccountCircle, ShoppingCartOutlined } from "@mui/icons-material";
 
-import {
-  AppBar,
-  Box,
-  Button,
-  IconButton,
-  Stack,
-  Toolbar,
-  Typography,
-} from "@mui/material";
+import { AppBar, Box, Button, Stack, Toolbar, Typography } from "@mui/material";
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
+import { delCookie } from "../common";
 
 const HeaderPage = () => {
   // const [avatar, setAvatar] = useState("");
@@ -28,7 +21,8 @@ const HeaderPage = () => {
     e.preventDefault();
     if (window.confirm("로그아웃하시겠습니까?")) {
       sessionStorage.clear();
-      window.location.href = "/";
+      delCookie("userid");
+      window.location.href = "/login";
     }
   };
 
@@ -176,20 +170,21 @@ const HeaderPage = () => {
                   <Typography
                     color="inherit"
                     component={Link}
-                    to="/cart"
-                    sx={{ textDecoration: "none" }}
-                    className="no-active-link"
-                  >
-                    <ShoppingCart sx={{ fontSize: "2.3rem" }} />
-                  </Typography>
-                  <Typography
-                    color="inherit"
-                    component={Link}
                     to="/mp"
                     sx={{ textDecoration: "none" }}
                     className="no-active-link"
                   >
                     <AccountCircle sx={{ fontSize: "2.3rem" }} />
+                  </Typography>
+
+                  <Typography
+                    color="inherit"
+                    component={Link}
+                    to="/cart"
+                    sx={{ textDecoration: "none" }}
+                    className="no-active-link"
+                  >
+                    <ShoppingCartOutlined sx={{ fontSize: "2rem" }} />
                   </Typography>
 
                   <Button color="inherit" onClick={onLogout} className="logout">
