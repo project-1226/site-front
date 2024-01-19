@@ -1,4 +1,4 @@
-import { ExpandMore } from "@mui/icons-material";
+import { ExpandMore, SubdirectoryArrowRight } from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -7,8 +7,14 @@ import {
   Box,
   Button,
   CircularProgress,
+  Divider,
+  FormControl,
+  FormControlLabel,
+  FormLabel,
   Pagination,
   Paper,
+  Radio,
+  RadioGroup,
   Stack,
   Table,
   TableBody,
@@ -24,38 +30,32 @@ import React, { Fragment, useEffect, useState } from "react";
 const AdminQnaPage = () => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
-  const [total, setTotal] = useState(0);
-  const [form, setForm] = useState({
-    userid: sessionStorage.getItem("userid"),
-    title: "",
-    content: "",
-  });
+  const [commentOption, setCommentOption] = useState("all");
+  const [comment, setComment] = useState("");
 
-  const size = 10;
-  const [page, setPage] = useState(1);
-  const handleChange = (e, value) => {
-    e.preventDefault();
-    setPage(value);
+  const onChangeCommentOption = (e) => {
+    setCommentOption(e.target.value);
   };
 
   const getList = async () => {
     setLoading(true);
-    const res = await axios("/shoppingqna/list", {
-      params: {
-        userid: "",
-      },
+    const res = await axios("/shoppingqna/all", {
+      params: { commentOption },
     });
     // console.log(res.data);
-    setList(res.data.list);
-    setTotal(res.data.total);
+    setList(res.data);
     setLoading(false);
   };
 
-  const onChangeForm = (e) => {
-    setForm({
-      ...form,
-      [e.target.name]: e.target.value,
+  const onSubmit = async (id) => {
+    // alert("postid : " + id + "\ncontent : " + comment);
+    await axios.post("/community/insert/comment", {
+      postid: id,
+      userid: sessionStorage.getItem("userid"),
+      content: comment,
     });
+    alert("답변이 등록되었습니다.");
+    getList();
   };
 
   const onDelete = async (id) => {
@@ -71,9 +71,7 @@ const AdminQnaPage = () => {
 
   useEffect(() => {
     getList();
-  }, [page]);
-
-  const comment = false;
+  }, [commentOption]);
 
   return (
     <Box
@@ -91,6 +89,27 @@ const AdminQnaPage = () => {
       >
         <CircularProgress color="inherit" />
       </Backdrop>
+      <FormControl>
+        <RadioGroup
+          row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          defaultValue="all"
+          name="row-radio-buttons-group"
+          onChange={onChangeCommentOption}
+        >
+          <FormControlLabel value="all" control={<Radio />} label="전체" />
+          <FormControlLabel
+            value="none"
+            control={<Radio />}
+            label="답변 대기중"
+          />
+          <FormControlLabel
+            value="withComments"
+            control={<Radio />}
+            label="답변 완료"
+          />
+        </RadioGroup>
+      </FormControl>
       <TableContainer component={Paper} sx={{ mt: 2, mb: 3 }}>
         <Table>
           <TableBody>
@@ -104,32 +123,72 @@ const AdminQnaPage = () => {
                   <TableCell>
                     <Typography variant="body1" sx={{ ml: 2 }}>
                       {l.title}
-                      <Typography
-                        variant="caption"
-                        color="text.secondary"
-                        sx={{ fontStyle: "italic", ml: 1 }}
-                      >
-                        ({l.fmtdate})
-                      </Typography>
+                    </Typography>
+                    <Typography
+                      variant="caption"
+                      color="text.secondary"
+                      sx={{ fontStyle: "italic", ml: 5 }}
+                    >
+                      <SubdirectoryArrowRight sx={{ fontSize: "0.7rem" }} />{" "}
+                      {l.username} ({l.fmtdate})
                     </Typography>
                     <Typography variant="body1" sx={{ ml: 2, mt: 1 }}>
                       <strong>Q : </strong>
                       {l.content}
                     </Typography>
-                    {!comment ? (
-                      <Typography
-                        variant="body1"
-                        color="text.secondary"
-                        sx={{ ml: 2, mt: 1 }}
-                      >
-                        <strong>A : </strong>
-                        답변 대기 중...
-                      </Typography>
+                    {!l.commentid ? (
+                      <>
+                        <Typography
+                          variant="body1"
+                          color="text.secondary"
+                          sx={{ ml: 2, mt: 1 }}
+                        >
+                          <strong>A : </strong>
+                          답변 대기 중...
+                        </Typography>
+                        <Divider
+                          sx={{
+                            borderStyle: "dashed",
+                            borderColor: "#777777",
+                            m: 2,
+                          }}
+                        />
+                        <Stack
+                          direction="row"
+                          spacing={1}
+                          sx={{ mx: 2, mb: 2, mt: 1 }}
+                        >
+                          <TextField
+                            fullWidth
+                            multiline
+                            label="답변 내용"
+                            size="small"
+                            name="content"
+                            rows={2}
+                            onChange={(e) => setComment(e.target.value)}
+                          />
+                          <Button
+                            variant="outlined"
+                            onClick={() => onSubmit(l.postid)}
+                          >
+                            등록
+                          </Button>
+                        </Stack>
+                      </>
                     ) : (
-                      <Typography variant="body1" sx={{ ml: 2, mt: 1 }}>
-                        <strong>A : </strong>
-                        {l.content}
-                      </Typography>
+                      <>
+                        <Typography variant="body1" sx={{ ml: 2, mt: 1 }}>
+                          <strong>A : </strong>
+                          {l.admin_content}
+                        </Typography>
+                        <Typography
+                          variant="caption"
+                          color="text.secondary"
+                          sx={{ fontStyle: "italic", ml: 5 }}
+                        >
+                          (답변 등록일 : {l.admin_regdate})
+                        </Typography>
+                      </>
                     )}
                     <Typography
                       variant="body2"
@@ -146,21 +205,6 @@ const AdminQnaPage = () => {
                         삭제
                       </Button>
                     </Typography>
-                    <Stack
-                      direction="row"
-                      spacing={1}
-                      sx={{ mx: 2, mb: 2, mt: 2 }}
-                    >
-                      <TextField
-                        fullWidth
-                        multiline
-                        label="문의 답변 남기기"
-                        size="small"
-                        name="content"
-                        rows={2}
-                      />
-                      <Button variant="outlined">등록</Button>
-                    </Stack>
                   </TableCell>
                 </TableRow>
               </Fragment>
@@ -168,18 +212,6 @@ const AdminQnaPage = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {total === 0 ? (
-        <Typography>문의 내역이 없습니다.</Typography>
-      ) : (
-        <Pagination
-          count={Math.ceil(total / size)}
-          shape="rounded"
-          color="primary"
-          page={page}
-          sx={{ marginBottom: 5 }}
-          onChange={handleChange}
-        />
-      )}
     </Box>
   );
 };

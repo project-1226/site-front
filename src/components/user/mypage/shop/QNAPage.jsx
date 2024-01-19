@@ -6,8 +6,13 @@ import {
   Backdrop,
   Button,
   CircularProgress,
+  Divider,
+  FormControl,
+  FormControlLabel,
   Pagination,
   Paper,
+  Radio,
+  RadioGroup,
   Stack,
   Table,
   TableBody,
@@ -37,14 +42,21 @@ const QNAPage = () => {
     setPage(value);
   };
 
+  const [commentOption, setCommentOption] = useState("all");
+
+  const onChangeCommentOption = (e) => {
+    setCommentOption(e.target.value);
+  };
+
   const getList = async () => {
     setLoading(true);
     const res = await axios("/shoppingqna/list", {
       params: {
         userid: sessionStorage.getItem("userid"),
+        commentOption,
       },
     });
-    // console.log(res.data);
+    console.log(res.data);
     setList(res.data.list);
     setTotal(res.data.total);
     setLoading(false);
@@ -80,7 +92,7 @@ const QNAPage = () => {
 
   useEffect(() => {
     getList();
-  }, [page]);
+  }, [page, commentOption]);
 
   const comment = false;
 
@@ -136,6 +148,27 @@ const QNAPage = () => {
           </AccordionDetails>
         </Accordion>
       </div>
+      <FormControl sx={{ mt: 3 }}>
+        <RadioGroup
+          row
+          aria-labelledby="demo-row-radio-buttons-group-label"
+          defaultValue="all"
+          name="row-radio-buttons-group"
+          onChange={onChangeCommentOption}
+        >
+          <FormControlLabel value="all" control={<Radio />} label="전체" />
+          <FormControlLabel
+            value="none"
+            control={<Radio />}
+            label="답변 대기중"
+          />
+          <FormControlLabel
+            value="withComments"
+            control={<Radio />}
+            label="답변 완료"
+          />
+        </RadioGroup>
+      </FormControl>
       <TableContainer component={Paper} sx={{ mt: 2, mb: 3 }}>
         <Table>
           <TableBody>
@@ -147,6 +180,43 @@ const QNAPage = () => {
                   }}
                 >
                   <TableCell>
+                    {l.commentid ? (
+                      <>
+                        <Typography
+                          variant="h6"
+                          color="primary"
+                          sx={{ fontWeight: "bolder", ml: 2 }}
+                        >
+                          답변완료
+                        </Typography>
+                        <Divider
+                          sx={{
+                            borderStyle: "dashed",
+                            borderColor: "#777777",
+                            mb: 2,
+                            mx: 2,
+                          }}
+                        />
+                      </>
+                    ) : (
+                      <>
+                        <Typography
+                          variant="h6"
+                          color="text.secondary"
+                          sx={{ fontWeight: "bolder", ml: 2 }}
+                        >
+                          답변 대기중
+                        </Typography>
+                        <Divider
+                          sx={{
+                            borderStyle: "dashed",
+                            borderColor: "#777777",
+                            mb: 2,
+                            mx: 2,
+                          }}
+                        />
+                      </>
+                    )}
                     <Typography variant="body1" sx={{ ml: 2 }}>
                       {l.title}
                       <Typography
@@ -161,20 +231,29 @@ const QNAPage = () => {
                       <strong>Q : </strong>
                       {l.content}
                     </Typography>
-                    {!comment ? (
+                    {!l.commentid ? (
                       <Typography
                         variant="body1"
                         color="text.secondary"
                         sx={{ ml: 2, mt: 1 }}
                       >
                         <strong>A : </strong>
-                        답변 대기 중...
+                        관리자가 답변을 준비 중입니다...
                       </Typography>
                     ) : (
-                      <Typography variant="body1" sx={{ ml: 2, mt: 1 }}>
-                        <strong>A : </strong>
-                        {l.content}
-                      </Typography>
+                      <>
+                        <Typography variant="body1" sx={{ ml: 2, mt: 1 }}>
+                          <strong>A : </strong>
+                          {l.admin_content}
+                        </Typography>
+                        <Typography
+                          variant="caption"
+                          color="text.secondary"
+                          sx={{ fontStyle: "italic", ml: 5 }}
+                        >
+                          (답변 등록일 : {l.admin_regdate})
+                        </Typography>
+                      </>
                     )}
                     <Typography
                       variant="body2"

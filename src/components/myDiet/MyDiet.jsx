@@ -10,8 +10,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 //함수(IngredientArrayMaker:하나의인수만,IngredientsArraytMaker2개 이상인수 가능)
 import { IngredientArrayMaker } from "./IngredientArrayMaker";
-import RecipeModal from './RecipeModal';
-
+import RecipeModal from "./RecipeModal";
 
 // MyDiet 컴포넌트 정의
 const MyDiet = ({ setIsHeader, setIsFooter }) => {
@@ -22,8 +21,10 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   const [myFoods, setMyFoods] = useState([]);
   const [selectedMyFood, setSelectedMyFood] = useState("");
-  const [isFoodChanged,setIsFoodChanged] = useState(false); 
+  const [isFoodChanged, setIsFoodChanged] = useState(false);
   // const [ingredientList, SetIngredientList] = useState([]);
+
+  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
 
   const getMyList = async () => {
     setLoading(true);
@@ -67,12 +68,16 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
   const handleCart = async () => {
     let ingreList = IngredientArrayMaker(selectedMyFood?.ingredients);
     if (ingreList.length > 0) {
-      //alert(ingreList);    
-      let notice = window.confirm(`${selectedDay}일차 재료를 장바구니에 담으시겠습니까?`);      
-      if(notice){
-        const res = await axios.post("/cart/insert-list", ingreList);      
-        ingreList.push(sessionStorage.getItem("userid"));  //ingredint배열과 userid를 묶어서보내면 받기어려워서 그냥 한 배열에 합쳐서보냄
-        notice = window.confirm(`${res.data}개의 상품이 등록되었습니다.\n 장바구니로 이동하시겠습니까?`);
+      //alert(ingreList);
+      let notice = window.confirm(
+        `${selectedDay}일차 재료를 장바구니에 담으시겠습니까?`
+      );
+      if (notice) {
+        const res = await axios.post("/cart/insert-list", ingreList);
+        ingreList.push(sessionStorage.getItem("userid")); //ingredint배열과 userid를 묶어서보내면 받기어려워서 그냥 한 배열에 합쳐서보냄
+        notice = window.confirm(
+          `${res.data}개의 상품이 등록되었습니다.\n 장바구니로 이동하시겠습니까?`
+        );
         if (res.data > 0) {
           if (notice) {
             navigate("/cart");
@@ -82,7 +87,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
         } else {
           console.error("insert ingredients error."); // 이경우..흠 try catch?
         }
-      }else {
+      } else {
         console.error("No ingreList.");
       }
     }
@@ -131,10 +136,19 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
             </div>
           </div>
 
-          <div className='date_plan_btn_wrap'>
-            <button onClick={handleImageClick}> 자세히보기 <MdChevronRight /></button>
-            <button onClick={handleCart}> 재료담기 <MdChevronRight /></button>
-            <button onClick={handleRecipe}> 홈메이드 레시피가 궁금하다면! <MdChevronRight /></button>
+          <div className="date_plan_btn_wrap">
+            <button onClick={handleImageClick}>
+              {" "}
+              자세히보기 <MdChevronRight />
+            </button>
+            <button onClick={handleCart}>
+              {" "}
+              재료담기 <MdChevronRight />
+            </button>
+            <button onClick={handleRecipe}>
+              {" "}
+              홈메이드 레시피가 궁금하다면! <MdChevronRight />
+            </button>
           </div>
         </div>
         {/* date_plan */}
@@ -211,8 +225,11 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
                   <div className="carousel_text_btm">
                     <p>
-                      <strong>상품이 다양</strong>해서 고르는 재미가 있어서 좋아요!<br />
-                      먹기도 편하고 휴대하기도 간편해서 너무 좋아요. 한 끼 식사로도 부담없는데 칼로리도 낮아서 걱정없어요!
+                      <strong>상품이 다양</strong>해서 고르는 재미가 있어서
+                      좋아요!
+                      <br />
+                      먹기도 편하고 휴대하기도 간편해서 너무 좋아요. 한 끼
+                      식사로도 부담없는데 칼로리도 낮아서 걱정없어요!
                     </p>
                   </div>
                 </div>
@@ -231,8 +248,11 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
                   <div className="carousel_text_btm">
                     <p>
-                      <strong>식단이 다른 곳과 달리 다양하고 </strong>다이어트 뿐만 아니라 질환 맞춤식도 있어서 좋더라구요~<br />
-                      고르는 재미도 있고, 식사 조절하는 다이어트가 너무 쉬워졌어요!
+                      <strong>식단이 다른 곳과 달리 다양하고 </strong>다이어트
+                      뿐만 아니라 질환 맞춤식도 있어서 좋더라구요~
+                      <br />
+                      고르는 재미도 있고, 식사 조절하는 다이어트가 너무
+                      쉬워졌어요!
                     </p>
                   </div>
                 </div>
