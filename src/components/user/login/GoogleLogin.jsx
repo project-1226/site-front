@@ -1,6 +1,6 @@
 import React from "react";
 
-import { auth } from "../../FirebaseConfig";
+import { auth } from "../../../FirebaseConfig";
 import { GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 
 import { Button } from "@mui/material";
@@ -36,7 +36,10 @@ const GoogleLogin = () => {
 
   return (
     <Button
-      variant="contained"
+      fullWidth
+      disableElevation
+      sx={{ height: "100%" }}
+      variant="outlined"
       startIcon={<GoogleIcon />}
       onClick={handleGoogleLogin}
     >
