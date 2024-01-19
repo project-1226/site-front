@@ -14,6 +14,7 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
   const [loading, setLoading] = useState(false);
   const [selectedImageToChange, setSelectedImageToChange] = useState({});
   const [imageTextOpacity, setImageTextOpacity] = useState({});
+  const [imageUrl, setImageUrl] = useState();
 
 
   const handleClose = () => {

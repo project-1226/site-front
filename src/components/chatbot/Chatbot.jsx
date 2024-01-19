@@ -33,9 +33,8 @@ const Chatbot = () => {
     console.log(user);
   };
 
-
-
-
+  
+  
   const getMyList = async () => {
 
     const res = await axios(
@@ -106,6 +105,7 @@ const Chatbot = () => {
       id: '0',
       message: `${user.nickname}님! 안녕하세요. 밀조이 상담 챗봇입니다.`,
       trigger: '1',
+
     },
     {
       id: '1',
@@ -154,7 +154,6 @@ const Chatbot = () => {
       message: `3일차  ${form.day3food}`,
       trigger: '3',
     },
-
     {
       id: '8',
       message: `4일차  ${form.day4food}`,
@@ -178,7 +177,7 @@ const Chatbot = () => {
     {
       id: '99',
       message: `상담이 종료되었습니다`,
-   
+
     },
 
 
@@ -237,6 +236,7 @@ const Chatbot = () => {
               onClick={handleChatbotToggle}
             >
               <ContactSupportIcon style={{ fontSize: '3rem' }} />
+
             </button>
           </div>
         </div>
