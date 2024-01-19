@@ -31,6 +31,8 @@ const Healthcare = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categories, setCategories] = useState([]);
   const [myExercise, setMyExercise] = useState([]);
+  const [value, setValue] = React.useState("one");
+
   const columns = [
     { field: "excerciseid", headerName: "Exercise ID", width: 120 },
     { field: "name", headerName: "Name", width: 200 },
@@ -69,7 +71,7 @@ const Healthcare = () => {
         ),
     },
   ];
-  const [value, setValue] = React.useState("one");
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
@@ -131,9 +133,11 @@ const Healthcare = () => {
     <div className="healthcare_wrap">
       <div className="healthcare_main">
         <div className="h_main_title_wrap">
-          <p>IT DOESN'T GET EASIER.</p>
-          <p>TOU GET BETTER.</p>
-          <p>MEALJOY의 노력이 현대인들의 삶을 건강하고, 행복하게 바꿉니다.</p>
+          <p className="h_main_title1">IT DOESN'T GET EASIER.</p>
+          <p className="h_main_title2">TOU GET BETTER.</p>
+          <p className="h_main_title3">
+            MEALJOY의 노력이 현대인들의 삶을 건강하고, 행복하게 바꿉니다.
+          </p>
         </div>
       </div>
       {/* <div className='healthcare_submain'>

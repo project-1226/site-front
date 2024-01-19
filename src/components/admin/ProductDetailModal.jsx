@@ -34,17 +34,19 @@ const ProductDetailModal = ({ show, hide, product }) => {
         }
     }
 
-    const getImage = async() => {
-        setLoading(true);
-        const res = await axios.get("/admin/imageList?productid=" + productid);
-        //console.log(res.data);
-        setImageList(res.data);
-        setLoading(false);
-    }
+    // const getImage = async() => {
+    //     setLoading(true);
+    //     const res = await axios.get("/admin/imageList?productid=" + productid);
+    //     console.log(res.data);
+    //     console.log(productid);
 
-    useEffect(() => {
-        getImage();
-    }, []);
+    //     setImageList(res.data);
+    //     setLoading(false);
+    // }
+
+    // useEffect(() => {
+    //     getImage();
+    // }, []);
 
     const handleClick = () => {
         setEditOpen(!editOpen);
@@ -63,9 +65,11 @@ const ProductDetailModal = ({ show, hide, product }) => {
         setForm({ name: '', price: '', content: ''});
     }
 
-    const onDelete = (productid) => {
+    const onDelete = async(productid) => {
         if(window.confirm(`${productid}번 상품을 삭제할까요?`)){
             //상품 삭제 작업
+            await axios.post(`/admin/deleteProduct`, {productid});
+            alert("상품 삭제!");
         }
     }
 
@@ -81,8 +85,13 @@ const ProductDetailModal = ({ show, hide, product }) => {
                 width: 800, height: 700, bgcolor: 'background.paper', border: '2px solid #000', boxShadow: 24, p: 4
             }}>
                 <div className='justify-content-center'>
-                    <h6>[{product.productid}]</h6>
-                    <form style={{display: 'flex', alignItems: 'center'}}>
+                    <h6>
+                        [{product.productid}]
+                        <div className='text-end'>
+                            <Button onClick={hide} sx={{ position: 'relative', top: '-25px'}}>Close</Button>
+                        </div>
+                    </h6>
+                    <form style={{display: 'flex', alignItems: 'center', marginTop: '-20px'}}>
                         <div style={{marginRight: '8px'}}>
                             {/* {imageList.map((i)=>
                                 <img src={i.image_url}/>
@@ -101,7 +110,7 @@ const ProductDetailModal = ({ show, hide, product }) => {
                             <div style={{ whiteSpace: 'pre-line'}}>{product.content}</div>
                         </div>
                     </form>
-                    <div className='text-center my-3'>
+                    <div className='text-center my-2'>
                         <Button onClick={handleClick} variant='outlined'>수정하기</Button>
                         <Button onClick={()=> onDelete(productid)} className='ms-3' variant='outlined' color='error'>삭제하기</Button>
                     </div>

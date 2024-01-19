@@ -50,7 +50,7 @@ const MyFood = ({ userInfo }) => {
         console.error("Error - 주차별 식단 데이터 출력 : ", error);
       }
     }
-    // console.log(data);
+    console.log(data);
     setList(data);
     setLoading(false);
   };

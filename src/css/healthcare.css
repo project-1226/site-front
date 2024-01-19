@@ -17,8 +17,8 @@
 /* select_challenge_wrap */
 .select_challenge_wrap {margin-bottom: 180px !important; }
 .challenge_wrap {background: url('../images/challenge_bg.jpg') no-repeat 50% 30%; background-size: cover; border-radius: 20px; position: relative; padding: 35px;}
-.challenge_wrap::before {width: 100%; height: 100%; content: ''; position: absolute; top: 0; left: 0; background: rgba(0, 0, 0, 0.3); border-radius: 20px;}
-.challenge_box_wrap {display: flex; flex-wrap: wrap; margin-bottom: 25px !important; z-index: 1; }
+.challenge_wrap::before {width: 100%; height: 100%; content: ''; position: absolute; top: 0; left: 0; background: rgba(0, 0, 0, 0.2); border-radius: 20px;}
+.challenge_box_wrap {display: flex; margin-bottom: 25px !important; z-index: 1; }
 .challenge_box_wrap:last-child { margin-bottom: 0 !important;}
 .challenge_box {width: 21.25vw;; height: 9vw; margin-right: 1.7vw; display: flex; align-items: center; justify-content: center; border-radius: 20px;
 cursor: pointer; font-size: 26px; font-weight: bold; font-family: 'GmarketSansMedium'; border: 2px solid #fff; z-index: 1; color: #fff;}
@@ -48,7 +48,7 @@ cursor: pointer; font-size: 26px; font-weight: bold; font-family: 'GmarketSansMe
 .healthcare_modal_body {width: 100%; height: 400px; margin-bottom: 30px !important;}
 .healthcare_modal_btm_wrap {width: 50%; margin: 0 auto; padding: 15px 30px; border: 1px solid #c8c8c8; border-radius: 20px; margin-bottom: 30px !important;}
 .healthcare_modal_btm {width: 100%; height: auto; margin: 0 auto; ; padding: 20px;}
-.healthcare_modal_selected_title {font-size: 28px; font-weight: 600; text-align: left; margin-bottom: 15px !important;}
+.healthcare_modal_selected_title {font-size: 28px; font-weight: 600; text-align: center; margin-bottom: 15px !important; font-family: 'GmarketSansMedium';}
 .healthcare_modal_unselected {text-align: center; color: red; font-weight: 500;}
 .healthcare_modal_selected_name {font-size: 16px; font-weight: 500;}
-.healthcare_modal_btn{text-align: center;}
+.healthcare_modal_btn{text-align: center; margin-bottom: 20px;}

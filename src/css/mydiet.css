@@ -19,11 +19,11 @@
 .date_plan_title {position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); border-radius: 20px; display: flex; justify-content: center; align-items: center; color: white; z-index: 2;}
 .date_plan_title p {margin: 0; font-size: 28px; font-family: 'Noto Serif KR'; letter-spacing: -1px;}
 
-.date_plan_btn_wrap {width: 50%; margin: 0 auto; display: flex; justify-content: center; align-items: center;}
-.date_plan_btn_wrap button {width: 115px; height: 47px; line-height: 45px; font-size: 0.875rem; text-align: center; border: 1px solid #e9e9e9; background: #f8f8f8; color: #000; font-weight: 500; border-radius: 50px;}
+.date_plan_btn_wrap {width: 50%; margin: 0 auto; display: flex; justify-content: center; align-items: center; font-family: 'Noto Serif KR';}
+.date_plan_btn_wrap button {width: 115px; height: 47px; line-height: 45px; font-size: 0.875rem; text-align: center; border: 1px solid #b8c7ae; background: #f8f8f8; color: #000; font-weight: 500; border-radius: 50px; margin-right: 2% !important;}
 .date_plan_btn_wrap button:hover {background: #748769; color: #fff; border: none;}
 .date_plan_datebtn button.selected {background-color: #e3e3e3; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);}
-.date_plan_btn_wrap button:first-child {margin-right: 20px; }
+.date_plan_btn_wrap button:last-child {width: 245px; margin-right: 0 !important; }
 
 /* diet_contents */
 .diet_contents {width: 94.8%; margin: 0 auto 180px auto;}

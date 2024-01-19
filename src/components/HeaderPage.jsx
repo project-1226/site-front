@@ -83,7 +83,7 @@ const HeaderPage = () => {
                   to="/health"
                   sx={{ textDecoration: "none" }}
                   className={`menu-item ${
-                    location.pathname === "/healthydiet" ? "active-link" : ""
+                    location.pathname === "/health" ? "active-link" : ""
                   }`}
                 >
                   {" "}
@@ -128,6 +128,18 @@ const HeaderPage = () => {
                   {" "}
                   커뮤니티{" "}
                 </Typography>
+                <Typography
+                  color="inherit"
+                  component={Link}
+                  to="/Ailist"
+                  sx={{ textDecoration: "none" }}
+                  className={`menu-item ${
+                    location.pathname === "/community" ? "active-link" : ""
+                  }`}
+                >
+                  {" "}
+                    트레이너 {" "}
+                </Typography>
               </>
             )}
           </Stack>
@@ -159,6 +171,15 @@ const HeaderPage = () => {
             sessionStorage.getItem("userid") &&
               sessionStorage.getItem("userid") !== "2fa0017c-053b-4983-8" && (
                 <>
+                <Typography
+                    color="inherit"
+                    component={Link}
+                    to="/cart"
+                    sx={{ textDecoration: "none" }}
+                    className="no-active-link"
+                  >
+                    <ShoppingCart sx={{ fontSize: "2.3rem" }} />
+                  </Typography>
                   <Typography
                     color="inherit"
                     component={Link}
@@ -168,6 +189,9 @@ const HeaderPage = () => {
                   >
                     <AccountCircle sx={{ fontSize: "2.3rem" }} />
                   </Typography>
+
+
+                 
                   <Button color="inherit" onClick={onLogout} className="logout">
                     {" "}
                     Logout{" "}
