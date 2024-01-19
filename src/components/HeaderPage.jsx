@@ -42,7 +42,7 @@ const HeaderPage = () => {
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static" className="seon_muipaper_shadow_none">
         <Toolbar>
-          <IconButton
+          {/* <IconButton
             size="large"
             edge="start"
             color="inherit"
@@ -52,7 +52,8 @@ const HeaderPage = () => {
             sx={{ mr: 2 }}
           >
             <SetMeal />
-          </IconButton>
+          </IconButton> */}
+          <Link className="logo" to="/">MEALJOY</Link>
 
           <Stack
             direction="row"
