@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 //함수(IngredientArrayMaker:하나의인수만,IngredientsArraytMaker2개 이상인수 가능)
 import { IngredientArrayMaker } from './IngredientArrayMaker'
+import RecipeModal from './RecipeModal';
 
 
 // MyDiet 컴포넌트 정의
@@ -22,6 +23,8 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
   const [myFoods, setMyFoods] = useState([]);
   const [selectedMyFood, setSelectedMyFood] = useState("");
   const [ingredientList, SetIngredientList] = useState("");
+
+  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
 
   const getMyList = async () => {
     setLoading(true);
@@ -41,6 +44,10 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   const handleImageClick = () => {
     setIsModalOpen(true);
+  };
+
+  const handleRecipe = () => {
+    setIsRecipeModalOpen(true);
   };
 
   const handleCloseModal = () => {
@@ -118,6 +125,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
           <div className='date_plan_btn_wrap'>
             <button onClick={handleImageClick}> 자세히보기 <MdChevronRight /></button>
             <button onClick={handleCart}> 재료담기 <MdChevronRight /></button>
+            <button onClick={handleRecipe}> 홈메이드 레시피가 궁금하다면! <MdChevronRight /></button>
           </div>
         </div>{/* date_plan */}
       </div>{/* main_box */}
@@ -179,8 +187,8 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
                   <div className='carousel_text_btm'>
                     <p>
-                      <strong>식당구성이 너무 좋아요!</strong>질리지 않은데다 조리법도 알려줘서 너무 좋아요.<br />
-                      특히나 제가 무릎이 안좋아서 과한 운동을 하지 못하는데, 일주일도 안되어 6kg이 빠졌어요!!!
+                      <strong>상품이 다양</strong>해서 고르는 재미가 있어서 좋아요!<br />
+                      먹기도 편하고 휴대하기도 간편해서 너무 좋아요. 한 끼 식사로도 부담없는데 칼로리도 낮아서 걱정없어요!
                     </p>
                   </div>
                 </div>
@@ -199,8 +207,8 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
                   <div className='carousel_text_btm'>
                     <p>
-                      <strong>식당구성이 너무 좋아요!</strong>질리지 않은데다 조리법도 알려줘서 너무 좋아요.<br />
-                      특히나 제가 무릎이 안좋아서 과한 운동을 하지 못하는데, 일주일도 안되어 6kg이 빠졌어요!!!
+                      <strong>식단이 다른 곳과 달리 다양하고 </strong>다이어트 뿐만 아니라 질환 맞춤식도 있어서 좋더라구요~<br />
+                      고르는 재미도 있고, 식사 조절하는 다이어트가 너무 쉬워졌어요!
                     </p>
                   </div>
                 </div>
@@ -313,6 +321,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
         </section>
       </div>{/* diet_contents */}
       <DietModal show={isModalOpen} onHide={handleCloseModal} selectedMyFood={selectedMyFood} selectedDay={selectedDay} />
+      <RecipeModal show={isRecipeModalOpen} onHide={() => setIsRecipeModalOpen(false)} selectedMyFood={selectedMyFood} selectedDay={selectedDay} />
     </div>
   );
 }

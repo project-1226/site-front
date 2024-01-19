@@ -82,7 +82,7 @@ const HeaderPage = () => {
                   to="/health"
                   sx={{ textDecoration: "none" }}
                   className={`menu-item ${
-                    location.pathname === "/healthydiet" ? "active-link" : ""
+                    location.pathname === "/health" ? "active-link" : ""
                   }`}
                 >
                   {" "}
