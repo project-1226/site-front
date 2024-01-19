@@ -21,7 +21,7 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,TextField,
   InputAdornment,Item, Stack
 } from '@mui/material';
-const modelURL = 'https://teachablemachine.withgoogle.com/models/OCgHIkBy1/';
+const modelURL = 'https://teachablemachine.withgoogle.com/models/Rj7xAvYY2/';
 let model, webcam, ctx, labelContainer, maxPredictions;
 
 const MotionReader = () => {
@@ -52,8 +52,8 @@ const MotionReader = () => {
 
   useEffect(() => {
     const init = async () => {
-      const modelURL = 'https://teachablemachine.withgoogle.com/models/OCgHIkBy1/model.json';
-      const metadataURL = 'https://teachablemachine.withgoogle.com/models/OCgHIkBy1/metadata.json';
+      const modelURL = 'https://teachablemachine.withgoogle.com/models/Rj7xAvYY2/model.json';
+      const metadataURL = 'https://teachablemachine.withgoogle.com/models/Rj7xAvYY2/metadata.json';
 
       // Load the model and metadata
       model = await tmPose.load(modelURL, metadataURL);
@@ -95,7 +95,7 @@ const MotionReader = () => {
        
        // console.log(moveCnt); // 이 시점에서 moveCnt는 이전 값일  수 있음
 
-      }, 2000);
+      }, 1500);
 
      
 
@@ -128,12 +128,12 @@ const MotionReader = () => {
       const classPrediction =
         prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
 		//console.log( prediction[1].probability);
-		setTest( prediction[0].probability.toFixed(2));
+		setTest( prediction[1].probability.toFixed(2));
         
 		labelContainer.childNodes[i].innerHTML = classPrediction;
 	  //console.log(prediction[1].probability);
 	
-		setMoveValue(prediction[0].probability.toFixed(2));
+		setMoveValue(prediction[1].probability.toFixed(2));
 		
 			// if(prediction[0].probability.toFixed(2)==1.00){
             //     movecounter++;
