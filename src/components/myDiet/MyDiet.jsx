@@ -21,7 +21,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   const [myFoods, setMyFoods] = useState([]);
   const [selectedMyFood, setSelectedMyFood] = useState("");
-  const [ingredientList, SetIngredientList] = useState("");
+  // const [ingredientList, SetIngredientList] = useState([]);
 
   const getMyList = async () => {
     setLoading(true);
@@ -53,34 +53,28 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
     //console.log(selectedMyFood);
   };
 
-  const handleCart = async () => {
-
-    if (selectedMyFood) {
-      let ingreList = IngredientArrayMaker(selectedMyFood.ingredients);
-      // 2024.1.17-아름
-      // 1. {ingreList(배열), userid}? -> post로 어떻게 보내고 받을지(자료형)
-      // 2. cart에 insert할때 필요한데이터, 어떤 api? ,api날릴때 필요한 파라미터?
-      // 3. 2번 선행이후 ingreList로 어떻게 select해올지 쿼리작성(mapper)
-      // 4. cart에 insert할때 필요한 VO 수정 or 생성
-
-      //5. 1.과 2. service로 묶기(재료담기 click -> 재료에해당하는 product검색 + cart insert)
-      //6 endpoint : navigate('/cart');
-      const res = await axios.post("/??????")
-
-      //
-
+  const handleCart = async () => {  
+      let ingreList = IngredientArrayMaker(selectedMyFood?.ingredients);
+      if(ingreList.length > 0){
+        alert(ingreList)
+      //ingredint배열과 userid를 묶어서보내면 받기어려워서 그냥 한 배열에 합쳐서보냄
+      ingreList.push(sessionStorage.getItem("userid"))
+      const res = await axios.post("/cart/insert-list",ingreList);
+      
+      const notice = window.confirm(`${res.data}개의 상품이 등록되었습니다.\n 장바구니로 이동하시겠습니까?`)
+      if(res.data > 0 ){
+        if(notice){
+          navigate("/cart")
+        }
+      }else if(res.data = 0){
+        alert("식단에 해당하는 재료의 상품이 없습니다.")
+      }else {
+        console.error("insert ingredients error."); // 이경우..흠 try catch?
+      }          
     } else {
-      // 선택된 음식이 없을 때의 처리
-      console.error("No selectedMyFood available.");
+      console.error("No ingreList.");
     }
-
-    //navigate('/cart');
-  }
-
-  useEffect(() => {
-    setIsFooter(true);
-    setIsHeader(true);
-  }, [])
+  };
 
   return (
     <div className='diet_wrap'>

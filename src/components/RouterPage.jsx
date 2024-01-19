@@ -86,7 +86,7 @@ const RouterPage = () => {
 
         <Route path="/AIimg" element={<Imagereader />} />
         <Route path="/AImotion" element={<MotionReader />} />
-        <Route path="/Ailist" element={<AiList />} />
+        <Route path="/Ailist" element={<AiList/>} />
           
         <Route path="/Chatbot" element={<Chatbot />} />
 
