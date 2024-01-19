@@ -1,4 +1,4 @@
-import { SetMeal, AccountCircle,ShoppingCart} from "@mui/icons-material";
+import { SetMeal, AccountCircle, ShoppingCart } from "@mui/icons-material";
 
 import {
   AppBar,
@@ -54,7 +54,9 @@ const HeaderPage = () => {
           >
             <SetMeal />
           </IconButton> */}
-          <Link className="logo" to="/">MEALJOY</Link>
+          <Link className="logo" to="/">
+            MEALJOY
+          </Link>
 
           <Stack
             direction="row"
@@ -134,11 +136,11 @@ const HeaderPage = () => {
                   to="/Ailist"
                   sx={{ textDecoration: "none" }}
                   className={`menu-item ${
-                    location.pathname === "/community" ? "active-link" : ""
+                    location.pathname === "/Ailist" ? "active-link" : ""
                   }`}
                 >
                   {" "}
-                    트레이너 {" "}
+                  트레이너{" "}
                 </Typography>
               </>
             )}
@@ -171,7 +173,7 @@ const HeaderPage = () => {
             sessionStorage.getItem("userid") &&
               sessionStorage.getItem("userid") !== "2fa0017c-053b-4983-8" && (
                 <>
-                <Typography
+                  <Typography
                     color="inherit"
                     component={Link}
                     to="/cart"
@@ -190,8 +192,6 @@ const HeaderPage = () => {
                     <AccountCircle sx={{ fontSize: "2.3rem" }} />
                   </Typography>
 
-
-                 
                   <Button color="inherit" onClick={onLogout} className="logout">
                     {" "}
                     Logout{" "}
