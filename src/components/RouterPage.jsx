@@ -53,6 +53,9 @@ import SurveySigninPage from "./SurveySigninPage";
 import HealthyDetailModal from "./healthyDiet/HealthyDetailModal";
 import ProductList from "./admin/ProductList";
 
+import Chatbotchatstart from "./chatbot/Chatbotchatstart";
+
+
 const RouterPage = () => {
   const navi = useNavigate();
   const isUserLoggedIn = sessionStorage.getItem("userid") !== null;
@@ -107,7 +110,7 @@ const RouterPage = () => {
         />
 
         <Route path="/AIimg" element={<Imagereader />} />
-        <Route path="/AImotion" element={<MotionReader />} />
+        <Route path="/aisquat" element={<MotionReader />} />
         <Route path="/Ailist" element={<AiList />} />
 
         <Route path="/Chatbot" element={<Chatbot />} />
@@ -115,6 +118,7 @@ const RouterPage = () => {
         {/* 주문 */}
         <Route path="/Cart" element={<Cart />} />
         <Route path="/Order" element={<OrderPage />} />
+        <Route path="/chatstart" element={<Chatbotchatstart />} />
 
         {/* 로그인/회원가입 */}
         <Route
