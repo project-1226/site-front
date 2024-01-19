@@ -60,6 +60,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   const handleCart = async () => {
     let ingreList = IngredientArrayMaker(selectedMyFood?.ingredients);
+    ingreList.push(sessionStorage.getItem('userid'));
     if (ingreList.length > 0) {
       //alert(ingreList);    
       let notice = window.confirm(`${selectedDay}일차 재료를 장바구니에 담으시겠습니까?`);      
