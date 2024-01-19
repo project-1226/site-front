@@ -46,7 +46,12 @@ const SigninPage = ({setIsHeader,setIsFooter}) => {
       setIsHeader(true);
       setIsFooter(true);
       sessionStorage.setItem("userid", userid);
-      navi("/mydiet");
+
+      if(sessionStorage.getItem("userid") === "2fa0017c-053b-4983-8"){
+        navi("/admin");
+      }else{
+        navi("/mydiet");
+      }
     }
   };
   useEffect(()=>{   
