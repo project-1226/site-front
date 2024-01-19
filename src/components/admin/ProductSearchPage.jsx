@@ -53,12 +53,9 @@ const ProductSearchPage = () => {
         return doc.body.textContent || "";
     }
 
-    const onSave = async(name, price) => {
-        //console.log(name);
-        //console.log(price);
-        
+    const onSave = async(name, price, image, productid) => {
         if(window.confirm("상품을 등록할까요?")){
-            await axios.post("/admin/insert/product", {name, price});
+            await axios.post("/admin/insert/product", {name, price, image_url:image, productid});
             alert("등록완료!");
         }
     }
@@ -137,7 +134,7 @@ const ProductSearchPage = () => {
                             </td>
                             <td ><div className='ellipsis_adpro'>{p.name}</div></td>
                             <td className='text-center'>{p.lprice}원</td>
-                            <div><Button onClick={()=> onSave(p.name, p.price)} variant='contained' size='small'>등록</Button></div>
+                            <div><Button onClick={()=> onSave(p.name, p.price, p.image, p.productid)} variant='contained' size='small'>등록</Button></div>
                         </tr>
                     )}
                 </tbody>
