@@ -114,7 +114,7 @@ const Chatbot = () => {
   return (
     <div className="ak_wrap">
       <div className="ak_contents">
-        <div class="cbfloat-container">
+        <div className="cbfloat-container">
           {chatbotOpened && (
             <>
               <div className="leDQrA">
@@ -128,8 +128,8 @@ const Chatbot = () => {
               </div>
             </>
           )}
-          <div class="cbfloat-button-container">
-            <button class="btn-hover color-5" onClick={handleChatbotToggle}>
+          <div className="cbfloat-button-container">
+            <button className="btn-hover color-5" onClick={handleChatbotToggle}>
               <ContactSupportIcon style={{ fontSize: "3rem" }} />
             </button>
           </div>
