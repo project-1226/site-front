@@ -192,9 +192,16 @@ const Healthy = ({pagetype}) => {
             
 
           <div className='healthy_video_wrap'>
-            <div className='healthy_video'>유튜브 레시피 영상 foods[0].name으로 검색한 영상</div>
-            <div className='healthy_video'>유튜브 레시피 영상 foods[1].name으로 검색한 영상</div>
-            <div className='healthy_video'>유튜브 레시피 영상 foods[2].name으로 검색한 영상</div>
+          {foods.slice(0, 3).map((food) => (
+              <iframe
+                key={food?.vidioid}
+                className="recipe_video"
+                src={`https://www.youtube.com/embed/${food?.vidioid}`}
+                title={food?.name}
+                frameBorder="0"
+                allowFullScreen
+              />
+            ))}
           </div>
         </section>{/* diet_recipe */}
       </div>

@@ -32,6 +32,8 @@ const Healthcare = () => {
   const [categories, setCategories] = useState([]);
   const [myExercise, setMyExercise] = useState([]);
   const [value, setValue] = React.useState("one");
+  const [hometrainning,setHometrainning] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   const columns = [
     { field: "excerciseid", headerName: "Exercise ID", width: 120 },
@@ -91,6 +93,7 @@ const Healthcare = () => {
     }
   };
   const getMyExercise = async () => {
+    setLoading(true);
     const res = await axios(
       `/exercise/myexercises?userid=${sessionStorage.getItem(
         "userid"
@@ -98,9 +101,16 @@ const Healthcare = () => {
     );
     console.log(res.data);
     setMyExercise(res.data);
+    setLoading(false);
   };
+
+  const getHometrainning=async()=>{
+    const res = await axios("/exercise/list?categoryid=58");
+    setHometrainning(res.data)
+  }
   useEffect(() => {
     getCategories();
+    getHometrainning();
   }, []);
 
   const handleCategoryClick = (category) => {
@@ -222,11 +232,17 @@ const Healthcare = () => {
           <div className="contents_title_box">
             <p className="contents_title">HOME TRAINING</p>
           </div>
-
           <div className="healthcare_video_wrap">
-            <div className="healthcare_video">운동 영상</div>
-            <div className="healthcare_video">운동 영상</div>
-            <div className="healthcare_video">운동 영상</div>
+          {hometrainning?.slice(0, 3).map((h_exercise) => (
+              <iframe
+                key={h_exercise?.vidioid}
+                className="recipe_video"
+                src={`https://www.youtube.com/embed/${h_exercise?.vidioid}`}
+                title={h_exercise?.name}
+                frameBorder="0"
+                allowFullScreen
+              />
+            ))}
           </div>
         </section>
 
