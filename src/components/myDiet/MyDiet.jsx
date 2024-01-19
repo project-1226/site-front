@@ -9,10 +9,7 @@ import { MdChevronRight } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 //함수(IngredientArrayMaker:하나의인수만,IngredientsArraytMaker2개 이상인수 가능)
-import {
-  IngredientArrayMaker,
-  IngredientsArraytMaker,
-} from "./IngredientArrayMaker";
+import { IngredientArrayMaker } from "./IngredientArrayMaker";
 
 // MyDiet 컴포넌트 정의
 const MyDiet = ({ setIsHeader, setIsFooter }) => {
