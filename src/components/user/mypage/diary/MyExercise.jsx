@@ -1,4 +1,10 @@
-import { ArrowRight, ExpandMore, LaunchRounded } from "@mui/icons-material";
+import {
+  ArrowRight,
+  ExpandMore,
+  SmartDisplay,
+  VideoCameraFront,
+  YouTube,
+} from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -12,11 +18,21 @@ import {
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import DietModal from "../../../myDiet/DietModal";
+import HealthcareModal from "../../../healthcare/HealthcareModal";
 
 const MyExercise = ({ userInfo }) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [showPage, setShowPage] = useState(0);
+  const [selectedCategory, setSelectedCategory] = useState(0);
+
+  const handleYoutubeClick = (categoryid) => {
+    setIsModalOpen(true);
+    setShowPage(1);
+    setSelectedCategory(categoryid);
+  };
 
   const getPlan = async (categoryid) => {
     const res = await axios("/exercise/myexercises", {
@@ -50,7 +66,7 @@ const MyExercise = ({ userInfo }) => {
         console.error("Error - 주차별 식단 데이터 출력 : ", error);
       }
     }
-    // console.log(data);
+    console.log(data);
     setList(data);
     setLoading(false);
   };
@@ -83,10 +99,18 @@ const MyExercise = ({ userInfo }) => {
             <AccordionDetails>
               <Stack direction="row">
                 <Grid container>
-                  {l.exercise_plans.map((e, index) => (
+                  {l.exercise_plans.map((p, index) => (
                     <Grid item sm={6} key={index}>
-                      <Typography>
-                        <ArrowRight /> {e.name}
+                      <Typography alignContent="center">
+                        <ArrowRight /> {p.name}
+                        <IconButton
+                          onClick={() => handleYoutubeClick(p.categoryid)}
+                        >
+                          <SmartDisplay />
+                        </IconButton>
+                        <IconButton>
+                          <VideoCameraFront />
+                        </IconButton>
                       </Typography>
                     </Grid>
                   ))}
@@ -96,6 +120,12 @@ const MyExercise = ({ userInfo }) => {
           </Accordion>
         ))}
       </div>
+      <HealthcareModal
+        show={isModalOpen}
+        handleClose={() => setIsModalOpen(false)}
+        selectedCategory={selectedCategory}
+        page={showPage}
+      />
     </>
   );
 };
