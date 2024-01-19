@@ -14,7 +14,6 @@ const ProductList = () => {
     const [isOpen, setIsOpen] = useState(false);
     const [modalProduct, setModalProduct] = useState([]);
     const [cnt, setCnt] = useState(0);
-
     const getList = async() => {
         setLoading(true);
         const res = await axios.get("/admin/productList", {
@@ -62,7 +61,7 @@ const ProductList = () => {
     const onCheckSingle = (e, productid) => {
         const data = list.map(item => item.productid === productid ? {...item, checked:e.target.checked} : item);
         setList(data);
-    }
+    };
 
     useEffect(() => {
         let chk = 0;
@@ -72,21 +71,18 @@ const ProductList = () => {
         setCnt(chk);
     }, [list]);
 
-    // const onCheckDelete = async(productid) => {
-    //     if(cnt === 0){
-    //         alert("삭제할 상품을 선택하세요!");
-    //     }else{
-    //         if(window.confirm(`${cnt}개 상품을 삭제할까요?`)){
-    //             for(const item of list){
-    //                 if(item.checked){
-    //                     await axios.post("/admin/deleteProduct", productid);
-    //                 }
-    //             }
-    //             alert("상품 삭제!");
-    //             getList();
-    //         }
-    //     }
-    // }
+    const onCheckDelete = async(productid) => {
+        if(cnt === 0){
+            alert("삭제할 상품을 선택하세요!");
+        }else{
+            if(window.confirm(`${cnt}개 상품을 삭제할까요?`)){
+                await axios.post("/admin/deleteProduct", {productid});
+
+                alert("상품 삭제!");
+                getList();
+            }
+        }
+    }
 
     if(loading) return <div className='text-center my-5 p-3'><Spinner/></div>
 
@@ -106,7 +102,7 @@ const ProductList = () => {
                 </div>
                 <div className='mt-4'>상품수: {total}
                     <div className='text-end'>
-                        <Button variant='contained' size='small' sx={{ position: 'relative', top: '-35px'}}>선택삭제</Button>
+                        <Button onClick={onCheckDelete} variant='contained' size='small' sx={{ position: 'relative', top: '-35px'}}>선택삭제</Button>
                     </div>
                     <input type='checkbox' onChange={onChangeAll} checked={list.length === cnt} />
                 </div>
