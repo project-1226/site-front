@@ -45,9 +45,6 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
     getMyList();
   }, [isFoodChanged]);
 
-  //myFoods(0,3)의 name뽑아서?
-  const recipeTitle = ["연어샐러드", "포케샐러드", "닭가슴살 샐러드"];
-
   const handleImageClick = () => {
     setIsModalOpen(true);
   };
@@ -68,6 +65,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   const handleCart = async () => {
     let ingreList = IngredientArrayMaker(selectedMyFood?.ingredients);
+    ingreList.push(sessionStorage.getItem('userid'));
     if (ingreList.length > 0) {
       //alert(ingreList);    
       let notice = window.confirm(`${selectedDay}일차 재료를 장바구니에 담으시겠습니까?`);      
