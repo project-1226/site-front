@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { CiCircleMore } from 'react-icons/ci';
 import React, { useEffect } from 'react'
 import axios from 'axios';
+import { MdChevronRight } from "react-icons/md";
 
 function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
   const [changeProdVisible, setChangeProdVisible] = useState(false);
@@ -11,6 +12,8 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
   const [showMore, setShowMore] = useState(false);
   const [randomFoods, setRandomFoods] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [selectedImageToChange, setSelectedImageToChange] = useState({});
+  const [imageTextOpacity, setImageTextOpacity] = useState({});
 
 
   const handleClose = () => {
@@ -29,16 +32,12 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
     setChangeProdVisible(false);
   };
 
-  // const handleToggleMoreImages = () => {
-  //   if (currentImages[0] === 'img1' && currentImages[1] === 'img2') {
-  //     setCurrentImages(['img3', 'img4']);
-  //   } else {
-  //     setCurrentImages(['img1', 'img2']);
-  //   }
-  // };
-
   const handleToggleShowMore = () => {
     setShowMore(!showMore);
+  };
+
+  const handleConfirmChange = () => {
+    window.alert("식단을 변경하시겠습니까?");
   };
 
   //랜덤으로 식단 뽑아오기
@@ -50,9 +49,30 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
     setLoading(false);
   };
 
-  // useEffect(() => {
-  //   handleUpdateMyFood();
-  // }, [changeProdVisible]);
+  const handleImageClick = (imageUrl) => {
+    // 클릭한 이미지 opacity를 1로 설정
+    // 나머지 이미지 opacity는 0으로 설정
+    setSelectedImageToChange((prevOpacity) => {
+      const updatedOpacity = {};
+
+      // 모든 이미지 opacity를 0으로 설정
+      randomFoods.forEach((food) => {
+        updatedOpacity[food.image] = 0;
+      });
+
+      // 클릭된 이미지 opacity를 1로 설정
+      updatedOpacity[imageUrl] = 1;
+
+      return updatedOpacity;
+    });
+
+    // 클릭된 이미지에 해당하는 .image_text의 opacity도 설정
+    const textOpacity = {};
+    randomFoods.forEach((food) => {
+      textOpacity[food.image] = food.image === imageUrl ? 1 : 0;
+    });
+    setImageTextOpacity(textOpacity);
+  };
 
   return (
     <>
@@ -80,7 +100,7 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
 
                   <div className="modal_btnwrap1">
                     <button onClick={handleToggleChangeProd}>
-                      식단변경하기
+                      식단변경하기 <MdChevronRight />
                     </button>
                   </div>
                 </div>
@@ -102,7 +122,10 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
                   {randomFoods.slice(0, 2).map((food, index) => (
                     <div key={index} className="image_container">
                       <img src={food.image} alt="" />
-                      <div className="image_text">{food.name}</div>
+                      <div className="image_text" style={{ opacity: imageTextOpacity[food.image] || 0 }}
+                        onClick={() => handleImageClick(food.image)}>
+                        {food.name}
+                      </div>
                     </div>
                   ))}
                 </div>
@@ -119,7 +142,7 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
                   onClick={handleCancelChangeProd}>
                   취소
                 </Button>
-                <Button variant="contained" size="small">
+                <Button variant="contained" size="small" onClick={handleConfirmChange}>
                   변경하기
                 </Button>
               </div>
