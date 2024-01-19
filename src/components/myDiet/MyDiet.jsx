@@ -44,9 +44,6 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
     getMyList();
   }, [isFoodChanged]);
 
-  //myFoods(0,3)의 name뽑아서?
-  const recipeTitle = ["연어샐러드", "포케샐러드", "닭가슴살 샐러드"];
-
   const handleImageClick = () => {
     setIsModalOpen(true);
   };
@@ -67,6 +64,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   const handleCart = async () => {
     let ingreList = IngredientArrayMaker(selectedMyFood?.ingredients);
+    ingreList.push(sessionStorage.getItem('userid'));
     if (ingreList.length > 0) {
       //alert(ingreList);
       let notice = window.confirm(
@@ -168,8 +166,6 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
               <iframe
                 key={food?.vidioid}
                 className="recipe_video"
-                width="400"
-                height="500"
                 src={`https://www.youtube.com/embed/${food?.vidioid}`}
                 title={food?.name}
                 frameBorder="0"
@@ -392,12 +388,15 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
       {/* diet_contents */}
       <DietModal
         show={isModalOpen}
-        onHide={handleCloseModal}
+        setIsModalOpen={setIsModalOpen}
         selectedMyFood={selectedMyFood}
         selectedDay={selectedDay}
         setIsFoodChanged={setIsFoodChanged}
         isFoodChanged={isFoodChanged}
       />
+      
+      <RecipeModal show={isRecipeModalOpen} setIsRecipeModalOpen={setIsRecipeModalOpen} selectedMyFood={selectedMyFood}selectedDay={selectedDay}/>
+    
     </div>
   );
 };

@@ -6,7 +6,7 @@ import React, { useEffect } from 'react'
 import axios from 'axios';
 import { MdChevronRight } from "react-icons/md";
 
-function DietModal({ show, onHide, selectedMyFood, selectedDay, setIsFoodChanged ,isFoodChanged}) {
+function DietModal({ show, setIsModalOpen, selectedMyFood, selectedDay, setIsFoodChanged ,isFoodChanged}) {
   const [changeProdVisible, setChangeProdVisible] = useState(false);
   // const [currentImages, setCurrentImages] = useState([]);
   const [showMore, setShowMore] = useState(false);
@@ -24,7 +24,7 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay, setIsFoodChanged
 
   const handleClose = () => {
     setChangeProdVisible(false);
-    onHide();
+    setIsModalOpen(false);
   };
 
   const handleToggleChangeProd = () => {

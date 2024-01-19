@@ -218,15 +218,26 @@ const HealthcareModal = ({ show, handleClose, selectedCategory, page }) => {
           </>
         )}
         {showPage == 1 && (
-          <div>
-            <Button
+          // 수정해야함
+          <div className="recipe_video_wrap"> 
+          <div><Button
               variant="contained"
               color="primary"
               onClick={() => setShowPage(0)}
             >
               뒤로가기
             </Button>
-            <p>유튜브영상나와야함 </p>
+          </div>
+            
+            <iframe
+                key={myExercise?.vidioid}               
+                width="800"
+                height="500"
+                src={`https://www.youtube.com/embed/${myExercise?.vidioid}`}
+                title={myExercise?.name}
+                frameBorder="0"
+                allowFullScreen
+              />
           </div>
         )}
         {showPage == 2 && (
