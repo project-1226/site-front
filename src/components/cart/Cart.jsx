@@ -125,8 +125,8 @@ const Cart = () => {
   const onDelete = async (cartid) => {
     console.log(cartid);
   
-    await axios.get(`/cart/delete?cartid=${cartid}`);
-    console.log("됨?");
+    await axios.post('/cart/delete', { cartid});
+    alert("삭제완료!");
     getList();
   };
   
@@ -273,6 +273,7 @@ const handleRadioChange = (addressid) => {
           address1: selectedAddress.address1,
           address2: selectedAddress.address2,
           address3: selectedAddress.address3,
+          addressid: selectedAddressId
         });
       }
     }
@@ -349,6 +350,7 @@ const handleRadioChange = (addressid) => {
       merchant_uid,
       error_msg,
     } = response;
+    console.log("--------------------------",selectedAddressId);
   
     if (success) {
       alert('결제 성공');
@@ -443,7 +445,7 @@ const handlecardradiochange = (event) => {
                 </TableRow>
                 <TableRow>
                   <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769' }}  >
-                    <input checked={list.length === lcount} type="checkbox" onChange={onChangeAll} /></TableCell>
+                   </TableCell>
                   <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}>이미지</TableCell>
                   <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}>상품 정보</TableCell>
                   <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}>수량</TableCell>
@@ -457,13 +459,13 @@ const handlecardradiochange = (event) => {
                   <TableRow key={product.cartid}>
                     {/* 체크박스 */}
                     <TableCell style={{ width: '5px', borderRadius: '0' }} >
-                      <input onChange={(e) => onChangeSingle(e, product.cartid)}
-                        type="checkbox" checked={product.checked} />
+                     
                     </TableCell>
 
                     {/* 이미지 */}
                     <TableCell >
-                      <img src={product.image_url} style={{ maxWidth: '100%', height: 'auto' }} />
+          
+                      <img src={product.image_url} style={{ maxWidth: '100px', height: 'auto' }} />
                     </TableCell>
 
                     {/* 상품 정보 */}
@@ -508,7 +510,7 @@ const handlecardradiochange = (event) => {
                 ))}
               </TableBody>
 
-              <TableRow style={{ border: '1px solid #ddd', borderRadius: '0', backgroundColor: '#748769' }}>
+              <TableRow style={{ border: '1px solid #ddd', borderRadius: '0', backgroundColor: '#748769' , color: 'white'}}>
                 {/* colSpan을 사용하여 병합 */}
                 <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'right', color: 'white', fontSize: '16px', fontWeight: 'bold' }} colSpan={7}>
                   결제금액: {sum}
@@ -559,7 +561,7 @@ const handlecardradiochange = (event) => {
           {/* 다른 주소 정보도 필요하다면 추가하세요 */}
           <TableContainer component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0' }}>
             <Grid container spacing={1}>
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC' }}>
+              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769' , color: 'white'}}>
                 <Typography>배송지 명</Typography>
               </Grid>
               <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
@@ -583,7 +585,7 @@ const handlecardradiochange = (event) => {
         </div>
               </Grid>
 
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: 'white' }}>
                 <Typography>받으시는 분</Typography>
               </Grid>
               <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
@@ -611,7 +613,7 @@ const handlecardradiochange = (event) => {
 
            
 
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC' }}>
+              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', color: 'white' }}>
                 <Typography>휴대전화</Typography>
               </Grid>
               <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
@@ -637,7 +639,7 @@ const handlecardradiochange = (event) => {
                     />
                 )}
                                               </Grid>
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC' }}>
+              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769' , color: 'white'}}>
                 <Typography>주소</Typography>
               </Grid>
               <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
@@ -669,7 +671,7 @@ const handlecardradiochange = (event) => {
                                />  )}
                   
               </Grid>
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC' }}>
+              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', color: 'white' }}>
                 <Typography>상세주소</Typography>
               </Grid>
               <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
@@ -687,7 +689,7 @@ const handlecardradiochange = (event) => {
                                 onChange={onChange}
                               /> )}
               </Grid>
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC' }}>
+              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769' , color: 'white'}}>
                 <Typography>상세주소</Typography>
               </Grid>
               <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
@@ -710,7 +712,7 @@ const handlecardradiochange = (event) => {
                                 }
                               /> )}
               </Grid>
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC' }}>
+              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px',backgroundColor: '#748769', color: 'white' }}>
                 <Typography>배송시 요청사항</Typography>
               </Grid>
               <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
@@ -745,7 +747,7 @@ const handlecardradiochange = (event) => {
           <div style={{ width: '600px', margin: 'auto' }}>
             <TableContainer component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', marginTop: '40px' }}>
     <Grid container spacing={1}>
-      <Grid item xs={6} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+      <Grid item xs={6} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: 'white' }}>
         <Typography>결제방식</Typography>
       </Grid>
       <Grid item xs={6} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
@@ -781,7 +783,7 @@ const handlecardradiochange = (event) => {
         </label>
       </Grid>
     </Grid>
-    <Grid item xs={12} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#ECE6CC' }}>
+    <Grid item xs={12} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', color: 'white' }}>
       <Typography>결제예정금액 : {sum} </Typography>
     </Grid>
   </TableContainer>
