@@ -25,6 +25,8 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
   const [isFoodChanged,setIsFoodChanged] = useState(false); 
   // const [ingredientList, SetIngredientList] = useState([]);
 
+  const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
+
   const getMyList = async () => {
     setLoading(true);
     const res = await axios(
