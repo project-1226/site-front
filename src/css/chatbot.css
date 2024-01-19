@@ -125,7 +125,6 @@
 	position: relative;
 	background: #4eb10b;
 	border-radius: .4em;
-	
 }
 
 .speech-bubble:after {
@@ -142,8 +141,6 @@
 	margin-left: -32.5px;
 	margin-bottom: -65px;
 }
-
-
 
 
 
