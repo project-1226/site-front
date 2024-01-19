@@ -7,12 +7,16 @@ import ai4 from '../../images/aia004.png'
 import ai5 from '../../images/aia005.png'
 import ai6 from '../../images/aia006.png'
 import ai7 from '../../images/aia007.png'
-import { NavLink } from 'react-router-dom';
+import ai8 from '../../images/aiex001.png'
+import ai9 from '../../images/aiex002.png'
+import ai10 from '../../images/aiex003.png'
+import Chatbot from '../chatbot/Chatbot';
+import { NavLink,useNavigate   } from 'react-router-dom';
 import { Container, Typography, Grid, Card, CardContent, CardMedia, Paper, TextField, Stack,ImageList,Box,Item } from '@mui/material';
 
 
 const AiList = () => {
-
+  const navigate = useNavigate(); // 수정된 위치
     const [books, setBooks] = useState([
         { bid: 1, title: '스쿼트', image: 'http://via.placeholder.com/170x250', rcnt: 10 },
         { bid: 2, title: '플랭크', image: 'http://via.placeholder.com/170x250', rcnt: 5 },
@@ -24,6 +28,10 @@ const AiList = () => {
 
 
 
+      const handleRestartClick = ()=> {
+        // excount 상태를 1 증가시킨 후 업데이트
+          navigate('/aisquat')
+      };
 
   return (
 
@@ -47,13 +55,13 @@ const AiList = () => {
               <Stack direction="row" spacing={0} style={{ border: '1px solid #748769'}} >
               <Grid container spacing={2}>
                   <Grid item xs={6} md={4}>
-                     <img src={ai1} alt="이미지 설명" />
+                     <img src={ai8} alt="이미지 설명" onClick={handleRestartClick}/>
                   </Grid>
                   <Grid item xs={6} md={4}>
-                  <img src={ai1} alt="이미지 설명" />
+                  <img src={ai9} alt="이미지 설명" />
                   </Grid>
                   <Grid item xs={6} md={4}>
-                  <img src={ai1} alt="이미지 설명" />
+                  <img src={ai10} alt="이미지 설명" />
                   </Grid>
           
                 </Grid>
@@ -61,7 +69,7 @@ const AiList = () => {
  
 
    
-
+              <Chatbot/>
 
          
 
