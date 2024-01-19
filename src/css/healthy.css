@@ -19,7 +19,7 @@
 
 /* healthy_video_wrap */
 .healthy_video_wrap {width: 100%; margin: 0 auto 180px auto; display: flex; flex-wrap: wrap; }
-.healthy_video {width: 32%; height: 250px; margin-right: 2%; background: #ddd;}
+.healthy_video {width: 32%; height: 350px; margin-right: 2%; background: #ddd;}
 .healthy_video:last-child {margin-right: 0;}
 
 
