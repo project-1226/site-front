@@ -13,6 +13,7 @@ const ProductList = () => {
     const [query, setQuery] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const [modalProduct, setModalProduct] = useState([]);
+    const [cnt, setCnt] = useState(0);
 
     const getList = async() => {
         setLoading(true);
@@ -20,7 +21,9 @@ const ProductList = () => {
             params: {page, size, query},
         });
         //console.log(res.data);
-        setList(res.data)
+        let data = res.data.map(item => item && {...item, checked:false});
+        //console.log(data);
+        setList(data)
         setLoading(false);
 
         const totalResult = await axios.get("/admin/total", {params: {query}});  
@@ -42,24 +45,56 @@ const ProductList = () => {
     }
 
     const onClickDetail = (p) => {
-        console.log(p);
+        //console.log(p);
         setModalProduct(p);
         setIsOpen(true);
-        
     }
 
     const handleClose = () => {
         setIsOpen(false);
     }
 
+    const onChangeAll = (e) => {
+        const data = list.map(item=> item && {...item, checked:e.target.checked});
+        setList(data);
+    }
+
+    const onCheckSingle = (e, productid) => {
+        const data = list.map(item => item.productid === productid ? {...item, checked:e.target.checked} : item);
+        setList(data);
+    }
+
+    useEffect(() => {
+        let chk = 0;
+        list.forEach(item=> {
+            if(item.checked) chk++;
+        });
+        setCnt(chk);
+    }, [list]);
+
+    // const onCheckDelete = async(productid) => {
+    //     if(cnt === 0){
+    //         alert("삭제할 상품을 선택하세요!");
+    //     }else{
+    //         if(window.confirm(`${cnt}개 상품을 삭제할까요?`)){
+    //             for(const item of list){
+    //                 if(item.checked){
+    //                     await axios.post("/admin/deleteProduct", productid);
+    //                 }
+    //             }
+    //             alert("상품 삭제!");
+    //             getList();
+    //         }
+    //     }
+    // }
 
     if(loading) return <div className='text-center my-5 p-3'><Spinner/></div>
 
     return (
         <div className='Product_List'>
-            <h5 className='mt-3'>Product List</h5>
+            <h6 className='mt-3'>Product List</h6>
             <div>
-                <div className='mt-5'>
+                <div className='mt-4'>
                     <form onSubmit={onSubmit}>
                         <InputGroup style={{width:'300px'}}>
                             <Form.Control onChange={(e)=> setQuery(e.target.value)}
@@ -69,22 +104,28 @@ const ProductList = () => {
                         </InputGroup>
                     </form>
                 </div>
-                <div className='mt-4'>상품수: {total}</div>
-                <div className='table my-3'>
+                <div className='mt-4'>상품수: {total}
+                    <div className='text-end'>
+                        <Button variant='contained' size='small' sx={{ position: 'relative', top: '-35px'}}>선택삭제</Button>
+                    </div>
+                    <input type='checkbox' onChange={onChangeAll} checked={list.length === cnt} />
+                </div>
+                <div className='table my-2'>
                     {list.map((p)=>
                         <div key={p.productid} style={{display: 'inline-block', margin: '0 10px 0px 10px'}}>
-                            <Card className='text-center' style={{width:'200px', height:'320px'}}>
-                                <div style={{ marginBottom: '5px' }}>
+                            <Card className='text-center' style={{width:'200px', height:'320px', display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                <input type='checkbox' onChange={(e)=> onCheckSingle(e, p.productid)} style={{ alignSelf: 'flex-start', marginLeft: '10px', marginTop: '10px'}}/>
+                                <div style={{ marginBottom: '3px', marginTop: '-15px' }}>
                                     {p.image_url ?
-                                        <img src={p.image_url} width='100px' height='100px' />
+                                        <img src={p.image_url} width='100px' height='80px' />
                                         :
-                                        <img src='http://via.placeholder.com/100x100' />
+                                        <img src='http://via.placeholder.com/100x80' />
                                     }
                                 </div>
-                                <div style={{ marginBottom: '5px' }}>
+                                <div style={{ marginBottom: '3px' }}>
                                     [{p.productid}] {p.name}
                                 </div>
-                                <div style={{ marginBottom: '5px' }}>
+                                <div style={{ marginBottom: '3px' }}>
                                     {p.fmtprice}원
                                 </div>
                                 <div>
@@ -95,10 +136,10 @@ const ProductList = () => {
                     )}
                 </div>
             </div>
-            <div className='mt-5'>
+            <div className='mt-4'>
                 <Button onClick={()=> setPage(page-1)} disabled={page === 1} variant='contained' size='small'>Prev</Button>
                 <span className='mx-3'>{page}</span>
-                <Button onClick={()=> setPage(page+1)} disabled={page === 3} variant='contained' size='small'>Next</Button>
+                <Button onClick={()=> setPage(page+1)} disabled={page === total} variant='contained' size='small'>Next</Button>
             </div>
             <ProductDetailModal show={isOpen} hide={handleClose} product={modalProduct} />
         </div>

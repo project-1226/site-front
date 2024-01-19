@@ -41,6 +41,7 @@ import AdminNotice from "./admin/AdminNotice";
 import AdminNoticeList from "./admin/AdminNoticeList";
 import AdminReview from "./admin/AdminReview";
 import ProductSearchPage from "./admin/ProductSearchPage";
+import ProductList from "./admin/ProductList";
 
 import SurveyPage from "./SurveyPage";
 import DiseaseDetail from "./diseaseDiet/DiseaseDetail";
@@ -51,7 +52,7 @@ import FooterPage from "./FooterPage";
 import QuestionsPage from "./QuestionsPage";
 import SurveySigninPage from "./SurveySigninPage";
 import HealthyDetailModal from "./healthyDiet/HealthyDetailModal";
-import ProductList from "./admin/ProductList";
+
 
 import Chatbotchatstart from "./chatbot/Chatbotchatstart";
 import AdminQnaPage from "./admin/AdminQnaPage";
