@@ -6,7 +6,7 @@ import React, { useEffect } from 'react'
 import axios from 'axios';
 import { MdChevronRight } from "react-icons/md";
 
-function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
+function DietModal({ show, onHide, selectedMyFood, selectedDay, setIsFoodChanged ,isFoodChanged}) {
   const [changeProdVisible, setChangeProdVisible] = useState(false);
   // const [currentImages, setCurrentImages] = useState([]);
   const [showMore, setShowMore] = useState(false);
@@ -17,6 +17,10 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
   const [imageUrl,setImageUrl]= useState("");
   const [changeFood,setChangeFood]= useState([]);
 
+
+  useEffect(()=>{
+
+  },[isFoodChanged])
 
   const handleClose = () => {
     setChangeProdVisible(false);
@@ -38,9 +42,17 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
     setShowMore(!showMore);
   };
 
-  const handleConfirmChange = () => {
-    window.alert("식단을 변경하시겠습니까?");
-    
+  const handleConfirmChange = async() => {
+    const notice = window.confirm(
+      `${changeFood.name}식단으로 변경합니다`
+    );
+    if(notice){
+      //식단변경로직
+      const res = await axios(`/food/change-my-food?foodplanid=${selectedMyFood.foodplanid}&foodid=${changeFood.foodid}`);
+      if(res.data > 0){
+        setIsFoodChanged(true)
+      }
+    } 
   };
 
   //랜덤으로 식단 뽑아오기
@@ -66,7 +78,7 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
 
       // 클릭된 이미지 opacity를 1로 설정
       updatedOpacity[imageUrl] = 1;
-
+      setChangeFood(food);
       return updatedOpacity;
     });
 
