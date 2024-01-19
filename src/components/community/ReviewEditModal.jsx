@@ -2,7 +2,6 @@ import React, { Fragment, useEffect, useRef, useState } from "react";
 import { Modal, Button, Box } from "@mui/material";
 import { Card, Form, InputGroup } from "react-bootstrap";
 import axios from "axios";
-import ImageUploader from "./ImageUploader";
 import {
   uploadBytes,
   getDownloadURL,

@@ -1,9 +1,0 @@
-.notice_register{width: 40%; height: auto; padding: 10px;}
-
-.ellipsis_adpro {
-    overflow: hidden;
-    text-overflow: ellipsis;
-    display: -webkit-box;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: vertical;
-}

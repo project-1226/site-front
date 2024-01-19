@@ -191,7 +191,7 @@ const CommentPage = () => {
 
                 {sessionStorage.getItem("userid") === review.userid &&
                     <div className='text-end mt-4' style={{width: '80%'}}>
-                        <Button onClick={()=> onClickEditReview(postid)} variant='contained' size='small'>수정</Button>
+                        <Button onClick={()=> onClickEditReview()} variant='contained' size='small'>수정</Button>
                         <Button onClick={()=> onClickDeleteReview(postid)}
                             className='ms-2' variant='contained' size='small' color='error'>삭제</Button>
                     </div>

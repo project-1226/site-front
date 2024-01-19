@@ -189,6 +189,8 @@ const Healthy = ({pagetype}) => {
             <p className="contents_title">레시피 모아모아</p>
           </div>
 
+            
+
           <div className='healthy_video_wrap'>
             <div className='healthy_video'>유튜브 레시피 영상 foods[0].name으로 검색한 영상</div>
             <div className='healthy_video'>유튜브 레시피 영상 foods[1].name으로 검색한 영상</div>
