@@ -154,8 +154,6 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
               <iframe
                 key={food?.vidioid}
                 className="recipe_video"
-                width="400"
-                height="500"
                 src={`https://www.youtube.com/embed/${food?.vidioid}`}
                 title={food?.name}
                 frameBorder="0"
@@ -372,12 +370,15 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
       {/* diet_contents */}
       <DietModal
         show={isModalOpen}
-        onHide={handleCloseModal}
+        setIsModalOpen={setIsModalOpen}
         selectedMyFood={selectedMyFood}
         selectedDay={selectedDay}
         setIsFoodChanged={setIsFoodChanged}
         isFoodChanged={isFoodChanged}
       />
+      
+      <RecipeModal show={isRecipeModalOpen} setIsRecipeModalOpen={setIsRecipeModalOpen} selectedMyFood={selectedMyFood}selectedDay={selectedDay}/>
+    
     </div>
   );
 };
