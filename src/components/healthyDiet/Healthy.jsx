@@ -110,7 +110,7 @@ const Healthy = ({pagetype}) => {
                 </div>
                 <p className='recomm_card_foodname'>{food.name}</p>
                 <div className='recomm_card_footer' onClick={() => handleMoreClick()}>
-                  <div>
+                  <div className='recomm_card_footer_more'>
                     <div variant="h7" component="div"> 식단더알아보기 &nbsp; &nbsp; +</div>
                   </div>
                 </div>
