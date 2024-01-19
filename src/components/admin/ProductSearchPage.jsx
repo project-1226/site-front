@@ -2,31 +2,36 @@ import { Button } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
 import { Col, Form, InputGroup, Spinner, Table } from 'react-bootstrap';
-import '../../css/adminnotice.css'
+import Pagination from "react-js-pagination";
+import '../../css/admin.css'
+import "./Pagination.css";
 
-const ProductListPage = () => {
+const ProductSearchPage = () => {
     const [loading, setLoading] = useState(false);
     const [list, setList] = useState([]);
     const [page, setPage] = useState(1);
-    const [query, setQuery] = useState("고구마");
+    const [query, setQuery] = useState("저염식단");
     const [cnt, setCnt] = useState(0);
+    const [total, setTotal] = useState();
+    const size=5;
     
 
     const getList = async() => {
         setLoading(true);
         const res = await axios.get(`/admin/product/list?page=${page}&size=5&query=${query}`);
-        //console.log(res.data);
+        console.log(res.data);
 
         let data = res.data.items.map(p=> p && {...p, name:stripHtmlTags(p.title), price:p.lprice});
         data= data.map(item=>item && {...item, checked:false});
         setList(data);
+        setTotal(res.data.total);
         setLoading(false);
         //console.log(list);
     }
 
     useEffect(() => {
         getList();
-    }, []);
+    }, [page]);
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -35,6 +40,11 @@ const ProductListPage = () => {
         }else{
             getList();
         }
+    }
+
+    const changeGetList = (cpage) => {
+        //console.log(cpage);
+        setPage(cpage);
     }
 
     //HTML 태그 제거하는 함수
@@ -93,7 +103,7 @@ const ProductListPage = () => {
     return (
         <div className='my-3'>
             <h5 className='mb-3'>상품검색</h5>
-            <Col md={3} className='mt-5'>
+            <Col md={4} className='mt-5'>
                 <form onSubmit={onSubmit}>
                     <InputGroup>
                         <Form.Control onChange={(e)=> setQuery(e.target.value)} placeholder='상품명' value={query} />
@@ -101,33 +111,49 @@ const ProductListPage = () => {
                     </InputGroup>
                 </form>
             </Col>
-            <Col className='text-end'>
-                <Button onClick={onCheckedSave}>선택저장</Button>
-            </Col>
-            <Table className='mt-3' style={{width:'1000px'}}>
+            <div className='text-end mx-5' style={{paddingRight: '8%'}}>
+                <Button onClick={onCheckedSave} variant='outlined' size='small'>선택저장</Button>
+            </div>
+            <Table className='mt-3' style={{width:'1100px'}}>
                 <thead>
                     <tr>
-                        <th><input type='checkbox' onChange={onChangeAll} checked={list.length === cnt} /></th>
-                        <th>Brand</th>
-                        <th>title</th>
-                        <th>가격</th>
+                        <th className='text-center'><input type='checkbox' onChange={onChangeAll} checked={list.length === cnt} /></th>
+                        <th style={{width:'130px'}}>Image</th>
+                        <th className='text-center' style={{width:'480px'}}>title</th>
+                        <th className='text-center'>가격</th>
                     </tr>
                 </thead>
                 <tbody>
                     {list.map(p=>
                         <tr key={p.productId}>
-                            <td><input type='checkbox' onChange={(e)=> onChangeSingle(e, p.productId)}
+                            <td className='text-center'><input type='checkbox' onChange={(e)=> onChangeSingle(e, p.productId)}
                                 checked={p.checked} /></td>
-                            <td>{p.brand}</td>
+                            <td>
+                                {p.image ?
+                                    <img src={p.image} width='50px' height='50px' />
+                                    :
+                                    <img src='http://via.placeholder.com/50x50' />
+                                }
+                            </td>
                             <td ><div className='ellipsis_adpro'>{p.name}</div></td>
-                            <td>{p.lprice}</td>
-                            <td><Button onClick={()=> onSave(p.name, p.price)} variant='contained' size='small'>등록</Button></td>
+                            <td className='text-center'>{p.lprice}원</td>
+                            <div><Button onClick={()=> onSave(p.name, p.price)} variant='contained' size='small'>등록</Button></div>
                         </tr>
                     )}
                 </tbody>
             </Table>
+                {total > size &&
+                    <Pagination
+                        activePage={page}
+                        itemsCountPerPage={size}
+                        totalItemsCount={total}
+                        pageRangeDisplayed={10}
+                        prevPageText={"‹"}
+                        nextPageText={"›"}
+                        onChange={(cpage)=>{changeGetList(cpage)}}/>
+                }
         </div>
     )
 }
 
-export default ProductListPage
+export default ProductSearchPage

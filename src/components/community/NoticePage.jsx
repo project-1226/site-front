@@ -30,7 +30,7 @@ const NoticePage = () => {
     }
 
     const onClickNotice = () => {
-        if(sessionStorage.getItem("userid") === 'admin'){
+        if(sessionStorage.getItem("userid") === '2fa0017c-053b-4983-8'){
             window.location.href='/admin/adno';
         }
     }
@@ -74,7 +74,7 @@ const NoticePage = () => {
                 </table>
             </Col>
             <div className='text-end mt-5'>
-                {sessionStorage.getItem("userid") === 'admin' &&
+                {sessionStorage.getItem("userid") === '2fa0017c-053b-4983-8' &&
                     <Button onClick={onClickNotice} variant='contained' size='small'>공지등록</Button>
                 }
             </div>

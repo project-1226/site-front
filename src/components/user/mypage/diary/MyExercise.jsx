@@ -14,36 +14,36 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import DietModal from "../../../myDiet/DietModal";
 
-const MyFood = ({ userInfo }) => {
+const MyExercise = ({ userInfo }) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
 
-  const getPlan = async (regdate) => {
-    const res = await axios("/food/mypage/plan", {
+  const getPlan = async (categoryid) => {
+    const res = await axios("/exercise/myexercises", {
       params: {
         userid: sessionStorage.getItem("userid"),
-        regdate,
+        categoryid,
       },
     });
     // console.log(res.data);
     return res.data;
   };
 
-  const getDates = async () => {
+  const getCategories = async () => {
     setLoading(true);
-    const res = await axios("/food/mypage/plandate", {
+    const res = await axios("/exercise/categoryList", {
       params: { userid: sessionStorage.getItem("userid") },
     });
     // console.log(res.data);
-    const dates = res.data;
+    const categories = res.data;
 
     const data = [];
-    for (const date of dates) {
+    for (const category of categories) {
       try {
-        const res1 = await getPlan(date.regdate);
+        const res1 = await getPlan(category.categoryid);
         const plan = {
-          ...date,
-          food_plans: res1,
+          ...category,
+          exercise_plans: res1,
         };
         data.push(plan);
       } catch (error) {
@@ -55,22 +55,8 @@ const MyFood = ({ userInfo }) => {
     setLoading(false);
   };
 
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [selectedFood, setSelectedFood] = useState("");
-  const [selectedDay, setSelectedDay] = useState(1);
-
-  const handleImageClick = (food, index) => {
-    setIsModalOpen(true);
-    setSelectedFood(food);
-    setSelectedDay(index + 1);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   useEffect(() => {
-    getDates();
+    getCategories();
   }, []);
 
   return (
@@ -83,7 +69,7 @@ const MyFood = ({ userInfo }) => {
       </Backdrop>
       <div>
         <Typography variant="h6" sx={{ pb: 2 }}>
-          {userInfo.nickname}님을 위한 추천 식단
+          {userInfo.nickname}님이 선택한 운동 리스트
         </Typography>
         {list.map((l, index) => (
           <Accordion key={index}>
@@ -92,20 +78,15 @@ const MyFood = ({ userInfo }) => {
               aria-controls="panel1-content"
               id="panel1-header"
             >
-              <Typography>
-                {index + 1}주차 ( {l.start_date} ~ {l.end_date} ) 식단
-              </Typography>
+              <Typography>{l.name}</Typography>
             </AccordionSummary>
             <AccordionDetails>
               <Stack direction="row">
                 <Grid container>
-                  {l.food_plans.map((f, index) => (
+                  {l.exercise_plans.map((e, index) => (
                     <Grid item sm={6} key={index}>
                       <Typography>
-                        <ArrowRight /> {index + 1}일차 : {f.name}
-                        <IconButton onClick={() => handleImageClick(f, index)}>
-                          <LaunchRounded sx={{ fontSize: 17 }} />
-                        </IconButton>
+                        <ArrowRight /> {e.name}
                       </Typography>
                     </Grid>
                   ))}
@@ -115,14 +96,8 @@ const MyFood = ({ userInfo }) => {
           </Accordion>
         ))}
       </div>
-      <DietModal
-        show={isModalOpen}
-        onHide={handleCloseModal}
-        selectedMyFood={selectedFood}
-        selectedDay={selectedDay}
-      />
     </>
   );
 };
 
-export default MyFood;
+export default MyExercise;

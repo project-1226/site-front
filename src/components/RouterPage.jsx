@@ -14,7 +14,6 @@ import ManageAddress from "./user/mypage/info/ManageAddress";
 import UpdateAddress from "./user/mypage/info/UpdateAddress";
 import MySurvey from "./user/mypage/diary/MySurvey";
 import Report from "./user/mypage/diary/Report";
-import ScrapPage from "./user/mypage/diary/ScrapPage";
 import MyPurchase from "./user/mypage/shop/MyPurchase";
 import CancelReturn from "./user/mypage/shop/CancelReturn";
 import MyWishItem from "./user/mypage/shop/MyWishItem";
@@ -25,7 +24,6 @@ import ReviewMain from "./user/mypage/activity/ReviewMain";
 
 import MyDiet from "./myDiet/MyDiet";
 import Healthy from "./healthyDiet/Healthy";
-import Disease from "./diseaseDiet/Disease";
 import Healthcare from "./healthcare/Healthcare";
 
 import Imagereader from "./ai/Imagereader";
@@ -42,7 +40,7 @@ import AdminOrderList from "./admin/AdminOrderList";
 import AdminNotice from "./admin/AdminNotice";
 import AdminNoticeList from "./admin/AdminNoticeList";
 import AdminReview from "./admin/AdminReview";
-import ProductListPage from "./admin/ProductListPage";
+import ProductSearchPage from "./admin/ProductSearchPage";
 
 import SurveyPage from "./SurveyPage";
 import DiseaseDetail from "./diseaseDiet/DiseaseDetail";
@@ -53,6 +51,7 @@ import FooterPage from "./FooterPage";
 import QuestionsPage from "./QuestionsPage";
 import SurveySigninPage from "./SurveySigninPage";
 import HealthyDetailModal from "./healthyDiet/HealthyDetailModal";
+import ProductList from "./admin/ProductList";
 
 import Chatbotchatstart from "./chatbot/Chatbotchatstart";
 
@@ -103,27 +102,16 @@ const RouterPage = () => {
           }
         />
 
-        <Route path="/mydiet" element={<MyDiet />} />
+        <Route
+          path="/mydiet"
+          element={
+            <MyDiet setIsHeader={setIsHeader} setIsFooter={setIsFooter} />
+          }
+        />
+
         <Route path="/AIimg" element={<Imagereader />} />
         <Route path="/aisquat" element={<MotionReader />} />
         <Route path="/Ailist" element={<AiList />} />
-
-        {/* community */}
-        <Route path="/community" element={<CommunityPageMain />}>
-          <Route path="" element={<NoticePage />} />
-          <Route path="review" element={<ReviewPage />} />
-          <Route path="review/comment/:pid" element={<CommentPage />} />
-        </Route>
-
-        {/* 관리자페이지 */}
-        <Route path="/admin" element={<AdminPage />}>
-          <Route path="adorder" element={<AdminOrderList />} />
-          <Route path="register" element={<ProductRegisterPage />} />
-          <Route path="product" element={<ProductListPage />} />
-          <Route path="adno" element={<AdminNotice />} />
-          <Route path="adnoud" element={<AdminNoticeList />} />
-          <Route path="adreview" element={<AdminReview />} />
-        </Route>
 
         <Route path="/Chatbot" element={<Chatbot />} />
 
@@ -141,13 +129,30 @@ const RouterPage = () => {
         />
         <Route path="/join" element={<SignupPage />} />
 
+        {/* community */}
+        <Route path="/community" element={<CommunityPageMain />}>
+          <Route path="" element={<NoticePage />} />
+          <Route path="review" element={<ReviewPage />} />
+          <Route path="review/comment/:pid" element={<CommentPage />} />
+        </Route>
+
+        {/* 관리자페이지 */}
+        <Route path="/admin" element={<AdminPage />}>
+          <Route path="adorder" element={<AdminOrderList />} />
+          <Route path="register" element={<ProductRegisterPage />} />
+          <Route path="product" element={<ProductSearchPage />} />
+          <Route path="plist" element={<ProductList />} />
+          <Route path="adno" element={<AdminNotice />} />
+          <Route path="adnoud" element={<AdminNoticeList />} />
+          <Route path="adreview" element={<AdminReview />} />
+        </Route>
+
         {/* 상품등록 */}
 
         {/* 마이페이지 */}
         <Route path="/mp" element={<MyPage />}>
           {/* 다이어리 */}
           <Route path="" element={<Report />} />
-          <Route path="scrp" element={<ScrapPage />} />
           <Route path="mysv" element={<MySurvey />} />
           {/* 활동 */}
           <Route path="mact" element={<ActivityMain />} />
