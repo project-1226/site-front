@@ -33,7 +33,7 @@ const Chatbot = () => {
     {
       id: "0",
       message: `${user.nickname}님! 안녕하세요.
-            $어플이름 상담 챗봇입니다.`,
+            MEALJOY 챗봇 경석방입니다.`,
       trigger: "1",
     },
     {
@@ -49,7 +49,7 @@ const Chatbot = () => {
       id: "2",
       options: [
         { value: 1, label: "설명보기", trigger: "3" },
-        { value: 2, label: "시작안하기", trigger: "4" },
+        { value: 2, label: "종료하기", trigger: "4" },
       ],
     },
     {
@@ -57,28 +57,25 @@ const Chatbot = () => {
       message: `우리는 식단과 운동어쩌고 `,
       trigger: "5",
     },
-
     {
       id: "4",
-      message: `ㄲㅈ `,
+      message: `ㅇㅉㅌㅂ `,
     },
-
     {
       id: "5",
       options: [
-        { value: 1, label: "더듣기 ", trigger: "6" },
-        { value: 2, label: "그만보기", trigger: "4" },
+        { value: 1, label: "더 보기 ", trigger: "6" },
+        { value: 2, label: "종료하기", trigger: "4" },
       ],
     },
-
     {
       id: "6",
-      message: `저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 저쩌고어쩌고 `,
+      message: `저쩌고어쩌고 저쩌고어쩌고 ... `,
       trigger: "7",
     },
     {
       id: "7",
-      options: [{ value: 1, label: "끝났습니다 " }],
+      options: [{ value: 1, label: "상담이 종료되었습니다." }],
     },
   ];
 
@@ -114,7 +111,7 @@ const Chatbot = () => {
   return (
     <div className="ak_wrap">
       <div className="ak_contents">
-        <div className="cbfloat-container">
+        <div class="cbfloat-container">
           {chatbotOpened && (
             <>
               <div className="leDQrA">
@@ -128,8 +125,8 @@ const Chatbot = () => {
               </div>
             </>
           )}
-          <div className="cbfloat-button-container">
-            <button className="btn-hover color-5" onClick={handleChatbotToggle}>
+          <div class="cbfloat-button-container">
+            <button class="btn-hover color-5" onClick={handleChatbotToggle}>
               <ContactSupportIcon style={{ fontSize: "3rem" }} />
             </button>
           </div>
