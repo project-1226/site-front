@@ -192,6 +192,24 @@ const QNAPage = () => {
                         삭제
                       </Button>
                     </Typography>
+                    {/* {sessionStorage.getItem("userid") ===
+                      "2fa0017c-053b-4983-8" && (
+                      <Stack
+                        direction="row"
+                        spacing={1}
+                        sx={{ mx: 2, mb: 2, mt: 2 }}
+                      >
+                        <TextField
+                          fullWidth
+                          multiline
+                          label="문의 답변 남기기"
+                          size="small"
+                          name="content"
+                          rows={2}
+                        />
+                        <Button variant="outlined">등록</Button>
+                      </Stack>
+                    )} */}
                   </TableCell>
                 </TableRow>
               </Fragment>
@@ -199,7 +217,7 @@ const QNAPage = () => {
           </TableBody>
         </Table>
       </TableContainer>
-      {total == 0 ? (
+      {total === 0 ? (
         <Typography>문의 내역이 없습니다.</Typography>
       ) : (
         <Pagination
