@@ -1,7 +1,18 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 
-import "./index.css";
+import "./css/index.css";
+import "./css/default.css";
+import "./css/AK.css"
+import "./css/mydiet.css";
+import "./css/dietmodal.css";
+import "./css/healthy.css";
+import "./css/healthcare.css";
+import "./css/disease.css";
+import "./css/survey.css";
+import "./css/admin.css";
+import "./css/chatbot.css";
+
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import App from "./App";
