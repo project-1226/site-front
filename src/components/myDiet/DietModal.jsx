@@ -14,6 +14,8 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
   const [loading, setLoading] = useState(false);
   const [selectedImageToChange, setSelectedImageToChange] = useState({});
   const [imageTextOpacity, setImageTextOpacity] = useState({});
+  const [imageUrl,setImageUrl]= useState("");
+  const [changeFood,setChangeFood]= useState([]);
 
 
   const handleClose = () => {
@@ -38,6 +40,7 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
 
   const handleConfirmChange = () => {
     window.alert("식단을 변경하시겠습니까?");
+    
   };
 
   //랜덤으로 식단 뽑아오기
@@ -49,7 +52,8 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
     setLoading(false);
   };
 
-  const handleImageClick = (imageUrl) => {
+  const handleImageClick = (food) => {
+    setImageUrl(food.image);
     // 클릭한 이미지 opacity를 1로 설정
     // 나머지 이미지 opacity는 0으로 설정
     setSelectedImageToChange((prevOpacity) => {
@@ -123,7 +127,7 @@ function DietModal({ show, onHide, selectedMyFood, selectedDay }) {
                     <div key={index} className="image_container">
                       <img src={food.image} alt="" />
                       <div className="image_text" style={{ opacity: imageTextOpacity[food.image] || 0 }}
-                        onClick={() => handleImageClick(food.image)}>
+                        onClick={() => handleImageClick(food)}>
                         {food.name}
                       </div>
                     </div>
