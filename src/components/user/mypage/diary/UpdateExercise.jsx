@@ -19,7 +19,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { FormLabel } from "react-bootstrap";
 
-const UpdateExcercise = ({ list, getList }) => {
+const UpdateExercise = ({ list, getList }) => {
   const [job, setJob] = useState(
     parseInt(list.find((l) => l.questionid === 2)?.selectid || 4)
   );
@@ -219,4 +219,4 @@ const UpdateExcercise = ({ list, getList }) => {
   );
 };
 
-export default UpdateExcercise;
+export default UpdateExercise;

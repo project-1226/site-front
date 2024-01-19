@@ -40,7 +40,7 @@ const HeaderPage = () => {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" className="seon_muipaper_shadow_none">
         <Toolbar>
           <IconButton
             size="large"
@@ -62,20 +62,70 @@ const HeaderPage = () => {
           >
             {sessionStorage.getItem("userid") && (
               <>
-                <Typography color="inherit" component={Link} to="/mydiet" sx={{ textDecoration: "none" }}
-                   className={`menu-item ${location.pathname === "/mydiet" ? "active-link" : ""}`}> 내 식단</Typography>
+                <Typography
+                  color="inherit"
+                  component={Link}
+                  to="/mydiet"
+                  sx={{ textDecoration: "none" }}
+                  className={`menu-item ${
+                    location.pathname === "/mydiet" ? "active-link" : ""
+                  }`}
+                >
+                  {" "}
+                  내 식단
+                </Typography>
 
-                <Typography color="inherit" component={Link} to="/health" sx={{ textDecoration: "none" }}
-                  className={`menu-item ${location.pathname === "/healthydiet" ? "active-link" : ""}`}> 건강식단</Typography>
+                <Typography
+                  color="inherit"
+                  component={Link}
+                  to="/health"
+                  sx={{ textDecoration: "none" }}
+                  className={`menu-item ${
+                    location.pathname === "/healthydiet" ? "active-link" : ""
+                  }`}
+                >
+                  {" "}
+                  건강식단
+                </Typography>
 
-                <Typography color="inherit" component={Link} to="/diseasediet" sx={{ textDecoration: "none" }}
-                  className={`menu-item ${location.pathname === "/diseasediet" ? "active-link" : ""}`}> 질환맞춤식단</Typography>
+                <Typography
+                  color="inherit"
+                  component={Link}
+                  to="/diseasediet"
+                  sx={{ textDecoration: "none" }}
+                  className={`menu-item ${
+                    location.pathname === "/diseasediet" ? "active-link" : ""
+                  }`}
+                >
+                  {" "}
+                  질환맞춤식단
+                </Typography>
 
-                <Typography color="inherit" component={Link} to="/healthcare" sx={{ textDecoration: "none" }}
-                  className={`menu-item ${location.pathname === "/healthcare" ? "active-link" : ""}`}> 헬스케어 </Typography>
+                <Typography
+                  color="inherit"
+                  component={Link}
+                  to="/healthcare"
+                  sx={{ textDecoration: "none" }}
+                  className={`menu-item ${
+                    location.pathname === "/healthcare" ? "active-link" : ""
+                  }`}
+                >
+                  {" "}
+                  헬스케어{" "}
+                </Typography>
 
-                <Typography color="inherit" component={Link} to="/community" sx={{ textDecoration: "none" }}
-                  className={`menu-item ${location.pathname === "/community" ? "active-link" : ""}`}> 커뮤니티 </Typography>
+                <Typography
+                  color="inherit"
+                  component={Link}
+                  to="/community"
+                  sx={{ textDecoration: "none" }}
+                  className={`menu-item ${
+                    location.pathname === "/community" ? "active-link" : ""
+                  }`}
+                >
+                  {" "}
+                  커뮤니티{" "}
+                </Typography>
               </>
             )}
           </Stack>
@@ -88,38 +138,51 @@ const HeaderPage = () => {
             alignItems="center"
           >
             {/* 관리자 로그인 */
-              sessionStorage.getItem("userid") === "2fa0017c-053b-4983-8" && (
+            sessionStorage.getItem("userid") === "2fa0017c-053b-4983-8" && (
+              <>
+                <Typography
+                  color="inherit"
+                  component={Link}
+                  to="/admin"
+                  sx={{ textDecoration: "none" }}
+                >
+                  관리자
+                </Typography>
+                <Button color="inherit" onClick={onLogout}>
+                  Logout
+                </Button>
+              </>
+            )}
+            {/* 사용자 로그인 */
+            sessionStorage.getItem("userid") &&
+              sessionStorage.getItem("userid") !== "2fa0017c-053b-4983-8" && (
                 <>
                   <Typography
                     color="inherit"
                     component={Link}
-                    to="/admin"
+                    to="/mp"
                     sx={{ textDecoration: "none" }}
+                    className="no-active-link"
                   >
-                    관리자
+                    <AccountCircle sx={{ fontSize: "2.3rem" }} />
                   </Typography>
-                  <Button color="inherit" onClick={onLogout}>
-                    Logout
+                  <Button color="inherit" onClick={onLogout} className="logout">
+                    {" "}
+                    Logout{" "}
                   </Button>
                 </>
               )}
-            {/* 사용자 로그인 */
-              sessionStorage.getItem("userid") &&
-              sessionStorage.getItem("userid") !== "2fa0017c-053b-4983-8" && (
-                <>
-                  <Typography color="inherit" component={Link} to="/mp" sx={{ textDecoration: "none" }} className="no-active-link">
-                    <AccountCircle sx={{ fontSize: "2.3rem" }} />
-                  </Typography>
-                  <Button color="inherit" onClick={onLogout} className="logout"> Logout </Button>
-
-                </>
-              )}
             {/* 비로그인 상태 */
-              !sessionStorage.getItem("userid") && (
-                <Button color="inherit" component={Link} to="/login" className="login">
-                  Login
-                </Button>
-              )}
+            !sessionStorage.getItem("userid") && (
+              <Button
+                color="inherit"
+                component={Link}
+                to="/login"
+                className="login"
+              >
+                Login
+              </Button>
+            )}
           </Stack>
         </Toolbar>
       </AppBar>
