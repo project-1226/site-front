@@ -372,12 +372,13 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
       {/* diet_contents */}
       <DietModal
         show={isModalOpen}
-        onHide={handleCloseModal}
+        setIsModalOpen={setIsModalOpen}
         selectedMyFood={selectedMyFood}
         selectedDay={selectedDay}
         setIsFoodChanged={setIsFoodChanged}
         isFoodChanged={isFoodChanged}
       />
+      <RecipeModal show={isRecipeModalOpen} setIsRecipeModalOpen={setIsRecipeModalOpen} selectedMyFood={selectedMyFood}/>
     </div>
   );
 };

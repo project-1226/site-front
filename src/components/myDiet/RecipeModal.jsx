@@ -1,9 +1,9 @@
 import React from 'react';
 import Modal from 'react-bootstrap/Modal';
 
-const RecipeModal = ({ show, onHide, selectedMyFood, selectedDay }) => {
+const RecipeModal = ({ show, setIsRecipeModalOpen, selectedMyFood, selectedDay }) => {
   const handleClose = () => {
-    onHide(); // onHide 함수 호출로 수정
+    setIsRecipeModalOpen(false); // onHide 함수 호출로 수정
   };
 
   return (
