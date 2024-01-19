@@ -34,8 +34,8 @@
 .recipe_video:last-child {margin-right: 0;} */
 
 /* recipe_video_wrap */
-.recipe_video_wrap {width: 100%; display: flex; flex-wrap: wrap; }
-.recipe_video {width: 32%; height: 250px; margin-right: 2%; background: #ddd;}
+.recipe_video_wrap {width: 100%; display: flex; flex-wrap: wrap;}
+.recipe_video {width: 32%; height: 300px; margin-right: 2%; background: #ddd;}
 .recipe_video:last-child {margin-right: 0;}
 
 .diet_market_contents_bg {width: 100%; height: 236px; background: url('../images/mydiet_submain.jpg') no-repeat 50% 50%; background-size: cover; margin-top: 2%;}

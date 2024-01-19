@@ -22,7 +22,8 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   const [myFoods, setMyFoods] = useState([]);
   const [selectedMyFood, setSelectedMyFood] = useState("");
-  const [ingredientList, SetIngredientList] = useState("");
+  const [isFoodChanged,setIsFoodChanged] = useState(false); 
+  // const [ingredientList, SetIngredientList] = useState([]);
 
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
 
@@ -40,9 +41,9 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
   useEffect(() => {
     getMyList();
   }, []);
-
-  //myFoods(0,3)의 name뽑아서?
-  const recipeTitle = ["연어샐러드", "포케샐러드", "닭가슴살 샐러드"];
+  useEffect(() => {
+    getMyList();
+  }, [isFoodChanged]);
 
   const handleImageClick = () => {
     setIsModalOpen(true);
@@ -64,26 +65,26 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   const handleCart = async () => {
     let ingreList = IngredientArrayMaker(selectedMyFood?.ingredients);
+    ingreList.push(sessionStorage.getItem('userid'));
     if (ingreList.length > 0) {
-      alert(ingreList);
-      //ingredint배열과 userid를 묶어서보내면 받기어려워서 그냥 한 배열에 합쳐서보냄
-      ingreList.push(sessionStorage.getItem("userid"));
-      const res = await axios.post("/cart/insert-list", ingreList);
-
-      const notice = window.confirm(
-        `${res.data}개의 상품이 등록되었습니다.\n 장바구니로 이동하시겠습니까?`
-      );
-      if (res.data > 0) {
-        if (notice) {
-          navigate("/cart");
+      //alert(ingreList);    
+      let notice = window.confirm(`${selectedDay}일차 재료를 장바구니에 담으시겠습니까?`);      
+      if(notice){
+        const res = await axios.post("/cart/insert-list", ingreList);      
+        ingreList.push(sessionStorage.getItem("userid"));  //ingredint배열과 userid를 묶어서보내면 받기어려워서 그냥 한 배열에 합쳐서보냄
+        notice = window.confirm(`${res.data}개의 상품이 등록되었습니다.\n 장바구니로 이동하시겠습니까?`);
+        if (res.data > 0) {
+          if (notice) {
+            navigate("/cart");
+          }
+        } else if ((res.data = 0)) {
+          alert("식단에 해당하는 재료의 상품이 없습니다.");
+        } else {
+          console.error("insert ingredients error."); // 이경우..흠 try catch?
         }
-      } else if ((res.data = 0)) {
-        alert("식단에 해당하는 재료의 상품이 없습니다.");
-      } else {
-        console.error("insert ingredients error."); // 이경우..흠 try catch?
+      }else {
+        console.error("No ingreList.");
       }
-    } else {
-      console.error("No ingreList.");
     }
   };
 
@@ -153,8 +154,6 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
               <iframe
                 key={food?.vidioid}
                 className="recipe_video"
-                width="400"
-                height="315"
                 src={`https://www.youtube.com/embed/${food?.vidioid}`}
                 title={food?.name}
                 frameBorder="0"
@@ -367,9 +366,19 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
             </div>
           </div>
         </section>
-      </div>{/* diet_contents */}
-      <DietModal show={isModalOpen} onHide={handleCloseModal} selectedMyFood={selectedMyFood} selectedDay={selectedDay} />
-      <RecipeModal show={isRecipeModalOpen} onHide={() => setIsRecipeModalOpen(false)} selectedMyFood={selectedMyFood} selectedDay={selectedDay} />
+      </div>
+      {/* diet_contents */}
+      <DietModal
+        show={isModalOpen}
+        setIsModalOpen={setIsModalOpen}
+        selectedMyFood={selectedMyFood}
+        selectedDay={selectedDay}
+        setIsFoodChanged={setIsFoodChanged}
+        isFoodChanged={isFoodChanged}
+      />
+      
+      <RecipeModal show={isRecipeModalOpen} setIsRecipeModalOpen={setIsRecipeModalOpen} selectedMyFood={selectedMyFood}selectedDay={selectedDay}/>
+    
     </div>
   );
 };

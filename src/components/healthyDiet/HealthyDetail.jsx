@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 import { useParams,useLocation } from 'react-router-dom';
 import HealthyDetailModal from './HealthyDetailModal';
+import RecipeModal from '../myDiet/RecipeModal';
 
 //useNavigate두번째 인자로 getFoodList()함수도 props로 전달가능하면 이후 수정
 const HealthyDetail = ({ initialFoods }) => {
@@ -16,6 +17,7 @@ const HealthyDetail = ({ initialFoods }) => {
   const [foods, setFoods] = useState(location.state?.initialFoods || []);
   const [loading, setLoading] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedFood,setSelectedFood] = useState("");
 
   const getFoodList = async () => {
     setLoading(true);
@@ -38,8 +40,9 @@ const HealthyDetail = ({ initialFoods }) => {
     console.log(foods);
   }, [location.state?.initialFoods]);
 
-  const handleDetailClick = () => {
+  const handleDetailClick = (food) => {
     setIsModalOpen(true);
+    setSelectedFood(food)
   };
 
   const handleCloseModal = () => {
@@ -68,7 +71,7 @@ const HealthyDetail = ({ initialFoods }) => {
             <p className="hd_name">{food.name} 재료</p>
             <p className="hd_material">{food.ingredients}</p>
             <p className="hd_recipe" dangerouslySetInnerHTML={{ __html: `${food.recipe}` }}></p>
-            <Button variant="contained" size="small"  onClick={handleDetailClick}>
+            <Button variant="contained" size="small"  onClick={()=>handleDetailClick(food)}>
               {" "}
               레시피 보러가기{" "}
             </Button>
@@ -81,7 +84,8 @@ const HealthyDetail = ({ initialFoods }) => {
           ) : null}
         </section>
       ))}
-      <HealthyDetailModal show={isModalOpen} onHide={handleCloseModal}/>
+      {/* <HealthyDetailModal show={isModalOpen} onHide={handleCloseModal}/> */}
+      <RecipeModal show={isModalOpen} setIsRecipeModalOpen ={handleCloseModal} selectedDay={0} selectedMyFood={selectedFood} />
     </div>
   );
 };
