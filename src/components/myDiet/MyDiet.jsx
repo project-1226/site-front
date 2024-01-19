@@ -45,9 +45,6 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
     getMyList();
   }, [isFoodChanged]);
 
-  //myFoods(0,3)의 name뽑아서?
-  const recipeTitle = ["연어샐러드", "포케샐러드", "닭가슴살 샐러드"];
-
   const handleImageClick = () => {
     setIsModalOpen(true);
   };
