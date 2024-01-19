@@ -57,10 +57,12 @@ const MyFood = ({ userInfo }) => {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFood, setSelectedFood] = useState("");
+  const [selectedDay, setSelectedDay] = useState(1);
 
-  const handleImageClick = (food) => {
+  const handleImageClick = (food, index) => {
     setIsModalOpen(true);
     setSelectedFood(food);
+    setSelectedDay(index + 1);
   };
 
   const handleCloseModal = () => {
@@ -101,7 +103,7 @@ const MyFood = ({ userInfo }) => {
                     <Grid item sm={6} key={index}>
                       <Typography>
                         <ArrowRight /> {index + 1}일차 : {f.name}
-                        <IconButton onClick={() => handleImageClick(f)}>
+                        <IconButton onClick={() => handleImageClick(f, index)}>
                           <LaunchRounded sx={{ fontSize: 17 }} />
                         </IconButton>
                       </Typography>
@@ -117,6 +119,7 @@ const MyFood = ({ userInfo }) => {
         show={isModalOpen}
         onHide={handleCloseModal}
         selectedMyFood={selectedFood}
+        selectedDay={selectedDay}
       />
     </>
   );
