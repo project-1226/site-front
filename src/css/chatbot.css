@@ -7,8 +7,8 @@
 
 /* 버튼 스타일 */
 .btn-hover {
-	width: 80px;
-	height: 80px;
+   width: 80px;
+   height: 80px;
     font-size: 16px;
     font-weight: 600;
     color: #fff;
@@ -145,6 +145,86 @@
 
 
 
+
+.cbfloat-button:hover {
+    transform: translate(0%, -20%);
+}
+
+.cbfloat-button-image {
+    height: 20px;
+    margin-right: 5px;
+}
+
+/* Speech Bubble */
+.speech-bubble {
+    position: relative;
+    background: #4eb10b;
+    border-radius: .4em;
+}
+
+.speech-bubble:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    border: 65px solid transparent;
+    border-top-color: #4eb10b;
+    border-bottom: 0;
+    border-left: 0;
+    margin-left: -32.5px;
+    margin-bottom: -65px;
+}
+
+/* 기타 스타일 */
+/*------------------------------------------------------------------*/
+.hJaMqV {
+    bottom: 135px !important;
+    right: 33% !important;
+}
+
+/* Chatbot Floating Button 컨테이너 */
+.cbfloat-button-container {
+    z-index: 1000;
+    position: fixed;
+    transform: translate(-50%, 0%);
+    left: 75%;
+    bottom: 30px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 10px;
+    height: 100px;
+    text-decoration: none !important;
+}
+
+/* Chatbot Floating Container */
+.cbfloat-container {
+    z-index: 1000;
+    position: fixed;
+    transform: translate(-50%, 0%);
+    right: 5%;
+    bottom: 3%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 10px;
+    text-decoration: none !important;
+   width: 1px;
+}
+
+/* Chatbot Floating Button */
+.cbfloat-button {
+    display: flex;
+    align-items: center;
+    padding: 0 20px;
+    cursor: pointer;
+    font-size: 13px;
+    white-space: nowrap;
+    font-weight: bold;
+    transition: 0.5s;
+}
 
 .cbfloat-button:hover {
     transform: translate(0%, -20%);

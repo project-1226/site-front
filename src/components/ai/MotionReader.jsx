@@ -21,7 +21,7 @@ import {
   Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,TextField,
   InputAdornment,Item, Stack
 } from '@mui/material';
-const modelURL = 'https://teachablemachine.withgoogle.com/models/OCgHIkBy1/';
+const modelURL = 'https://teachablemachine.withgoogle.com/models/Rj7xAvYY2/';
 let model, webcam, ctx, labelContainer, maxPredictions;
 
 const MotionReader = () => {
@@ -30,7 +30,7 @@ const MotionReader = () => {
   const [moveresult,setmoveResult]=useState(null);
   let [test, setTest]=useState(0);
   let [moveCnt, setMoveCnt]=useState(0);
-	let movecounter = 0;
+   let movecounter = 0;
   const [excount, setExcount] = useState(0);
   const [exset, setExset] = useState(1);
   const [ratio, setratio] = useState(50);
@@ -52,31 +52,39 @@ const MotionReader = () => {
 
   useEffect(() => {
     const init = async () => {
-      const modelURL = 'https://teachablemachine.withgoogle.com/models/OCgHIkBy1/model.json';
-      const metadataURL = 'https://teachablemachine.withgoogle.com/models/OCgHIkBy1/metadata.json';
-
-      // Load the model and metadata
-      model = await tmPose.load(modelURL, metadataURL);
-      maxPredictions = model.getTotalClasses();
-      modelRef.current = model;
-
-      // Convenience function to set up a webcam
-      const size = 500;
-      const flip = true; // Whether to flip the webcam
-      webcam = new tmPose.Webcam(size, size, flip); // Width, height, flip
-      await webcam.setup(); // Request access to the webcam
-      await webcam.play();
-      window.requestAnimationFrame(loop);
-
-      // Append/get elements to the DOM
-      const canvas = document.getElementById('canvas');
-      canvas.width = size;
-      canvas.height = size;
-      ctx = canvas.getContext('2d');
-      labelContainer = document.getElementById('label-container');
-      for (let i = 0; i < maxPredictions; i++) {
-        // And class labels
-        labelContainer.appendChild(document.createElement('div'));
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+    
+        const modelURL = 'https://teachablemachine.withgoogle.com/models/Rj7xAvYY2/model.json';
+        const metadataURL = 'https://teachablemachine.withgoogle.com/models/Rj7xAvYY2/metadata.json';
+    
+        // Load the model and metadata
+        model = await tmPose.load(modelURL, metadataURL);
+        maxPredictions = model.getTotalClasses();
+        modelRef.current = model;
+    
+        // Convenience function to set up a webcam
+        const size = 500;
+        const flip = true; // Whether to flip the webcam
+        webcam = new tmPose.Webcam(size, size, flip); // Width, height, flip
+        await webcam.setup(); // Request access to the webcam
+        await webcam.play();
+        window.requestAnimationFrame(loop);
+    
+        // Append/get elements to the DOM
+        const canvas = document.getElementById('canvas');
+        canvas.width = size;
+        canvas.height = size;
+        ctx = canvas.getContext('2d');
+        labelContainer = document.getElementById('label-container');
+        for (let i = 0; i < maxPredictions; i++) {
+          // And class labels
+          labelContainer.appendChild(document.createElement('div'));
+        }
+      } catch (error) {
+        // 웹캠이 없을 때의 에러 처리
+        console.error('Error accessing webcam:', error);
+        alert('웹캠을 찾을 수 없습니다.');
       }
     };
 
@@ -95,7 +103,7 @@ const MotionReader = () => {
        
        // console.log(moveCnt); // 이 시점에서 moveCnt는 이전 값일  수 있음
 
-      }, 2000);
+      }, 1500);
 
      
 
@@ -123,24 +131,24 @@ const MotionReader = () => {
     // Prediction #2: run input through the Teachable Machine classification model
     const prediction = await modelRef.current.predict(posenetOutput); 
 
-	
+   
     for (let i = 0; i < maxPredictions; i++) {
       const classPrediction =
         prediction[i].className + ': ' + prediction[i].probability.toFixed(2);
-		//console.log( prediction[1].probability);
-		setTest( prediction[0].probability.toFixed(2));
+      //console.log( prediction[1].probability);
+      setTest( prediction[1].probability.toFixed(2));
         
-		labelContainer.childNodes[i].innerHTML = classPrediction;
-	  //console.log(prediction[1].probability);
-	
-		setMoveValue(prediction[0].probability.toFixed(2));
-		
-			// if(prediction[0].probability.toFixed(2)==1.00){
+      labelContainer.childNodes[i].innerHTML = classPrediction;
+     //console.log(prediction[1].probability);
+   
+      setMoveValue(prediction[1].probability.toFixed(2));
+      
+         // if(prediction[0].probability.toFixed(2)==1.00){
             //     movecounter++;
-			// }
-			//console.log(movecounter)
+         // }
+         //console.log(movecounter)
 
-	 
+    
 
 
     }
@@ -192,7 +200,7 @@ const MotionReader = () => {
     }else{
 
     }
-	
+   
   },[moveCnt]);
  
 
@@ -201,7 +209,7 @@ const MotionReader = () => {
     <div className='ak_wrap'>
   <div className='ak_aicontents'>
        <Typography style = {{textAlign:"center",     fontWeight: "bold",fontSize:"40px",color:"#748769"}}>AI 트레이너 - 스쿼트</Typography>
-		<hr></hr>
+      <hr></hr>
       
      <>
       <Stack direction="row" spacing={0} style={{width:"1800px",border:  '5px solid #748769'}}>
