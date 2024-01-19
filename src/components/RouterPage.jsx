@@ -54,7 +54,7 @@ import HealthyDetailModal from "./healthyDiet/HealthyDetailModal";
 import ProductList from "./admin/ProductList";
 
 import Chatbotchatstart from "./chatbot/Chatbotchatstart";
-
+import AdminQnaPage from "./admin/AdminQnaPage";
 
 const RouterPage = () => {
   const navi = useNavigate();
@@ -145,6 +145,7 @@ const RouterPage = () => {
           <Route path="adno" element={<AdminNotice />} />
           <Route path="adnoud" element={<AdminNoticeList />} />
           <Route path="adreview" element={<AdminReview />} />
+          <Route path="adqna" element={<AdminQnaPage />} />
         </Route>
 
         {/* 상품등록 */}
