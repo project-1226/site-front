@@ -85,9 +85,7 @@ const MyExercise = ({ userInfo }) => {
                 <Grid container>
                   {l.exercise_plans.map((e, index) => (
                     <Grid item sm={6} key={index}>
-                      <Typography>
-                        <ArrowRight /> {e.name}
-                      </Typography>
+                      <Typography>{/* <ArrowRight /> {e.name} */}</Typography>
                     </Grid>
                   ))}
                 </Grid>
