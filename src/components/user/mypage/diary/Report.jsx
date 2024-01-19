@@ -27,7 +27,7 @@ const Report = () => {
     const res = await axios("/user/survey/read", {
       params: { userid: sessionStorage.getItem("userid") },
     });
-    console.log(res.data);
+    // console.log(res.data);
     setList(res.data);
   };
 
