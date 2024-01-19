@@ -29,7 +29,6 @@ const QuestionMain = () => {
           </TabList>
         </Box>
         <TabPanel className="seon-mypage-MuiTabPanel-root" value="1">
-          {}
           <FAQPage />
         </TabPanel>
         <TabPanel className="seon-mypage-MuiTabPanel-root" value="2">
