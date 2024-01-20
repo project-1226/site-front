@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import {
   Alert,
@@ -20,8 +20,11 @@ import axios from "axios";
 import GoogleLogin from "./login/GoogleLogin";
 import KakaoLogin from "./login/KakaoLogin";
 import { useNavigate } from "react-router";
+import { setCookie } from "../../common.js";
 
 const SigninPage = ({ setIsHeader, setIsFooter }) => {
+  const [checked, setChecked] = useState(false);
+
   const navi = useNavigate();
   const {
     register, // React Hook Form 에 등록
@@ -39,8 +42,11 @@ const SigninPage = ({ setIsHeader, setIsFooter }) => {
     } else if (result === 2) {
       alert("비밀번호가 일치하지 않습니다.");
     } else {
-      alert("로그인 성공!");
       const userid = res.data.user.userid;
+      if (checked) {
+        setCookie("userid", userid, 7);
+      }
+      alert("로그인 성공!");
       //헤더 푸터 보이는여부 -> 설문질문페이지 마지막에서 이벤트로 처리예정
       setIsHeader(true);
       setIsFooter(true);
@@ -128,8 +134,19 @@ const SigninPage = ({ setIsHeader, setIsFooter }) => {
           <FormControlLabel
             control={<Checkbox value="remember" color="primary" />}
             label="Remember me"
+            checked={checked}
+            onChange={(e) => setChecked(e.target.checked)}
           />
-          <Stack maxWidth="xs" textAlign="end">
+          <Button
+            type="submit"
+            fullWidth
+            disableElevation
+            variant="contained"
+            sx={{ mt: 2, height: "50px" }}
+          >
+            Sign In
+          </Button>
+          <Stack maxWidth="xs" textAlign="end" mt={2}>
             <Link href="#" variant="body2">
               Forgot password?
             </Link>
@@ -137,13 +154,14 @@ const SigninPage = ({ setIsHeader, setIsFooter }) => {
               {"Don't have an account? Sign Up"}
             </Link>
           </Stack>
-          <Button type="submit" fullWidth variant="contained" sx={{ mt: 3 }}>
-            Sign In
-          </Button>
-          <Stack sx={{ mt: 3, mb: 5 }}>
-            <GoogleLogin />
-            <KakaoLogin />
-          </Stack>
+          <Grid container spacing={1.5} sx={{ mt: 1 }}>
+            <Grid item xs={6}>
+              <GoogleLogin />
+            </Grid>
+            <Grid item xs={6}>
+              <KakaoLogin />
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Container>
