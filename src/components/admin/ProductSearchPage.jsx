@@ -77,7 +77,12 @@ const ProductSearchPage = () => {
             if(window.confirm(`${cnt}개 상품을 등록할까요?`)){
                 for(const item of list){
                     if(item.checked){
-                        await axios.post(`/admin/insert/product`, item);
+                        await axios.post("/admin/insert/product", {
+                            name: item.name,
+                            price: item.price,
+                            image_url: item.image,
+                            productid: item.productid
+                        });
                     }
                 }
                 alert("상품등록 완료!");
