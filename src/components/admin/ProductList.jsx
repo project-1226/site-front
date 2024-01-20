@@ -9,17 +9,20 @@ const ProductList = () => {
     const [loading, setLoading] = useState(false);
     const [total, setTotal] = useState(0);
     const [page, setPage] = useState(1);
+
     const size = 5;
     const [query, setQuery] = useState("");
     const [isOpen, setIsOpen] = useState(false);
     const [modalProduct, setModalProduct] = useState([]);
     const [cnt, setCnt] = useState(0);
+
     const getList = async() => {
         setLoading(true);
         const res = await axios.get("/admin/productList", {
             params: {page, size, query},
         });
         //console.log(res.data);
+
         let data = res.data.map(item => item && {...item, checked:false});
         //console.log(data);
         setList(data)
