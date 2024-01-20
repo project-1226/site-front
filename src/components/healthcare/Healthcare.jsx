@@ -150,56 +150,11 @@ const Healthcare = () => {
           </p>
         </div>
       </div>
-      {/* <div className='healthcare_submain'>
-        <div className='healthcare_submain_box'></div>
-        <div className='healthcare_submain_box'></div>
-      </div> */}
-
-      {/* 내가선택한 운동 리스트  */}
-
-      {/* <Box
-        sx={{
-          width: "100%",
-          typography: "body1",
-          bgcolor: "transparent",
-          py: 4.5,
-          pr: 3,
-        }}
-      >
-        <TabContext value={value}>
-          <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
-            <TabList onChange={handleChange} aria-label="lab API tabs example">
-              {categories.map((category =>
-                <Tab value={category.categoryid} label={category.name} />
-              ))}
-            </TabList>
-          </Box>
-          <TabPanel value={value}>
-
-            {myExercise.length == 0 ?
-              <div><h1>해당 카테고리에서 선택한운동이 없습니다</h1></div>
-              :
-              <DataGrid
-                rows={myExercise}
-                columns={columns}
-                initialState={{
-                  pagination: {
-                    paginationModel: { page: 0, pageSize: 5 },
-                  },
-                }}  // 한 페이지당 보이는 행 수 설정
-                pageSizeOptions={[5, 10]}
-                getRowId={(row) => row.excerciseid}
-              />
-            }
-
-          </TabPanel>
-        </TabContext>
-      </Box> */}
 
       <div className="healthcare_contents">
         <section className="select_challenge_wrap">
           <div className="contents_title_box">
-            <p className="contents_title">챌린지를 선택해주세요!</p>
+            <p className="contents_title_healthcare">챌린지를 선택해주세요!</p>
           </div>
 
           <div className="challenge_wrap">
@@ -230,7 +185,7 @@ const Healthcare = () => {
 
         <section>
           <div className="contents_title_box">
-            <p className="contents_title">HOME TRAINING</p>
+            <p className="contents_title_healthcare">HOME TRAINING</p>
           </div>
           <div className="healthcare_video_wrap">
           {hometrainning?.slice(0, 3).map((h_exercise) => (
@@ -248,8 +203,8 @@ const Healthcare = () => {
 
         <section className="healthcare_review_wrap">
           <div className="contents_title_box">
-            <p className="contents_title"> 오운완 챌린지 </p>
-            <p className="contents_subtitle">
+            <p className="contents_title_healthcare"> 오운완 챌린지 </p>
+            <p className="contents_subtitle_healthcare">
               {" "}
               챌린지를 도전해 1등을 차지해보세요!{" "}
             </p>

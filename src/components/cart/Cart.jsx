@@ -11,7 +11,7 @@ import {
   Toolbar,
   Box,
   CardMedia,
-  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper,TextField,
+  Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField,
   InputAdornment
 } from '@mui/material';
 import ModatPostCode from "../user/mypage/info/ModatPostCode"
@@ -22,13 +22,7 @@ import { Link } from 'react-router-dom';
 import { Form, InputGroup } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
-import Checkbox from '@mui/material/Checkbox';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import IconButton from '@mui/material/IconButton';
-import AddIcon from '@mui/icons-material/Add';
-import RemoveIcon from '@mui/icons-material/Remove';
 import SvgIcon from "@mui/material/SvgIcon";
-import { SvgIconComponent } from "@mui/icons-material";
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Chatbot from '../chatbot/Chatbot';
 
@@ -50,19 +44,19 @@ const Cart = () => {
 
 
   const [form, setForm] = useState({
-    userid: sessionStorage.getItem("userid")?sessionStorage.getItem("userid"):"",
+    userid: sessionStorage.getItem("userid") ? sessionStorage.getItem("userid") : "",
     selected: 0,
     recipient: "",
     recipient_phone: "",
     address1: "",
     address2: "",
     address3: "",
-    orderid:`${sessionStorage.getItem("userid")}${new Date().getTime()}`,
-    totalprice:"",
-    card:"",
-    status:1,
-    request:"",
-    addressid:0
+    orderid: `${sessionStorage.getItem("userid")}${new Date().getTime()}`,
+    totalprice: "",
+    card: "",
+    status: 1,
+    request: "",
+    addressid: 0
   });
   const {
     addressid,
@@ -86,7 +80,7 @@ const Cart = () => {
   const getList = async () => {
     const res = await axios(`/cart/list.json?&userid=${sessionStorage.getItem("userid")}`);
     const data = res.data.list.map(product => product && { ...product, checked: false });
-   
+
     setTotal(res.data.total);
     setSum(res.data.sum);
     setList(data);
@@ -106,7 +100,7 @@ const Cart = () => {
         // 찾은 주소 정보를 사용할 수 있습니다.
         const selectedAddressId = selectedAddress.addressid;
         setForm({
-          ...form, 
+          ...form,
           recipient: selectedAddress.recipient,
           recipient_phone: selectedAddress.recipient_phone,
           address1: selectedAddress.address1,
@@ -124,12 +118,12 @@ const Cart = () => {
 
   const onDelete = async (cartid) => {
     console.log(cartid);
-  
-    await axios.post('/cart/delete', { cartid});
+
+    await axios.post('/cart/delete', { cartid });
     alert("삭제완료!");
     getList();
   };
-  
+
   const onChangeAll = (e) => {
     const data = list.map(product => product && { ...product, checked: e.target.checked });
     setList(data);
@@ -197,15 +191,13 @@ const Cart = () => {
     await axios.post("/address/insert", form);
     alert("배송지가 등록되었습니다.");
     setSubmitted(false);
-  
+
   };
 
-  
-  
   useEffect(() => {
     getList();
     getadrList();
-    
+
   }, []);
 
   useEffect(() => {
@@ -215,14 +207,11 @@ const Cart = () => {
   }, [adrlist]);
 
   useEffect(() => {
-  // console.log(form);
+    // console.log(form);
 
 
   }, [form]);
 
-
-
- 
   useEffect(() => {
     let lcount = 0;
     let sum = 0;
@@ -236,26 +225,20 @@ const Cart = () => {
     setCheckSum(sum);
   }, [list]);
 
-
- 
-const onclickmainadr = ()=>{
+  const onclickmainadr = () => {
     // adrlist 배열의 각 요소의 selected 속성을 0으로 설정
     const updatedAdrList = adrlist.map(ad => ({ ...ad, selected: 0 }));
     // 변경된 배열을 다시 설정
-  
+  }
 
-}
-
-
-
-const handleRadioChange = (addressid) => {
+  const handleRadioChange = (addressid) => {
     setSelectedAddressId(addressid);
 
     // 선택한 주소가 새로운 배송지인 경우 폼 데이터 초기화
     if (addressid === 'newAddress') {
       setForm({
-        ...form, 
-       
+        ...form,
+
         recipient: '',
         recipient_phone: '',
         address1: '',
@@ -267,7 +250,7 @@ const handleRadioChange = (addressid) => {
       const selectedAddress = adrlist.find((address) => address.addressid === addressid);
       if (selectedAddress) {
         setForm({
-          ...form, 
+          ...form,
           recipient: selectedAddress.recipient,
           recipient_phone: selectedAddress.recipient_phone,
           address1: selectedAddress.address1,
@@ -283,9 +266,6 @@ const handleRadioChange = (addressid) => {
     setSelectedAddressId('newAddress');
     setShowNewAddressForm(true);
   };
-
-
-
 
   // const [dvrform, setdvrForm] = useState({
   //   orderid:"",
@@ -308,13 +288,12 @@ const handleRadioChange = (addressid) => {
   //   request
   // } = dvrform;
 
-
   useEffect(() => {
     // 주소 목록이 로드되었을 때 실행되는 코드 블록
-  
+
     // selected가 1인 첫 번째 주소를 찾기
     const selectedAddress = adrlist.find(address => address.selected === 1);
-  
+
     // 찾은 경우 해당 주소의 addressid를 selectedAddressId로 설정
     if (selectedAddress) {
       setSelectedAddressId(selectedAddress.addressid);
@@ -336,8 +315,8 @@ const handleRadioChange = (addressid) => {
       buyer_name: recipient,                           // 구매자 이름
       buyer_tel: recipient_phone,                     // 구매자 전화번호
       buyer_email: 'example@example.com',               // 구매자 이메일
-      buyer_addr:  address2 + address3 ,                    // 구매자 주소
-      buyer_postcode: address1 ,                      // 구매자 우편번호
+      buyer_addr: address2 + address3,                    // 구매자 주소
+      buyer_postcode: address1,                      // 구매자 우편번호
 
     };
 
@@ -350,8 +329,8 @@ const handleRadioChange = (addressid) => {
       merchant_uid,
       error_msg,
     } = response;
-    console.log("--------------------------",selectedAddressId);
-  
+    console.log("--------------------------", selectedAddressId);
+
     if (success) {
       alert('결제 성공');
       console.log(response);
@@ -366,12 +345,12 @@ const handleRadioChange = (addressid) => {
           // 오류 처리 로직을 여기에 작성하세요.
         }
       } else {
-        console.log("기존로직",selectedAddressId); 
-            
+        console.log("기존로직", selectedAddressId);
+
         setForm({
-            ...form,
-            addressid: selectedAddressId
-          })
+          ...form,
+          addressid: selectedAddressId
+        })
         console.log(form)
         try {
           await axios.post("/order/insertpd", form);
@@ -382,441 +361,398 @@ const handleRadioChange = (addressid) => {
           console.error("주문추가중오류발생:", error);
           // 오류 처리 로직을 여기에 작성하세요.
         }
-
-
-
-
       }
     } else {
       alert(`결제 실패: ${error_msg}`);
     }
   }
-    
 
-  const orderBtnClick = async(selectedAddressId) => {
-    if(selectedAddressId =="newAddress"){
-    
+
+  const orderBtnClick = async (selectedAddressId) => {
+    if (selectedAddressId == "newAddress") {
+
       onClickPayment()
-    
-    }else{
+
+    } else {
       onClickPayment()
       console.log("기존")
       console.log(selectedAddressId)
     }
-};
+  };
 
 
-const handlecardradiochange = (event) => {
-  // 라디오 버튼이 변경될 때 호출되는 함수
-  setForm({
-    ...form,
-    [event.target.name]: event.target.value,
-  });
-  
-};
+  const handlecardradiochange = (event) => {
+    // 라디오 버튼이 변경될 때 호출되는 함수
+    setForm({
+      ...form,
+      [event.target.name]: event.target.value,
+    });
+
+  };
 
   return (
-    <div className='ak_wrap'>
-      <div className='ak_contents'>
+    <div className='cart_wrap'>
+      <div className='cart_contents'>
         <Box style={{ backgroundColor: 'white', padding: '15px', }}>
-          <Typography variant="h6" style={{ fontSize: '25px', flexGrow: 1, color: "black" }}>
-            장바구니
-          </Typography>
-          <hr></hr>
+          <h2 className='cart_title_top'> 장바구니 </h2>
+          {list.length > 0 ? (
+            <>
+              <TableContainer component={Paper} >
+                <Table>
+                  <TableHead>
 
+                    <TableRow >
+                      {/* colSpan을 사용하여 병합 */}
+                      <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', fontSize: '20px', fontWeight: 'bold' }} colSpan={5}>
+                        일반상품
+                      </TableCell>
+                      <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'right' }} colSpan={2}>
+                        <Button onClick={onDeleteChecked}> <SvgIcon component={DeleteForeverIcon} inheritViewBox /></Button>
+                      </TableCell>
+                    </TableRow>
 
+                    <TableRow className='cart_tablerow'>
+                      <TableCell >
+                      </TableCell>
+                      <TableCell className='cart_tableCell_text'>이미지</TableCell>
+                      <TableCell className='cart_tableCell_text'>상품 정보</TableCell>
+                      <TableCell className='cart_tableCell_text'>수량</TableCell>
+                      <TableCell className='cart_tableCell_text'>배송 정보</TableCell>
+                      <TableCell className='cart_tableCell_text'>금액</TableCell>
+                      <TableCell className='cart_tableCell_text'>삭제</TableCell>
+                    </TableRow>
+                  </TableHead>
+                  <TableBody>
+                    {list.map((product) => (
+                      <TableRow key={product.cartid}>
+                        {/* 체크박스 */}
+                        <TableCell style={{ width: '5px', borderRadius: '0' }} >
 
-  {list.length > 0 ? (
-    <>
-          <TableContainer component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0' }}  >
-            <Table>
-              <TableHead>
+                        </TableCell>
 
-                <TableRow style={{ border: '1px solid #ddd', borderRadius: '0', backgroundColor: 'white' }}>
-                  {/* colSpan을 사용하여 병합 */}
+                        {/* 이미지 */}
+                        <TableCell >
 
-                  <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', fontSize: '20px', fontWeight: 'bold' }} colSpan={5}>
-                    일반상품
-                  </TableCell>
-                  <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'right' }} colSpan={2}>
-                    <Button onClick={onDeleteChecked}> <SvgIcon component={DeleteForeverIcon} inheritViewBox /></Button>
-                  </TableCell>
+                          <img src={product.image_url} style={{ maxWidth: '100px', height: 'auto' }} />
+                        </TableCell>
 
-                </TableRow>
-                <TableRow>
-                  <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769' }}  >
-                   </TableCell>
-                  <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}>이미지</TableCell>
-                  <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}>상품 정보</TableCell>
-                  <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}>수량</TableCell>
-                  <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}>배송 정보</TableCell>
-                  <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}>금액</TableCell>
-                  <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}>삭제</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {list.map((product) => (
-                  <TableRow key={product.cartid}>
-                    {/* 체크박스 */}
-                    <TableCell style={{ width: '5px', borderRadius: '0' }} >
-                     
-                    </TableCell>
+                        {/* 상품 정보 */}
+                        <TableCell style={{ width: '500px' }} >
+                          <Typography variant="subtitle1">{product.name}</Typography>
+                          <Typography variant="body2">판매가: {product.price}</Typography>
+                          <Typography variant="body2">적립금: {product.point}</Typography>
+                        </TableCell>
 
-                    {/* 이미지 */}
-                    <TableCell >
-          
-                      <img src={product.image_url} style={{ maxWidth: '100px', height: 'auto' }} />
-                    </TableCell>
+                        {/* 수량 */}
+                        <TableCell style={{ border: '1px solid #ddd', borderRadius: '0' }} >
+                          <Typography variant="body2">
+                            <InputGroup >
+                              <Form.Control onChange={(e) => { onChangeQnt(e, product.cartid) }}
+                                value={product.count} type="number" />
+                              <Button onClick={() => onUpdateQnt(product.cartid, product.count)}
+                                variant='outline-dark'>수정</Button>
+                            </InputGroup>
 
-                    {/* 상품 정보 */}
-                    <TableCell style={{ width: '500px' }} >
-                      <Typography variant="subtitle1">{product.name}</Typography>
-                      <Typography variant="body2">판매가: {product.price}</Typography>
-                      <Typography variant="body2">적립금: {product.point}</Typography>
-                    </TableCell>
+                          </Typography>
+                        </TableCell>
 
-                    {/* 수량 */}
-                    <TableCell style={{ border: '1px solid #ddd', borderRadius: '0' }} >
-                      <Typography variant="body2">
-                        <InputGroup >
-                          <Form.Control onChange={(e) => { onChangeQnt(e, product.cartid) }}
-                            value={product.count} type="number" />
-                          <Button onClick={() => onUpdateQnt(product.cartid, product.count)}
-                            variant='outline-dark'>수정</Button>
-                        </InputGroup>
+                        {/* 배송 정보 */}
+                        <TableCell style={{ border: '1px solid #ddd', borderRadius: '0' }}>
 
-                      </Typography>
-                    </TableCell>
+                          <Typography variant="body2">배송비: 무료 </Typography>
+                        </TableCell>
 
-                    {/* 배송 정보 */}
-                    <TableCell style={{ border: '1px solid #ddd', borderRadius: '0' }}>
+                        {/* 합계 */}
+                        <TableCell style={{ border: '1px solid #ddd', borderRadius: '0' }}>
+                          <Typography variant="body2"> {product.fmtsum}</Typography>
+                        </TableCell>
 
-                      <Typography variant="body2">배송비: 무료 </Typography>
-                    </TableCell>
+                        {/* 선택 */}
+                        <TableCell style={{ border: '1px solid #ddd', borderRadius: '0' }}>
+                          <Typography variant="body2">
+                            <Button onClick={() => onDelete(product.cartid)}>  <SvgIcon component={DeleteForeverIcon} inheritViewBox /> </Button>
+                          </Typography>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
 
-                    {/* 합계 */}
-                    <TableCell style={{ border: '1px solid #ddd', borderRadius: '0' }}>
-                      <Typography variant="body2"> {product.fmtsum}</Typography>
-                    </TableCell>
-
-                    {/* 선택 */}
-                    <TableCell style={{ border: '1px solid #ddd', borderRadius: '0' }}>
-                      <Typography variant="body2">
-                        <Button onClick={() => onDelete(product.cartid)}>  <SvgIcon component={DeleteForeverIcon} inheritViewBox /> </Button>
-
-                      </Typography>
+                  <TableRow style={{ border: '1px solid #ddd', borderRadius: '0', backgroundColor: '#748769', color: 'white' }}>
+                    {/* colSpan을 사용하여 병합 */}
+                    <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'right', color: 'white', fontSize: '16px', fontWeight: 'bold' }} colSpan={7}>
+                      결제금액: {sum}
                     </TableCell>
                   </TableRow>
-                ))}
-              </TableBody>
+                </Table>
+              </TableContainer>
 
-              <TableRow style={{ border: '1px solid #ddd', borderRadius: '0', backgroundColor: '#748769' , color: 'white'}}>
-                {/* colSpan을 사용하여 병합 */}
-                <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'right', color: 'white', fontSize: '16px', fontWeight: 'bold' }} colSpan={7}>
-                  결제금액: {sum}
-                </TableCell>
-              </TableRow>
-            </Table>
+              <TableContainer component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', marginTop: '20px' }}  >
+                <Table>
+                  <TableRow className='cart_tablerow'>
+                    <TableCell className='cart_tableCell_text' >총 상품금액</TableCell>
+                    <TableCell className='cart_tableCell_text'>배송비</TableCell>
+                    <TableCell className='cart_tableCell_text'>결제예정금액</TableCell>
+                  </TableRow>
 
-          </TableContainer>
+                  <TableBody>
+                    <TableRow >
+                      {/* 체크박스 */}
+                      <TableCell style={{ width: '300px', textAlign: 'center', backgroundColor: 'WHITE' }} >
+                        {sum}원
+                      </TableCell>
+                      <TableCell style={{ width: '300px', textAlign: 'center', backgroundColor: 'WHITE' }} >
+                        무료
+                      </TableCell>
+                      <TableCell style={{ width: '600px', textAlign: 'center', backgroundColor: 'WHITE' }} >
+                        {sum}원
+                      </TableCell>
+                    </TableRow>
+                  </TableBody>
+                </Table>
+              </TableContainer>
 
-          <TableContainer component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', marginTop: '20px' }}  >
-            <Table>
-              <TableRow>
-                <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}  >총 상품금액</TableCell>
-                <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}>배송비</TableCell>
-                <TableCell style={{ border: '1px solid #ddd', borderRadius: '0', textAlign: 'center', backgroundColor: '#748769', color: 'white', fontSize: '16px', fontWeight: 'bold' }}>결제예정금액</TableCell>
+              <div className='cart_title_btm_wrap'>
+                <p className='cart_title_btm'> 배송정보 </p>
+                <button onClick={onSubmit} className='cart_add_address_btn'>배송지 추가</button>
+              </div>
 
-              </TableRow>
-              <TableBody>
+              <div className='cart_btm_wrap'>
+                {/* 다른 주소 정보도 필요하다면 추가하세요 */}
+                <TableContainer component={Paper} className='cart_tableContainer'>
+                  <Grid container spacing={1} className='adfg'>
+                    <Grid item xs={3} component={Paper} className='cart_grid_left'>
+                      <Typography className='cart_typo'>배송지 명</Typography>
+                    </Grid>
 
-                <TableRow >
-                  {/* 체크박스 */}
-                  <TableCell style={{ border: '1px solid #ddd', width: '300px', borderRadius: '0', textAlign: 'center', backgroundColor: 'WHITE' }} >
-                    {sum}
-                  </TableCell>
-                  <TableCell style={{ border: '1px solid #ddd', width: '300px', borderRadius: '0', textAlign: 'center', backgroundColor: 'WHITE' }} >
-                    무료
-                  </TableCell>
-                  <TableCell style={{ border: '1px solid #ddd', width: '600px', borderRadius: '0', textAlign: 'center', backgroundColor: 'WHITE' }} >
-                    {sum}
-                  </TableCell>
+                    <Grid item xs={9} component={Paper} className='cart_grid_right'>
+                      <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
+                        {adrlist.map((address) => (
+                          <div key={address.addressid} style={{ marginRight: '10px', marginBottom: '10px' }}>
+                            <input
+                              type="radio"
+                              name="recipientRadio"
+                              checked={address.addressid == selectedAddressId}
+                              onChange={() => handleRadioChange(address.addressid)}
+                            />
+                            {address.recipient}
+                          </div>
+                        ))}
 
-                </TableRow>
-              </TableBody>
-            </Table>
+                        <Button variant="outlined" color="primary" onClick={handleShowNewAddressForm}>
+                          새로운 배송지
+                        </Button>
+                      </div>
+                    </Grid>
 
-          </TableContainer>
-         
-          <hr></hr>
+                    <Grid item xs={3} component={Paper} className='cart_grid_left'>
+                      <Typography className='cart_typo'>받으시는 분</Typography>
+                    </Grid>
 
-          <Typography variant="h6" style={{ fontSize: '25px', flexGrow: 1, color: "black", marginTop: '40px' }}>
-            배송정보
-          </Typography>
-          
+                    <Grid item xs={9} component={Paper} className='cart_grid_right'>
+                      {adrlist.find((address) => address.addressid === selectedAddressId)?.recipient}
+                      <Button   >기본 배송지로 설정</Button>
+                      {selectedAddressId === "newAddress" && (
+                        < TextField id="input-with-sx" variant="standard"
+                          type="text"
+                          placeholder="받는 사람"
+                          name="recipient"
+                          value={recipient}
+                          onChange={onChange}
+                          helperText={
+                            !recipient &&
+                            submitted && (
+                              <Typography variant="caption" color="error">
+                                받는 사람 이름을 입력하세요.
+                              </Typography>
+                            )
+                          }
+                        />)}
+                    </Grid>
 
-    
-        <div>
-       
-          {/* 다른 주소 정보도 필요하다면 추가하세요 */}
-          <TableContainer component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0' }}>
-            <Grid container spacing={1}>
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769' , color: 'white'}}>
-                <Typography>배송지 명</Typography>
-              </Grid>
-              <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
-              <div style={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap' }}>
-          {adrlist.map((address) => (
-          <div key={address.addressid} style={{ marginRight: '10px', marginBottom: '10px' }}>
-            <input
-              type="radio"
-              name="recipientRadio"
-              checked={address.addressid == selectedAddressId}
-              onChange={() => handleRadioChange(address.addressid)}
-            />
-            {address.recipient} 
-          </div>
-
-        ))}
-     
-           <Button variant="outlined" color="primary" onClick={handleShowNewAddressForm}>
-            새로운 배송지
-          </Button>
-        </div>
-              </Grid>
-
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: 'white' }}>
-                <Typography>받으시는 분</Typography>
-              </Grid>
-              <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
-              {adrlist.find((address) => address.addressid === selectedAddressId)?.recipient}
-              <Button   >기본 배송지로 설정</Button>
-              {selectedAddressId === "newAddress" && (
-                               < TextField id="input-with-sx" variant="standard" 
-                     
-                               type="text"
-                               placeholder="받는 사람"
-                               name="recipient"
-                               value={recipient}
-                               onChange={onChange}
-                               helperText={
-                                !recipient &&
-                                submitted && (
-                                  <Typography variant="caption" color="error">
-                                    받는 사람 이름을 입력하세요.
-                                  </Typography>
-                                )
-                              } 
-                               /> )}
-                              
-              </Grid>
-
-           
-
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', color: 'white' }}>
-                <Typography>휴대전화</Typography>
-              </Grid>
-              <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
-              {adrlist.find((address) => address.addressid === selectedAddressId)?.recipient_phone}
-              {selectedAddressId === "newAddress" && (
-                    <TextField
-                        id="input-with-sx"
-                        variant="standard"
-                        type="text"
-                        placeholder="전화번호"
-                        name="recipient_phone"
-                        value={recipient_phone}
-                        onChange={onChange}
-                        helperText={
+                    <Grid item xs={3} component={Paper} className='cart_grid_left'>
+                      <Typography className='cart_typo'>휴대전화</Typography>
+                    </Grid>
+                    <Grid item xs={9} component={Paper} className='cart_grid_right'>
+                      {adrlist.find((address) => address.addressid === selectedAddressId)?.recipient_phone}
+                      {selectedAddressId === "newAddress" && (
+                        <TextField
+                          id="input-with-sx"
+                          variant="standard"
+                          type="text"
+                          placeholder="전화번호"
+                          name="recipient_phone"
+                          value={recipient_phone}
+                          onChange={onChange}
+                          helperText={
                             selectedAddressId === "newAddress" &&
                             !recipient_phone &&
                             submitted && (
-                                <Typography variant="caption" color="error">
-                                    받는 사람 전화번호를 입력하세요.
-                                </Typography>
+                              <Typography variant="caption" color="error">
+                                받는 사람 전화번호를 입력하세요.
+                              </Typography>
                             )
-                        }
-                    />
-                )}
-                                              </Grid>
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769' , color: 'white'}}>
-                <Typography>주소</Typography>
-              </Grid>
-              <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
-              {adrlist.find((address) => address.addressid === selectedAddressId)?.address1}
-              {selectedAddressId === "newAddress" && (
-                               < TextField id="input-with-sx" variant="standard" 
-                     
-                               type="text"
-                               placeholder="주소"
-                               name="recipient"
-                               value={address1}
-                               InputProps={{
-                                readOnly: true,
-                                endAdornment: (
-                                  <InputAdornment position="end">
-                                    <ModatPostCode form={form} setForm={setForm} />
-                                  </InputAdornment>
-                                ),
-                              }}
-                               onChange={onChange}
-                               helperText={
-                                !address1 &&
-                                submitted && (
-                                  <Typography variant="caption" color="error">
-                                    주소 검색을 해주세요.
-                                  </Typography>
-                                )
-                              }
-                               />  )}
-                  
-              </Grid>
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', color: 'white' }}>
-                <Typography>상세주소</Typography>
-              </Grid>
-              <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
-              {adrlist.find((address) => address.addressid === selectedAddressId)?.address2}
-              {selectedAddressId === "newAddress" && (
-                                <TextField
-                                fullWidth
-                                type="text"
-                                placeholder="주소"
-                                name="address2"
-                                value={address2}
-                                InputProps={{
-                                  readOnly: true,
-                                }}
-                                onChange={onChange}
-                              /> )}
-              </Grid>
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769' , color: 'white'}}>
-                <Typography>상세주소</Typography>
-              </Grid>
-              <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
-              {adrlist.find((address) => address.addressid === selectedAddressId)?.address3}
-              {selectedAddressId === "newAddress" && (
-                                <TextField
-                                fullWidth
-                                type="text"
-                                placeholder="상세주소"
-                                name="address3"
-                                value={address3}
-                                onChange={onChange}
-                                helperText={
-                                  !address3 &&
-                                  submitted && (
-                                    <Typography variant="caption" color="error">
-                                      상세 주소를 입력해주세요.
-                                    </Typography>
-                                  )
-                                }
-                              /> )}
-              </Grid>
-              <Grid item xs={3} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px',backgroundColor: '#748769', color: 'white' }}>
-                <Typography>배송시 요청사항</Typography>
-              </Grid>
-              <Grid item xs={9} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px' }}>
- 
-                                <TextField
-                                fullWidth
-                                type="text"
-                                placeholder="배송시 요청사항"
-                                name="request"
-                                value={request}
-                                onChange={onChange}
-                               
-                              /> 
-              </Grid>
+                          }
+                        />
+                      )}
+                    </Grid>
 
-          
-            </Grid>
+                    <Grid item xs={3} component={Paper} className='cart_grid_left'>
+                      <Typography className='cart_typo'>주소</Typography>
+                    </Grid>
 
+                    <Grid item xs={9} component={Paper} className='cart_grid_right'>
+                      {adrlist.find((address) => address.addressid === selectedAddressId)?.address1}
+                      {selectedAddressId === "newAddress" && (
+                        < TextField id="input-with-sx" variant="standard"
+                          type="text"
+                          placeholder="주소"
+                          name="recipient"
+                          value={address1}
+                          InputProps={{
+                            readOnly: true,
+                            endAdornment: (
+                              <InputAdornment position="end">
+                                <ModatPostCode form={form} setForm={setForm} />
+                              </InputAdornment>
+                            ),
+                          }}
+                          onChange={onChange}
+                          helperText={
+                            !address1 &&
+                            submitted && (
+                              <Typography variant="caption" color="error">
+                                주소 검색을 해주세요.
+                              </Typography>
+                            )
+                          }
+                        />)}
+                    </Grid>
 
+                    <Grid item xs={3} component={Paper} className='cart_grid_left'>
+                      <Typography className='cart_typo'>상세주소</Typography>
+                    </Grid>
 
-          </TableContainer>
+                    <Grid item xs={9} component={Paper} className='cart_grid_right'>
+                      {adrlist.find((address) => address.addressid === selectedAddressId)?.address2}
+                      {selectedAddressId === "newAddress" && (
+                        <TextField
+                          fullWidth
+                          type="text"
+                          placeholder="주소"
+                          name="address2"
+                          value={address2}
+                          InputProps={{
+                            readOnly: true,
+                          }}
+                          onChange={onChange}
+                        />)}
+                    </Grid>
 
+                    <Grid item xs={3} component={Paper} className='cart_grid_left'>
+                      <Typography className='cart_typo'>상세주소</Typography>
+                    </Grid>
 
-        </div>
-    
+                    <Grid item xs={9} component={Paper} className='cart_grid_right'>
+                      {adrlist.find((address) => address.addressid === selectedAddressId)?.address3}
+                      {selectedAddressId === "newAddress" && (
+                        <TextField
+                          fullWidth
+                          type="text"
+                          placeholder="상세주소"
+                          name="address3"
+                          value={address3}
+                          onChange={onChange}
+                          helperText={
+                            !address3 &&
+                            submitted && (
+                              <Typography variant="caption" color="error">
+                                상세 주소를 입력해주세요.
+                              </Typography>
+                            )
+                          }
+                        />)}
+                    </Grid>
 
-        
-          
-          <Button  onClick={onSubmit} style={{ border: '1px solid #ddd', width: '200px', height: '30px', borderRadius: '0', backgroundColor: '#748769', color: 'white', fontSize: '13px', fontWeight: 'bold', textAlign: 'center',marginTop: '10px' }}>배송지 추가</Button>
-  
-  
-          <div style={{ width: '600px', margin: 'auto' }}>
-            <TableContainer component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', marginTop: '40px' }}>
-    <Grid container spacing={1}>
-      <Grid item xs={6} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: 'white' }}>
-        <Typography>결제방식</Typography>
-      </Grid>
-      <Grid item xs={6} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
-        <label>
-          <input
-            type="radio"
-            name="card"
-            value="kcp"
-            checked={card === 'kcp'} // 선택된 값에 따라 checked 상태 설정
-            onChange={handlecardradiochange} 
-          />
-          실시간 계좌이체
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="card"
-            value="danal"
-            checked={card === 'danal'} // 선택된 값에 따라 checked 상태 설정
-            onChange={handlecardradiochange}
-          />
-          휴대폰결제
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="card"
-            value="kakaopay"
-            checked={card === 'kakaopay'} // 선택된 값에 따라 checked 상태 설정
-            onChange={handlecardradiochange} 
-          />
-          카카오페이
-        </label>
-      </Grid>
-    </Grid>
-    <Grid item xs={12} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', color: 'white' }}>
-      <Typography>결제예정금액 : {sum} </Typography>
-    </Grid>
-  </TableContainer>
-  <div style={{ display: 'flex', justifyContent: 'center', marginTop: '20px' }}>
-    <Button onClick={() => orderBtnClick(selectedAddressId)} style={{ border: '1px solid #ddd', width: '300px', height: '50px', borderRadius: '0', backgroundColor: '#748769', color: 'white', fontSize: '20px', fontWeight: 'bold', textAlign: 'center' }}>
-      {sum}원 결제하기
-    </Button>
-  </div>
-</div>
+                    <Grid item xs={3} component={Paper} className='cart_grid_left'>
+                      <Typography className='cart_typo'>배송시 요청사항</Typography>
+                    </Grid>
+                    <Grid item xs={9} component={Paper} className='cart_grid_right'>
+                      <TextField
+                        fullWidth
+                        type="text"
+                        placeholder="배송시 요청사항"
+                        name="request"
+                        value={request}
+                        onChange={onChange}
+                      />
+                    </Grid>
+                  </Grid>
+                </TableContainer>
+              </div>
 
+              {/* <div className='for_cartbtn_position'>
+                <button onClick={onSubmit} className='cart_add_address_btn'>배송지 추가</button>
+              </div> */}
 
-          </>                   
-      ) : (
-        <Typography variant="body1" style={{ marginTop: '20px' }}>
-          장바구니가 비어 있습니다.
-
-          <Button variant="contained" color="primary" component={Link} to="/">
-         쇼핑하러가기
-       </Button>
-       
-        </Typography>
-        
-      )}
-
+              <div style={{ width: '600px', margin: 'auto' }}>
+                <TableContainer component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', marginTop: '40px' }}>
+                  <Grid container spacing={1}>
+                    <Grid item xs={6} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', display: 'flex', flexDirection: 'column', justifyContent: 'center', color: 'white' }}>
+                      <Typography>결제방식</Typography>
+                    </Grid>
+                    <Grid item xs={6} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: 'white', display: 'flex', flexDirection: 'column', justifyContent: 'center' }}>
+                      <label>
+                        <input
+                          type="radio"
+                          name="card"
+                          value="kcp"
+                          checked={card === 'kcp'} // 선택된 값에 따라 checked 상태 설정
+                          onChange={handlecardradiochange}
+                        />
+                        실시간 계좌이체
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          name="card"
+                          value="danal"
+                          checked={card === 'danal'} // 선택된 값에 따라 checked 상태 설정
+                          onChange={handlecardradiochange}
+                        />
+                        휴대폰결제
+                      </label>
+                      <label>
+                        <input
+                          type="radio"
+                          name="card"
+                          value="kakaopay"
+                          checked={card === 'kakaopay'} // 선택된 값에 따라 checked 상태 설정
+                          onChange={handlecardradiochange}
+                        />
+                        카카오페이
+                      </label>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={12} component={Paper} style={{ border: '1px solid #ddd', borderRadius: '0', padding: '10px', backgroundColor: '#748769', color: 'white' }}>
+                    <Typography>결제예정금액 : {sum} </Typography>
+                  </Grid>
+                </TableContainer>
+                <div style={{ display: 'flex', justifyContent: 'center', marginTop: '70px' }}>
+                  <button onClick={() => orderBtnClick(selectedAddressId)} className='cart_payment_btn'> {sum}원 결제하기 </button>
+                </div>
+              </div>
+            </>
+          ) : (
+            <Typography variant="body1" style={{ marginTop: '20px' }}>
+              장바구니가 비어 있습니다.
+              <Button variant="contained" color="primary" component={Link} to="/">
+                쇼핑하러가기
+              </Button>
+            </Typography>
+          )}
         </Box>
-        <Chatbot/>
-     
+        <Chatbot />
       </div>
-
-      
-
-
-                
     </div>
   );
 };

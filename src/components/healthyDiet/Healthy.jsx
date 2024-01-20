@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react'
-import HealthyModal from './HealthyModal';
 import {Backdrop, Button, CircularProgress,
 } from "@mui/material";
 import axios from 'axios';
@@ -56,11 +55,6 @@ const Healthy = ({pagetype}) => {
     }
   }
 
-  const handleMenuClick = (food) => {
-    setSelectedFood(food);
-    setIsModalOpen(true);
-  };
-
   const handleMoreClick = () => {
     //navigate 함수는 두 번째 인자로 state를 받아 해당 경로로 이동할 때 상태를 전달할 수 있음
     navi(`/health/healthydetail/${selectTag.categoryid}`, {
@@ -105,7 +99,7 @@ const Healthy = ({pagetype}) => {
           {foods.slice(0, 3).map((food) =>
             food.categoryid == selectTag.categoryid ?
               <div className='recomm_card'>
-                <div className='recomm_card_img' onClick={() => handleMenuClick(food)}>
+                <div className='recomm_card_img' >
                   <img src={food.image} alt="" />
                 </div>
                 <p className='recomm_card_foodname'>{food.name}</p>
@@ -205,8 +199,6 @@ const Healthy = ({pagetype}) => {
           </div>
         </section>{/* diet_recipe */}
       </div>
-
-      <HealthyModal show={isModalOpen} handleClose={() => setIsModalOpen(false)} selectedFood={selectedFood} />
     </div>
   )
 }
