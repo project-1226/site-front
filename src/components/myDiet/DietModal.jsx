@@ -5,6 +5,9 @@ import { CiCircleMore } from 'react-icons/ci';
 import React, { useEffect } from 'react'
 import axios from 'axios';
 import { MdChevronRight } from "react-icons/md";
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
+
 
 function DietModal({ show, setIsModalOpen, selectedMyFood, selectedDay, setIsFoodChanged ,isFoodChanged}) {
   const [changeProdVisible, setChangeProdVisible] = useState(false);
@@ -16,17 +19,42 @@ function DietModal({ show, setIsModalOpen, selectedMyFood, selectedDay, setIsFoo
   const [imageTextOpacity, setImageTextOpacity] = useState({});
   const [imageUrl,setImageUrl]= useState("");
   const [changeFood,setChangeFood]= useState([]);
+  const [isFavorite,setIsFavorite]= useState(false);
 
+  const isFavoriteFood=async()=>{
+    console.log(selectedMyFood.foodid)
+    const res = await axios(`/food/read/favorite?userid=${sessionStorage.getItem("userid")}&foodid=${selectedMyFood.foodid}`);
+    if(res.data > 0){
+      setIsFavorite(true);
+    }else{
+      setIsFavorite(false);
+    }
+  }
 
   useEffect(()=>{
-
-  },[isFoodChanged])
+    isFavoriteFood();
+  },[show,isFavorite])
+  useEffect(()=>{},[isFoodChanged])
+  
+  
 
   const handleClose = () => {
     setChangeProdVisible(false);
     setIsModalOpen(false);
   };
 
+  const onClickFavorite=async()=>{
+    const res = await axios(`/food/insert/favorite?userid=${sessionStorage.getItem("userid")}&foodid=${selectedMyFood?.foodid}`);
+    if(res.data >0){
+      setIsFavorite(true);
+    }
+  }
+
+  const onClickCancleFavorite=async()=>{
+    const res = await axios.delete(`/food/delete/favorite?userid=${sessionStorage.getItem("userid")}&foodid=${selectedMyFood.foodid}`);
+    console.log(res.data);
+    setIsFavorite(false);
+  }
   const handleToggleChangeProd = () => {
     console.log(selectedMyFood);
     setChangeProdVisible(!changeProdVisible);
@@ -48,9 +76,9 @@ function DietModal({ show, setIsModalOpen, selectedMyFood, selectedDay, setIsFoo
     );
     if(notice){
       //식단변경로직
-      const res = await axios(`/food/change-my-food?foodplanid=${selectedMyFood.foodplanid}&foodid=${changeFood.foodid}`);
+      const res = await axios(`/food/myfood/update?foodplanid=${selectedMyFood.foodplanid}&foodid=${changeFood?.foodid}`);
       if(res.data > 0){
-        setIsFoodChanged(true)
+        setIsFoodChanged((pre) => pre + 1);       
       }
     } 
   };
@@ -58,7 +86,7 @@ function DietModal({ show, setIsModalOpen, selectedMyFood, selectedDay, setIsFoo
   //랜덤으로 식단 뽑아오기
   const handleUpdateMyFood = async () => {
     setLoading(true);
-    const response = await axios(`/food/random-my-food?categoryid=${selectedMyFood?.categoryid}&foodid=${selectedMyFood?.foodid}`)
+    const response = await axios(`/food/myfood/otherlist?categoryid=${selectedMyFood?.categoryid}&foodid=${selectedMyFood?.foodid}`)
     setRandomFoods(response.data);
     console.log(response.data)
     setLoading(false);
@@ -94,7 +122,7 @@ function DietModal({ show, setIsModalOpen, selectedMyFood, selectedDay, setIsFoo
     <>
       <Modal show={show} onHide={handleClose} backdrop="static" keyboard={false} size="lg">
         <Modal.Header closeButton variant="white">
-          <Modal.Title>상세보기</Modal.Title>
+          <Modal.Title>상세보기 </Modal.Title>
         </Modal.Header>
 
         <Modal.Body>
@@ -105,11 +133,19 @@ function DietModal({ show, setIsModalOpen, selectedMyFood, selectedDay, setIsFoo
                 <div className="modal_date">
                   <button>{`${selectedDay}일차`}</button>
                 </div>
-
+                <div className='modal_favorit'>
+                  식단찜하기
+                  {isFavorite ?
+                    <BookmarkOutlinedIcon  onClick={onClickCancleFavorite}/>
+                  :
+                    <BookmarkBorderOutlinedIcon onClick={onClickFavorite}/>
+                  }
+                  
+                </div>
                 <div className="modal_article_wrap">
                   <div className="modal_article">
                     <div className="modal_foodname">
-                      <p>{selectedMyFood.name}</p>
+                      <p>{selectedMyFood.name} </p>
                       <p>{selectedMyFood.ingredients}</p>
                     </div>
                   </div>
@@ -124,7 +160,7 @@ function DietModal({ show, setIsModalOpen, selectedMyFood, selectedDay, setIsFoo
             </section>
 
             <section className='modal_btm'>
-              <p>[{selectedMyFood.cname}]</p>
+              <p>[{selectedMyFood.cname}] </p>
               <p>{selectedMyFood.description}</p>
             </section>
 

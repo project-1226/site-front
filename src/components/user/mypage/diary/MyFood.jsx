@@ -17,6 +17,7 @@ import DietModal from "../../../myDiet/DietModal";
 const MyFood = ({ userInfo }) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
+  const [isFoodChanged, setIsFoodChanged] = useState(false);
 
   const getPlan = async (regdate) => {
     const res = await axios("/food/mypage/plan", {
@@ -65,13 +66,12 @@ const MyFood = ({ userInfo }) => {
     setSelectedDay(index + 1);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   useEffect(() => {
     getDates();
   }, []);
+  useEffect(() => {
+    getDates();
+  }, [isFoodChanged]);
 
   return (
     <>
@@ -117,9 +117,11 @@ const MyFood = ({ userInfo }) => {
       </div>
       <DietModal
         show={isModalOpen}
-        onHide={handleCloseModal}
+        setIsModalOpen={setIsModalOpen}
         selectedMyFood={selectedFood}
         selectedDay={selectedDay}
+        setIsFoodChanged={setIsFoodChanged}
+        isFoodChanged={isFoodChanged}
       />
     </>
   );

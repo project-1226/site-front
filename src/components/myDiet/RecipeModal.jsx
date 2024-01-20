@@ -1,14 +1,47 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import { Button } from '@mui/material';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import BookmarkOutlinedIcon from '@mui/icons-material/BookmarkOutlined';
+import axios from 'axios';
+
+
 
 const RecipeModal = ({ show, setIsRecipeModalOpen, selectedMyFood, selectedDay }) => {
   const[isYoutube,setIsYoutube] = useState(false);
+  const [isFavorite,setIsFavorite]= useState(false);
+  
+  const isFavoriteFood=async()=>{
+    console.log(selectedMyFood.foodid)
+    const res = await axios(`/food/read/favorite?userid=${sessionStorage.getItem("userid")}&foodid=${selectedMyFood.foodid}`);
+    if(res.data > 0){
+      setIsFavorite(true);
+    } else {
+      setIsFavorite(false);
+    }
+  }
+
+  const onClickFavorite=async()=>{
+    const res = await axios(`/food/insert/favorite?userid=${sessionStorage.getItem("userid")}&foodid=${selectedMyFood?.foodid}`);
+    if(res.data >0){
+      setIsFavorite(true);
+    }
+  }
+
+  const onClickCancleFavorite=async()=>{
+    const res = await axios.delete(`/food/delete/favorite?userid=${sessionStorage.getItem("userid")}&foodid=${selectedMyFood.foodid}`);
+    console.log(res.data);
+    setIsFavorite(false);
+  }
+
   const handleClose = () => {   
     setIsYoutube(false); 
     setIsRecipeModalOpen(false); // onHide 함수 호출로 수정   
   };
 
+  useEffect(()=>{
+    isFavoriteFood();
+  },[show,isFavorite])
   useEffect(()=>{},[isYoutube]);
   
   return (
@@ -25,6 +58,15 @@ const RecipeModal = ({ show, setIsRecipeModalOpen, selectedMyFood, selectedDay }
             <section className="modal_top">
               <div className="modal_contents">
                 <div className="imgbox"><img src={selectedMyFood.image} /></div>
+                <div className='modal_favorit'>
+                  식단찜하기
+                  {isFavorite ?
+                    <BookmarkOutlinedIcon  onClick={onClickCancleFavorite}/>
+                  :
+                    <BookmarkBorderOutlinedIcon onClick={onClickFavorite}/>
+                  }
+                  
+                </div>
                 {selectedDay>0 &&
                   <div className="modal_date">
                     <button>{`${selectedDay}일차`}</button>

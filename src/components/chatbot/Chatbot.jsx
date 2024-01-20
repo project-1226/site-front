@@ -38,7 +38,7 @@ const Chatbot = () => {
   const getMyList = async () => {
 
     const res = await axios(
-      "/food/my_food_list?userid=" + sessionStorage.getItem("userid")
+      "/food/myfood/list?userid=" + sessionStorage.getItem("userid")
     );
     console.log("0---------------------------"+res.data[0].name);
     setMyFoods(res.data);
