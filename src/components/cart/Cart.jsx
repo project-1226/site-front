@@ -98,7 +98,7 @@ const Cart = () => {
       const res = await axios("/address/list", {
         params: { userid: sessionStorage.getItem("userid"), page, size },
       });
-      console.log(res)
+
       const array = res.data.list;
       setadrList(array);
       const selectedAddress = array.find(address => address.selected === 1);
@@ -116,14 +116,14 @@ const Cart = () => {
       } else {
         console.log("No address with selected === 1 found.");
       }
-      console.log(adrlist);
+
     } catch (error) {
       console.error("Error fetching address list:", error);
     }
   };
 
   const onDelete = async (cartid) => {
-    console.log(cartid);
+
   
     await axios.post('/cart/delete', { cartid});
     alert("삭제완료!");
@@ -146,7 +146,7 @@ const Cart = () => {
     } else {
       for (const product of list) {
         if (product.checked) {
-          console.log(product.cartid);
+
           await axios('/cart/delete', { cartid: product.cartid });
         }
       }
@@ -209,13 +209,13 @@ const Cart = () => {
   }, []);
 
   useEffect(() => {
-    console.log(adrlist);
+
 
 
   }, [adrlist]);
 
   useEffect(() => {
-  // console.log(form);
+
 
 
   }, [form]);
@@ -351,7 +351,8 @@ const handleRadioChange = (addressid) => {
       error_msg,
     } = response;
     console.log("--------------------------",selectedAddressId);
-  
+
+   console.log("--------------------------",form);
     if (success) {
       alert('결제 성공');
       console.log(response);
@@ -399,6 +400,8 @@ const handleRadioChange = (addressid) => {
       onClickPayment()
     
     }else{
+      console.log(form)
+
       onClickPayment()
       console.log("기존")
       console.log(selectedAddressId)
