@@ -169,8 +169,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
                 src={`https://www.youtube.com/embed/${food?.vidioid}`}
                 title={food?.name}
                 frameBorder="0"
-                allowFullScreen
-              />
+                allowFullScreen/>
             ))}
           </div>
 

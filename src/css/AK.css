@@ -1,25 +1,14 @@
 /*상단바 전체  ===*/
-.ak_wrap {
-    
-    width: 100%;
-    margin-top: 10px;
-}
+.ak_wrap {width: 94.8%; margin: 0 auto;}
+
 /*기본설정 94.8*/
-.ak_contents {width: 94.8%; margin: 0 auto 180px auto;}
-.ak_aicontents {
-    width: 94.8%;
-    margin: 0 auto 180px auto;
-    background-color: white; /* 남색 배경 */
-}
+.ak_aicontents {width: 100%; margin: 100px auto 180px auto; background-color: white; /* 남색 배경 */}
 .ak_half {width: 50%; height: 100%; margin-right: 2%; background: #ddd;}
+.ak_img_contents {width: 50%; margin: 0 auto 100px auto;}
+.ak_grid_img_wrap {padding: 20px; border: 2px solid #aabd9f; border-radius: 20px;}
+.ak_grid_img {cursor: pointer; border-radius: 20px;}
 
-
-
-
-.akbuttons {
-    margin: 10%;
-    text-align: center;
-}
+.akbuttons { margin: 10%; text-align: center}
 .akbtn-hover {
     width: 200px;
     font-weight: bold;
@@ -36,7 +25,6 @@
     transition: all 0.4s ease-in-out;
     animation: backgroundAnimation 0.4s ease-in-out infinite;
     animation-duration: 1s; 
-
 }
 
 @keyframes backgroundAnimation {

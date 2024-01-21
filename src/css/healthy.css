@@ -25,14 +25,14 @@
 
 /* 음식박스부분 - Card */
 .recomm_card_wrap {display: flex; flex-wrap: wrap; justify-content: center; z-index: 1; position: relative; bottom: 150px}
-.recomm_card {width: 18%; height: 450px; margin-right: 2%; position: relative; cursor: pointer; background: #fff; padding: 20px; border-radius: 20px;
+.recomm_card {width: 18%; height: 450px; margin-right: 2%; position: relative; background: #fff; padding: 20px; border-radius: 20px;
 box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); transition: all 0.3s cubic-bezier(.25,.8,.25,1); overflow: hidden;}
 .recomm_card:hover {box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);}
 .recomm_card:last-child {margin-right: 0;}
 .recomm_card_foodname {font-size: 20px; font-weight: 600; margin-bottom: 70px !important;}
 
 .recomm_card_footer {position: absolute; left: 0; bottom: 0; padding-left: 20px; width: 260px; line-height: 48px; font-size: 18px; color: #666; background: #d9e1d4; border-radius: 0 20px 0 0; text-align: left;}
-.recomm_card_footer_more {font-size: 16px; font-weight: 600;}
+.recomm_card_footer_more {font-size: 16px; font-weight: 600; cursor: pointer;}
 .recomm_card_img img {width: 100%; height: 250px; border-radius: 20px; margin-bottom: 20px;}
 
 /* healthy_tag_box - 태그박스부분 */

@@ -29,16 +29,14 @@
 .diet_contents {width: 94.8%; margin: 0 auto 180px auto;}
 /* -------------------------------section1 diet_recipe ------------------------------- */
 .diet_recipe {width: 100%; margin-bottom: 180px;}
-/* .recipe_video_wrap {width: 100%; margin: 0 auto; display: flex; flex-wrap: wrap; justify-content: center;}
-.recipe_video {width: 32%; height: auto; margin-right: 2%;}
-.recipe_video:last-child {margin-right: 0;} */
+.recipe_video {border-radius: 20px;}
 
 /* recipe_video_wrap */
 .recipe_video_wrap {width: 100%; display: flex; flex-wrap: wrap;}
 .recipe_video {width: 32%; height: 300px; margin-right: 2%; background: #ddd;}
 .recipe_video:last-child {margin-right: 0;}
 
-.diet_market_contents_bg {width: 100%; height: 236px; background: url('../images/mydiet_submain.jpg') no-repeat 50% 50%; background-size: cover; margin-top: 2%;}
+.diet_market_contents_bg {width: 100%; height: 236px; background: url('../images/mydiet_submain.jpg') no-repeat 50% 50%; background-size: cover; margin-top: 1%; border-radius: 20px;}
 
 
 /* -------------------------------section2 review_wrap ------------------------------- */
