@@ -17,7 +17,6 @@ import DietModal from "../../../myDiet/DietModal";
 const MyFood = ({ userInfo }) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
-  const [isFoodChanged, setIsFoodChanged] = useState(false);
 
   const getPlan = async (regdate) => {
     const res = await axios("/food/mypage/plan", {
