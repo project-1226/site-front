@@ -1,89 +1,51 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react'
-import { Spinner } from 'react-bootstrap';
-import { Typography, Box, TableContainer, Table, TableCell, TableRow, TableBody, Paper, Tab, TableHead } from '@mui/material';
-import { TabList, TabPanel } from '@mui/lab';
-import TabContext from '@mui/lab/TabContext';
+import { Row, Spinner, Table } from 'react-bootstrap';
 
 const AdminOrderList = () => {
-  const [value, setValue] = useState('1');
-  const [loading, setLoading] = useState(false);
-  const [list, setList] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [list, setList] = useState([]);
 
-  const getList = async () => {
-    setLoading(true);
-    const res = await axios.get('/admin/orderList');
-    console.log(res.data);
-    setList(res.data);
-    setLoading(false);
-  }
+    const getList = async() => {
+        setLoading(true);
+        const res = await axios.get('/');
+        setList(res.data.list);
+        setLoading(false);
+    }
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-
-  useEffect(() => {
-    getList();
-  }, []);
+    useEffect(()=> {
+        getList();
+    }, []);
 
 
-  if (loading) return <div><Spinner /></div>
+    if(loading) return <div><Spinner/></div>
 
-  return (
-    <Box sx={{ width: '100%' }}>
-      <TabContext value={value}>
-        <Box sx={{ borderBottom: 1, borderColor: 'divider', marginTop: '20px', width: '130px' }}>
-          <TabList onChange={handleChange} aria-label="lab API tabs example">
-            <Tab label="주문 / 배송 내역" value="1" />
-          </TabList>
-        </Box>
-        <TabPanel value="1">
-          <TableContainer component={Paper} sx={{ width: '95%', marginLeft: '10px' }}>
-            <Table>
-              <TableHead>
-                <TableCell>주문일</TableCell>
-                <TableCell>주문자</TableCell>
-                <TableCell>주문상품</TableCell>
-                <TableCell>주문금액</TableCell>
-                <TableCell>주문상태</TableCell>
-              </TableHead>
-              <TableBody>
-                {list.map((l) => (
-                  <TableRow key={l.orderId} sx={{ fontStyle: "italic" }}>
-                    <TableCell>
-                      <Typography
-                        variant="caption"
-                        color="text.secondary"
-                        sx={{ fontStyle: "italic" }}
-                      >
-                        {l.fmtdate}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography>
-                        {l.userid}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      <Typography>
-                        {l.product_info}
-                      </Typography>
-                    </TableCell>
-                    <TableCell>
-                      {l.sum}원
-                    </TableCell>
-                    <TableCell>
-                      {l.str_status}
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        </TabPanel>
-      </TabContext>
-    </Box>
-  )
+    return (
+        <div className='my-5 ms-5'>
+            <Row className='justify-content-center'>
+                <Table>
+                    <thead className='text-center p-2'>
+                        <tr>
+                            <th>주문번호</th>
+                            <th>주문자명 / (userid)</th>
+                            <th>전화번호</th>
+                            <th>배송지</th>
+                            <th>주문상품</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0001</td>
+                            <td>홍길동 / userid</td>
+                            <td>010-1234-5678</td>
+                            <td>제주도 한림읍 210-2</td>
+                            <td>닭가슴살 외 2종</td>
+                        </tr>
+                    </tbody>
+                </Table>
+            </Row>
+        </div>
+    )
 }
 
 export default AdminOrderList
