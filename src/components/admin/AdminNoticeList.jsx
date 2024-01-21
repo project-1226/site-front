@@ -19,9 +19,7 @@ const AdminNoticeList = () => {
         const res = await axios.get(`/admin/list?categoryid=${categoryid}`);
         //console.log(res.data);
 
-        //let data = res.data.map(n => n && { ...n, checked: false });
         setList(res.data);
-
         setLoading(false);
     }
 
