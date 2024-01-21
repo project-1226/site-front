@@ -38,7 +38,7 @@ const NoticePage = () => {
     if(loading) return <div className='text-center my-5'><Spinner/></div>
 
     return (
-        <div className='my-5 ms-5'>
+        <div className='p-5'>
             <Col className='justify-content-center'>
                 <table width={850}>
                     <thead>
