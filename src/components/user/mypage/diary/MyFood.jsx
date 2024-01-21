@@ -17,7 +17,6 @@ import DietModal from "../../../myDiet/DietModal";
 const MyFood = ({ userInfo }) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
-  const [isFoodChanged, setIsFoodChanged] = useState(false);
 
   const getPlan = async (regdate) => {
     const res = await axios("/food/mypage/plan", {
@@ -59,6 +58,7 @@ const MyFood = ({ userInfo }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFood, setSelectedFood] = useState("");
   const [selectedDay, setSelectedDay] = useState(1);
+  const [isFoodChanged, setIsFoodChanged] = useState(false);
 
   const handleImageClick = (food, index) => {
     setIsModalOpen(true);
