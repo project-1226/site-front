@@ -56,6 +56,7 @@ import HealthyDetailModal from "./healthyDiet/HealthyDetailModal";
 
 import Chatbotchatstart from "./chatbot/Chatbotchatstart";
 import AdminQnaPage from "./admin/AdminQnaPage";
+import MyWishPlan from "./user/mypage/activity/MyWishPlan";
 
 const RouterPage = () => {
   const navi = useNavigate();
@@ -159,6 +160,7 @@ const RouterPage = () => {
           {/* 활동 */}
           <Route path="mact" element={<ActivityMain />} />
           <Route path="ract" element={<ReviewMain />} />
+          <Route path="wspl" element={<MyWishPlan/>}/>
           {/* 주문내역 */}
           <Route path="mprch" element={<MyPurchase />} />
           <Route path="cncl" element={<CancelReturn />} />

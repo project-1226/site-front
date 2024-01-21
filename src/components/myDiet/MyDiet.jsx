@@ -21,7 +21,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   const [myFoods, setMyFoods] = useState([]);
   const [selectedMyFood, setSelectedMyFood] = useState("");
-  const [isFoodChanged, setIsFoodChanged] = useState(false);
+  const [isFoodChanged, setIsFoodChanged] = useState(0);
   // const [ingredientList, SetIngredientList] = useState([]);
 
   const [isRecipeModalOpen, setIsRecipeModalOpen] = useState(false);
@@ -29,7 +29,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
   const getMyList = async () => {
     setLoading(true);
     const res = await axios(
-      "/food/my_food_list?userid=" + sessionStorage.getItem("userid")
+      "/food/myfood/list?userid=" + sessionStorage.getItem("userid")
     );
     console.log(res.data);
     setMyFoods(res.data);
@@ -50,10 +50,6 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
 
   const handleRecipe = () => {
     setIsRecipeModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
   };
 
   const handleDayButtonClick = (day) => {
@@ -123,9 +119,7 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
           </div>
 
           <div className="date_plan_img">
-            {/* 아름 -제목한번추가해봄 
-          <div className='text-center'><h3>{selectedMyFood.name}</h3> </div> */}
-
+          
             <div className="date_plan_imgbox">
               <div className="date_plan_title">
                 <p>{selectedMyFood.name}</p>
@@ -394,7 +388,11 @@ const MyDiet = ({ setIsHeader, setIsFooter }) => {
         isFoodChanged={isFoodChanged}
       />
       
-      <RecipeModal show={isRecipeModalOpen} setIsRecipeModalOpen={setIsRecipeModalOpen} selectedMyFood={selectedMyFood}selectedDay={selectedDay}/>
+      <RecipeModal 
+      show={isRecipeModalOpen} 
+      setIsRecipeModalOpen={setIsRecipeModalOpen} 
+      selectedMyFood={selectedMyFood}
+      selectedDay={selectedDay}/>
     
     </div>
   );
