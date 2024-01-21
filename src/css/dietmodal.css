@@ -2,7 +2,7 @@
 
 .modal_wrap{padding: 20px;}
 .modal_date {margin-bottom: 15px;}
-
+.modal_favorit{position: absolute; top: 0px; right: 0px;}
 
 .modal_top {width: 100%; margin-bottom: 30px;}
 .modal_contents {display: flex; position: relative;}

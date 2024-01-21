@@ -20,14 +20,13 @@ const GoogleLogin = () => {
         console.log(email + "\n" + photoURL);
         const res = await axios.post("/user/login", { email, password: "0" });
         console.log(res.data);
-        // if (res.data === 0) {
-        //   await axios.post("/user/insert", {
-        //     email,
-        //     photo: photoURL,
-        //   });
-        // }
-        // sessionStorage.setItem("email", email);
-        // window.location.href = "/";
+        if (res.data === 0) {
+          await axios.post("/user/insert", {
+            email,
+          });
+        }
+        sessionStorage.setItem("userid", "e91b8eb6-24af-404a-b");
+        window.location.href = "/mydiet";
       })
       .catch((err) => {
         console.log(err);

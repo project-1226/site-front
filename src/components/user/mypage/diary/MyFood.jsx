@@ -58,6 +58,7 @@ const MyFood = ({ userInfo }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFood, setSelectedFood] = useState("");
   const [selectedDay, setSelectedDay] = useState(1);
+  const [isFoodChanged, setIsFoodChanged] = useState(false);
 
   const handleImageClick = (food, index) => {
     setIsModalOpen(true);
@@ -65,13 +66,12 @@ const MyFood = ({ userInfo }) => {
     setSelectedDay(index + 1);
   };
 
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
-
   useEffect(() => {
     getDates();
   }, []);
+  useEffect(() => {
+    getDates();
+  }, [isFoodChanged]);
 
   return (
     <>
@@ -117,9 +117,11 @@ const MyFood = ({ userInfo }) => {
       </div>
       <DietModal
         show={isModalOpen}
-        onHide={handleCloseModal}
+        setIsModalOpen={setIsModalOpen}
         selectedMyFood={selectedFood}
         selectedDay={selectedDay}
+        setIsFoodChanged={setIsFoodChanged}
+        isFoodChanged={isFoodChanged}
       />
     </>
   );
