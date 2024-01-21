@@ -14,14 +14,16 @@ import {
 import axios from "axios";
 import React, { useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useLocation } from 'react-router-dom';
+import { useLocation } from "react-router-dom";
 import { useNavigate } from "react-router";
+import GoogleLogin from "./login/GoogleLogin";
+import KakaoLogin from "./login/KakaoLogin";
 
-const SignupPage = ({result}) => {
+const SignupPage = ({ result }) => {
   const navi = useNavigate();
   const location = useLocation();
   //설문결과
-  const [s_result,setS_result] = useState(location.state?.result);
+  const [s_result, setS_result] = useState(location.state?.result);
 
   const {
     register,
@@ -34,35 +36,31 @@ const SignupPage = ({result}) => {
   password.current = watch("password", "");
 
   const onSubmit = async (data) => {
-    if(!s_result){
-      alert(
-        "설문을 먼저 작성해주세요!"
-      );
-      navi("/")
-      return
+    if (!s_result) {
+      alert("설문을 먼저 작성해주세요!");
+      navi("/");
+      return;
     }
     // console.log(data);
     if (window.confirm("회원 가입을 진행하시겠습니까?")) {
       await axios
-        .post("/user/insert",{"user":data,"result":s_result})
+        .post("/user/insert", { user: data, result: s_result })
         .then((response) => {
-
           alert(
             "회원가입을 환영합니다!\n가입 기념으로 3000포인트를 지급해드렸습니다!"
           );
-          
         })
         .catch((error) => {
           alert("이미 가입된 이메일입니다.");
         });
-        
-        //회원가입 이후 로직
-        navi("/mydiet");
+
+      //회원가입 이후 로직
+      navi("/mydiet");
     }
   };
-  useEffect(()=>{
-    console.log(s_result)
-  },[location])
+  useEffect(() => {
+    console.log(s_result);
+  }, [location]);
   return (
     <Container component="main" maxWidth="xs">
       <CssBaseline />
@@ -159,18 +157,25 @@ const SignupPage = ({result}) => {
           >
             Sign Up
           </Button>
-          
-          <Grid container justifyContent="flex-end">
-            <Grid item>
-            {!s_result &&
-              <Link href="/login" variant="body2">
-                이미 계정이 있으신가요?
-              </Link>
-            }
+
+          <Grid container spacing={1.5} sx={{ mt: 1 }}>
+            <Grid item xs={6}>
+              <GoogleLogin />
+            </Grid>
+            <Grid item xs={6}>
+              <KakaoLogin />
             </Grid>
           </Grid>
-          
-          
+
+          <Grid container justifyContent="flex-end">
+            <Grid item>
+              {!s_result && (
+                <Link href="/login" variant="body2">
+                  이미 계정이 있으신가요?
+                </Link>
+              )}
+            </Grid>
+          </Grid>
         </Box>
       </Box>
     </Container>
@@ -178,6 +183,3 @@ const SignupPage = ({result}) => {
 };
 
 export default SignupPage;
-
-
-
