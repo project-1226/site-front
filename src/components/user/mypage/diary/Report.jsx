@@ -27,7 +27,7 @@ const Report = () => {
     const res = await axios("/user/survey/read", {
       params: { userid: sessionStorage.getItem("userid") },
     });
-    console.log(res.data);
+    // console.log(res.data);
     setList(res.data);
   };
 
@@ -75,7 +75,7 @@ const Report = () => {
             현재 체중 : {currentWeight}kg
           </Typography>
           <Typography variant="h5" color="text.secondary">
-            현재 체질량지수(MBI) : {bmi} kg/m<sup>2</sup>
+            현재 체질량지수(BMI) : {bmi} kg/m<sup>2</sup>
           </Typography>
         </Stack>
         <LineChart

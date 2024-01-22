@@ -50,26 +50,28 @@ const MyFood = ({ userInfo }) => {
         console.error("Error - 주차별 식단 데이터 출력 : ", error);
       }
     }
-    // console.log(data);
+    console.log(data);
     setList(data);
     setLoading(false);
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedFood, setSelectedFood] = useState("");
+  const [selectedDay, setSelectedDay] = useState(1);
+  const [isFoodChanged, setIsFoodChanged] = useState(false);
 
-  const handleImageClick = (food) => {
+  const handleImageClick = (food, index) => {
     setIsModalOpen(true);
     setSelectedFood(food);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
+    setSelectedDay(index + 1);
   };
 
   useEffect(() => {
     getDates();
   }, []);
+  useEffect(() => {
+    getDates();
+  }, [isFoodChanged]);
 
   return (
     <>
@@ -101,7 +103,7 @@ const MyFood = ({ userInfo }) => {
                     <Grid item sm={6} key={index}>
                       <Typography>
                         <ArrowRight /> {index + 1}일차 : {f.name}
-                        <IconButton onClick={() => handleImageClick(f)}>
+                        <IconButton onClick={() => handleImageClick(f, index)}>
                           <LaunchRounded sx={{ fontSize: 17 }} />
                         </IconButton>
                       </Typography>
@@ -115,8 +117,11 @@ const MyFood = ({ userInfo }) => {
       </div>
       <DietModal
         show={isModalOpen}
-        onHide={handleCloseModal}
+        setIsModalOpen={setIsModalOpen}
         selectedMyFood={selectedFood}
+        selectedDay={selectedDay}
+        setIsFoodChanged={setIsFoodChanged}
+        isFoodChanged={isFoodChanged}
       />
     </>
   );

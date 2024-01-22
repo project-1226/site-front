@@ -2,9 +2,9 @@
 
 .modal_wrap{padding: 20px;}
 .modal_date {margin-bottom: 15px;}
+.modal_favorit{position: absolute; top: 0px; right: 0px;}
 
-
-.modal_top {width: 100%; margin-bottom: 20px;}
+.modal_top {width: 100%; margin-bottom: 30px;}
 .modal_contents {display: flex; position: relative;}
 .imgbox {width: 50%; height: auto; margin-right: 15px; border-radius: 20px; overflow: hidden;}
 .imgbox img {display: block; border-radius: 20px;}
@@ -13,11 +13,11 @@
 .modal_date button {width: 70px; height: 70px; line-height: 70px; font-size: 1rem; text-align: center; background: #b8c7ae; border: none; color: #000; font-weight: 500; 
 border-radius: 50px; font-family: 'Noto Serif KR'; position: absolute; top: -17px; left: -17px;}
 .modal_foodname {margin-bottom: 16px;}
-.modal_foodname p:first-child {font-size: 26px; font-weight: bold; letter-spacing: -1px; margin-bottom: 8px !important;}
+.modal_foodname p:first-child {font-size: 26px; font-weight: bold; letter-spacing: -1px; margin-bottom: 8px !important; font-family: 'Noto Serif KR'}
 .modal_foodname p:last-child {font-size: 12px; color: #929292; letter-spacing: -0.5px; margin-bottom: 25px !important;}
 
 .modal_btm {margin-bottom: 40px;}
-.modal_btm p:first-child {font-size: 18px; font-weight: 600; margin-bottom: 0;}
+.modal_btm p:first-child, .recipe_modal_btm p:first-child {font-size: 18px; font-weight: 600; margin-bottom: 0; margin-bottom: 8px !important; font-family: 'Noto Serif KR'}
 .modal_btm p:last-child {font-size: 12px; color: #929292; letter-spacing: -0.5px;}
 
 .modal_btnwrap1 button {width: 115px; height: 47px; line-height: 45px; font-size: 0.875rem; text-align: center; border: 1px solid #e9e9e9; background: #f8f8f8; color: #000; font-weight: 500; border-radius: 50px;}
@@ -36,11 +36,13 @@ border-radius: 50px; font-family: 'Noto Serif KR'; position: absolute; top: -17p
 .image_container img:hover { transform: scale(0.95); }
 
 
-  
-
-
 .randombox img:last-child {margin-right: 0;}
 .modal_more {display: flex; align-items: center;}
 
 .modal_btnwrap2 {text-align: center;}
 .modal_btnwrap2 button:first-child {margin-right: 15px;}
+
+
+/* ------------------------------------ RecipeModal ------------------------------------ */
+.recipe_modal_btm p:first-child {font-size: 18px; font-weight: 600; margin-bottom: 0; font-family: 'Noto Serif KR';}
+.recipe_modal_btm p:last-child {font-size: 14px; letter-spacing: -0.5px; color: #666;}

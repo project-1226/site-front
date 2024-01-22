@@ -1,4 +1,10 @@
-import { ArrowRight, ExpandMore, LaunchRounded } from "@mui/icons-material";
+import {
+  ArrowRight,
+  ExpandMore,
+  SmartDisplay,
+  VideoCameraFront,
+  YouTube,
+} from "@mui/icons-material";
 import {
   Accordion,
   AccordionDetails,
@@ -8,15 +14,37 @@ import {
   Grid,
   IconButton,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import DietModal from "../../../myDiet/DietModal";
+import HealthcareModal from "../../../healthcare/HealthcareModal";
+import { useNavigate } from "react-router";
 
 const MyExercise = ({ userInfo }) => {
   const [loading, setLoading] = useState(false);
   const [list, setList] = useState([]);
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(0);
+
+  const navi = useNavigate();
+
+  const handleYoutubeClick = (categoryid) => {
+    setIsModalOpen(true);
+    setSelectedCategory(categoryid);
+  };
+
+  const handleAiClick = (id) => {
+    if (id === 32) {
+      navi("/aisquat");
+    } else {
+      alert(
+        "해당 운동에 대한 ai 트레이너가 준비 중입니다.\n최대한 빨리 준비하도록 하겠습니다."
+      );
+    }
+  };
 
   const getPlan = async (categoryid) => {
     const res = await axios("/exercise/myexercises", {
@@ -50,7 +78,7 @@ const MyExercise = ({ userInfo }) => {
         console.error("Error - 주차별 식단 데이터 출력 : ", error);
       }
     }
-    // console.log(data);
+    console.log(data);
     setList(data);
     setLoading(false);
   };
@@ -83,9 +111,25 @@ const MyExercise = ({ userInfo }) => {
             <AccordionDetails>
               <Stack direction="row">
                 <Grid container>
-                  {l.exercise_plans.map((e, index) => (
+                  {l.exercise_plans.map((p, index) => (
                     <Grid item sm={6} key={index}>
-                      <Typography>{/* <ArrowRight /> {e.name} */}</Typography>
+                      <Typography alignContent="center">
+                        <ArrowRight /> {p.name}
+                        <Tooltip title="운동영상 보러가기">
+                          <IconButton
+                            onClick={() => handleYoutubeClick(p.categoryid)}
+                          >
+                            <SmartDisplay />
+                          </IconButton>
+                        </Tooltip>
+                        <Tooltip title="ai와 운동하기">
+                          <IconButton
+                            onClick={() => handleAiClick(p.excerciseid)}
+                          >
+                            <VideoCameraFront />
+                          </IconButton>
+                        </Tooltip>
+                      </Typography>
                     </Grid>
                   ))}
                 </Grid>
@@ -94,6 +138,12 @@ const MyExercise = ({ userInfo }) => {
           </Accordion>
         ))}
       </div>
+      <HealthcareModal
+        show={isModalOpen}
+        handleClose={() => setIsModalOpen(false)}
+        selectedCategory={selectedCategory}
+        page={1}
+      />
     </>
   );
 };

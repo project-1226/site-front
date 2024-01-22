@@ -1,5 +1,13 @@
 /*공통서식*/
-.contents_title_box {width: 100%; margin: 0 auto; margin-bottom: 35px; }
-.contents_title { font-family: 'Noto Sans KR'; font-size: 30px; letter-spacing: -2px; color: #3d3d3d; font-weight: 600; margin-bottom: 5px; }
+.contents_title_box {width: 100%; margin: 0 auto; margin-bottom: 35px;}
+.contents_title {font-size: 30px; letter-spacing: -2px; color: #3d3d3d;font-weight: 700; margin-bottom: 5px; font-family: 'Noto Serif KR';}
 .contents_subtitle {font-size: 14px; letter-spacing: -1px; color: #3d3d3d; font-weight: 500; margin-bottom: 0;}
-p {margin-bottom: 0 !important;}
+
+/* 헬스케어 페이지 타이 */
+.contents_title_healthcare {font-size: 30px; letter-spacing: -2px; color: #3d3d3d;font-weight: 700; margin-bottom: 5px; font-family: 'GmarketSansMedium';}
+.contents_subtitle_healthcare {font-size: 14px; letter-spacing: -1px; color: #3d3d3d; font-weight: 500; margin-bottom: 0; font-family: 'GmarketSansMedium';}
+p { margin-bottom: 0 !important;}
+
+
+
+.seon_muipaper_shadow_none {box-shadow: none !important;}

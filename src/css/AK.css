@@ -1,5 +1,111 @@
 /*상단바 전체  ===*/
-.ak_wrap {width: 100%;}
+.ak_wrap {width: 94.8%; margin: 0 auto;}
+
 /*기본설정 94.8*/
-.ak_contents {width: 94.8%; margin: 0 auto 180px auto;}
+.ak_aicontents {width: 100%; margin: 100px auto 180px auto; background-color: white; /* 남색 배경 */}
 .ak_half {width: 50%; height: 100%; margin-right: 2%; background: #ddd;}
+.ak_img_contents {width: 50%; margin: 0 auto 100px auto;}
+.ak_grid_img_wrap {padding: 20px; border: 2px solid #aabd9f; border-radius: 20px;}
+.ak_grid_img {cursor: pointer; border-radius: 20px;}
+
+.akbuttons { margin: 10%; text-align: center}
+.akbtn-hover {
+    width: 200px;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 20px;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    transition: all 0.4s ease-in-out;
+    animation: backgroundAnimation 0.4s ease-in-out infinite;
+    animation-duration: 1s; 
+}
+
+@keyframes backgroundAnimation {
+    to {
+        background-position: 100% 0;
+    }
+}
+
+.akbtn-hover:focus {
+    outline: none;
+}
+
+.akbtn-hover.color-1 {
+    background-image: linear-gradient(to right, #25aae1, #40e495, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(49, 196, 190, 0.75);
+}
+.akbtn-hover.color-2 {
+    background-image: linear-gradient(to right, #f5ce62, #e43603, #fa7199, #e85a19);
+    box-shadow: 0 4px 15px 0 rgba(229, 66, 10, 0.75);
+}
+.akbtn-hover.color-3 {
+    background-image: linear-gradient(to right, #667eea, #764ba2, #6B8DD6, #8E37D7);
+    box-shadow: 0 4px 15px 0 rgba(116, 79, 168, 0.75);
+}
+.akbtn-hover.color-4 {
+    background-image: linear-gradient(to right, #fc6076, #ff9a44, #ef9d43, #e75516);
+    box-shadow: 0 4px 15px 0 rgba(252, 104, 110, 0.75);
+}
+.akbtn-hover.color-5 {
+    background-image: linear-gradient(to right, #0ba360, #3cba92, #30dd8a, #2bb673);
+    box-shadow: 0 4px 15px 0 rgba(23, 168, 108, 0.75);
+}
+.akbtn-hover.color-6 {
+    background-image: linear-gradient(to right, #009245, #FCEE21, #00A8C5, #D9E021);
+    box-shadow: 0 4px 15px 0 rgba(83, 176, 57, 0.75);
+}
+.akbtn-hover.color-7 {
+    background-image: linear-gradient(to right, #6253e1, #852D91, #A3A1FF, #F24645);
+    box-shadow: 0 4px 15px 0 rgba(126, 52, 161, 0.75);
+}
+.akbtn-hover.color-8 {
+    background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+    box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+}
+.akbtn-hover.color-9 {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+.akbtn-hover.color-10 {
+        background-image: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);
+    box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+}
+.akbtn-hover.color-11 {
+       background-image: linear-gradient(to right, #eb3941, #f15e64, #e14e53, #e2373f);  box-shadow: 0 5px 15px rgba(242, 97, 103, .4);
+}
+
+
+.akbuttons2 {
+    margin: 10%;
+    text-align: center;
+}
+.akbtn-hover2 {
+    width: 200px;
+    font-weight: bold;
+    font-size: 30px;
+    text-align: center;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 40px;
+    text-align: center;
+    border: none;
+    background-size: 300% 100%;
+    border-radius: 50px;
+    transition: all 0.4s ease-in-out;
+    animation: backgroundAnimation 0.4s ease-in-out infinite;
+    animation-duration: 1s; 
+
+}
+
+.akbtn-hover2.color-10 {
+    background-image: linear-gradient(to right, #ed6ea0, #ec8c69, #f7186a , #FBB03B);
+box-shadow: 0 4px 15px 0 rgba(236, 116, 149, 0.75);
+}
